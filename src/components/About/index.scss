@@ -1,0 +1,56 @@
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+// *
+// * FileName     [ index.scss ]
+// * PackageName  [ src/About ]
+// * Synopsis     [ Style for index.js ]
+// * Author       [ Cheng-Hua Lu ]
+// * Copyright    [ 2022 8 ]
+// *
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+
+@import '../../index.scss';
+@import 'animate.css';
+
+.about-lab-container {
+    background-image: linear-gradient(0deg, $light-blue, 15%, $dark-blue);
+    width: 100%;
+    height: max-content;
+    padding-bottom: 3%;
+
+    .wrapper {
+        width: 100%;
+        height: max-content;
+        margin: 0;
+
+        .about-content {
+            width: 100%;
+
+            h1 {
+                font-family: 'Coolvetica';
+                font-size: $title-font-size;
+                color: $light-yellow;
+                font-weight: 500;
+                padding: 3% 0%;
+                margin: 0 10%;
+
+                .text-animate {
+                    &:hover {
+                        color: $dark-yellow;
+                    }
+                }
+            }
+
+            .slider {
+                width: 75%;
+                margin: 0% 12.5% 10%;
+            }
+
+            .lab-culture {
+                height: max-content;
+                width: 100vw;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+}

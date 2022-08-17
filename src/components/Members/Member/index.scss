@@ -1,0 +1,62 @@
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+// *
+// * FileName     [ index.scss ]
+// * PackageName  [ src/Members/Member ]
+// * Synopsis     [ Style for index.js ]
+// * Author       [ Cheng-Hua Lu ]
+// * Copyright    [ 2022 8 ]
+// *
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+
+@import '../../../index.scss';
+
+.member-container {
+    background-color: $light-blue;
+    width: 170px;
+    height: 240px;
+    border-radius: 5%;
+    justify-content: center;
+    display: flex;
+    color: $dark-blue;
+
+    &:hover {
+        color: $light-yellow;
+        background-color: $gray-blue;
+        cursor: pointer;
+    }
+
+    .wrapper {
+        width: 90%;
+        height: 80%;
+        margin: auto;
+
+        .img-block {
+            width: 100px;
+            height: 100px;
+            margin: auto;
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+        }
+
+        .name-block {
+            text-align: center;
+            justify-content: center;
+            width: 150px;
+            height: 100px;
+            margin: auto;
+            display: table;
+
+            span {
+                font-size: 20px;
+                font-family: 'Helvetica Neue';
+                font-weight: 500;
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
+    }
+}

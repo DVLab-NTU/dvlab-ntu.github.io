@@ -1,0 +1,45 @@
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+// *
+// * FileName     [ index.scss ]
+// * PackageName  [ src/Publications ]
+// * Synopsis     [ Style for index.js ]
+// * Author       [ Cheng-Hua Lu ]
+// * Copyright    [ 2022 8 ]
+// *
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+
+@import '../../index.scss';
+
+.publications-container {
+    background-image: linear-gradient(36deg, $dark-blue 30%, $light-blue);
+    width: 100%;
+    height: max-content;
+    padding-bottom: 5%;
+
+    .wrapper {
+        margin: 0 10%;
+        width: 80%;
+        height: max-content;
+
+        h1 {
+            font-family: 'Coolvetica';
+            font-size: $title-font-size;
+            color: $dark-blue;
+            font-weight: 500;
+            padding: 3% 0%;
+
+            .text-animate {
+                &:hover {
+                    color: $black-blue;
+                    font-weight: 700;
+                }
+            }
+        }
+
+        .pub-list {
+            width: 100%;
+            height: auto;
+            padding: 0% 1%;
+        }
+    }
+}
