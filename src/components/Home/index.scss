@@ -1,0 +1,24 @@
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+// *
+// * FileName     [ index.scss ]
+// * PackageName  [ src/Home ]
+// * Synopsis     [ Style for index.js ]
+// * Author       [ Cheng-Hua Lu ]
+// * Copyright    [ 2022 8 ]
+// *
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+
+@import '../../index.scss';
+
+.home-container {
+    background: radial-gradient(circle,
+            rgba(177, 208, 210, 1) 0%,
+            $dark-blue 100%);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
+    color: white;
+
+    height: 100%;
+    padding-bottom: 3%;
+}
