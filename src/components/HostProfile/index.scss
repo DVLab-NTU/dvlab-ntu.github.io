@@ -1,0 +1,150 @@
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+// *
+// * FileName     [ index.scss ]
+// * PackageName  [ src/HostProfile ]
+// * Synopsis     [ Style for index.js ]
+// * Author       [ Cheng-Hua Lu ]
+// * Copyright    [ 2022 8 ]
+// *
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+
+@import '../../index.scss';
+
+.host-profile-container {
+    background-image: linear-gradient(228deg, $light-blue, 15%, $dark-blue);
+    width: 100%;
+    height: max-content;
+    padding-bottom: 3%;
+
+    .wrapper {
+        margin: 0 10%;
+        width: 80%;
+        height: max-content;
+
+        h1 {
+            font-family: 'Coolvetica';
+            font-size: $title-font-size;
+            color: $dark-yellow;
+            font-weight: 500;
+            padding: 3% 0%;
+
+            .text-animate {
+                &:hover {
+                    color: $light-yellow;
+                    font-weight: 700;
+                }
+            }
+        }
+
+        .content {
+            width: 100%;
+            height: auto;
+            min-height: 50vh;
+
+            .content-info {
+                width: 100%;
+                height: max-content;
+                padding-bottom: 13%;
+                padding-top: 8%;
+                margin: auto;
+                justify-content: space-between;
+                display: flex;
+
+                .left-col {
+                    display: inline-block;
+                    width: 30%;
+                    height: 100%;
+
+                    .img-container {
+                        display: flex;
+                        margin: 0 auto;
+                        justify-content: center;
+                        height: 100%;
+
+                        img {
+                            border-radius: 15px;
+                            width: 75%;
+                            height: 100%;
+                        }
+                    }
+                }
+
+                .right-col {
+                    display: inline-block;
+                    width: 65%;
+                    font-size: 36px;
+                    color: white;
+
+                    .position-list {
+                        display: inline-block;
+                        margin: 0;
+                        padding: 5% 0;
+
+                        li {
+                            font-weight: 500;
+                            list-style-type: none;
+                            margin: 0;
+                            float: left;
+                            font-size: 24px;
+                        }
+                    }
+
+                    .media-list {
+                        a {
+                            color: white;
+                            font-size: 70px;
+                            padding: 0px 60px 0px 0px;
+
+                            .media-icon {
+                                opacity: 0.6;
+
+                                &:hover {
+                                    opacity: 0.9;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .education {
+                padding-top: 2%;
+                padding-bottom: 2%;
+
+                h3 {
+                    font-family: 'Helvetica Neue';
+                    font-weight: 100;
+                    font-size: $subtitle-font-size;
+                    font-weight: 700;
+                    color: white;
+                }
+
+                .edu-list {
+                    margin: auto;
+
+                    li {
+                        list-style-type: none;
+                        padding: 2px 5px;
+                        font-size: 22px;
+                        color: white;
+                        font-weight: 400;
+                    }
+
+                    p {
+                        margin: 0;
+                        padding: 2px 5px;
+                        font-size: 22px;
+                        color: white;
+                        font-weight: 600;
+                        font-weight: 400;
+                    }
+
+                    .summary-paragraph {
+                        padding-top: 10px;
+                        padding-bottom: 30px;
+                    }
+                }
+            }
+        }
+    }
+}

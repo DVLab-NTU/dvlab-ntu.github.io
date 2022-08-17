@@ -1,0 +1,57 @@
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+// *
+// * FileName     [ index.scss ]
+// * PackageName  [ src/Footer ]
+// * Synopsis     [ Style for index.js ]
+// * Author       [ Cheng-Hua Lu ]
+// * Copyright    [ 2022 8 ]
+// *
+// * /////////////////////////////////////////////////////////////////////////////////////////////
+
+@import '../../index.scss';
+
+.footer-container {
+    width: 100%;
+    height: 30px;
+    min-height: 1vh;
+    position: fixed;
+    bottom: 0;
+
+    background-color: $black-blue;
+
+    .wrapper {
+        width: 80%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+
+        .left-col {
+            width: 40%;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .right-col {
+            width: 50%;
+            font-size: 16px;
+            color: $middle-gray;
+
+            a {
+                font-size: 16px;
+                text-decoration: none;
+                color: $middle-gray;
+                border: $middle-gray 1px solid;
+                border-radius: 5px;
+                margin: 10px;
+                padding: 0 10px;
+                text-transform: uppercase;
+
+                &:hover {
+                    color: $light-gray;
+                    border: $light-gray 1px solid;
+                }
+            }
+        }
+    }
+}
