@@ -68,19 +68,19 @@ const AboutLab = () => {
                 )}
               </div>
               <div className="right-col">
-                <img src={configData.ABOUT_DV_LAB_PAGE.DESCRIPTION.IMAGE}/>
+                <img src={configData.ABOUT_DV_LAB_PAGE.DESCRIPTION.IMAGE} />
               </div>
             </div>
             <div className="lab-culture">
-                {gallery_list.map((item, idx) => (
-                  <Gallery
-                    idx={idx}
-                    img_path={item.IMAGE}
-                    subtitle={item.TITLE}
-                    text={item.DETAILS}
-                  />
-                ))}
-              </div>
+              {gallery_list.map((item, idx) => (
+                <Gallery
+                  idx={idx}
+                  img_path={item.IMAGE}
+                  subtitle={item.TITLE}
+                  text={item.DETAILS}
+                />
+              ))}
+            </div>
             {/* <Slider
                 className="slider"
                 dots="true"
@@ -93,7 +93,6 @@ const AboutLab = () => {
                   <Slide text={slide.TEXT} img_path={slide.IMAGE} />
                 ))}
               </Slider> */}
-            
           </animated.div>
         </div>
       </div>
