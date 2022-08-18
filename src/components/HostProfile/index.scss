@@ -8,7 +8,7 @@
 // *
 // * /////////////////////////////////////////////////////////////////////////////////////////////
 
-@import '../../index.scss';
+@import "../../index.scss";
 
 .host-profile-container {
     background-image: linear-gradient(228deg, $light-blue, 15%, $dark-blue);
@@ -22,7 +22,7 @@
         height: max-content;
 
         h1 {
-            font-family: 'Coolvetica';
+            font-family: "Coolvetica";
             font-size: $title-font-size;
             color: $dark-yellow;
             font-weight: 500;
@@ -41,21 +41,51 @@
             height: auto;
             min-height: 50vh;
 
+            .header {
+                p {
+                    font-size: 30px;
+                    font-weight: 700;
+                    color: $light-yellow;
+                    line-height: 0.7;
+                    // margin:auto;
+                    // padding:0;
+                    font-style: italic;
+                }
+            }
+
             .content-info {
                 width: 100%;
                 height: max-content;
-                padding-bottom: 13%;
-                padding-top: 8%;
+                padding-bottom: 3%;
+                padding-top: 3%;
                 margin: auto;
                 justify-content: space-between;
                 display: flex;
+                // background-color: paleturquoise;
 
                 .left-col {
                     display: inline-block;
-                    width: 30%;
+                    width: 60%;
                     height: 100%;
+                    // background-color: palegreen;
+
+                    p {
+                        font-size: 22px;
+                        color: $light-blue;
+                        text-align: justify;
+                    }
+                }
+
+                .right-col {
+                    // background-color: palegreen;
+                    display: inline-block;
+                    width: 35%;
+                    height: auto;
+                    font-size: 36px;
+                    color: white;
 
                     .img-container {
+                        // background-color: palevioletred;
                         display: flex;
                         margin: 0 auto;
                         justify-content: center;
@@ -63,56 +93,57 @@
 
                         img {
                             border-radius: 15px;
-                            width: 75%;
-                            height: 100%;
-                        }
-                    }
-                }
-
-                .right-col {
-                    display: inline-block;
-                    width: 65%;
-                    font-size: 36px;
-                    color: white;
-
-                    .position-list {
-                        display: inline-block;
-                        margin: 0;
-                        padding: 5% 0;
-
-                        li {
-                            font-weight: 500;
-                            list-style-type: none;
-                            margin: 0;
-                            float: left;
-                            font-size: 24px;
+                            width: 80%;
+                            height: 80%;
                         }
                     }
 
                     .media-list {
+                        // background-color: plum;
+                        padding-top:5%;
+                        width: 80%;
+                        margin: auto;
+                        display: flex;
+                        justify-content: space-between;
                         a {
                             color: white;
-                            font-size: 70px;
-                            padding: 0px 60px 0px 0px;
-
+                            font-size: 60px;
+                            
+                            // padding: 0px 60px 0px 0px;
+        
                             .media-icon {
                                 opacity: 0.6;
-
                                 &:hover {
                                     opacity: 0.9;
                                 }
                             }
                         }
                     }
+
+                    // .position-list {
+                    //     display: inline-block;
+                    //     margin: 0;
+                    //     padding: 5% 0;
+
+                    //     li {
+                    //         font-weight: 500;
+                    //         list-style-type: none;
+                    //         margin: 0;
+                    //         float: left;
+                    //         font-size: 24px;
+                    //     }
+                    // }
                 }
             }
+
+            
 
             .education {
                 padding-top: 2%;
                 padding-bottom: 2%;
 
                 h3 {
-                    font-family: 'Helvetica Neue';
+                    font-family: "Helvetica Neue";
                     font-weight: 100;
                     font-size: $subtitle-font-size;
                     font-weight: 700;
