@@ -27,7 +27,7 @@ const Gallery = ({ idx, img_path, subtitle, text }) => {
             <div className="left-col">
               <div className="content">
                 <h3>{subtitle}</h3>
-                <p>{text}</p>
+                {/* <p>{text}</p> */}
               </div>
             </div>
             <div className="right-col">
@@ -42,7 +42,7 @@ const Gallery = ({ idx, img_path, subtitle, text }) => {
             <div className="left-col">
               <div className="content">
                 <h3>{subtitle}</h3>
-                <p>{text}</p>
+                {/* <p>{text}</p> */}
               </div>
             </div>
           </div>
