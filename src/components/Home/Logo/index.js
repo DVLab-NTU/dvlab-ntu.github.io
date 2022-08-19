@@ -10,7 +10,7 @@
 
 import './index.scss'
 import React from 'react'
-import configData from '../../../config.json'
+import frontendData from '../../../config/frontend.json'
 import { useSpring, animated, config } from 'react-spring'
 
 const Logo = () => {
@@ -71,32 +71,32 @@ const Logo = () => {
         <animated.div>
           <animated.img
             className="chip_img"
-            src={configData.LOGO_SUB_PIC.CHIP}
+            src={frontendData.LOGO_SUB_PIC.CHIP}
             style={chip}
           />
           <animated.img
             className="bug_img"
-            src={configData.LOGO_SUB_PIC.BUG}
+            src={frontendData.LOGO_SUB_PIC.BUG}
             style={bug}
           />
           <animated.img
             className="maginfier_img"
-            src={configData.LOGO_SUB_PIC.MAGNIFIER}
+            src={frontendData.LOGO_SUB_PIC.MAGNIFIER}
             style={magnifier}
           />
           <animated.img
             className="ntugiee_img"
-            src={configData.LOGO_SUB_PIC.NTUGIEE}
+            src={frontendData.LOGO_SUB_PIC.NTUGIEE}
             style={ntugiee}
           />
           <animated.img
             className="dvlab_img"
-            src={configData.LOGO_SUB_PIC.DVLAB}
+            src={frontendData.LOGO_SUB_PIC.DVLAB}
             style={dvlab}
           />
           <animated.img
             className="description_img"
-            src={configData.LOGO_SUB_PIC.DESCRIPTION}
+            src={frontendData.LOGO_SUB_PIC.DESCRIPTION}
             style={description}
           />
         </animated.div>

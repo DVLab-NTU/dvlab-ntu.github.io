@@ -11,7 +11,8 @@
 import './index.scss'
 import Item from './Item'
 import React, { useState } from 'react'
-import configData from '../../../config.json'
+import frontendData from '../../../config/frontend.json'
+import newsAndAwards from '../../../config/newsAndAwards.json'
 import AnimatedLetters from '../../AnimatedLetters'
 
 const NewsAwards = () => {
@@ -22,7 +23,7 @@ const NewsAwards = () => {
   //        itemList        Array       data for each item
 
   const [letterClass, setLetterClass] = useState('text-animate')
-  const itemList = Object.values(configData.HOME_PAGE.NEWS_AWARDS_PART.CONTENTS)
+  const itemList = newsAndAwards
   return (
     <div className="news-container">
       <div className="wrapper">
@@ -30,7 +31,7 @@ const NewsAwards = () => {
           <h1>
             <AnimatedLetters
               letterClass={letterClass}
-              strArray={configData.HOME_PAGE.NEWS_AWARDS_PART.TITLE.split('')}
+              strArray={frontendData.HOME_PAGE.NEWS_AWARDS_PART.TITLE.split('')}
               idx={20}
             />
           </h1>

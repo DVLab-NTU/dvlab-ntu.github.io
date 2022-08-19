@@ -11,7 +11,8 @@
 import './index.scss'
 import Pub from './Pub'
 import Loader from 'react-loaders'
-import configData from '../../config.json'
+import frontendData from '../../config/frontend.json'
+import publicationList from '../../config/publication.json'
 import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
@@ -43,13 +44,13 @@ const Publications = () => {
             <h1>
               <AnimatedLetters
                 letterClass={letterClass}
-                strArray={configData.PUBLICATIONS_PAGE.TITLE.split('')}
+                strArray={frontendData.PUBLICATIONS_PAGE.TITLE.split('')}
                 idx={20}
               />
             </h1>
           </div>
           <animated.div className="pub-list" style={props}>
-            {Object.values(configData.PUBLICATIONS_PAGE.PUB_LIST).map((pub) => (
+            {publicationList.map((pub) => (
               <Pub pub_info={pub} />
             ))}
           </animated.div>

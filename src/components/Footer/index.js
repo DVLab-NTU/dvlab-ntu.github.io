@@ -11,7 +11,7 @@
 import './index.scss'
 import React from 'react'
 import maintainer from '../../config/maintainer.json'
-import configData from '../../config/frontend.json'
+import frontendData from '../../config/frontend.json'
 
 const Footer = () => {
   // * Footer: Implement footer at the bottom of each page.
@@ -19,11 +19,10 @@ const Footer = () => {
   // @param authors:    Array       Data for each authors.
 
   const authors = Object.values(maintainer)
-  console.log(authors)
   return (
     <div className="footer-container">
       <div className="wrapper">
-        <div className="left-col">{configData.FOOTER.COPYRIGHT}</div>
+        <div className="left-col">{frontendData.FOOTER.COPYRIGHT}</div>
         <div className="right-col">
           We thank{' '}
           {authors.map((item, idx) => (

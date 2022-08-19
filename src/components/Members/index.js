@@ -11,7 +11,8 @@
 import './index.scss'
 import Group from './Group'
 import Loader from 'react-loaders'
-import configData from '../../config.json'
+import frontendData from '../../config/frontend.json'
+import membio from '../../config/membio.json'
 import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
@@ -31,8 +32,8 @@ const Members = () => {
     delay: 2000,
     config: config.molasses,
   })
-  const all_member_data = Object.values(configData.MEMBERS_PAGE.MEMBIO)
-  const group_list = Object.values(configData.MEMBERS_PAGE.GROUP)
+  const all_member_data = membio
+  const group_list = Object.values(frontendData.MEMBERS_PAGE.GROUP)
   let group_member_list = []
   group_list.map((item) =>
     group_member_list.push({
@@ -59,7 +60,7 @@ const Members = () => {
           <h1>
             <AnimatedLetters
               letterClass={letterClass}
-              strArray={configData.MEMBERS_PAGE.TITLE.split('')}
+              strArray={frontendData.MEMBERS_PAGE.TITLE.split('')}
               idx={20}
             />
           </h1>

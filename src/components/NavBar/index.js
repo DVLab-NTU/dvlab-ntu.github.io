@@ -13,7 +13,7 @@ import React from 'react'
 import Logo from '../../logo.png'
 import { Navbar } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import configData from '../../config.json'
+import frontendData from '../../config/frontend.json'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faLightbulb,
@@ -57,7 +57,7 @@ const NavBar = () => {
                 icon={faHome}
               ></FontAwesomeIcon>
               <span className="nav-text">
-                {configData.ABOUT_DV_LAB_PAGE.TITLE}
+                {frontendData.ABOUT_DV_LAB_PAGE.TITLE}
               </span>
             </NavLink>
           </li>
@@ -68,7 +68,7 @@ const NavBar = () => {
                 icon={faUserGraduate}
               ></FontAwesomeIcon>
               <span className="nav-text">
-                {configData.HOST_PROFILE_PAGE.TITLE}
+                {frontendData.HOST_PROFILE_PAGE.TITLE}
               </span>
             </NavLink>
           </li>
@@ -79,7 +79,7 @@ const NavBar = () => {
                 icon={faLightbulb}
               ></FontAwesomeIcon>
               <span className="nav-text">
-                {configData.PUBLICATIONS_PAGE.TITLE}
+                {frontendData.PUBLICATIONS_PAGE.TITLE}
               </span>
             </NavLink>
           </li>
@@ -89,7 +89,7 @@ const NavBar = () => {
                 className="nav-icon"
                 icon={faUserGroup}
               ></FontAwesomeIcon>
-              <span className="nav-text">{configData.MEMBERS_PAGE.TITLE}</span>
+              <span className="nav-text">{frontendData.MEMBERS_PAGE.TITLE}</span>
             </NavLink>
           </li>
           <li className="nav-item">
@@ -98,7 +98,7 @@ const NavBar = () => {
                 className="nav-icon"
                 icon={faLandmark}
               ></FontAwesomeIcon>
-              <span className="nav-text">{configData.COURSES_PAGE.TITLE}</span>
+              <span className="nav-text">{frontendData.COURSES_PAGE.TITLE}</span>
             </NavLink>
           </li>
         </ul>
