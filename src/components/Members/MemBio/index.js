@@ -12,7 +12,7 @@ import './index.scss'
 import Loader from 'react-loaders'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import configData from '../../../config.json'
+import membio from '../../../config/membio.json'
 import { useSpring, animated, config } from 'react-spring'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -42,12 +42,12 @@ const MemBio = () => {
   })
 
   let mem_info = {}
-  configData.MEMBERS_PAGE.MEMBIO.forEach((member) => {
+  membio.forEach((member) => {
     if (member.ID === memberId) {
       mem_info = member
     }
   })
-
+  console.log(mem_info)
   // * Scroll to top of the page when rendering
   useEffect(() => {
     window.scrollTo(0, 0)
