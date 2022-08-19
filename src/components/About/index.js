@@ -15,8 +15,10 @@ import Gallery from "./Gallery";
 import Slider from "react-slick";
 import Loader from "react-loaders";
 import configData from "../../config.json";
+import Typewriter from "typewriter-effect";
 import { useState, useEffect } from "react";
 import AnimatedLetters from "../AnimatedLetters";
+// import { Typewriter } from "react-simple-typewriter";
 import { useSpring, animated, config } from "react-spring";
 
 const AboutLab = () => {
@@ -53,7 +55,7 @@ const AboutLab = () => {
               <AnimatedLetters
                 letterClass={letterClass}
                 strArray={configData.ABOUT_DV_LAB_PAGE.SUBTITLE.split("")}
-                idx={1000}
+                idx={1}
               />
             </h1>
           </div>
@@ -72,27 +74,39 @@ const AboutLab = () => {
               </div>
             </div>
             <div className="lab-culture">
-              {gallery_list.map((item, idx) => (
-                <Gallery
-                  idx={idx}
-                  img_path={item.IMAGE}
-                  subtitle={item.TITLE}
-                  text={item.DETAILS}
+              <span>
+                <Typewriter
+                  options={{
+                    strings: configData.ABOUT_DV_LAB_PAGE.LAB_CULTURE.SUBTITLE,
+                    autoStart: true,
+                    loop: true,
+                    cursor: "_",
+                    delay: 20,
+                    deleteSpeed: 30,
+                  }}
                 />
-              ))}
-            </div>
-            {/* <Slider
-                className="slider"
-                dots="true"
-                infinite="true"
+              </span>
+              <Slider
+                className="gallery"
+                dots={true}
+                infinite={true}
                 slidesToShow={1}
                 slidesToScroll={1}
-                speed={500}
+                speed={2000}
+                autoplay={true}
+                autoplaySpeed={5000}
+                arrows={false}
+                cssEase="linear"
+                pauseOnHover={true}
               >
-                {slides_list.map((slide) => (
-                  <Slide text={slide.TEXT} img_path={slide.IMAGE} />
-                ))}
-              </Slider> */}
+                {configData.ABOUT_DV_LAB_PAGE.LAB_CULTURE.GALLERY.map(
+                  (photo) => (
+                    <Slide img_path={photo}/>
+                    
+                  )
+                )}
+              </Slider>
+            </div>
           </animated.div>
         </div>
       </div>

@@ -41,18 +41,6 @@
         .about-content {
             width: 100%;
 
-            .slider {
-                width: 75%;
-                margin: 0% 12.5% 10%;
-            }
-
-            .lab-culture {
-                height: max-content;
-                width: 100vw;
-                margin: 0;
-                padding: 0;
-            }
-
             .introduction {
                 display: flex;
                 justify-content: space-between;
@@ -89,6 +77,49 @@
                     }
                 }
             }
+
+            .lab-culture {
+                height: max-content;
+                width: 80%;
+                margin: 3% 10%;
+                padding: 0;
+                span{
+                    font-family: "Coolvetica";
+                    font-size: $subtitle-font-size;
+                    color: $light-yellow;
+                    font-weight: 500;
+                }
+                .gallery {
+                    width: 55%;
+                    height: 100%;
+                    margin: 3% auto;
+                    // background-color: paleturquoise;
+                    // vertical-align: middle;
+
+                    // .photo-container{
+                    //     width: 100%;
+                    //     height: auto;
+                    //     background-color: pink;
+                        
+                        
+                    //     img{
+                    //         display: block;
+                    //         width: 80%;
+                    //         height: auto;
+                    //         margin:auto;
+                    //         border-radius: 25px;
+                    //     }
+
+                    // }
+                    
+                }
+            }
         }
+    }
+}
+
+@for $i from 1 through 100 {
+    .text-animate._#{$i} {
+      animation-delay: #{$i / 20}s;
     }
 }
