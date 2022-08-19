@@ -43,76 +43,60 @@
         }
     },
     "ABOUT_DV_LAB_PAGE": {
-        "TITLE": "About DV Lab",
+        "TITLE":"About DV Lab",
+        "SUBTITLE": "Exploring the beauty of the unknown and making the known useful",
         "DESCRIPTION": {
-            "DES 1": {
-                "TEXT": "This is the description of the first item. This is the description of the first item. This is the description of the first item. This is the description of the first item.",
-                "IMAGE": "assets/images/img_example.jpeg"
-            },
-            "DES 2": {
-                "TEXT": "This is the description of the second item. This is the description of the second item.",
-                "IMAGE": "assets/images/img_example2.jpeg"
-            }
+            "TEXT":[
+                "In DVLab, we are committed to resolving the verification bottlenecks and building an open-source verification framework for the system-level designs. We believe “automatic abstraction” is the key, where the extracted design features can efficiently reduce the problem complexity, and “intelligent refinement” is the fuel, in which the essential design intents are learned to ensure the success of verification.",
+                "We are also curious on how quantum techniques may evolve into the new computing paradigm. Expanding upon our expertise on formal verification, we are on the way to reveal the secret of how quantum algorithms can be realized and optimized on practical quantum devices. This is a research area where the wonderful math, physics, and engineering knowledges meet, and we are thrilled to be part of this exciting journey."
+            ],
+            "IMAGE":"assets/images/img_example.jpeg"
         },
         "LAB_CULTURE": {
-            "SUBTITLE": "Lab Culture",
+            "SUBTITLE": [
+                "We research because we are curious",
+                "We publish because we love to share",
+                "We exercise because we work too hard"
+            ],
+            "GALLERY":[
+                "assets/images/examples/lab-activity/hiking_220623.JPG",
+                "assets/images/examples/lab-activity/lunch_gathering.jpg",
+                "assets/images/examples/lab-activity/jogging_0315.JPG"
+            ],
             "CONTENTS": {
                 "DES 1": {
-                    "TITLE": "2022 Summer Outing",
-                    "DETAILS": "This is the details of content 1. This is the details of content 1.",
+                    "TITLE": "We research because we are curious",
                     "IMAGE": "assets/images/examples/lab-activity/hiking_220623.JPG"
                 },
-                "DES 2": {
-                    "TITLE": "Practice for the NTU campus Marathon",
-                    "DETAILS": "This is the details of content 2. This is the details of content 2. This is the details of content 2.",
-                    "IMAGE": "assets/images/examples/lab-activity/jogging_0315.JPG"
-                },
                 "DES 3": {
-                    "TITLE": "Lunch Gathering, 2021",
-                    "DETAILS": "This is the details of content 3. This is the details of content 3. This is the details of content 3.",
+                    "TITLE": "We publish because we love to share",
                     "IMAGE": "assets/images/examples/lab-activity/lunch_gathering.jpg"
+                },
+                "DES 2": {
+                    "TITLE": "We exercise because we work too hard",
+                    "IMAGE": "assets/images/examples/lab-activity/jogging_0315.JPG"
                 }
             }
+
+
         }
     },
     "HOST_PROFILE_PAGE": {
         "TITLE": "HOST PROFILE",
-        "NAME": "Chung-Yang (Ric) Huang",
+        "NAME": "Professor Chung-Yang (Ric) Huang",
         "PHOTO": "assets/images/examples/host-profile/ric.jpeg",
-        "EDUCATION": {
-            "BACHELOR": "National Taiwan University , 1992",
-            "PHD": "University of California at Santa Barbara, 2000"
-        },
+        "HEADER":"This is the header. This is the header. This is the header. ",
         "INFO": {
-            "ADDRESS": "EE2-444, NTU",
-            "LAB": "EE2-353, NTU",
-            "PHONE": "+886-2-33663644",
-            "FAX": "+886-2-23671909",
             "EMAIL": "cyhuang@ntu.edu.tw",
+            "LINKEDIN": "https://www.linkedin.com/in/chung-yang-ric-huang-7a708a1/",
             "FACEBOOK": "https://www.facebook.com/ric2k1",
-            "GITHUB": "https://github.com/ric2k1",
-            "LINKEDIN": "https://www.linkedin.com/in/chung-yang-ric-huang-7a708a1/"
+            "LINE": "https://line.me/ti/p/1NuZA3KwBq"
         },
-        "POSITION": [
-            "Professor, Department of Electrical Engineering, National Taiwan University",
-            "Professor, Graduate Institute of Electronics Engineering, National Taiwan University"
-        ],
-        "MAJOR_RESEARCH_AREA": {
-            "TITLE": "Major Research Area",
-            "CONTENTS": [
-                "design verification for SoCs",
-                "design for verifiability",
-                "design automation and optimization",
-                "constraint satisfaction problems in electronic design automation (EDA) area"
-            ]
-        },
-        "RESEARCH_SUMMARY": {
-            "TITLE": "Research Summary",
-            "CONTENTS": [
-                "This is the first paragraph.  This is the first paragraph.  This is the first paragraph.  This is the first paragraph.  This is the first paragraph. ",
-                "This is the second paragraph.  This is the second paragraph.  This is the second paragraph.  This is the second paragraph.  This is the second paragraph."
-            ]
-        }
+        "SHORT_BIO":[
+            "This is the first paragraph of short bio. This is the first paragraph of short bio. This is the first paragraph of short bio. This is the first paragraph of short bio.",
+            "This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio.",
+            "This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio."
+        ]
     },
     "PUBLICATIONS_PAGE": {
         "TITLE": "Publications",
