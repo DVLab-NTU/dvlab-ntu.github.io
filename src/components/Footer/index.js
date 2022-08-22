@@ -10,25 +10,26 @@
 
 import './index.scss'
 import React from 'react'
-import configData from '../../config.json'
+import maintainer from '../../config/maintainer.json'
+import frontendData from '../../config/frontend.json'
 
 const Footer = () => {
   // * Footer: Implement footer at the bottom of each page.
   // TODO: The format for multiple maintainer.
   // @param authors:    Array       Data for each authors.
 
-  const authors = Object.values(configData.FOOTER.MAINTAINER)
+  const authors = Object.values(maintainer)
   return (
     <div className="footer-container">
       <div className="wrapper">
-        <div className="left-col">{configData.FOOTER.COPYRIGHT}</div>
+        <div className="left-col">{frontendData.FOOTER.COPYRIGHT}</div>
         <div className="right-col">
           We thank{' '}
           {authors.map((item, idx) => (
             <a href={item.LINK} target="_blank">
               {' '}
               {item.NAME}
-              {idx === authors.length - 1 ? ' ' : ' and '}
+              {/* {idx === authors.length - 1 ? ' ' : ' and '} */}
             </a>
           ))}
           for creating and maintaining the DV Lab official website.

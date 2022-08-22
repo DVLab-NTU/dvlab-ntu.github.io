@@ -10,7 +10,7 @@
 
 import "./index.scss";
 import Loader from "react-loaders";
-import configData from "../../config.json";
+import frontendData from "../../config/frontend.json";
 import AnimatedLetters from "../AnimatedLetters";
 import React, { useState, useEffect } from "react";
 import { useSpring, animated, config } from "react-spring";
@@ -50,29 +50,29 @@ const HostProfile = () => {
             <h1>
               <AnimatedLetters
                 letterClass={letterClass}
-                strArray={configData.HOST_PROFILE_PAGE.NAME.split("")}
+                strArray={frontendData.HOST_PROFILE_PAGE.NAME.split("")}
                 idx={4}
               />
             </h1>
           </div>
           <animated.div className="content" style={props}>
             <div className="header">
-              <p>"{configData.HOST_PROFILE_PAGE.HEADER}"</p>
+              <p>"{frontendData.HOST_PROFILE_PAGE.HEADER}"</p>
             </div>
             <div className="content-info">
               <div className="left-col">
-                {configData.HOST_PROFILE_PAGE.SHORT_BIO.map((paragraph) => (
+                {frontendData.HOST_PROFILE_PAGE.SHORT_BIO.map((paragraph) => (
                   <p>{paragraph}</p>
                 ))}
               </div>
               <div className="right-col">
                 <div>
                 <div className="img-container">
-                  <img src={configData.HOST_PROFILE_PAGE.PHOTO} />
+                  <img src={frontendData.HOST_PROFILE_PAGE.PHOTO} />
                 </div>
                 <div className="media-list">
                   <a
-                    href={"mailto:" + configData.HOST_PROFILE_PAGE.INFO.EMAIL}
+                    href={"mailto:" + frontendData.HOST_PROFILE_PAGE.INFO.EMAIL}
                     target="_blank"
                   >
                     <FontAwesomeIcon
@@ -81,13 +81,13 @@ const HostProfile = () => {
                     />
                   </a>
                   <a
-                    href={configData.HOST_PROFILE_PAGE.INFO.LINKEDIN}
+                    href={frontendData.HOST_PROFILE_PAGE.INFO.LINKEDIN}
                     target="_blank"
                   >
                     <FontAwesomeIcon className="media-icon" icon={faLinkedin} />
                   </a>
                   <a
-                    href={configData.HOST_PROFILE_PAGE.INFO.FACEBOOK}
+                    href={frontendData.HOST_PROFILE_PAGE.INFO.FACEBOOK}
                     target="_blank"
                   >
                     <FontAwesomeIcon
@@ -96,7 +96,7 @@ const HostProfile = () => {
                     />
                   </a>
                   <a
-                    href={configData.HOST_PROFILE_PAGE.INFO.LINE}
+                    href={frontendData.HOST_PROFILE_PAGE.INFO.LINE}
                     target="_blank"
                   >
                     <FontAwesomeIcon className="media-icon" icon={faLine} />
@@ -111,14 +111,14 @@ const HostProfile = () => {
             {/* <div className="education">
               <h3>Education</h3>
               <ul className="edu-list">
-                <li>B.S. {configData.HOST_PROFILE_PAGE.EDUCATION.BACHELOR}</li>
-                <li>Ph.D. {configData.HOST_PROFILE_PAGE.EDUCATION.PHD}</li>
+                <li>B.S. {frontendData.HOST_PROFILE_PAGE.EDUCATION.BACHELOR}</li>
+                <li>Ph.D. {frontendData.HOST_PROFILE_PAGE.EDUCATION.PHD}</li>
               </ul>
             </div> */}
             {/* <div className="education">
-              <h3>{configData.HOST_PROFILE_PAGE.MAJOR_RESEARCH_AREA.TITLE}</h3>
+              <h3>{frontendData.HOST_PROFILE_PAGE.MAJOR_RESEARCH_AREA.TITLE}</h3>
               <ul className="edu-list">
-                {configData.HOST_PROFILE_PAGE.MAJOR_RESEARCH_AREA.CONTENTS.map(
+                {frontendData.HOST_PROFILE_PAGE.MAJOR_RESEARCH_AREA.CONTENTS.map(
                   (item, idx) => (
                     <p>
                       {idx + 1}. {item}
@@ -129,9 +129,9 @@ const HostProfile = () => {
               </ul>
             </div> */}
             {/* <div className="education">
-              <h3>{configData.HOST_PROFILE_PAGE.RESEARCH_SUMMARY.TITLE}</h3>
+              <h3>{frontendData.HOST_PROFILE_PAGE.RESEARCH_SUMMARY.TITLE}</h3>
               <ul className="edu-list">
-                {configData.HOST_PROFILE_PAGE.RESEARCH_SUMMARY.CONTENTS.map(
+                {frontendData.HOST_PROFILE_PAGE.RESEARCH_SUMMARY.CONTENTS.map(
                   (paragraph) => (
                     <p className="summary-paragraph">{paragraph}</p>
                   )

@@ -11,7 +11,8 @@
 import './index.scss'
 import Course from './Course'
 import Loader from 'react-loaders'
-import configData from '../../config.json'
+import frontendData from '../../config/frontend.json'
+import courseList from '../../config/course.json'
 import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
@@ -43,13 +44,13 @@ const Courses = () => {
             <h1>
               <AnimatedLetters
                 letterClass={letterClass}
-                strArray={configData.COURSES_PAGE.TITLE.split('')}
+                strArray={frontendData.COURSES_PAGE.TITLE.split('')}
                 idx={16}
               />
             </h1>
           </div>
           <animated.div className="courses-list" style={props}>
-            {configData.COURSES_PAGE.COURSES_LIST.map((course, idx) => (
+            {courseList.map((course, idx) => (
               <Course course={course} />
             ))}
           </animated.div>

@@ -14,7 +14,7 @@ import Loader from 'react-loaders'
 import NewsAwards from './NewsAwards'
 import React, { useEffect } from 'react'
 import Particles from 'react-tsparticles'
-import configData from '../../config.json'
+import frontendData from '../../config/frontend.json'
 import { useSpring, animated, config } from 'react-spring'
 
 const Home = () => {
@@ -92,7 +92,7 @@ const Home = () => {
         </div>
 
         <animated.div style={props}>
-          <Logo img_path={configData.LOGO} />
+          <Logo img_path={frontendData.LOGO} />
           <NewsAwards />
         </animated.div>
       </div>
