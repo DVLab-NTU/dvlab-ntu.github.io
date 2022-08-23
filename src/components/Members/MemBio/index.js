@@ -46,21 +46,15 @@ const MemBio = () => {
     to: { opacity: 1 },
     from: { opacity: 0 },
     reset: false,
-    delay: 2000,
+    delay: 1000,
     config: config.molasses,
   })
 
   const getBios = async () => {
     // get Bios from backend
-    const a = await instance.get('/getMemBio')
+    const a = await instance.get('/getMemBio', { params: {ID: memberId} })
     const bio = a.data.contents
-    let mem_info = {}
-    bio.forEach((member) => {
-      if (member.ID === memberId) {
-        mem_info = member
-      }
-    })
-    setInfo(mem_info)
+    setInfo(bio)
     setReady(true)
   }
   // * Scroll to top of the page when rendering

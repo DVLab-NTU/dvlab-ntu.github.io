@@ -12,7 +12,7 @@ import MemberBio from '../models/Member'
 
 exports.GetMemBio = async (req, res) => {
     // Get MemberBios from mongodb and return to frontend
-    MemberBio.find()
+    MemberBio.findOne({ID: req.query.ID})
         .exec((err, data) => {
             if (err)
                 res.status(403).send({ message: 'error', contents: [] })
