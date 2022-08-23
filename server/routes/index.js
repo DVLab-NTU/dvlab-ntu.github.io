@@ -9,11 +9,13 @@
 // * ////////////////////////////////////////////////////////////////////////
 
 import memberRoute from './member'
+import maintainerRoute from './maintainer'
 
 const wrap = fn => (...args) => fn(...args).catch(args[2])
 
 function main(app) {
-  app.get('/api/getContents', wrap(memberRoute.GetContents))
+  app.get('/api/getMemBio', wrap(memberRoute.GetMemBio))
+  app.get('/api/getMaintainer', wrap(maintainerRoute.GetMaintainer))
 }
 
 export default main

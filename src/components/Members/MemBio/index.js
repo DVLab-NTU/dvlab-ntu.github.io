@@ -3,7 +3,7 @@
 // * FileName     [ index.js ]
 // * PackageName  [ src/components/Members/MemBio ]
 // * Synopsis     [ Implement "MemBio" page for each member ]
-// * Author       [ Cheng-Hua Lu (Front), Chin-Yi Cheng (Back)]
+// * Author       [ Cheng-Hua Lu (Front), Chin-Yi Cheng (Back) ]
 // * Copyright    [ 2022 8 ]
 // *
 // * ////////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ const MemBio = () => {
 
   const getBios = async () => {
     // get Bios from backend
-    const a = await instance.get('/getContents')
+    const a = await instance.get('/getMemBio')
     const bio = a.data.contents
     let mem_info = {}
     bio.forEach((member) => {
@@ -70,212 +70,212 @@ const MemBio = () => {
     window.scrollTo(0, 0)
   })
   return (
-        <>
-          <div className="membio-container">
-            <div className="wrapper">
-              <animated.div className="content" style={props}>
-              {(ready) ?
-                <div className="content-info">
-                  <div className="left-col">
-                    <div className="img-container">
-                      <img src={info.IMG} />
-                    </div>
-                    <h3>{info.NAME}</h3>
-                    {info.CHINESE_NAME !== '' &&
-                      info.ENGLISH_NAME !== '' ? (
-                      <h6>
-                        {info.CHINESE_NAME} • {info.ENGLISH_NAME}
-                      </h6>
-                    ) : info.CHINESE_NAME !== '' ? (
-                      <h6>{info.CHINESE_NAME} </h6>
-                    ) : info.ENGLISH_NAME !== '' ? (
-                      <h6>{info.ENGLISH_NAME}</h6>
+    <>
+      <div className="membio-container">
+        <div className="wrapper">
+          <animated.div className="content" style={props}>
+            {(ready) ?
+              <div className="content-info">
+                <div className="left-col">
+                  <div className="img-container">
+                    <img src={info.IMG} />
+                  </div>
+                  <h3>{info.NAME}</h3>
+                  {info.CHINESE_NAME !== '' &&
+                    info.ENGLISH_NAME !== '' ? (
+                    <h6>
+                      {info.CHINESE_NAME} • {info.ENGLISH_NAME}
+                    </h6>
+                  ) : info.CHINESE_NAME !== '' ? (
+                    <h6>{info.CHINESE_NAME} </h6>
+                  ) : info.ENGLISH_NAME !== '' ? (
+                    <h6>{info.ENGLISH_NAME}</h6>
+                  ) : (
+                    <></>
+                  )}
+                  <div className="media-list">
+                    {info.EMAIL !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faSquareEnvelope}
+                        />
+                        <a href={'mailto:' + info.EMAIL} target="_blank">
+                          {info.EMAIL.length > 30
+                            ? info.EMAIL.substring(0, 30) + '...'
+                            : info.EMAIL}
+                        </a>
+                      </div>
                     ) : (
                       <></>
                     )}
-                    <div className="media-list">
-                      {info.EMAIL !== '' ? (
-                        <div className="media-item">
-                          <FontAwesomeIcon
-                            className="media-icon"
-                            icon={faSquareEnvelope}
-                          />
-                          <a href={'mailto:' + info.EMAIL} target="_blank">
-                            {info.EMAIL.length > 30
-                              ? info.EMAIL.substring(0, 30) + '...'
-                              : info.EMAIL}
-                          </a>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {info.GITHUB !== '' ? (
-                        <div className="media-item">
-                          <FontAwesomeIcon
-                            className="media-icon"
-                            icon={faSquareGithub}
-                          />
-                          <a href={info.GITHUB} target="_blank">
-                            {info.GITHUB.length > 30
-                              ? info.GITHUB.substring(0, 30) + '...'
-                              : info.GITHUB}
-                          </a>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {info.FACEBOOK !== '' ? (
-                        <div className="media-item">
-                          <FontAwesomeIcon
-                            className="media-icon"
-                            icon={faSquareFacebook}
-                          />
-                          <a href={info.FACEBOOK} target="_blank">
-                            {info.FACEBOOK.length > 30
-                              ? info.FACEBOOK.substring(0, 30) + '...'
-                              : info.FACEBOOK}
-                          </a>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {info.LINKEDIN !== '' ? (
-                        <div className="media-item">
-                          <FontAwesomeIcon
-                            className="media-icon"
-                            icon={faLinkedin}
-                          />
-                          <a href={info.LINKEDIN} target="_blank">
-                            {info.LINKEDIN.length > 30
-                              ? info.LINKEDIN.substring(0, 30) + '...'
-                              : info.LINKEDIN}
-                          </a>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {info.PERSONAL_WEBSITE !== '' ? (
-                        <div className="media-item">
-                          <FontAwesomeIcon
-                            className="media-icon"
-                            icon={faSquareRss}
-                          />
-                          <a href={info.PERSONAL_WEBSITE} target="_blank">
-                            {info.PERSONAL_WEBSITE.length > 30
-                              ? info.PERSONAL_WEBSITE.substring(0, 30) + '...'
-                              : info.PERSONAL_WEBSITE}
-                          </a>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {info.RESEARCH_GATE !== '' ? (
-                        <div className="media-item">
-                          <FontAwesomeIcon
-                            className="media-icon"
-                            icon={faResearchgate}
-                          />
-                          <a href={info.RESEARCH_GATE} target="_blank">
-                            {info.RESEARCH_GATE.length > 30
-                              ? info.RESEARCH_GATE.substring(0, 30) + '...'
-                              : info.RESEARCH_GATE}
-                          </a>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
+                    {info.GITHUB !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faSquareGithub}
+                        />
+                        <a href={info.GITHUB} target="_blank">
+                          {info.GITHUB.length > 30
+                            ? info.GITHUB.substring(0, 30) + '...'
+                            : info.GITHUB}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {info.FACEBOOK !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faSquareFacebook}
+                        />
+                        <a href={info.FACEBOOK} target="_blank">
+                          {info.FACEBOOK.length > 30
+                            ? info.FACEBOOK.substring(0, 30) + '...'
+                            : info.FACEBOOK}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {info.LINKEDIN !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faLinkedin}
+                        />
+                        <a href={info.LINKEDIN} target="_blank">
+                          {info.LINKEDIN.length > 30
+                            ? info.LINKEDIN.substring(0, 30) + '...'
+                            : info.LINKEDIN}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {info.PERSONAL_WEBSITE !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faSquareRss}
+                        />
+                        <a href={info.PERSONAL_WEBSITE} target="_blank">
+                          {info.PERSONAL_WEBSITE.length > 30
+                            ? info.PERSONAL_WEBSITE.substring(0, 30) + '...'
+                            : info.PERSONAL_WEBSITE}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {info.RESEARCH_GATE !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faResearchgate}
+                        />
+                        <a href={info.RESEARCH_GATE} target="_blank">
+                          {info.RESEARCH_GATE.length > 30
+                            ? info.RESEARCH_GATE.substring(0, 30) + '...'
+                            : info.RESEARCH_GATE}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
-                  <div className="right-col">
-                    <div className="item-block">
-                      <h3>Short Bio</h3>
-                      {info.SHORT_BIO.map((item) => (
-                        <p>{item}</p>
+                </div>
+                <div className="right-col">
+                  <div className="item-block">
+                    <h3>Short Bio</h3>
+                    {info.SHORT_BIO.map((item) => (
+                      <p>{item}</p>
+                    ))}
+                  </div>
+                  <div className="item-block">
+                    <h3>Fields of Interest</h3>
+                    <ul>
+                      {info.INTEREST_FIELDS.map((item) => (
+                        <li>{item}</li>
                       ))}
-                    </div>
-                    <div className="item-block">
-                      <h3>Fields of Interest</h3>
-                      <ul>
-                        {info.INTEREST_FIELDS.map((item) => (
-                          <li>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
+                    </ul>
                   </div>
-                  
-                </div>:<div className="content-info"></div>
-                }
-                <div className="education">
+                </div>
 
-                  {info.EDUCATION == undefined ? <></> :
-                    <>
-                      <h3>Education</h3>
-                      <div className="edu-list">
-                        {Object.values(info.EDUCATION).map((item) => (
-                          <div className="edu-item">
-                            <div className="edu-subitem" style={{ width: '15%' }}>
-                              {item.DEGREE}
-                            </div>
-                            <div className="edu-subitem" style={{ width: '35%' }}>
-                              {item.DEPARTMENT}
-                            </div>
-                            <div className="edu-subitem" style={{ width: '30%' }}>
-                              {item.SCHOOL}
-                            </div>
-                            <div
-                              className="edu-subitem"
-                              style={{ width: '20%', textAlign: 'right' }}
-                            >
-                              {item.DURATION}
-                            </div>
-                          </div>
+              </div> : <div className="content-info"></div>
+            }
+            <div className="education">
+
+              {info.EDUCATION == undefined ? <></> :
+                <>
+                  <h3>Education</h3>
+                  <div className="edu-list">
+                    {Object.values(info.EDUCATION).map((item) => (
+                      <div className="edu-item">
+                        <div className="edu-subitem" style={{ width: '15%' }}>
+                          {item.DEGREE}
+                        </div>
+                        <div className="edu-subitem" style={{ width: '35%' }}>
+                          {item.DEPARTMENT}
+                        </div>
+                        <div className="edu-subitem" style={{ width: '30%' }}>
+                          {item.SCHOOL}
+                        </div>
+                        <div
+                          className="edu-subitem"
+                          style={{ width: '20%', textAlign: 'right' }}
+                        >
+                          {item.DURATION}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              }
+            </div>
+            {info.PUBLICATION == undefined ? <></> :
+              <div className="publications">
+                <h3>Publications</h3>
+                <div className="pub-list">
+                  {Object.values(info.PUBLICATION).map((item) => (
+                    <div className="pub-item">
+                      <a
+                        className="pub-subitem"
+                        href={item.LINK}
+                        target={item.LINK !== "" ? "_blank" : ""}
+                        style={{
+                          fontWeight: 'bold',
+                          cursor: 'pointer',
+                          textDecoration: 'none',
+                        }}
+                      >
+                        {item.TITLE}
+                      </a>
+                      <div className="pub-subitem">
+                        {item.AUTHORS.map((author, idx) => (
+                          <span>
+                            {author}
+                            {idx !== item.AUTHORS.length - 1 ? ', ' : ''}
+                          </span>
                         ))}
                       </div>
-                    </>
-                  }
-                </div>
-                {info.PUBLICATION == undefined ? <></> :
-                  <div className="publications">
-                    <h3>Publications</h3>
-                    <div className="pub-list">
-                      {Object.values(info.PUBLICATION).map((item) => (
-                        <div className="pub-item">
-                          <a
-                            className="pub-subitem"
-                            href={item.LINK}
-                            target={item.LINK !== "" ? "_blank" : ""}
-                            style={{
-                              fontWeight: 'bold',
-                              cursor: 'pointer',
-                              textDecoration: 'none',
-                            }}
-                          >
-                            {item.TITLE}
-                          </a>
-                          <div className="pub-subitem">
-                            {item.AUTHORS.map((author, idx) => (
-                              <span>
-                                {author}
-                                {idx !== item.AUTHORS.length - 1 ? ', ' : ''}
-                              </span>
-                            ))}
-                          </div>
-                          <div
-                            className="pub-subitem institution"
-                            style={{ textAlign: 'right' }}
-                          >
-                            {item.INSTITUTION}, {item.YEAR}
-                          </div>
-                        </div>
-                      ))}
+                      <div
+                        className="pub-subitem institution"
+                        style={{ textAlign: 'right' }}
+                      >
+                        {item.INSTITUTION}, {item.YEAR}
+                      </div>
                     </div>
-                  </div>
-                }
-              </animated.div>
-            </div>
-          </div>
-          <Loader type="line-scale" />
-        </> 
+                  ))}
+                </div>
+              </div>
+            }
+          </animated.div>
+        </div>
+      </div>
+      <Loader type="line-scale" />
+    </>
   )
 }
 
