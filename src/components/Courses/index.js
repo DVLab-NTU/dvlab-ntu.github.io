@@ -3,7 +3,7 @@
 // * FileName     [ index.js ]
 // * PackageName  [ src/components/Courses ]
 // * Synopsis     [ Implement "Courses" page ]
-// * Author       [ Cheng-Hua Lu ]
+// * Author       [ Cheng-Hua Lu (Front), Chin-Yi Cheng (Back) ]
 // * Copyright    [ 2022 8 ]
 // *
 // * ////////////////////////////////////////////////////////////////////////
@@ -12,16 +12,22 @@ import './index.scss'
 import Course from './Course'
 import Loader from 'react-loaders'
 import frontendData from '../../config/frontend.json'
-import courseList from '../../config/course.json'
 import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
+
+//Backend Additions
+import axios from 'axios'
+const API_ROOT = 'http://localhost:4000/api'
+const instance = axios.create({
+  baseURL: API_ROOT
+})
 
 const Courses = () => {
   // * Courses: Implement "Courses" page, it contains Course.
   // @param props:          useSpring   the animation for animated.div
   //        letterClass     String      the animation for title
-
+  const [courses, setCourses] = useState([])     // to store 
   const [letterClass, setLetterClass] = useState('text-animate')
   const props = useSpring({
     to: { opacity: 1 },
@@ -30,12 +36,19 @@ const Courses = () => {
     delay: 2000,
     config: config.molasses,
   })
-
+  const getCourses = async () => {
+    // get Bios from backend
+    const back = await instance.get('/getCourse')
+    const course = back.data.contents
+    setCourses(course)
+  }
   // * Scroll to top of the page when rendering
   useEffect(() => {
+    if (courses.length === 0)
+      getCourses()
     window.scrollTo(0, 0)
   }, [])
-
+  console.log(courses.length === 0)
   return (
     <>
       <div className="courses-container">
@@ -50,9 +63,13 @@ const Courses = () => {
             </h1>
           </div>
           <animated.div className="courses-list" style={props}>
-            {courseList.map((course, idx) => (
-              <Course course={course} />
-            ))}
+            {courses.length !== 0 ?
+              <>
+                {courses.map((course, idx) => (
+                  <Course course={course} />
+                ))}
+              </>
+              : <Loader type="line-scale" />}
           </animated.div>
         </div>
       </div>

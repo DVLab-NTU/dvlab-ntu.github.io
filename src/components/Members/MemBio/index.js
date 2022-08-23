@@ -65,10 +65,10 @@ const MemBio = () => {
   }
   // * Scroll to top of the page when rendering
   useEffect(() => {
-    if (Object.keys(info).length == 0)
+    if (Object.keys(info).length === 0)
       getBios()
     window.scrollTo(0, 0)
-  })
+  },[])
   return (
     <>
       <div className="membio-container">
@@ -207,7 +207,7 @@ const MemBio = () => {
             }
             <div className="education">
 
-              {info.EDUCATION == undefined ? <></> :
+              {info.EDUCATION === undefined ? <></> :
                 <>
                   <h3>Education</h3>
                   <div className="edu-list">
@@ -234,7 +234,7 @@ const MemBio = () => {
                 </>
               }
             </div>
-            {info.PUBLICATION == undefined ? <></> :
+            {info.PUBLICATION === undefined ? <></> :
               <div className="publications">
                 <h3>Publications</h3>
                 <div className="pub-list">
