@@ -46,7 +46,7 @@ const MemBio = () => {
     to: { opacity: 1 },
     from: { opacity: 0 },
     reset: false,
-    delay: 1000,
+    delay: 2000,
     config: config.molasses,
   })
 
