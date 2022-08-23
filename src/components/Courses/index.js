@@ -37,7 +37,6 @@ const Courses = () => {
     config: config.molasses,
   })
   const getCourses = async () => {
-    // get Bios from backend
     const back = await instance.get('/getCourse')
     const course = back.data.contents
     setCourses(course)
@@ -48,7 +47,6 @@ const Courses = () => {
       getCourses()
     window.scrollTo(0, 0)
   }, [])
-  console.log(courses.length === 0)
   return (
     <>
       <div className="courses-container">
