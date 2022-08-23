@@ -11,6 +11,7 @@
 import memberRoute from './member'
 import maintainerRoute from './maintainer'
 import courseRoute from './course'
+import publicationRoute from './publication'
 
 const wrap = fn => (...args) => fn(...args).catch(args[2])
 
@@ -18,6 +19,7 @@ function main(app) {
   app.get('/api/getMemBio', wrap(memberRoute.GetMemBio))
   app.get('/api/getMaintainer', wrap(maintainerRoute.GetMaintainer))
   app.get('/api/getCourse', wrap(courseRoute.GetCourse))
+  app.get('/api/getPublication', wrap(publicationRoute.GetPublication))
 }
 
 export default main
