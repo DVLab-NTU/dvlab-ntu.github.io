@@ -3,22 +3,39 @@
 // * FileName     [ index.js ]
 // * PackageName  [ src/components/Footer ]
 // * Synopsis     [ Implement footer at the bottom of each page ]
-// * Author       [ Cheng-Hua Lu ]
+// * Author       [ Cheng-Hua Lu (Front), Chin-Yi Cheng (Back) ]
 // * Copyright    [ 2022 8 ]
 // *
 // * ////////////////////////////////////////////////////////////////////////
 
 import './index.scss'
-import React from 'react'
-import maintainer from '../../config/maintainer.json'
+import React, { useEffect, useState } from 'react'
 import frontendData from '../../config/frontend.json'
+
+//Backend Additions
+import axios from 'axios'
+const API_ROOT = 'http://localhost:4000/api'
+const instance = axios.create({
+  baseURL: API_ROOT
+})
 
 const Footer = () => {
   // * Footer: Implement footer at the bottom of each page.
   // TODO: The format for multiple maintainer.
   // @param authors:    Array       Data for each authors.
 
-  const authors = Object.values(maintainer)
+  const [authors, setAuthor] = useState([])     // to store 
+
+  const getAuthors = async () => {
+    // get Bios from backend
+    const back = await instance.get('/getMaintainer')
+    const maintainer = back.data.contents
+    setAuthor(maintainer)
+  }
+  useEffect(() => {
+    if (authors.length === 0)
+      getAuthors()
+  })
   return (
     <div className="footer-container">
       <div className="wrapper">

@@ -3,16 +3,15 @@
 // * FileName     [ index.js ]
 // * PackageName  [ src/components/Members/MemBio ]
 // * Synopsis     [ Implement "MemBio" page for each member ]
-// * Author       [ Cheng-Hua Lu ]
+// * Author       [ Cheng-Hua Lu (Front), Chin-Yi Cheng (Back) ]
 // * Copyright    [ 2022 8 ]
 // *
 // * ////////////////////////////////////////////////////////////////////////
 
 import './index.scss'
 import Loader from 'react-loaders'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import membio from '../../../config/membio.json'
 import { useSpring, animated, config } from 'react-spring'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -26,12 +25,22 @@ import {
   faResearchgate,
 } from '@fortawesome/free-brands-svg-icons'
 
+//Backend Additions
+import axios from 'axios'
+
+const API_ROOT = 'http://localhost:4000/api'
+const instance = axios.create({
+  baseURL: API_ROOT
+})
+
 const MemBio = () => {
   // * MemBio: Implement "MemBio" page for each member.
   // @param memberId      useParams     The id of the member
   //        props         useSpring     The animation for animated.div
   //        mem_info      Dictionary    The information for the member
 
+  const [info, setInfo] = useState({})     // to store 
+  const [ready, setReady] = useState(false)     // to store 
   const { memberId } = useParams()
   const props = useSpring({
     to: { opacity: 1 },
@@ -41,180 +50,189 @@ const MemBio = () => {
     config: config.molasses,
   })
 
-  let mem_info = {}
-  membio.forEach((member) => {
-    if (member.ID === memberId) {
-      mem_info = member
-    }
-  })
-  console.log(mem_info)
+  const getBios = async () => {
+    // get Bios from backend
+    const a = await instance.get('/getMemBio', { params: {ID: memberId} })
+    const bio = a.data.contents
+    setInfo(bio)
+    setReady(true)
+  }
   // * Scroll to top of the page when rendering
   useEffect(() => {
+    if (Object.keys(info).length === 0)
+      getBios()
     window.scrollTo(0, 0)
-  }, [])
-
+  },[])
   return (
     <>
       <div className="membio-container">
         <div className="wrapper">
           <animated.div className="content" style={props}>
-            <div className="content-info">
-              <div className="left-col">
-                <div className="img-container">
-                  <img src={'../' + mem_info.IMG} />
-                </div>
-                <h3>{mem_info.NAME}</h3>
-                {mem_info.CHINESE_NAME !== '' &&
-                mem_info.ENGLISH_NAME !== '' ? (
-                  <h6>
-                    {mem_info.CHINESE_NAME} • {mem_info.ENGLISH_NAME}
-                  </h6>
-                ) : mem_info.CHINESE_NAME !== '' ? (
-                  <h6>{mem_info.CHINESE_NAME} </h6>
-                ) : mem_info.ENGLISH_NAME !== '' ? (
-                  <h6>{mem_info.ENGLISH_NAME}</h6>
-                ) : (
-                  <></>
-                )}
-                <div className="media-list">
-                  {mem_info.EMAIL !== '' ? (
-                    <div className="media-item">
-                      <FontAwesomeIcon
-                        className="media-icon"
-                        icon={faSquareEnvelope}
-                      />
-                      <a href={'mailto:' + mem_info.EMAIL} target="_blank">
-                        {mem_info.EMAIL.length > 30
-                          ? mem_info.EMAIL.substring(0, 30) + '...'
-                          : mem_info.EMAIL}
-                      </a>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {mem_info.GITHUB !== '' ? (
-                    <div className="media-item">
-                      <FontAwesomeIcon
-                        className="media-icon"
-                        icon={faSquareGithub}
-                      />
-                      <a href={mem_info.GITHUB} target="_blank">
-                        {mem_info.GITHUB.length > 30
-                          ? mem_info.GITHUB.substring(0, 30) + '...'
-                          : mem_info.GITHUB}
-                      </a>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {mem_info.FACEBOOK !== '' ? (
-                    <div className="media-item">
-                      <FontAwesomeIcon
-                        className="media-icon"
-                        icon={faSquareFacebook}
-                      />
-                      <a href={mem_info.FACEBOOK} target="_blank">
-                        {mem_info.FACEBOOK.length > 30
-                          ? mem_info.FACEBOOK.substring(0, 30) + '...'
-                          : mem_info.FACEBOOK}
-                      </a>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {mem_info.LINKEDIN !== '' ? (
-                    <div className="media-item">
-                      <FontAwesomeIcon
-                        className="media-icon"
-                        icon={faLinkedin}
-                      />
-                      <a href={mem_info.LINKEDIN} target="_blank">
-                        {mem_info.LINKEDIN.length > 30
-                          ? mem_info.LINKEDIN.substring(0, 30) + '...'
-                          : mem_info.LINKEDIN}
-                      </a>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {mem_info.PERSONAL_WEBSITE !== '' ? (
-                    <div className="media-item">
-                      <FontAwesomeIcon
-                        className="media-icon"
-                        icon={faSquareRss}
-                      />
-                      <a href={mem_info.PERSONAL_WEBSITE} target="_blank">
-                        {mem_info.PERSONAL_WEBSITE.length > 30
-                          ? mem_info.PERSONAL_WEBSITE.substring(0, 30) + '...'
-                          : mem_info.PERSONAL_WEBSITE}
-                      </a>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {mem_info.RESEARCH_GATE !== '' ? (
-                    <div className="media-item">
-                      <FontAwesomeIcon
-                        className="media-icon"
-                        icon={faResearchgate}
-                      />
-                      <a href={mem_info.RESEARCH_GATE} target="_blank">
-                        {mem_info.RESEARCH_GATE.length > 30
-                          ? mem_info.RESEARCH_GATE.substring(0, 30) + '...'
-                          : mem_info.RESEARCH_GATE}
-                      </a>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              </div>
-              <div className="right-col">
-                <div className="item-block">
-                  <h3>Short Bio</h3>
-                  {mem_info.SHORT_BIO.map((item) => (
-                    <p>{item}</p>
-                  ))}
-                </div>
-                <div className="item-block">
-                  <h3>Fields of Interest</h3>
-                  <ul>
-                    {mem_info.INTEREST_FIELDS.map((item) => (
-                      <li>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="education">
-              <h3>Education</h3>
-              <div className="edu-list">
-                {Object.values(mem_info.EDUCATION).map((item) => (
-                  <div className="edu-item">
-                    <div className="edu-subitem" style={{ width: '15%' }}>
-                      {item.DEGREE}
-                    </div>
-                    <div className="edu-subitem" style={{ width: '35%' }}>
-                      {item.DEPARTMENT}
-                    </div>
-                    <div className="edu-subitem" style={{ width: '30%' }}>
-                      {item.SCHOOL}
-                    </div>
-                    <div
-                      className="edu-subitem"
-                      style={{ width: '20%', textAlign: 'right' }}
-                    >
-                      {item.DURATION}
-                    </div>
+            {(ready) ?
+              <div className="content-info">
+                <div className="left-col">
+                  <div className="img-container">
+                    <img src={info.IMG} />
                   </div>
-                ))}
-              </div>
+                  <h3>{info.NAME}</h3>
+                  {info.CHINESE_NAME !== '' &&
+                    info.ENGLISH_NAME !== '' ? (
+                    <h6>
+                      {info.CHINESE_NAME} • {info.ENGLISH_NAME}
+                    </h6>
+                  ) : info.CHINESE_NAME !== '' ? (
+                    <h6>{info.CHINESE_NAME} </h6>
+                  ) : info.ENGLISH_NAME !== '' ? (
+                    <h6>{info.ENGLISH_NAME}</h6>
+                  ) : (
+                    <></>
+                  )}
+                  <div className="media-list">
+                    {info.EMAIL !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faSquareEnvelope}
+                        />
+                        <a href={'mailto:' + info.EMAIL} target="_blank">
+                          {info.EMAIL.length > 30
+                            ? info.EMAIL.substring(0, 30) + '...'
+                            : info.EMAIL}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {info.GITHUB !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faSquareGithub}
+                        />
+                        <a href={info.GITHUB} target="_blank">
+                          {info.GITHUB.length > 30
+                            ? info.GITHUB.substring(0, 30) + '...'
+                            : info.GITHUB}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {info.FACEBOOK !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faSquareFacebook}
+                        />
+                        <a href={info.FACEBOOK} target="_blank">
+                          {info.FACEBOOK.length > 30
+                            ? info.FACEBOOK.substring(0, 30) + '...'
+                            : info.FACEBOOK}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {info.LINKEDIN !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faLinkedin}
+                        />
+                        <a href={info.LINKEDIN} target="_blank">
+                          {info.LINKEDIN.length > 30
+                            ? info.LINKEDIN.substring(0, 30) + '...'
+                            : info.LINKEDIN}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {info.PERSONAL_WEBSITE !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faSquareRss}
+                        />
+                        <a href={info.PERSONAL_WEBSITE} target="_blank">
+                          {info.PERSONAL_WEBSITE.length > 30
+                            ? info.PERSONAL_WEBSITE.substring(0, 30) + '...'
+                            : info.PERSONAL_WEBSITE}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {info.RESEARCH_GATE !== '' ? (
+                      <div className="media-item">
+                        <FontAwesomeIcon
+                          className="media-icon"
+                          icon={faResearchgate}
+                        />
+                        <a href={info.RESEARCH_GATE} target="_blank">
+                          {info.RESEARCH_GATE.length > 30
+                            ? info.RESEARCH_GATE.substring(0, 30) + '...'
+                            : info.RESEARCH_GATE}
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                </div>
+                <div className="right-col">
+                  <div className="item-block">
+                    <h3>Short Bio</h3>
+                    {info.SHORT_BIO.map((item) => (
+                      <p>{item}</p>
+                    ))}
+                  </div>
+                  <div className="item-block">
+                    <h3>Fields of Interest</h3>
+                    <ul>
+                      {info.INTEREST_FIELDS.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+              </div> : <div className="content-info"></div>
+            }
+            <div className="education">
+
+              {info.EDUCATION === undefined ? <></> :
+                <>
+                  <h3>Education</h3>
+                  <div className="edu-list">
+                    {Object.values(info.EDUCATION).map((item) => (
+                      <div className="edu-item">
+                        <div className="edu-subitem" style={{ width: '15%' }}>
+                          {item.DEGREE}
+                        </div>
+                        <div className="edu-subitem" style={{ width: '35%' }}>
+                          {item.DEPARTMENT}
+                        </div>
+                        <div className="edu-subitem" style={{ width: '30%' }}>
+                          {item.SCHOOL}
+                        </div>
+                        <div
+                          className="edu-subitem"
+                          style={{ width: '20%', textAlign: 'right' }}
+                        >
+                          {item.DURATION}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              }
             </div>
-            {Object.values(mem_info.PUBLICATION).length !== 0 ? (
+            {info.PUBLICATION === undefined ? <></> :
               <div className="publications">
                 <h3>Publications</h3>
                 <div className="pub-list">
-                  {Object.values(mem_info.PUBLICATION).map((item) => (
+                  {Object.values(info.PUBLICATION).map((item) => (
                     <div className="pub-item">
                       <a
                         className="pub-subitem"
@@ -246,9 +264,7 @@ const MemBio = () => {
                   ))}
                 </div>
               </div>
-            ) : (
-              <></>
-            )}
+            }
           </animated.div>
         </div>
       </div>

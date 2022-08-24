@@ -36,13 +36,19 @@
     "sass": "^1.54.1",
     "slick-carousel": "^1.8.1",
     "typewriter-effect": "^2.19.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "axios": "^0.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.15"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "nodemon"
   },
   "eslintConfig": {
     "extends": [
@@ -61,5 +67,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.6",
+    "@babel/preset-env": "^7.12.1",
+    "nodemon": "^2.0.6"
   }
 }
