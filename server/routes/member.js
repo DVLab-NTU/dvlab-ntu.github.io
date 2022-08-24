@@ -23,7 +23,7 @@ exports.GetMemBio = async (req, res) => {
 
 exports.GetMemBrief = async (req, res) => {
     // Get MemberBios from mongodb and return to frontend
-    MemberBio.find({},'ID NAME TEAM IMG')
+    MemberBio.find({},'ID NAME TEAM IMG').sort('NAME')
         .exec((err, data) => {
             if (err)
                 res.status(403).send({ message: 'error', contents: [] })
