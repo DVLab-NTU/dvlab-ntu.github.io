@@ -1,14 +1,26 @@
-# Design Verification Lab Website
+# Design Verification Lab Website, NTUEE
 ## Run website
-A terminal (frontend)
+### Local
+1. Modify "BackendPort": to "http://localhost:4000/api/"
+
+2. A terminal (frontend)
 ```bash=
-npm start
+cd frontend
+yarn start
 ```
-Another terminal (backend)
+3. Another terminal (backend)
 ```bash=
-npm run server
+cd backend
+yarn run server
 ```
 
+### Deploy
+1. Modify "BackendPort": to "api/"
+
+2. In terminal
+```bash=
+docker-compose up -f tools/docker-compose.yml --build
+```
 ## MongoDB
 ### Login by google account
 * account: dvlabdvlab@gmail.com
@@ -27,7 +39,7 @@ MONGO_URL=mongodb+srv://${account}:${password}@${cluster}.pqmbqsg.mongodb.net/${
 
 ## Data
 ### Frontend
-* Frontend data are in `src/config/frontend.json`.
+* Frontend data are in `frontend/src/config/frontend.json`.
 ### Backend Database
 * Beckend data in MongoDB
 * Collections
@@ -41,48 +53,68 @@ MONGO_URL=mongodb+srv://${account}:${password}@${cluster}.pqmbqsg.mongodb.net/${
 ## Structure
 
 ```
-src
-├── App.js
-├── App.scss
-├── components
-│   ├── About
-│   │   ├── Gallery
-│   │   ├── Slide
-│   ├── AnimatedLetters
-│   ├── Courses
-│   │   ├── Course
-│   ├── Footer
-│   ├── Home
-│   │   ├── Logo
-│   │   ├── NewsAwards
-│   │   │   ├── Item
-│   ├── HostProfile
-│   ├── Members
-│   │   ├── Group
-│   │   ├── MemBio
-│   │   ├── Member
-│   ├── NavBar
-│   └── Publications
-│       ├── Pub
-├── config.json
-├── index.js
-├── index.scss
-└── logo.png
-server
-├── models
-│   ├── course.js
-│   ├── maintainer.js
-│   ├── member.js
-│   ├── newsAward.js
-│   ├── maintainer.js
-│   ├── publication.js
-├── routes
+backend
+├── .env
+├── .env.default
+├── server
+│    ├── models
+│    │   ├── course.js
+│    │   ├── maintainer.js
+│    │   ├── member.js
+│    │   ├── newsAward.js
+│    │   ├── maintainer.js
+│    │   ├── publication.js
+│    ├── routes
+│    │   ├── index.js
+│    │   ├── course.js
+│    │   ├── maintainer.js
+│    │   ├── member.js
+│    │   ├── newsAward.js
+│    │   ├── maintainer.js
+│    │   ├── publication.js
+│    └── server.js
+├── package.json
+└── yarn.lock
+
+frontend
+├── public/
+├── src
+│   ├── App.js
+│   ├── App.scss
+│   ├── components
+│   │   ├── About
+│   │   │   ├── Gallery
+│   │   │   └── Slide
+│   │   ├── AnimatedLetters
+│   │   ├── Courses
+│   │   │   └── Course
+│   │   ├── Footer
+│   │   ├── Home
+│   │   │   ├── Logo
+│   │   │   └── NewsAwards
+│   │   │       └── Item
+│   │   ├── HostProfile
+│   │   ├── Members
+│   │   │   ├── Group
+│   │   │   ├── MemBio
+│   │   │   └── Member
+│   │   ├── NavBar
+│   │   └── Publications
+│   │       └── Pub
+│   ├── config
+│   │    └── frontend.json
 │   ├── index.js
-│   ├── course.js
-│   ├── maintainer.js
-│   ├── member.js
-│   ├── newsAward.js
-│   ├── maintainer.js
-│   ├── publication.js
-└── server.js
+│   ├── index.scss
+│   └── logo.png
+├── package.json
+└── yarn.lock
+
+nginx
+├── Dockerfile
+└── nginx.conf
+
+tools
+├── docker-compose.yml
+├── Dockerfile.backend
+└── Dockerfile.frontend
 ```
