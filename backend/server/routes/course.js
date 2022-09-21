@@ -8,7 +8,7 @@
 // *
 // * ////////////////////////////////////////////////////////////////////////
 
-import Course from '../models/Course'
+import Course from '../models/course'
 
 exports.GetCourse = async (req, res) => {
     // Get MemberBios from mongodb and return to frontend

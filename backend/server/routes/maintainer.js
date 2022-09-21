@@ -8,7 +8,7 @@
 // *
 // * ////////////////////////////////////////////////////////////////////////
 
-import Maintainer from '../models/Maintainer'
+import Maintainer from '../models/maintainer'
 
 exports.GetMaintainer = async (req, res) => {
     // Get MemberBios from mongodb and return to frontend

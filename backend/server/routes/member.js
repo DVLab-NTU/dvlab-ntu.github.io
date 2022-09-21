@@ -8,7 +8,7 @@
 // *
 // * ////////////////////////////////////////////////////////////////////////
 
-import MemberBio from '../models/Member'
+import MemberBio from '../models/member'
 
 exports.GetMemBio = async (req, res) => {
     // Get MemberBios from mongodb and return to frontend
