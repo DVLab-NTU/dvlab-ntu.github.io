@@ -1,0 +1,19 @@
+version: "3.4"
+name: "dvlab-prod"
+services:
+  frontend:
+    build:
+      context: ${PWD}
+      dockerfile: ./tools/Dockerfile.frontend
+  backend:
+    build:
+      context: ${PWD}
+      dockerfile: ./tools/Dockerfile.backend
+  nginx:
+    build:
+      context: ${PWD}
+      dockerfile: ./nginx/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ${PWD}/nginx:/etc/nginx/conf.d

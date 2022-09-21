@@ -1,0 +1,19 @@
+FROM node:16-buster
+
+# setup working directory
+WORKDIR /app
+# RUN yarn global add serve -g
+
+# install node_modules in the container
+COPY ["frontend/package.json", "frontend/yarn.lock", "./"]
+RUN yarn
+
+COPY ./frontend .
+
+# build
+RUN yarn
+
+# react-scripts run on port 3000
+EXPOSE 3000
+# startup command
+CMD ["yarn", "start"] 
