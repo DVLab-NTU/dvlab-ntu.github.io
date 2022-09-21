@@ -18,9 +18,8 @@ import { useSpring, animated, config } from 'react-spring'
 
 //Backend Additions
 import axios from 'axios'
-const API_ROOT = 'http://localhost:4000/api'
 const instance = axios.create({
-  baseURL: API_ROOT
+  baseURL: frontendData.BackendPort
 })
 
 const Courses = () => {

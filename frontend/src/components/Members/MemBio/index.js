@@ -9,6 +9,7 @@
 // * ////////////////////////////////////////////////////////////////////////
 
 import './index.scss'
+import frontendData from '../../../config/frontend.json'
 import Loader from 'react-loaders'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -28,9 +29,8 @@ import {
 //Backend Additions
 import axios from 'axios'
 
-const API_ROOT = 'http://localhost:4000/api'
 const instance = axios.create({
-  baseURL: API_ROOT
+  baseURL: frontendData.BackendPort
 })
 
 const MemBio = () => {
