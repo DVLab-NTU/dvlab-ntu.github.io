@@ -61,7 +61,7 @@
         "TITLE": "HOST PROFILE",
         "NAME": "Professor Chung-Yang (Ric) Huang",
         "PHOTO": "assets/images/examples/host-profile/ric.jpeg",
-        "HEADER":"This is the header. This is the header. This is the header. ",
+        "HEADER":"Think Rationally, and Trust Your Intuition.",
         "INFO": {
             "EMAIL": "cyhuang@ntu.edu.tw",
             "LINKEDIN": "https://www.linkedin.com/in/chung-yang-ric-huang-7a708a1/",
@@ -69,9 +69,10 @@
             "LINE": "https://line.me/ti/p/1NuZA3KwBq"
         },
         "SHORT_BIO":[
-            "This is the first paragraph of short bio. This is the first paragraph of short bio. This is the first paragraph of short bio. This is the first paragraph of short bio.",
-            "This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio.",
-            "This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio. This is the second paragraph of short bio."
+            "Professor Chung-Yang (Ric) Huang received his B.S. degree from Department of Electrical Engineering, National Taiwan University (NTUEE), in 1992. He obtained his PhD from Department of Electrical and Computer Engineering, University of California at Santa Barbara, in 2000. Before joining NTUEE as an assistant professor in 2004, he was with Cadence Design Systems, where he served as a senior R&D manager and was in charge of the core engine development of their functional verification tools.", 
+            "Professor Huang’s research interests include (1) design verification for SoCs, (2) quantum circuit optimizaion, (3) automatic testing and test generation for web services, and (4) entreperneurship education.",
+            "For those new and prospective graduate students looking for an advisor, or undergraduate students who are interested in research projects, please refer to the information in this web site. You are also very welcome to talk to Professor Huang for more details.",
+            "ps. Welcome to connect with me on cyberspace. However, please drop me a note about who you are, or your invitation may not be acknowledged."
         ]
     },
     "PUBLICATIONS_PAGE": {
