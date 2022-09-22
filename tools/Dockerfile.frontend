@@ -1,8 +1,17 @@
+## * /////////////////////////////////////////////////////////////////////////////////////////////
+## *
+## * FileName     [ Dockerfile.backend ]
+## * PackageName  [ tools ]
+## * Synopsis     [ Create backend docker image and container ]
+## * Author       [ Chin-Yi Cheng ]
+## * Copyright    [ 2022 9 ]
+## * 
+## * /////////////////////////////////////////////////////////////////////////////////////////////
+
 FROM node:16-buster
 
 # setup working directory
 WORKDIR /app
-# RUN yarn global add serve -g
 
 # install node_modules in the container
 COPY ["frontend/package.json", "frontend/yarn.lock", "./"]

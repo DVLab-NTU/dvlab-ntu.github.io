@@ -1,3 +1,13 @@
+## * /////////////////////////////////////////////////////////////////////////////////////////////
+## *
+## * FileName     [ docker-compose.yml ]
+## * PackageName  [ tools ]
+## * Synopsis     [ Ymls file for composing docker containers ]
+## * Author       [ Chin-Yi Cheng ]
+## * Copyright    [ 2022 9 ]
+## * 
+## * /////////////////////////////////////////////////////////////////////////////////////////////
+
 version: "3.4"
 name: "dvlab-prod"
 services:
@@ -14,6 +24,6 @@ services:
       context: ${PWD}
       dockerfile: ./nginx/Dockerfile
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - ${PWD}/nginx:/etc/nginx/conf.d
