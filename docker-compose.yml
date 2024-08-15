@@ -12,18 +12,23 @@ version: "3.4"
 name: "dvlab-prod"
 services:
   frontend:
+    restart: always
     build:
       context: ${PWD}
       dockerfile: ./tools/Dockerfile.frontend
   backend:
+    restart: always
     build:
       context: ${PWD}
       dockerfile: ./tools/Dockerfile.backend
   nginx:
-    build:
-      context: ${PWD}
-      dockerfile: ./nginx/Dockerfile
+    image: jonasal/nginx-certbot:3
+    restart: unless-stopped
+    environment:
+      - CERTBOT_EMAIL=${CERTBOT_EMAIL}
     ports:
-      - "80:80"
+      - 80:80
+      - 443:443
     volumes:
-      - ${PWD}/nginx:/etc/nginx/conf.d
+      - ./tools/letsencrypt:/etc/letsencrypt
+      - ./tools/user_conf.d:/etc/nginx/user_conf.d
