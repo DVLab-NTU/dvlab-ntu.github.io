@@ -16,7 +16,7 @@ const PublicationSchema = Schema({
     TITLE: { type: String, required: true },
     IMG: { type: String },
     AUTHOR: [{ type: String }],
-    DATE: { type: String },
+    DATE: { type: Date },
     ABSTRACT: { type: String },
     KEYWORDS: [{ type: String }],
     LINK: { type: String }
@@ -25,6 +25,6 @@ const PublicationSchema = Schema({
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 })
 
-const exportSchema = mongoose.model('publication', PublicationSchema)
+const PublicationModel = mongoose.model('publication', PublicationSchema)
 
-export default exportSchema
+export default PublicationModel

@@ -15,11 +15,11 @@ yarn run server
 ```
 
 ### Deploy
-1. Modify "BackendPort": to "api/"
+1. Modify `BackendPort`: to `api/`
 
 2. In terminal
 ```bash=
-docker-compose up -f tools/docker-compose.yml --build
+docker-compose up --build -d
 ```
 ## MongoDB
 ### Login by google account
@@ -41,7 +41,7 @@ MONGO_URL=mongodb+srv://${account}:${password}@${cluster}.pqmbqsg.mongodb.net/${
 ### Frontend
 * Frontend data are in `frontend/src/config/frontend.json`.
 ### Backend Database
-* Beckend data in MongoDB
+* Backend data in MongoDB
 * Collections
     * course
     * membio
@@ -49,72 +49,3 @@ MONGO_URL=mongodb+srv://${account}:${password}@${cluster}.pqmbqsg.mongodb.net/${
     * publication
     * maintainer
 * ``frontend.json`` would not store in database
-
-## Structure
-
-```
-backend
-├── .env
-├── .env.default
-├── server
-│    ├── models
-│    │   ├── course.js
-│    │   ├── maintainer.js
-│    │   ├── member.js
-│    │   ├── newsAward.js
-│    │   ├── maintainer.js
-│    │   ├── publication.js
-│    ├── routes
-│    │   ├── index.js
-│    │   ├── course.js
-│    │   ├── maintainer.js
-│    │   ├── member.js
-│    │   ├── newsAward.js
-│    │   ├── maintainer.js
-│    │   ├── publication.js
-│    └── server.js
-├── package.json
-└── yarn.lock
-
-frontend
-├── public/
-├── src
-│   ├── App.js
-│   ├── App.scss
-│   ├── components
-│   │   ├── About
-│   │   │   ├── Gallery
-│   │   │   └── Slide
-│   │   ├── AnimatedLetters
-│   │   ├── Courses
-│   │   │   └── Course
-│   │   ├── Footer
-│   │   ├── Home
-│   │   │   ├── Logo
-│   │   │   └── NewsAwards
-│   │   │       └── Item
-│   │   ├── HostProfile
-│   │   ├── Members
-│   │   │   ├── Group
-│   │   │   ├── MemBio
-│   │   │   └── Member
-│   │   ├── NavBar
-│   │   └── Publications
-│   │       └── Pub
-│   ├── config
-│   │    └── frontend.json
-│   ├── index.js
-│   ├── index.scss
-│   └── logo.png
-├── package.json
-└── yarn.lock
-
-nginx
-├── Dockerfile
-└── nginx.conf
-
-tools
-├── docker-compose.yml
-├── Dockerfile.backend
-└── Dockerfile.frontend
-```
