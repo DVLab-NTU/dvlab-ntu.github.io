@@ -25,7 +25,7 @@ services:
     image: jonasal/nginx-certbot:3
     restart: unless-stopped
     environment:
-      - CERTBOT_EMAIL=${CERTBOT_EMAIL}
+      - CERTBOT_EMAIL=dvlabdvlab@gmail.com
     ports:
       - 80:80
       - 443:443
