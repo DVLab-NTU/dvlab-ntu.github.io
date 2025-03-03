@@ -44,9 +44,9 @@
     "mongoose": "^5.10.15"
   },
   "scripts": {
-    "start": "NODE_ENV=development react-scripts start",
-    "build": "NODE_ENV=production react-scripts build",
-    "test": "NODE_ENV=test react-scripts test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "nodemon"
   },
