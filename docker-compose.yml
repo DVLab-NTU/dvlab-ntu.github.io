@@ -5,7 +5,7 @@
 ## * Synopsis     [ Ymls file for composing docker containers ]
 ## * Author       [ Chin-Yi Cheng ]
 ## * Copyright    [ 2022 9 ]
-## * 
+## *
 ## * /////////////////////////////////////////////////////////////////////////////////////////////
 
 version: "3.4"
@@ -16,6 +16,8 @@ services:
     build:
       context: ${PWD}
       dockerfile: ./tools/Dockerfile.frontend
+    environment:
+      - NODE_ENV=production
   backend:
     restart: always
     build:
