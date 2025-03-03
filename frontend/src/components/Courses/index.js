@@ -16,11 +16,7 @@ import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
 
-//Backend Additions
-import axios from 'axios'
-const instance = axios.create({
-  baseURL: frontendData.BackendPort
-})
+import instance from '../../axiosInstance'
 
 const Courses = () => {
   // * Courses: Implement "Courses" page, it contains Course.

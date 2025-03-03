@@ -27,11 +27,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 
 //Backend Additions
-import axios from 'axios'
-
-const instance = axios.create({
-  baseURL: frontendData.BackendPort
-})
+import instance from '../../../axiosInstance'
 
 const MemBio = () => {
   // * MemBio: Implement "MemBio" page for each member.
