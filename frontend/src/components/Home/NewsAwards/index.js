@@ -14,11 +14,8 @@ import React, { useState, useEffect } from 'react'
 import frontendData from '../../../config/frontend.json'
 import AnimatedLetters from '../../AnimatedLetters'
 
-//Backend Additions
-import axios from 'axios'
-const instance = axios.create({
-  baseURL: frontendData.BackendPort
-})
+import instance from '../../../axiosInstance'
+
 
 const NewsAwards = () => {
   // * NewsAwards: Implement "News & Awards" in "Home" page

@@ -12,11 +12,8 @@ import './index.scss'
 import React, { useEffect, useState } from 'react'
 import frontendData from '../../config/frontend.json'
 
-//Backend Additions
-import axios from 'axios'
-const instance = axios.create({
-  baseURL: frontendData.BackendPort
-})
+import instance from '../../axiosInstance'
+
 
 const Footer = () => {
   // * Footer: Implement footer at the bottom of each page.

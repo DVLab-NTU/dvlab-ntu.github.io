@@ -16,11 +16,8 @@ import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
 
-//Backend Additions
-import axios from 'axios'
-const instance = axios.create({
-  baseURL: frontendData.BackendPort
-})
+import instance from '../../axiosInstance'
+
 const Members = () => {
   // * Members: Implement "Members" page, it contains Group.
   // @param props:          useSpring   the animation for animated.div

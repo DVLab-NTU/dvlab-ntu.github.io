@@ -88,5 +88,5 @@
     "FOOTER": {
         "COPYRIGHT": "© 2022 DV Lab, NTUEE. All rights reserved."
     },
-    "BackendPort": "/api"
+    "BackendPort": "http://127.0.0.1:4000/api"
 }

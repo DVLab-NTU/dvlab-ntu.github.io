@@ -1,31 +1,40 @@
 # Design Verification Lab Website, NTUEE
-## Run website
-### Local
-1. Modify "BackendPort": to "http://localhost:4000/api/"
 
-2. A terminal (frontend)
+## Run website
+
+### Local
+
+1. A terminal (frontend)
+
 ```bash=
 cd frontend
 yarn start
 ```
-3. Another terminal (backend)
+
+2. Another terminal (backend)
+
 ```bash=
 cd backend
 yarn run server
 ```
 
 ### Deploy
-1. Modify `BackendPort`: to `api/`
 
-2. In terminal
+1. In terminal
+
 ```bash=
 docker-compose up --build -d
 ```
+
 ## MongoDB
+
 ### Login by google account
-* account: dvlabdvlab@gmail.com
-* password: 
+
+- account: dvlabdvlab@gmail.com
+- password:
+
 ### .env url
+
 ```bash=
 account=
 password=
@@ -35,17 +44,22 @@ database=
 MONGO_URL=mongodb+srv://${account}:${password}@${cluster}.pqmbqsg.mongodb.net/${database}?retryWrites=true&w=majority
 
 ```
-* **<font color="#f00">Make sure your IP is in the whitelist before connecting to DB</font>**
+
+- **<font color="#f00">Make sure your IP is in the whitelist before connecting to DB</font>**
 
 ## Data
+
 ### Frontend
-* Frontend data are in `frontend/src/config/frontend.json`.
+
+- Frontend data are in `frontend/src/config/frontend.json`.
+
 ### Backend Database
-* Backend data in MongoDB
-* Collections
-    * course
-    * membio
-    * newsAndAwards
-    * publication
-    * maintainer
-* ``frontend.json`` would not store in database
+
+- Backend data in MongoDB
+- Collections
+  - course
+  - membio
+  - newsAndAwards
+  - publication
+  - maintainer
+- `frontend.json` would not store in database
