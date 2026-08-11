@@ -31,7 +31,7 @@ const NavBar = () => {
   return (
     <Navbar className="navbar navbar-expand-lg navbar-container" sticky="top">
       <a className="navbar-brand" href="/">
-        <img src={Logo} />
+        <img src={Logo} alt="DV Lab" />
       </a>
 
       <button

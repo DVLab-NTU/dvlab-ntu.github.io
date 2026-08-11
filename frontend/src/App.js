@@ -19,7 +19,7 @@ import Courses from './components/Courses';
 import MemBio from './components/Members/MemBio';
 import HostProfile from './components/HostProfile';
 import Publications from './components/Publications';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
   return (

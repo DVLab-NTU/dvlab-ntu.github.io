@@ -9,9 +9,8 @@
 // * ////////////////////////////////////////////////////////////////////////
 
 import './index.scss'
-import frontendData from '../../../config/frontend.json'
 import Loader from 'react-loaders'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSpring, animated, config } from 'react-spring'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -26,8 +25,7 @@ import {
   faResearchgate,
 } from '@fortawesome/free-brands-svg-icons'
 
-//Backend Additions
-import instance from '../../../axiosInstance'
+import { getMemberById } from '../../../siteData'
 
 const MemBio = () => {
   // * MemBio: Implement "MemBio" page for each member.
@@ -35,9 +33,9 @@ const MemBio = () => {
   //        props         useSpring     The animation for animated.div
   //        mem_info      Dictionary    The information for the member
 
-  const [info, setInfo] = useState({})     // to store 
-  const [ready, setReady] = useState(false)     // to store 
   const { memberId } = useParams()
+  const info = getMemberById(memberId) || {}
+  const ready = Object.keys(info).length !== 0
   const props = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },
@@ -46,19 +44,9 @@ const MemBio = () => {
     config: config.molasses,
   })
 
-  const getBios = async () => {
-    // get Bios from backend
-    const a = await instance.get('/getMemBio', { params: {ID: memberId} })
-    const bio = a.data.contents
-    setInfo(bio)
-    setReady(true)
-  }
-  // * Scroll to top of the page when rendering
   useEffect(() => {
-    if (Object.keys(info).length === 0)
-      getBios()
     window.scrollTo(0, 0)
-  },[])
+  }, [])
   return (
     <>
       <div className="membio-container">
@@ -68,7 +56,7 @@ const MemBio = () => {
               <div className="content-info">
                 <div className="left-col">
                   <div className="img-container">
-                    <img src={info.IMG} />
+                    <img src={info.IMG} alt={info.NAME} />
                   </div>
                   <h3>{info.NAME}</h3>
                   {info.CHINESE_NAME !== '' &&
@@ -90,7 +78,7 @@ const MemBio = () => {
                           className="media-icon"
                           icon={faSquareEnvelope}
                         />
-                        <a href={'mailto:' + info.EMAIL} target="_blank">
+                        <a href={'mailto:' + info.EMAIL} target="_blank" rel="noreferrer">
                           {info.EMAIL.length > 30
                             ? info.EMAIL.substring(0, 30) + '...'
                             : info.EMAIL}
@@ -105,7 +93,7 @@ const MemBio = () => {
                           className="media-icon"
                           icon={faSquareGithub}
                         />
-                        <a href={info.GITHUB} target="_blank">
+                        <a href={info.GITHUB} target="_blank" rel="noreferrer">
                           {info.GITHUB.length > 30
                             ? info.GITHUB.substring(0, 30) + '...'
                             : info.GITHUB}
@@ -120,7 +108,7 @@ const MemBio = () => {
                           className="media-icon"
                           icon={faSquareFacebook}
                         />
-                        <a href={info.FACEBOOK} target="_blank">
+                        <a href={info.FACEBOOK} target="_blank" rel="noreferrer">
                           {info.FACEBOOK.length > 30
                             ? info.FACEBOOK.substring(0, 30) + '...'
                             : info.FACEBOOK}
@@ -135,7 +123,7 @@ const MemBio = () => {
                           className="media-icon"
                           icon={faLinkedin}
                         />
-                        <a href={info.LINKEDIN} target="_blank">
+                        <a href={info.LINKEDIN} target="_blank" rel="noreferrer">
                           {info.LINKEDIN.length > 30
                             ? info.LINKEDIN.substring(0, 30) + '...'
                             : info.LINKEDIN}
@@ -150,7 +138,7 @@ const MemBio = () => {
                           className="media-icon"
                           icon={faSquareRss}
                         />
-                        <a href={info.PERSONAL_WEBSITE} target="_blank">
+                        <a href={info.PERSONAL_WEBSITE} target="_blank" rel="noreferrer">
                           {info.PERSONAL_WEBSITE.length > 30
                             ? info.PERSONAL_WEBSITE.substring(0, 30) + '...'
                             : info.PERSONAL_WEBSITE}
@@ -165,7 +153,7 @@ const MemBio = () => {
                           className="media-icon"
                           icon={faResearchgate}
                         />
-                        <a href={info.RESEARCH_GATE} target="_blank">
+                        <a href={info.RESEARCH_GATE} target="_blank" rel="noreferrer">
                           {info.RESEARCH_GATE.length > 30
                             ? info.RESEARCH_GATE.substring(0, 30) + '...'
                             : info.RESEARCH_GATE}
@@ -234,6 +222,7 @@ const MemBio = () => {
                         className="pub-subitem"
                         href={item.LINK}
                         target={item.LINK !== "" ? "_blank" : ""}
+                        rel="noreferrer"
                         style={{
                           fontWeight: 'bold',
                           cursor: 'pointer',

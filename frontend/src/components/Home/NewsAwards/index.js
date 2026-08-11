@@ -10,11 +10,11 @@
 
 import './index.scss'
 import Item from './Item'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import frontendData from '../../../config/frontend.json'
 import AnimatedLetters from '../../AnimatedLetters'
 
-import instance from '../../../axiosInstance'
+import { getAwardData } from '../../../siteData'
 
 
 const NewsAwards = () => {
@@ -23,18 +23,8 @@ const NewsAwards = () => {
   // TODO: Add a new page to show all the news and awards
   // @param letterClass     String      the animation for title
   //        itemList        Array       data for each item
-  const [newsAwards, setNewsAwards] = useState([])     // to store 
-  const [letterClass, setLetterClass] = useState('text-animate')
-  const getNewsAwards = async () => {
-    const back = await instance.get('/getNewsAward')
-    const newsAward = back.data.contents
-    setNewsAwards(newsAward)
-  }
-  // * Scroll to top of the page when rendering
-  useEffect(() => {
-    if (newsAwards.length === 0)
-      getNewsAwards()
-  }, [])
+  const newsAwards = getAwardData()
+  const [letterClass] = useState('text-animate')
 
   return (
     <div className="news-container">

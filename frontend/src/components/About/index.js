@@ -11,7 +11,6 @@
 import "./index.scss";
 import React from "react";
 import Slide from "./Slide";
-import Gallery from "./Gallery";
 import Slider from "react-slick";
 import Loader from "react-loaders";
 import frontendData from "../../config/frontend.json";
@@ -28,11 +27,8 @@ const AboutLab = () => {
     //        props:          useSpring   the animation for animated.div
     //        letterClass     String      the animation for title
 
-    const [letterClass, setLetterClass] = useState("text-animate");
+    const [letterClass] = useState("text-animate");
     // const slides_list = Object.values(frontendData.ABOUT_DV_LAB_PAGE.DESCRIPTION);
-    const gallery_list = Object.values(
-        frontendData.ABOUT_DV_LAB_PAGE.LAB_CULTURE.CONTENTS
-    );
     const props = useSpring({
         to: { opacity: 1 },
         from: { opacity: 0 },
@@ -70,7 +66,7 @@ const AboutLab = () => {
                                 )}
                             </div>
                             <div className="right-col">
-                                <img src={frontendData.ABOUT_DV_LAB_PAGE.DESCRIPTION.IMAGE} />
+                                <img src={frontendData.ABOUT_DV_LAB_PAGE.DESCRIPTION.IMAGE} alt="DV Lab" />
                             </div>
                         </div>
                         <div className="lab-culture">

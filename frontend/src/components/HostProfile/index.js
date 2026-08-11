@@ -19,7 +19,6 @@ import { faSquareEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
   faLinkedin,
   faSquareFacebook,
-  faSquareGithub,
   faLine,
 } from "@fortawesome/free-brands-svg-icons";
 
@@ -28,7 +27,7 @@ const HostProfile = () => {
   // @param props:          useSpring   the animation for animated.div
   //        letterClass     String      the animation for title
 
-  const [letterClass, setLetterClass] = useState("text-animate");
+  const [letterClass] = useState("text-animate");
   const props = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },
@@ -68,12 +67,12 @@ const HostProfile = () => {
               <div className="right-col">
                 <div>
                 <div className="img-container">
-                  <img src={frontendData.HOST_PROFILE_PAGE.PHOTO} />
+                  <img src={frontendData.HOST_PROFILE_PAGE.PHOTO} alt={frontendData.HOST_PROFILE_PAGE.NAME} />
                 </div>
                 <div className="media-list">
                   <a
                     href={"mailto:" + frontendData.HOST_PROFILE_PAGE.INFO.EMAIL}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     <FontAwesomeIcon
                       className="media-icon"
@@ -82,13 +81,13 @@ const HostProfile = () => {
                   </a>
                   <a
                     href={frontendData.HOST_PROFILE_PAGE.INFO.LINKEDIN}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     <FontAwesomeIcon className="media-icon" icon={faLinkedin} />
                   </a>
                   <a
                     href={frontendData.HOST_PROFILE_PAGE.INFO.FACEBOOK}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     <FontAwesomeIcon
                       className="media-icon"
@@ -97,7 +96,7 @@ const HostProfile = () => {
                   </a>
                   <a
                     href={frontendData.HOST_PROFILE_PAGE.INFO.LINE}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     <FontAwesomeIcon className="media-icon" icon={faLine} />
                   </a>

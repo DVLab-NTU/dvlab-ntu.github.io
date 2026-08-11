@@ -1,65 +1,25 @@
 # Design Verification Lab Website, NTUEE
 
-## Run website
+A public static React site for the Design Verification Lab at National Taiwan University.
 
-### Local
+## Local development
 
-1. A terminal (frontend)
-
-```bash=
+```bash
 cd frontend
-yarn start
+npm ci
+npm start
 ```
 
-2. Another terminal (backend)
+## Verification
 
-```bash=
-cd backend
-yarn run server
+```bash
+cd frontend
+npm test -- --watchAll=false --runInBand
+npm run build
 ```
 
-### Deploy
+## Content
 
-1. In terminal
+Bundled public content lives in `frontend/src/data/`. Update the source data and the corresponding page together; the site must not fetch data from MongoDB or another runtime API.
 
-```bash=
-docker-compose up --build -d
-```
-
-## MongoDB
-
-### Login by google account
-
-- account: dvlabdvlab@gmail.com
-- password:
-
-### .env url
-
-```bash=
-account=
-password=
-cluster=
-database=
-
-MONGO_URL=mongodb+srv://${account}:${password}@${cluster}.pqmbqsg.mongodb.net/${database}?retryWrites=true&w=majority
-
-```
-
-- **<font color="#f00">Make sure your IP is in the whitelist before connecting to DB</font>**
-
-## Data
-
-### Frontend
-
-- Frontend data are in `frontend/src/config/frontend.json`.
-
-### Backend Database
-
-- Backend data in MongoDB
-- Collections
-  - course
-  - membio
-  - newsAndAwards
-  - publication
-  - maintainer
-- `frontend.json` would not store in database
+GitHub Pages deployment and its CI workflow are tracked separately before the site is published.
