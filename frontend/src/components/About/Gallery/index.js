@@ -31,13 +31,13 @@ const Gallery = ({ idx, img_path, subtitle, text }) => {
               </div>
             </div>
             <div className="right-col">
-              <img src={img_path} />
+              <img src={img_path} alt={subtitle} />
             </div>
           </div>
         ) : (
           <div className="a-row">
             <div className="right-col">
-              <img src={img_path} />
+              <img src={img_path} alt={subtitle} />
             </div>
             <div className="left-col">
               <div className="content">

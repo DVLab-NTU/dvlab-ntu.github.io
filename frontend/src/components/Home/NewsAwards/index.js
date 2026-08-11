@@ -24,7 +24,7 @@ const NewsAwards = () => {
   // @param letterClass     String      the animation for title
   //        itemList        Array       data for each item
   const newsAwards = getAwardData()
-  const [letterClass, setLetterClass] = useState('text-animate')
+  const [letterClass] = useState('text-animate')
 
   return (
     <div className="news-container">

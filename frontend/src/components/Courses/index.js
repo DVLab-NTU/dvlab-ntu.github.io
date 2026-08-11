@@ -23,7 +23,7 @@ const Courses = () => {
   // @param props:          useSpring   the animation for animated.div
   //        letterClass     String      the animation for title
   const courses = getCourseData()
-  const [letterClass, setLetterClass] = useState('text-animate')
+  const [letterClass] = useState('text-animate')
   const props = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },

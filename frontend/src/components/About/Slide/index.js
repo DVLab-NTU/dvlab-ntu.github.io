@@ -19,7 +19,7 @@ const Slide = ({ img_path }) => {
   return (
     <div className="slide-container">
       <div className="wrapper">
-        <img src={img_path} />
+        <img src={img_path} alt="" />
         {/* <div className="text-col">
           <div className="text-wrapper">
             <span>{text}</span>

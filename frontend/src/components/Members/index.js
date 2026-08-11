@@ -25,7 +25,7 @@ const Members = () => {
   //        all_member_data Array       Data for all members
   //        group_list      Array       List of group name
   const memBriefs = getMemberData()
-  const [letterClass, setLetterClass] = useState('text-animate')
+  const [letterClass] = useState('text-animate')
   const props = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },

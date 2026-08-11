@@ -28,7 +28,7 @@ const Footer = () => {
         <div className="right-col">
           We thank{' '}
           {authors.map((item, idx) => (
-            <a href={item.LINK} target="_blank">
+            <a href={item.LINK} target="_blank" rel="noreferrer">
               {' '}
               {item.NAME}
               {/* {idx === authors.length - 1 ? ' ' : ' and '} */}

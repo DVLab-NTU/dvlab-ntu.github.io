@@ -28,7 +28,7 @@ const Member = ({ name, img_path, personal_id }) => {
     <div className="member-container" onClick={navigateToMemBio}>
       <div className="wrapper">
         <div className="img-block">
-          <img src={img_path} />
+          <img src={img_path} alt={name} />
         </div>
         <div className="name-block">
           <span>{name}</span>

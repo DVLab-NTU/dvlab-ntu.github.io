@@ -24,7 +24,7 @@ const Pub = ({ pub_info }) => {
                     className="img-block"
                     style={imgExist ? { width: '30%' } : { width: '0%', display: 'none' }}
                 >
-                    <img src={pub_info.IMG} />
+                    <img src={pub_info.IMG} alt="" />
                 </div>
 
                 <div
@@ -51,7 +51,7 @@ const Pub = ({ pub_info }) => {
                         className="link-button"
                         style={linkExist ? {} : { display: 'none' }}
                     >
-                        <a href={pub_info.LINK} target="_blank">
+                        <a href={pub_info.LINK} target="_blank" rel="noreferrer">
                             {' '}
                             Learn More {'>> '}
                         </a>

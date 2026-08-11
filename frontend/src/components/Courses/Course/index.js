@@ -38,7 +38,7 @@ const Course = ({ course }) => {
               <span className="semester-text">{course.SEMESTER}</span>
             </div>
             {course.GITHUB !== '' ? (
-              <a className="github-repo" href={course.GITHUB} target="_blank">
+              <a className="github-repo" href={course.GITHUB} target="_blank" rel="noreferrer">
                 <FontAwesomeIcon className="github-icon" icon={faGithub} />
                 <span className="github-text">GitHub Repo</span>
               </a>
@@ -75,7 +75,7 @@ const Course = ({ course }) => {
             className="link-button"
             style={linkExist ? {} : { display: 'none' }}
           >
-            <a href={course.LINK} target="_blank">
+            <a href={course.LINK} target="_blank" rel="noreferrer">
               {' '}
               Learn More >>{' '}
             </a>
