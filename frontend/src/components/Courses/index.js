@@ -16,13 +16,13 @@ import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
 
-import instance from '../../axiosInstance'
+import { getCourseData } from '../../siteData'
 
 const Courses = () => {
   // * Courses: Implement "Courses" page, it contains Course.
   // @param props:          useSpring   the animation for animated.div
   //        letterClass     String      the animation for title
-  const [courses, setCourses] = useState([])     // to store 
+  const courses = getCourseData()
   const [letterClass, setLetterClass] = useState('text-animate')
   const props = useSpring({
     to: { opacity: 1 },
@@ -31,15 +31,7 @@ const Courses = () => {
     delay: 2000,
     config: config.molasses,
   })
-  const getCourses = async () => {
-    const back = await instance.get('/getCourse')
-    const course = back.data.contents
-    setCourses(course)
-  }
-  // * Scroll to top of the page when rendering
   useEffect(() => {
-    if (courses.length === 0)
-      getCourses()
     window.scrollTo(0, 0)
   }, [])
   return (

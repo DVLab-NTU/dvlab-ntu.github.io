@@ -9,10 +9,10 @@
 // * ////////////////////////////////////////////////////////////////////////
 
 import './index.scss'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import frontendData from '../../config/frontend.json'
 
-import instance from '../../axiosInstance'
+import { getMaintainerData } from '../../siteData'
 
 
 const Footer = () => {
@@ -20,18 +20,7 @@ const Footer = () => {
   // TODO: The format for multiple maintainer.
   // @param authors:    Array       Data for each authors.
 
-  const [authors, setAuthor] = useState([])     // to store 
-
-  const getAuthors = async () => {
-    // get Bios from backend
-    const back = await instance.get('/getMaintainer')
-    const maintainer = back.data.contents
-    setAuthor(maintainer)
-  }
-  useEffect(() => {
-    if (authors.length === 0)
-      getAuthors()
-  })
+  const authors = getMaintainerData()
   return (
     <div className="footer-container">
       <div className="wrapper">

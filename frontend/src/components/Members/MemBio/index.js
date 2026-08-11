@@ -11,7 +11,7 @@
 import './index.scss'
 import frontendData from '../../../config/frontend.json'
 import Loader from 'react-loaders'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSpring, animated, config } from 'react-spring'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -26,8 +26,7 @@ import {
   faResearchgate,
 } from '@fortawesome/free-brands-svg-icons'
 
-//Backend Additions
-import instance from '../../../axiosInstance'
+import { getMemberById } from '../../../siteData'
 
 const MemBio = () => {
   // * MemBio: Implement "MemBio" page for each member.
@@ -35,9 +34,9 @@ const MemBio = () => {
   //        props         useSpring     The animation for animated.div
   //        mem_info      Dictionary    The information for the member
 
-  const [info, setInfo] = useState({})     // to store 
-  const [ready, setReady] = useState(false)     // to store 
   const { memberId } = useParams()
+  const info = getMemberById(memberId) || {}
+  const ready = Object.keys(info).length !== 0
   const props = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },
@@ -46,19 +45,9 @@ const MemBio = () => {
     config: config.molasses,
   })
 
-  const getBios = async () => {
-    // get Bios from backend
-    const a = await instance.get('/getMemBio', { params: {ID: memberId} })
-    const bio = a.data.contents
-    setInfo(bio)
-    setReady(true)
-  }
-  // * Scroll to top of the page when rendering
   useEffect(() => {
-    if (Object.keys(info).length === 0)
-      getBios()
     window.scrollTo(0, 0)
-  },[])
+  }, [])
   return (
     <>
       <div className="membio-container">

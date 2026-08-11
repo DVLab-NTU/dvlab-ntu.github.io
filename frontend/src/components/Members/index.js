@@ -16,7 +16,7 @@ import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
 
-import instance from '../../axiosInstance'
+import { getMemberData } from '../../siteData'
 
 const Members = () => {
   // * Members: Implement "Members" page, it contains Group.
@@ -24,7 +24,7 @@ const Members = () => {
   //        letterClass     String      the animation for title
   //        all_member_data Array       Data for all members
   //        group_list      Array       List of group name
-  const [memBriefs, setMemBriefs] = useState([])
+  const memBriefs = getMemberData()
   const [letterClass, setLetterClass] = useState('text-animate')
   const props = useSpring({
     to: { opacity: 1 },
@@ -33,15 +33,7 @@ const Members = () => {
     delay: 2000,
     config: config.molasses,
   })
-  const getMemBriefs = async () => {
-    const back = await instance.get('/getMemBrief')
-    const memBrief = back.data.contents
-    setMemBriefs(memBrief)
-  }
-  // * Scroll to top of the page when rendering
   useEffect(() => {
-    if (memBriefs.length === 0)
-      getMemBriefs()
     window.scrollTo(0, 0)
   }, [])
 
