@@ -11,10 +11,10 @@
 import './index.scss'
 import Course from './Course'
 import Loader from 'react-loaders'
-import frontendData from '../../config/frontend.json'
 import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
+import { useLocale } from '../../i18n/LocaleContext'
 
 import { getCourseData } from '../../siteData'
 
@@ -22,6 +22,7 @@ const Courses = () => {
   // * Courses: Implement "Courses" page, it contains Course.
   // @param props:          useSpring   the animation for animated.div
   //        letterClass     String      the animation for title
+  const { locale, t } = useLocale()
   const courses = getCourseData()
   const [letterClass] = useState('text-animate')
   const props = useSpring({
@@ -42,7 +43,7 @@ const Courses = () => {
             <h1>
               <AnimatedLetters
                 letterClass={letterClass}
-                strArray={frontendData.COURSES_PAGE.TITLE.split('')}
+                strArray={t('courses.title').split('')}
                 idx={16}
               />
             </h1>
@@ -51,7 +52,7 @@ const Courses = () => {
             {courses.length !== 0 ?
               <>
                 {courses.map((course, idx) => (
-                  <Course course={course} />
+                  <Course course={course} locale={locale} key={course.TITLE + idx} />
                 ))}
               </>
               : <Loader type="line-scale" />}

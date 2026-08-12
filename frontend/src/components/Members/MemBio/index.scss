@@ -21,6 +21,25 @@
         margin: 0 10%;
         width: 80%;
 
+        .back-link {
+            padding-top: 20px;
+
+            button {
+                background: transparent;
+                border: 1px solid $light-gray;
+                border-radius: 5px;
+                color: $light-gray;
+                padding: 5px 12px;
+                cursor: pointer;
+                text-transform: uppercase;
+
+                &:hover {
+                    color: $light-yellow;
+                    border-color: $light-yellow;
+                }
+            }
+        }
+
         .content {
             width: 100%;
             height: auto;

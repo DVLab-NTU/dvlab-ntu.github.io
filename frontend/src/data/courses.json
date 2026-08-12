@@ -1,44 +1,107 @@
 [
     {
-        "TITLE":"Web Programming",
+        "TITLE": "Web Programming",
+        "TITLE_ZH": "網路服務程式設計",
         "LINK": "https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id=901%2034300&class=&dpt_code=9010&ser_no=47380&semester=111-1&lang=CH",
-        "INTRO":[
-            "This is the introduction of web programming. This is the introduction of web programming. This is the introduction of web programming. "
+        "INTRO": [
+            "Web Programming (EE3035) introduces the design and implementation of modern full-stack web applications. The course covers front-end development with React.js, back-end services, databases, and deployment, and is taught through lectures together with hands-on online hackathons and a final project."
         ],
-        "CONTENTS":[
-            "This is content 1.",
-            "This is content 2.",
-            "This is content 3.",
-            "This is content 4.",
-            "This is content 5."
+        "INTRO_ZH": [
+            "網路服務程式設計（EE3035）介紹現代全端網頁應用程式的設計與實作。課程涵蓋以 React.js 進行的前端開發、後端服務、資料庫與部署，並透過課堂講授、線上黑客松與期末專題的方式進行實作練習。"
         ],
-        "SEMESTER":"111-1",
-        "GITHUB":""
+        "CONTENTS": [
+            "Class Introduction / Introduction to Web Programming",
+            "Web Application with JavaScript",
+            "Class in JavaScript + Intro. to React.js",
+            "More on React.js",
+            "Advanced Topics on React.js",
+            "Introduction to Backend",
+            "Online Hackathon #1",
+            "More on Backend + Database",
+            "Full Stack Web Applications",
+            "Online Hackathon #2",
+            "GraphQL",
+            "Things You Need to Know about Production",
+            "Online Hackathon #3",
+            "Final Project"
+        ],
+        "CONTENTS_ZH": [
+            "課程介紹 / 網頁程式設計簡介",
+            "以 JavaScript 開發網頁應用程式",
+            "JavaScript 中的類別 + React.js 入門",
+            "React.js 進階",
+            "React.js 進階主題",
+            "後端簡介",
+            "線上黑客松 #1",
+            "後端與資料庫進階",
+            "全端網頁應用程式",
+            "線上黑客松 #2",
+            "GraphQL",
+            "上線前你該知道的事",
+            "線上黑客松 #3",
+            "期末專題"
+        ],
+        "SEMESTER": "111-1",
+        "GITHUB": ""
     },
     {
-        "TITLE":"SoC Verification",
+        "TITLE": "SoC Verification",
+        "TITLE_ZH": "系統晶片驗證",
         "LINK": "https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id=943%20U0250&class=&dpt_code=9210&ser_no=26928&semester=110-2&lang=CH",
-        "INTRO":[
-            "This is the introduction of SoCV. This is the introduction of SoCV. This is the introduction of SoCV. This is the introduction of SoCV. ",
-            "This is the introduction of SoCV. This is the introduction of SoCV. This is the introduction of SoCV. This is the introduction of SoCV. This is the introduction of SoCV. This is the introduction of SoCV. This is the introduction of SoCV. "
+        "INTRO": [
+            "SoC Verification (EEE5023) introduces formal verification techniques for system-on-chip designs. The course covers Boolean reasoning engines (BDD and SAT), model checking, property directed reachability, and SAT-assisted synthesis, with a strong emphasis on both the theory and hands-on use of modern verification tools."
         ],
-        "CONTENTS":[
-            "This is content 1.",
-            "This is content 2.",
-            "This is content 3.",
-            "This is content 4.",
-            "This is content 5."
+        "INTRO_ZH": [
+            "系統晶片驗證（EEE5023）介紹系統晶片設計之形式化驗證技術。課程涵蓋布林推理引擎（BDD 與 SAT）、模型檢驗、性質導向可達性分析（PDR）與 SAT 輔助合成，兼重理論與現代驗證工具的實作練習。"
         ],
-        "SEMESTER":"110-2",
-        "GITHUB":""
+        "CONTENTS": [
+            "Class Intro / Intro to Design Verification",
+            "Formal Modeling and Property Specification",
+            "Introduction to BDD",
+            "Advanced BDD Techniques",
+            "BDD-Based Verification",
+            "Introduction to SAT",
+            "Advanced SAT Techniques",
+            "Bounded Model Checking",
+            "Unbounded Model Checking",
+            "Property Directed Reachability",
+            "SAT-Assisted Synthesis",
+            "From SAT to Optimization",
+            "Liveness Property Checking",
+            "Satisfiability Modulo Theories",
+            "Final Project"
+        ],
+        "CONTENTS_ZH": [
+            "課程介紹 / 設計驗證簡介",
+            "形式化建模與性質規格",
+            "BDD 簡介",
+            "BDD 進階技術",
+            "以 BDD 為基礎的驗證",
+            "SAT 簡介",
+            "SAT 進階技術",
+            "有界模型檢驗",
+            "無界模型檢驗",
+            "性質導向可達性分析（PDR）",
+            "SAT 輔助合成",
+            "從 SAT 到最佳化",
+            "活性性質檢驗",
+            "可滿足性模組理論（SMT）",
+            "期末專題"
+        ],
+        "SEMESTER": "110-2",
+        "GITHUB": ""
     },
     {
-        "TITLE":"Data Structure and Programming",
+        "TITLE": "Data Structure and Programming",
+        "TITLE_ZH": "資料結構與程式設計",
         "LINK": "https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id=901%2031900&class=&dpt_code=9010&ser_no=46927&semester=108-1&lang=CH",
-        "INTRO":[
+        "INTRO": [
             "In this class, you will learn the practical issues and gain the real experiences in implementing various data structures with C++ on Linux workstations."
         ],
-        "CONTENTS":[
+        "INTRO_ZH": [
+            "本課程將帶領同學在 Linux 工作站上以 C++ 實作各種資料結構，從中學習實務問題並累積真實的程式設計經驗。"
+        ],
+        "CONTENTS": [
             "Data Structure in Programming: Why is data structure (implementation) so important?",
             "Programming on Linux Workstations: A peek in the real engineering world",
             "C++ Advanced Features Review: When can/should I use them?",
@@ -53,7 +116,22 @@
             "Bit Vector and Matrix: All about numerical operations",
             "Putting What You Learn Together: Implementing an advanced data structure (e.g. BDD)"
         ],
-        "SEMESTER":"108-1",
-        "GITHUB":"https://github.com/ric2k1/DSnP.open"
+        "CONTENTS_ZH": [
+            "程式設計中的資料結構：為什麼（實作上的）資料結構如此重要？",
+            "在 Linux 工作站上程式設計：一窺真實的工程世界",
+            "C++ 進階特性回顧：何時可以使用？",
+            "什麼是好的程式？軟體工程的觀點",
+            "計算複雜度：時間與空間的取捨",
+            "記憶體管理：如何輕鬆獲得 30% 的效能提升",
+            "動態陣列 vs. 鏈結串列：哪個比較好？",
+            "樹：如何比線性時間更快地搜尋資料？",
+            "圖與電路：從 CS 到 EE 的應用",
+            "Heap、Set 與 Map：如何儲存排序資料？",
+            "Cache vs. Hash：程式中的虛擬記憶體",
+            "位元向量與矩陣：數值運算的一切",
+            "整合所學：實作進階資料結構（如 BDD）"
+        ],
+        "SEMESTER": "108-1",
+        "GITHUB": "https://github.com/ric2k1/DSnP.open"
     }
 ]

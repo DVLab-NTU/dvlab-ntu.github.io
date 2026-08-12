@@ -52,7 +52,9 @@
                 "YEAR": 2021,
                 "LINK": "https://academic.oup.com/nargab/article/3/4/lqab099/6415103?login=false"
             }
-        }
+        },
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "jasbrocoli",
@@ -89,7 +91,9 @@
                 "DURATION": "2014-2017"
             }
         },
-        "PUBLICATION": {}
+        "PUBLICATION": {},
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "gordon1387",
@@ -120,7 +124,9 @@
                 "DURATION": "2017-2021"
             }
         },
-        "PUBLICATION": {}
+        "PUBLICATION": {},
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "arvindrathor16",
@@ -168,7 +174,9 @@
                 "YEAR": 2020,
                 "LINK": "https://link.springer.com/chapter/10.1007/978-981-15-5679-1_7"
             }
-        }
+        },
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "pseudo-aloha",
@@ -201,7 +209,9 @@
                 "DURATION": "2018-2022"
             }
         },
-        "PUBLICATION": {}
+        "PUBLICATION": {},
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "HHHUUUGGGOOO",
@@ -233,7 +243,9 @@
                 "DURATION": "2018-2022"
             }
         },
-        "PUBLICATION": {}
+        "PUBLICATION": {},
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "JoshuaLau0220",
@@ -272,7 +284,9 @@
                 "DURATION": "2014-2017"
             }
         },
-        "PUBLICATION": {}
+        "PUBLICATION": {},
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "chinyi0523",
@@ -339,7 +353,9 @@
                 "YEAR": 2022,
                 "LINK": "https://arxiv.org/abs/2203.16007"
             }
-        }
+        },
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "Pinchun",
@@ -372,7 +388,9 @@
                 "DURATION": "2018-2022"
             }
         },
-        "PUBLICATION": {}
+        "PUBLICATION": {},
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "jhlin829",
@@ -405,7 +423,9 @@
                 "DURATION": "2017-2020"
             }
         },
-        "PUBLICATION": {}
+        "PUBLICATION": {},
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "Ablabla0403",
@@ -436,7 +456,9 @@
                 "DURATION": "2018-2022"
             }
         },
-        "PUBLICATION": {}
+        "PUBLICATION": {},
+        "STATUS": "Student",
+        "COHORT": ""
     },
     {
         "ID": "hchchiu",
@@ -467,6 +489,155 @@
                 "DURATION": "2018-2022"
             }
         },
+        "PUBLICATION": {},
+        "STATUS": "Student",
+        "COHORT": ""
+    },
+    {
+        "ID": "ChingHuanWang",
+        "NAME": "Ching-Huan Wang",
+        "ENGLISH_NAME": "",
+        "CHINESE_NAME": "",
+        "TEAM": "Quantum",
+        "STATUS": "Student",
+        "COHORT": "",
+        "GRADUATED": false,
+        "IMG": "assets/images/examples/members/ChingHuanWang.jpg",
+        "EMAIL": "",
+        "GITHUB": "",
+        "FACEBOOK": "",
+        "LINKEDIN": "",
+        "RESEARCH_GATE": "",
+        "PERSONAL_WEBSITE": "",
+        "SHORT_BIO": [],
+        "INTEREST_FIELDS": [],
+        "EDUCATION": {},
+        "PUBLICATION": {}
+    },
+    {
+        "ID": "jimmyyang3125",
+        "NAME": "Hsiang-Chun Yang",
+        "ENGLISH_NAME": "",
+        "CHINESE_NAME": "",
+        "TEAM": "Quantum",
+        "STATUS": "Student",
+        "COHORT": "",
+        "GRADUATED": false,
+        "IMG": "assets/images/examples/members/jimmyyang3125.jpg",
+        "EMAIL": "",
+        "GITHUB": "",
+        "FACEBOOK": "",
+        "LINKEDIN": "",
+        "RESEARCH_GATE": "",
+        "PERSONAL_WEBSITE": "",
+        "SHORT_BIO": [],
+        "INTEREST_FIELDS": [],
+        "EDUCATION": {},
+        "PUBLICATION": {}
+    },
+    {
+        "ID": "ips73519680",
+        "NAME": "Hung-Ling Liu",
+        "ENGLISH_NAME": "",
+        "CHINESE_NAME": "",
+        "TEAM": "EDA",
+        "STATUS": "Student",
+        "COHORT": "",
+        "GRADUATED": false,
+        "IMG": "assets/images/examples/members/ips73519680.jpg",
+        "EMAIL": "",
+        "GITHUB": "",
+        "FACEBOOK": "",
+        "LINKEDIN": "",
+        "RESEARCH_GATE": "",
+        "PERSONAL_WEBSITE": "",
+        "SHORT_BIO": [],
+        "INTEREST_FIELDS": [],
+        "EDUCATION": {},
+        "PUBLICATION": {}
+    },
+    {
+        "ID": "jhl",
+        "NAME": "Jian-Heng Liu",
+        "ENGLISH_NAME": "",
+        "CHINESE_NAME": "",
+        "TEAM": "EDA",
+        "STATUS": "Student",
+        "COHORT": "",
+        "GRADUATED": false,
+        "IMG": "assets/images/examples/members/jhl.jpg",
+        "EMAIL": "",
+        "GITHUB": "",
+        "FACEBOOK": "",
+        "LINKEDIN": "",
+        "RESEARCH_GATE": "",
+        "PERSONAL_WEBSITE": "",
+        "SHORT_BIO": [],
+        "INTEREST_FIELDS": [],
+        "EDUCATION": {},
+        "PUBLICATION": {}
+    },
+    {
+        "ID": "wish",
+        "NAME": "Wei-Hsu Chen",
+        "ENGLISH_NAME": "",
+        "CHINESE_NAME": "",
+        "TEAM": "EDA",
+        "STATUS": "Student",
+        "COHORT": "",
+        "GRADUATED": false,
+        "IMG": "assets/images/examples/members/wish.jpg",
+        "EMAIL": "",
+        "GITHUB": "",
+        "FACEBOOK": "",
+        "LINKEDIN": "",
+        "RESEARCH_GATE": "",
+        "PERSONAL_WEBSITE": "",
+        "SHORT_BIO": [],
+        "INTEREST_FIELDS": [],
+        "EDUCATION": {},
+        "PUBLICATION": {}
+    },
+    {
+        "ID": "KuoKuo1521",
+        "NAME": "Yi-Hsiang Kuo",
+        "ENGLISH_NAME": "",
+        "CHINESE_NAME": "",
+        "TEAM": "Quantum",
+        "STATUS": "Student",
+        "COHORT": "",
+        "GRADUATED": false,
+        "IMG": "assets/images/examples/members/KuoKuo1521.jpg",
+        "EMAIL": "",
+        "GITHUB": "",
+        "FACEBOOK": "",
+        "LINKEDIN": "",
+        "RESEARCH_GATE": "",
+        "PERSONAL_WEBSITE": "",
+        "SHORT_BIO": [],
+        "INTEREST_FIELDS": [],
+        "EDUCATION": {},
+        "PUBLICATION": {}
+    },
+    {
+        "ID": "bob.sui",
+        "NAME": "Zhong-Yu Sui",
+        "ENGLISH_NAME": "",
+        "CHINESE_NAME": "",
+        "TEAM": "EDA",
+        "STATUS": "Student",
+        "COHORT": "",
+        "GRADUATED": false,
+        "IMG": "assets/images/examples/members/bob.sui.jpg",
+        "EMAIL": "",
+        "GITHUB": "",
+        "FACEBOOK": "",
+        "LINKEDIN": "",
+        "RESEARCH_GATE": "",
+        "PERSONAL_WEBSITE": "",
+        "SHORT_BIO": [],
+        "INTEREST_FIELDS": [],
+        "EDUCATION": {},
         "PUBLICATION": {}
     }
 ]

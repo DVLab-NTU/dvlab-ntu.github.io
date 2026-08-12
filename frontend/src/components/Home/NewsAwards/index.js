@@ -2,7 +2,7 @@
 // *
 // * FileName     [ index.js ]
 // * PackageName  [ src/components/Home/NewsAwards ]
-// * Synopsis     [ Implement "News & Awards" in "Home" page ]
+// * Synopsis     [ Implement "Awards" in "Home" page ]
 // * Author       [ Cheng-Hua Lu (Front), Chin-Yi Cheng (Back) ]
 // * Copyright    [ 2022 8 ]
 // *
@@ -11,20 +11,21 @@
 import './index.scss'
 import Item from './Item'
 import React, { useState } from 'react'
-import frontendData from '../../../config/frontend.json'
+import { useLocale } from '../../../i18n/LocaleContext'
 import AnimatedLetters from '../../AnimatedLetters'
 
 import { getAwardData } from '../../../siteData'
 
 
 const NewsAwards = () => {
-  // * NewsAwards: Implement "News & Awards" in "Home" page
-  // TODO: Add the function to show the first three items
-  // TODO: Add a new page to show all the news and awards
+  // * NewsAwards: Implement "Awards" in "Home" page (News was removed)
   // @param letterClass     String      the animation for title
   //        itemList        Array       data for each item
+  const { locale, t } = useLocale()
   const newsAwards = getAwardData()
   const [letterClass] = useState('text-animate')
+
+  const title = t('home.awardsTitle')
 
   return (
     <div className="news-container">
@@ -33,7 +34,7 @@ const NewsAwards = () => {
           <h1>
             <AnimatedLetters
               letterClass={letterClass}
-              strArray={frontendData.HOME_PAGE.NEWS_AWARDS_PART.TITLE.split('')}
+              strArray={title.split('')}
               idx={20}
             />
           </h1>
@@ -41,11 +42,14 @@ const NewsAwards = () => {
         <div className="content">
           {newsAwards.map((item) => (
             <Item
+              key={item.TITLE}
               year={item.YEAR}
               month={item.MONTH}
-              title={item.TITLE}
-              link={item.LINK}
-              attendants={item.ATTENDANTS}
+              title={locale === 'zh' && item.TITLE_ZH ? item.TITLE_ZH : item.TITLE}
+              source={item.SOURCE}
+              students={item.STUDENTS}
+              advisors={item.ADVISORS}
+              locale={locale}
             />
           ))}
         </div>

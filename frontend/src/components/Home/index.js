@@ -18,7 +18,7 @@ import frontendData from '../../config/frontend.json'
 import { useSpring, animated, config } from 'react-spring'
 
 const Home = () => {
-  // * Home: Implement "Home" page, it contains Logo and NewsAwards
+  // * Home: Implement "Home" page, it contains Logo and Awards
   // @param props:    useSpring   The animation for animated.div
 
   const props = useSpring({

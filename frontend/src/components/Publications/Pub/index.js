@@ -10,11 +10,13 @@
 
 import './index.scss'
 import React from 'react'
+import { useLocale } from '../../../i18n/LocaleContext'
 
 const Pub = ({ pub_info }) => {
     // * Pub: Implement Pub in "Publications" page.
     // @param imgExist    bool       If true, show image in Pub
     //        linkExist   bool       If true, show "learn more" in Pub
+    const { t } = useLocale()
     const imgExist = pub_info.IMG !== ''
     const linkExist = pub_info.LINK !== ''
     return (
@@ -34,17 +36,19 @@ const Pub = ({ pub_info }) => {
                     <h2>{pub_info.TITLE}</h2>
                     <div className="author-list">
                         {pub_info.AUTHOR.map((name, idx) => (
-                            <span>
+                            <span key={name}>
                                 {name}
                                 {idx !== pub_info.AUTHOR.length - 1 ? ', ' : ''}
                             </span>
                         ))}
                     </div>
                     <div className="date">{pub_info.DATE}</div>
-                    <div className="abstract">{pub_info.ABSTRACT}</div>
+                    {pub_info.ABSTRACT !== '' ? (
+                        <div className="abstract">{pub_info.ABSTRACT}</div>
+                    ) : (<></>)}
                     <div className="keywords-list">
                         {pub_info.KEYWORDS.map((keyword) => (
-                            <div className="keyword">#{keyword}</div>
+                            <div className="keyword" key={keyword}>#{keyword}</div>
                         ))}
                     </div>
                     <div
@@ -53,7 +57,7 @@ const Pub = ({ pub_info }) => {
                     >
                         <a href={pub_info.LINK} target="_blank" rel="noreferrer">
                             {' '}
-                            Learn More {'>> '}
+                            {t('publications.learnMore')}
                         </a>
                     </div>
                 </div>

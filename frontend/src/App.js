@@ -19,13 +19,20 @@ import Courses from './components/Courses';
 import MemBio from './components/Members/MemBio';
 import HostProfile from './components/HostProfile';
 import Publications from './components/Publications';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { LocaleProvider, stripLocalePrefix } from './i18n/LocaleContext';
 
 const App = () => {
+  const location = useLocation();
+  const locale = location.pathname.startsWith('/zh') ? 'zh' : 'en';
+  // Match routes against the locale-stripped path so the same route table
+  // serves both `/...` (English) and `/zh/...` (Traditional Chinese).
+  const strippedLocation = { ...location, pathname: stripLocalePrefix(location.pathname) };
+
   return (
-    <>
+    <LocaleProvider locale={locale}>
       <NavBar />
-      <Routes>
+      <Routes location={strippedLocation}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutLab />} />
         <Route path="/host" element={<HostProfile />} />
@@ -35,7 +42,7 @@ const App = () => {
         <Route path="/courses" element={<Courses />} />
       </Routes>
       <Footer />
-    </>
+    </LocaleProvider>
   );
 }
 
