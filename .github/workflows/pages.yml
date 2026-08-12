@@ -10,33 +10,27 @@ permissions:
   pages: write
   id-token: write
 
-# Only one deployment at a time; drop superseded runs.
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  # Build and verify the static artifact. Deployment below depends on this job,
-  # so Pages only publishes after the same checks CI runs have passed.
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version-file: .node-version
           cache: npm
-          cache-dependency-path: frontend/package-lock.json
       - run: npm ci
-      - run: CI=true npm test -- --watchAll=false --runInBand
-      - run: npm run build
+      - run: npm run verify
+        env:
+          PUBLIC_SITE_URL: https://dvlab-ntu.github.io
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: frontend/build
+          path: dist
 
   deploy:
     environment:

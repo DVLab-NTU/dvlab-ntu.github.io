@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { pickI18nText } from '../../utils/i18n-text';
+
+const awardEntries = await getCollection('awards');
+const awards = awardEntries
+  .map((e) => ({ slug: e.slug, ...e.data }))
+  .sort((a, b) => b.year - a.year || a.month.localeCompare(b.month));
+const pageDesc = 'Awards and honors won by DVLab members, including international competitions.';
+---
+<BaseLayout title="Awards" desc={pageDesc} lang="en" pathPrefix="/en">
+  <section class="page-head" data-reveal>
+    <h1 class="page-title">Awards</h1>
+  </section>
+
+  <section class="detail-shell" data-reveal-group>
+    {awards.map((a, i) => (
+      <article class="card detail-content stack-sm" data-reveal data-reveal-order={String(i)}>
+        <h2 class="page-title">{pickI18nText(a.title, 'en')}</h2>
+        <p class="badge-muted">{a.year} · {a.month}</p>
+        <p><strong>Students: </strong>{a.students.join(', ')}</p>
+        {a.advisors && a.advisors.length > 0 && (
+          <p><strong>Advisors: </strong>{a.advisors.join(', ')}</p>
+        )}
+        <div class="detail-links">
+          <a class="btn btn-ghost" href={a.source} target="_blank" rel="noreferrer">Source</a>
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

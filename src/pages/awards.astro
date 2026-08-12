@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { pickI18nText } from '../utils/i18n-text';
+
+const awardEntries = await getCollection('awards');
+const awards = awardEntries
+  .map((e) => ({ slug: e.slug, ...e.data }))
+  .sort((a, b) => b.year - a.year || a.month.localeCompare(b.month));
+const pageDesc = '檢視 DVLab 的獲獎紀錄，包含國際競賽與學術獎項。';
+---
+<BaseLayout title="獲獎" desc={pageDesc} lang="zh" pathPrefix="">
+  <section class="page-head" data-reveal>
+    <h1 class="page-title">獲獎紀錄</h1>
+  </section>
+
+  <section class="detail-shell" data-reveal-group>
+    {awards.map((a, i) => (
+      <article class="card detail-content stack-sm" data-reveal data-reveal-order={String(i)}>
+        <h2 class="page-title">{pickI18nText(a.title, 'zh')}</h2>
+        <p class="badge-muted">{a.year} · {a.month}</p>
+        <p><strong>學生：</strong>{a.students.join('、')}</p>
+        {a.advisors && a.advisors.length > 0 && (
+          <p><strong>指導教授：</strong>{a.advisors.join('、')}</p>
+        )}
+        <div class="detail-links">
+          <a class="btn btn-ghost" href={a.source} target="_blank" rel="noreferrer">來源</a>
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

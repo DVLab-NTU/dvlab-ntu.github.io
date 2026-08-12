@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import siteZh from '../data/site.zh.json';
+
+const t = siteZh;
+const highlightLinks = ['/members/', '/papers/', '/awards/'];
+---
+<BaseLayout title="首頁" desc={t.home.intro} lang="zh" pathPrefix="">
+  <section class="card hero hero-glow gradient-frame mb-5" data-reveal>
+    <h1 class="hero-title" data-reveal data-reveal-delay="70">{t.siteName}</h1>
+    <p class="hero-subtitle" data-reveal data-reveal-delay="120">{t.home.intro}</p>
+    <div class="hero-actions" data-reveal data-reveal-delay="180">
+      <a class="btn btn-primary" href="/members/">了解成員</a>
+      <a class="btn btn-ghost" href="/papers/">查看論文</a>
+      <a class="btn btn-ghost" href="/awards/">獲獎紀錄</a>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <div class="page-head" data-reveal>
+      <h2 class="page-title">{t.home.sections?.highlights ?? '重點資訊'}</h2>
+    </div>
+    <div class="grid grid-3" data-reveal-group>
+      {t.home.highlights.map((h, i) => (
+        <article class="card card-hover card-clickable" data-reveal data-reveal-order={String(i)}>
+          <a class="card-link-overlay" href={highlightLinks[i] ?? '/news'} aria-label={`查看 ${h.title} 詳情`}></a>
+          <h3>{h.title}</h3>
+          <p class="mt-4">{h.desc}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <div class="page-head" data-reveal>
+      <h2 class="page-title">快速連結</h2>
+    </div>
+    <ul class="grid grid-3">
+      <li><a href="/members/">成員列表</a></li>
+      <li><a href="/papers/">研究成果</a></li>
+      <li><a href="/courses/">課程</a></li>
+      <li><a href="/awards/">獲獎紀錄</a></li>
+      <li><a href="/join/">招生與合作</a></li>
+    </ul>
+  </section>
+</BaseLayout>

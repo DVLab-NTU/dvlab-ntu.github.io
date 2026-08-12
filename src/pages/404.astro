@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="404"
+  desc="DVLab 頁面不存在。請返回首頁、成員、專案或新聞頁面繼續瀏覽。"
+  lang="zh"
+  pathPrefix=""
+  noindex={true}
+  disableCanonical={true}
+  disableLocaleAlternates={true}
+>
+  <section class="detail-shell">
+    <article class="card detail-hero" data-reveal>
+      <span class="badge-muted">404</span>
+      <h1 class="page-title">頁面不存在</h1>
+      <p>你訪問的內容可能已移動或尚未釋出。請透過下方入口返回主要列表頁面。</p>
+    </article>
+
+    <div class="back-row" data-reveal>
+      <a class="btn btn-primary" href="/">返回首頁</a>
+      <a class="btn btn-ghost" href="/members/">成員</a>
+      <a class="btn btn-ghost" href="/projects/">專案</a>
+      <a class="btn btn-ghost" href="/news/">新聞</a>
+    </div>
+  </section>
+</BaseLayout>

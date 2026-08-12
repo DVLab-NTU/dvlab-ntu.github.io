@@ -1,0 +1,34 @@
+{
+  "brand": "DV LAB",
+  "siteName": "DVLab · Design Verification Lab, NTUEE",
+  "nav": {
+    "home": "Home",
+    "members": "Members",
+    "papers": "Papers",
+    "courses": "Courses",
+    "awards": "Awards",
+    "news": "News"
+  },
+  "home": {
+    "intro": "The Design Verification Lab (DVLab) at the Department of Electrical Engineering, National Taiwan University, directed by Prof. Chung-Yang (Ric) Huang, focuses on formal verification, quantum circuit synthesis and optimization, and electronic design automation.",
+    "sections": {
+      "highlights": "Highlights",
+      "recentProjects": "Research Areas"
+    },
+    "highlights": [
+      {
+        "title": "Research Team",
+        "desc": "Led by Prof. Chung-Yang (Ric) Huang, our members span Master's, PhD, and undergraduate researchers working on formal verification, quantum computing, and EDA."
+      },
+      {
+        "title": "Research Outputs",
+        "desc": "The lab has been recognized at ICCAD CAD Contest, DAC, DATE, and QCE, and continuously publishes high-quality research."
+      },
+      {
+        "title": "Recruitment & Collaboration",
+        "desc": "We welcome students interested in verification, quantum circuits, and EDA, as well as academic and industrial collaboration."
+      }
+    ],
+    "quick": "Quick Links"
+  }
+}

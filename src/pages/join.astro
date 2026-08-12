@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { summarizeText } from '../utils/seo';
+
+const joinEntries = await getCollection('join');
+const entry =
+  joinEntries.find((item) => item.id === 'recruitment/overview_cn.md') ||
+  joinEntries.find((item) => /_cn\.md$/i.test(item.id));
+
+if (!entry) {
+  throw new Error('Missing Chinese join content: src/content/join/**/_cn.md');
+}
+
+const { Content } = await render(entry);
+const pageTitle = entry.data.title || '招生與合作';
+const pageDesc = summarizeText(entry.body) || '檢視 DVLab 的招生與合作資訊。';
+---
+<BaseLayout title={pageTitle} desc={pageDesc} lang="zh" pathPrefix="">
+  <section class="detail-shell">
+    <article class="card detail-hero" data-reveal>
+      <h1 class="page-title">{pageTitle}</h1>
+    </article>
+
+    <article class="card detail-content news-article" data-reveal>
+      <Content />
+    </article>
+
+    <div class="back-row" data-reveal>
+      <a class="btn btn-primary" href="/">返回首頁</a>
+      <a class="btn btn-ghost" href="/members/">檢視成員</a>
+    </div>
+  </section>
+</BaseLayout>
