@@ -1,29 +1,29 @@
 {
     "TITLE": "Design Verification Lab, NTUEE",
-    "LOGO": "assets/images/examples/logo/logo.png",
+    "LOGO": "/assets/images/examples/logo/logo.png",
     "LOGO_SUB_PIC": {
-        "MAGNIFIER": "assets/images/examples/logo/magnifier.png",
-        "BUG": "assets/images/examples/logo/bug.png",
-        "CHIP": "assets/images/examples/logo/chip.png",
-        "NTUGIEE": "assets/images/examples/logo/ntugiee.png",
-        "DVLAB": "assets/images/examples/logo/dvlab_text.png",
-        "DESCRIPTION": "assets/images/examples/logo/description.png"
+        "MAGNIFIER": "/assets/images/examples/logo/magnifier.png",
+        "BUG": "/assets/images/examples/logo/bug.png",
+        "CHIP": "/assets/images/examples/logo/chip.png",
+        "NTUGIEE": "/assets/images/examples/logo/ntugiee.png",
+        "DVLAB": "/assets/images/examples/logo/dvlab_text.png",
+        "DESCRIPTION": "/assets/images/examples/logo/description.png"
     },
     "ABOUT_DV_LAB_PAGE": {
         "DESCRIPTION": {
-            "IMAGE": "assets/images/img_example.jpeg"
+            "IMAGE": "/assets/images/img_example.jpeg"
         },
         "LAB_CULTURE": {
             "GALLERY": [
-                "assets/images/examples/lab-activity/hiking_220623.JPG",
-                "assets/images/examples/lab-activity/lunch_gathering.jpg",
-                "assets/images/examples/lab-activity/jogging_0315.JPG"
+                "/assets/images/examples/lab-activity/hiking_220623.JPG",
+                "/assets/images/examples/lab-activity/lunch_gathering.jpg",
+                "/assets/images/examples/lab-activity/jogging_0315.JPG"
             ]
         }
     },
     "HOST_PROFILE_PAGE": {
         "NAME": "Professor Chung-Yang (Ric) Huang",
-        "PHOTO": "assets/images/examples/host-profile/ric.jpeg",
+        "PHOTO": "/assets/images/examples/host-profile/ric.jpeg",
         "INFO": {
             "EMAIL": "cyhuang@ntu.edu.tw",
             "LINKEDIN": "https://www.linkedin.com/in/chung-yang-ric-huang-7a708a1/",
