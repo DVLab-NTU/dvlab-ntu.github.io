@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout
   title="404"
-  desc="DVLab 頁面不存在。請返回首頁、成員、專案或新聞頁面繼續瀏覽。"
+  desc="DVLab 頁面不存在。請返回首頁、成員、論文、課程或獲獎頁面繼續瀏覽。"
   lang="zh"
   pathPrefix=""
   noindex={true}
@@ -20,7 +20,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="back-row" data-reveal>
       <a class="btn btn-primary" href="/">返回首頁</a>
       <a class="btn btn-ghost" href="/members/">成員</a>
-      <a class="btn btn-ghost" href="/projects/">專案</a>
+      <a class="btn btn-ghost" href="/papers/">論文</a>
+      <a class="btn btn-ghost" href="/courses/">課程</a>
+      <a class="btn btn-ghost" href="/awards/">獲獎</a>
     </div>
   </section>
 </BaseLayout>
