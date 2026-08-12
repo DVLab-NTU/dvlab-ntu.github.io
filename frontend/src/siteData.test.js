@@ -48,6 +48,12 @@ test('member lookup works by id', () => {
   expect(getMemberById('no-such-member')).toBeUndefined()
 })
 
+test('member images use absolute paths so they resolve on every route', () => {
+  for (const member of getMemberData()) {
+    expect(member.IMG).toMatch(/^\/assets\//)
+  }
+})
+
 test('every course links to the official NTU course catalogue', () => {
   for (const course of getCourseData()) {
     expect(course.LINK).toMatch(/^https:\/\/nol\.ntu\.edu\.tw\//)
