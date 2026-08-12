@@ -1,33 +1,8 @@
 import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
 
 const i18nText = z.object({
   zh: z.string().min(1),
   en: z.string().min(1)
-});
-
-const newsDate = z.preprocess((value) => {
-  if (value instanceof Date && !Number.isNaN(value.getTime())) {
-    return value.toISOString().slice(0, 10);
-  }
-
-  return value;
-}, z.string().regex(/^\d{4}-\d{2}-\d{2}$/));
-
-function newsEntryId(entry: string) {
-  return entry.split('\\').join('/').replace(/\.md$/i, '');
-}
-
-const news = defineCollection({
-  loader: glob({
-    pattern: '**/*.md',
-    base: './src/content/news',
-    generateId: ({ entry }) => newsEntryId(entry),
-  }),
-  schema: z.object({
-    date: newsDate,
-    title: i18nText,
-  })
 });
 
 const papers = defineCollection({
@@ -123,4 +98,4 @@ const awards = defineCollection({
   })
 });
 
-export const collections = { news, papers, members, projects, join, courses, awards };
+export const collections = { papers, members, projects, join, courses, awards };
