@@ -16,7 +16,7 @@ const translations = {
       awardsTitle: 'AWARDS',
     },
     footer: {
-      copyright: '© 2024 DV Lab, NTUEE. All rights reserved.',
+      copyright: '© 2026 DV Lab, NTUEE. All rights reserved.',
       thanks: 'We thank',
       and: 'and',
       forMaintaining: 'for creating and maintaining the DV Lab official website.',
@@ -89,7 +89,7 @@ const translations = {
       awardsTitle: '獲獎紀錄',
     },
     footer: {
-      copyright: '© 2024 DV Lab, 台大電機系。版權所有。',
+      copyright: '© 2026 DV Lab, 台大電機系。版權所有。',
       thanks: '我們感謝',
       and: '與',
       forMaintaining: '建立並維護 DV Lab 官方網站。',

@@ -106,7 +106,7 @@ const NavBar = () => {
               <span className="nav-text">{t('nav.courses')}</span>
             </NavLink>
           </li>
-          <li className="nav-item">
+          <li className="nav-item lang-item">
             <button
               className="btn btn-link nav-link lang-switcher"
               type="button"

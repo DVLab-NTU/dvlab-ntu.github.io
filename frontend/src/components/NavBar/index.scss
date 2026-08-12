@@ -65,7 +65,7 @@
 }
 
 #navbarToggler {
-    overflow: hidden;
+    overflow: visible;
     position: relative;
 
     ul {
@@ -117,6 +117,27 @@
                     color: #000000;
                     background-color: transparent;
                     transition: all 0.7s;
+                }
+            }
+
+            &.lang-item {
+                width: 110px;
+
+                .nav-link {
+                    padding: 20px 0;
+                }
+
+                .nav-icon {
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 0;
+                }
+
+                .nav-text {
+                    display: inline-block;
+                    font-size: 14px;
+                    padding-top: 0;
+                    margin-left: 6px;
                 }
             }
         }
