@@ -141,7 +141,9 @@ const navPathResolved = {
   <body>
     <header class="site-header">
       <div class="container nav">
-        <div class="brand">{t.brand}</div>
+        <div class="brand">
+          <img class="brand-logo" src="/images/dvlab-logo.png" alt="DVLab" width="57" height="40" />
+        </div>
         <nav class="nav-links">
           <a class={`nav-link ${currentPath === navPathResolved.home ? 'is-active' : ''}`} href={navPathResolved.home}>{t.nav.home}</a>
           <a class={`nav-link ${currentPath.startsWith(navPathResolved.members) ? 'is-active' : ''}`} href={navPathResolved.members}>{t.nav.members}</a>
@@ -185,7 +187,7 @@ const navPathResolved = {
         </span>
         <span>© 2026 {t.siteName}</span>
         <span>
-          <a href="https://github.com/nightt5879/dvlab" target="_blank" rel="noreferrer">
+          <a href="https://github.com/DVLab-NTU/dvlab-ntu.github.io" target="_blank" rel="noreferrer">
             GitHub
           </a>
         </span>
