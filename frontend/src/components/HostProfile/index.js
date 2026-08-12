@@ -12,6 +12,7 @@ import "./index.scss";
 import Loader from "react-loaders";
 import frontendData from "../../config/frontend.json";
 import AnimatedLetters from "../AnimatedLetters";
+import { useLocale } from "../../i18n/LocaleContext";
 import React, { useState, useEffect } from "react";
 import { useSpring, animated, config } from "react-spring";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,6 +28,7 @@ const HostProfile = () => {
   // @param props:          useSpring   the animation for animated.div
   //        letterClass     String      the animation for title
 
+  const { t } = useLocale();
   const [letterClass] = useState("text-animate");
   const props = useSpring({
     to: { opacity: 1 },
@@ -49,19 +51,19 @@ const HostProfile = () => {
             <h1>
               <AnimatedLetters
                 letterClass={letterClass}
-                strArray={frontendData.HOST_PROFILE_PAGE.NAME.split("")}
+                strArray={t("host.title").split("")}
                 idx={4}
               />
             </h1>
           </div>
           <animated.div className="content" style={props}>
             <div className="header">
-              <p>"{frontendData.HOST_PROFILE_PAGE.HEADER}"</p>
+              <p>"{t("host.header")}"</p>
             </div>
             <div className="content-info">
               <div className="left-col">
-                {frontendData.HOST_PROFILE_PAGE.SHORT_BIO.map((paragraph) => (
-                  <p>{paragraph}</p>
+                {t("host.shortBio").map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
               <div className="right-col">

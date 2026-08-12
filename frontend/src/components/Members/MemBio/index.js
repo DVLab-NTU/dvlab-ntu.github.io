@@ -11,8 +11,9 @@
 import './index.scss'
 import Loader from 'react-loaders'
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useSpring, animated, config } from 'react-spring'
+import { useLocale } from '../../../i18n/LocaleContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faSquareEnvelope,
@@ -34,6 +35,8 @@ const MemBio = () => {
   //        mem_info      Dictionary    The information for the member
 
   const { memberId } = useParams()
+  const navigate = useNavigate()
+  const { t, localize } = useLocale()
   const info = getMemberById(memberId) || {}
   const ready = Object.keys(info).length !== 0
   const props = useSpring({
@@ -51,6 +54,11 @@ const MemBio = () => {
     <>
       <div className="membio-container">
         <div className="wrapper">
+          <div className="back-link">
+            <button type="button" onClick={() => navigate(localize('/members'))}>
+              {'< '}{t('members.backToMembers')}
+            </button>
+          </div>
           <animated.div className="content" style={props}>
             {(ready) ?
               <div className="content-info">
@@ -165,29 +173,33 @@ const MemBio = () => {
                   </div>
                 </div>
                 <div className="right-col">
-                  <div className="item-block">
-                    <h3>Short Bio</h3>
-                    {info.SHORT_BIO.map((item) => (
-                      <p>{item}</p>
-                    ))}
-                  </div>
-                  <div className="item-block">
-                    <h3>Fields of Interest</h3>
-                    <ul>
-                      {info.INTEREST_FIELDS.map((item) => (
-                        <li>{item}</li>
+                  {info.SHORT_BIO.length !== 0 ? (
+                    <div className="item-block">
+                      <h3>{t('members.shortBio')}</h3>
+                      {info.SHORT_BIO.map((item) => (
+                        <p key={item}>{item}</p>
                       ))}
-                    </ul>
-                  </div>
+                    </div>
+                  ) : (<></>)}
+                  {info.INTEREST_FIELDS.length !== 0 ? (
+                    <div className="item-block">
+                      <h3>{t('members.fieldsOfInterest')}</h3>
+                      <ul>
+                        {info.INTEREST_FIELDS.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (<></>)}
                 </div>
 
               </div> : <div className="content-info"></div>
             }
             <div className="education">
 
-              {info.EDUCATION === undefined ? <></> :
+              {info.EDUCATION === undefined || Object.values(info.EDUCATION).length === 0 ? <></> :
                 <>
-                  <h3>Education</h3>
+                  <h3>{t('members.education')}</h3>
                   <div className="edu-list">
                     {Object.values(info.EDUCATION).map((item) => (
                       <div className="edu-item">
@@ -212,9 +224,9 @@ const MemBio = () => {
                 </>
               }
             </div>
-            {info.PUBLICATION === undefined ? <></> :
+            {info.PUBLICATION === undefined || Object.values(info.PUBLICATION).length === 0 ? <></> :
               <div className="publications">
-                <h3>Publications</h3>
+                <h3>{t('members.publications')}</h3>
                 <div className="pub-list">
                   {Object.values(info.PUBLICATION).map((item) => (
                     <div className="pub-item">

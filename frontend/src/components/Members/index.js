@@ -11,19 +11,20 @@
 import './index.scss'
 import Group from './Group'
 import Loader from 'react-loaders'
-import frontendData from '../../config/frontend.json'
 import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
+import { useLocale } from '../../i18n/LocaleContext'
 
 import { getMemberData } from '../../siteData'
 
 const Members = () => {
   // * Members: Implement "Members" page, it contains Group.
+  // Current students are grouped by research team; graduates by cohort.
   // @param props:          useSpring   the animation for animated.div
   //        letterClass     String      the animation for title
   //        all_member_data Array       Data for all members
-  //        group_list      Array       List of group name
+  const { t } = useLocale()
   const memBriefs = getMemberData()
   const [letterClass] = useState('text-animate')
   const props = useSpring({
@@ -37,21 +38,11 @@ const Members = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const all_member_data = memBriefs
-  const group_list = Object.values(frontendData.MEMBERS_PAGE.GROUP)
-  let group_member_list = []
-  group_list.map((item) =>
-    group_member_list.push({
-      key: { item },
-      values: [],
-    })
-  )
+  const students = memBriefs.filter((m) => m.STATUS !== 'Graduated')
+  const graduates = memBriefs.filter((m) => m.STATUS === 'Graduated')
 
-  all_member_data.map((one_mem) =>
-    group_member_list[
-      group_list.findIndex((group_name) => group_name === one_mem.TEAM)
-    ].values.push(one_mem)
-  )
+  const studentTeams = [...new Set(students.map((m) => m.TEAM))]
+  const graduateCohorts = [...new Set(graduates.map((m) => m.COHORT))].sort()
 
   return (
     <>
@@ -60,13 +51,24 @@ const Members = () => {
           <h1>
             <AnimatedLetters
               letterClass={letterClass}
-              strArray={frontendData.MEMBERS_PAGE.TITLE.split('')}
+              strArray={t('members.title').split('')}
               idx={20}
             />
           </h1>
           <animated.div style={props}>
-            {Object.values(group_member_list).map((group_members) => (
-              <Group group_members={group_members} />
+            {studentTeams.map((team) => (
+              <Group
+                key={`student-${team}`}
+                group_name={team}
+                group_members={students.filter((m) => m.TEAM === team)}
+              />
+            ))}
+            {graduateCohorts.map((cohort) => (
+              <Group
+                key={`graduate-${cohort}`}
+                group_name={`${t('members.graduates')} (${cohort})`}
+                group_members={graduates.filter((m) => m.COHORT === cohort)}
+              />
             ))}
           </animated.div>
         </div>

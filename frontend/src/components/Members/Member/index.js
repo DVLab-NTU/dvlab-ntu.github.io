@@ -12,16 +12,17 @@ import './index.scss'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const Member = ({ name, img_path, personal_id }) => {
+const Member = ({ name, img_path, personal_id, to }) => {
   // * Member: Implement Member in Group of "Members" page.
   // @param name          String        The name of the member
   //        img_path      String        The path of the member's image
   //        personal_id   String        The id of the member -> for navigate to MemBio
+  //        to            String        The localized route to the member's bio
   //        navigate      useNavigate   For navigate to MemBio
 
   const navigate = useNavigate()
   const navigateToMemBio = () => {
-    navigate('/members/' + personal_id)
+    navigate(to || '/members/' + personal_id)
   }
 
   return (

@@ -17,6 +17,7 @@ import frontendData from "../../config/frontend.json";
 import Typewriter from "typewriter-effect";
 import { useState, useEffect } from "react";
 import AnimatedLetters from "../AnimatedLetters";
+import { useLocale } from "../../i18n/LocaleContext";
 // import { Typewriter } from "react-simple-typewriter";
 import { useSpring, animated, config } from "react-spring";
 
@@ -27,8 +28,8 @@ const AboutLab = () => {
     //        props:          useSpring   the animation for animated.div
     //        letterClass     String      the animation for title
 
+    const { t } = useLocale();
     const [letterClass] = useState("text-animate");
-    // const slides_list = Object.values(frontendData.ABOUT_DV_LAB_PAGE.DESCRIPTION);
     const props = useSpring({
         to: { opacity: 1 },
         from: { opacity: 0 },
@@ -50,7 +51,7 @@ const AboutLab = () => {
                         <h1>
                             <AnimatedLetters
                                 letterClass={letterClass}
-                                strArray={frontendData.ABOUT_DV_LAB_PAGE.SUBTITLE.split("")}
+                                strArray={t("about.subtitle").split("")}
                                 idx={1}
                             />
                         </h1>
@@ -59,11 +60,9 @@ const AboutLab = () => {
                     <animated.div className="about-content" style={props}>
                         <div className="introduction">
                             <div className="left-col">
-                                {frontendData.ABOUT_DV_LAB_PAGE.DESCRIPTION.TEXT.map(
-                                    (paragraph) => (
-                                        <p>{paragraph}</p>
-                                    )
-                                )}
+                                {t("about.description").map((paragraph) => (
+                                    <p key={paragraph}>{paragraph}</p>
+                                ))}
                             </div>
                             <div className="right-col">
                                 <img src={frontendData.ABOUT_DV_LAB_PAGE.DESCRIPTION.IMAGE} alt="DV Lab" />
@@ -73,7 +72,7 @@ const AboutLab = () => {
                             <span>
                                 <Typewriter
                                     options={{
-                                        strings: frontendData.ABOUT_DV_LAB_PAGE.LAB_CULTURE.SUBTITLE,
+                                        strings: t("about.culture"),
                                         autoStart: true,
                                         loop: true,
                                         cursor: "_",
@@ -97,7 +96,7 @@ const AboutLab = () => {
                             >
                                 {frontendData.ABOUT_DV_LAB_PAGE.LAB_CULTURE.GALLERY.map(
                                     (photo) => (
-                                        <Slide img_path={photo} />
+                                        <Slide img_path={photo} key={photo} />
 
                                     )
                                 )}

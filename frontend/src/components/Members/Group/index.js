@@ -12,19 +12,18 @@ import './index.scss'
 import React from 'react'
 import Member from '../Member'
 import Slider from 'react-slick'
+import { useLocale } from '../../../i18n/LocaleContext'
 
-const Group = ({ group_members }) => {
+const Group = ({ group_name, group_members }) => {
   // * Group: Implement Group in "Members" page, it contains Member.
-  // @param group_members   Array       Data for all members in the group
-  //        group_name      String      Group name
-  //        data_list       Array       List of group name
+  // @param group_name     String      Group name
+  //        group_members  Array       Data for all members in the group
 
-  const group_name = Object.values(group_members)[0].item
-  const data_list = Object.values(group_members)[1]
+  const { localize } = useLocale()
 
   return (
     <div className="group-container">
-      {data_list.length === 0 ? (
+      {group_members.length === 0 ? (
         <></>
       ) : (
         <div className="wrapper">
@@ -42,8 +41,14 @@ const Group = ({ group_members }) => {
             cssEase="linear"
             pauseOnHover="true"
           >
-            {data_list.map((d) => (
-              <Member name={d.NAME} img_path={d.IMG} personal_id={d.ID} />
+            {group_members.map((d) => (
+              <Member
+                key={d.ID}
+                name={d.NAME}
+                img_path={d.IMG}
+                personal_id={d.ID}
+                to={localize(`/members/${d.ID}`)}
+              />
             ))}
           </Slider>
         </div>

@@ -11,10 +11,10 @@
 import './index.scss'
 import Pub from './Pub'
 import Loader from 'react-loaders'
-import frontendData from '../../config/frontend.json'
 import AnimatedLetters from '../AnimatedLetters'
 import React, { useState, useEffect } from 'react'
 import { useSpring, animated, config } from 'react-spring'
+import { useLocale } from '../../i18n/LocaleContext'
 
 import { getPublicationData } from '../../siteData'
 
@@ -22,6 +22,7 @@ const Publications = () => {
     // * Publications: Implement "Publications" page, it contains Pub.
     // @param props:          useSpring   the animation for animated.div
     //        letterClass     String      the animation for title
+    const { t } = useLocale()
     const publications = getPublicationData()
     const [letterClass] = useState('text-animate')
     const props = useSpring({
@@ -43,7 +44,7 @@ const Publications = () => {
                         <h1>
                             <AnimatedLetters
                                 letterClass={letterClass}
-                                strArray={frontendData.PUBLICATIONS_PAGE.TITLE.split('')}
+                                strArray={t('publications.title').split('')}
                                 idx={20}
                             />
                         </h1>
@@ -52,7 +53,7 @@ const Publications = () => {
                         {publications.length !== 0 ?
                             <>
                                 {publications.map((pub) => (
-                                    <Pub pub_info={pub} />
+                                    <Pub pub_info={pub} key={pub.TITLE} />
                                 ))}
                             </>
                             : <Loader type="line-scale" />}
