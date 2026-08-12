@@ -67,7 +67,6 @@ function validateSite(site, lang) {
     assert(isString(site.nav?.[key]), `site.${lang}.nav.${key} invalid`);
   });
   assert(isString(site.home?.intro), `site.${lang}.home.intro invalid`);
-  assert(isString(site.home?.quick), `site.${lang}.home.quick invalid`);
   assert(isString(site.home?.sections?.highlights), `site.${lang}.home.sections.highlights invalid`);
 
   assert(Array.isArray(site.home?.highlights) && site.home.highlights.length > 0, `site.${lang}.home.highlights invalid`);
