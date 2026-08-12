@@ -4,7 +4,14 @@ import { getCollection } from 'astro:content';
 import { pickI18nText } from '../utils/i18n-text';
 
 const courseEntries = await getCollection('courses');
-const courses = courseEntries.map((e) => ({ slug: e.slug, ...e.data }));
+const courses = courseEntries
+  .map((e) => ({ slug: e.slug, ...e.data }))
+  // Newest semester first: "111-1" > "110-2" > "108-1"
+  .sort((a, b) => {
+    const [ay, at] = a.semester.split('-').map((v) => parseInt(v, 10));
+    const [by, bt] = b.semester.split('-').map((v) => parseInt(v, 10));
+    return by - ay || bt - at;
+  });
 const pageDesc = 'DVLab（台大設計驗證實驗室）開設課程：網路服務程式設計、系統晶片驗證、資料結構與程式設計，連結台大官方課程目錄。';
 ---
 <BaseLayout title="課程" desc={pageDesc} lang="zh" pathPrefix="">
@@ -15,8 +22,10 @@ const pageDesc = 'DVLab（台大設計驗證實驗室）開設課程：網路服
   <section class="detail-shell" data-reveal-group>
     {courses.map((c, i) => (
       <article class="card detail-content stack-sm" data-reveal data-reveal-order={String(i)}>
-        <h2 class="page-title">{pickI18nText(c.title, 'zh')}</h2>
-        <p class="badge-muted">{c.semester}</p>
+        <div class="detail-meta">
+          <h2 class="page-title">{pickI18nText(c.title, 'zh')}</h2>
+          <span class="badge-muted">{c.semester}</span>
+        </div>
         {c.intro && <p>{pickI18nText(c.intro, 'zh')}</p>}
         {c.contents && (
           <details>
