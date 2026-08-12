@@ -17,13 +17,13 @@ function initThemeToggle() {
     root.setAttribute('data-theme', theme);
     if (toggle) {
       const nextLabel = theme === 'dark'
-        ? (isZh ? '浅色' : 'Light')
+        ? (isZh ? '淺色' : 'Light')
         : (isZh ? '深色' : 'Dark');
       const icon = theme === 'dark' ? '☼' : '☾';
       toggle.textContent = `${icon} ${nextLabel}`;
       toggle.setAttribute('aria-label', theme === 'dark'
-        ? (isZh ? '切换到浅色模式' : 'Switch to light mode')
-        : (isZh ? '切换到深色模式' : 'Switch to dark mode'));
+        ? (isZh ? '切換到淺色模式' : 'Switch to light mode')
+        : (isZh ? '切換到深色模式' : 'Switch to dark mode'));
       toggle.setAttribute('aria-pressed', String(theme === 'dark'));
     }
   }
