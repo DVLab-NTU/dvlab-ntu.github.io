@@ -1,0 +1,34 @@
+{
+  "brand": "DV LAB",
+  "siteName": "DVLab · Design Verification Lab, NTUEE",
+  "nav": {
+    "home": "首頁",
+    "members": "成員",
+    "papers": "論文",
+    "courses": "課程",
+    "awards": "獲獎",
+    "news": "最新消息"
+  },
+  "home": {
+    "intro": "國立臺灣大學電機工程學系設計驗證實驗室（DVLab），由黃鐘揚教授主持，專注於形式化驗證、量子電路合成與最佳化、以及電子設計自動化研究。",
+    "sections": {
+      "highlights": "重點資訊",
+      "recentProjects": "研究方向"
+    },
+    "highlights": [
+      {
+        "title": "研究團隊",
+        "desc": "由黃鐘揚教授領導，成員涵蓋碩士生、博士生與專題生，研究方向涵蓋形式化驗證、量子計算與 EDA。"
+      },
+      {
+        "title": "研究成果",
+        "desc": "實驗室在 ICCAD CAD Contest、DAC、DATE、QCE 等頂尖會議與競賽中屢獲佳績，並持續發表高品質論文。"
+      },
+      {
+        "title": "招生與合作",
+        "desc": "歡迎對驗證、量子電路與 EDA 有興趣的學生加入，也歡迎學界與業界合作交流。"
+      }
+    ],
+    "quick": "快速連結"
+  }
+}

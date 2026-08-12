@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { pickI18nText } from '../utils/i18n-text';
+
+const courseEntries = await getCollection('courses');
+const courses = courseEntries.map((e) => ({ slug: e.slug, ...e.data }));
+const pageDesc = '檢視 DVLab 開設課程與授課資訊。';
+---
+<BaseLayout title="課程" desc={pageDesc} lang="zh" pathPrefix="">
+  <section class="page-head" data-reveal>
+    <h1 class="page-title">課程</h1>
+  </section>
+
+  <section class="detail-shell" data-reveal-group>
+    {courses.map((c, i) => (
+      <article class="card detail-content stack-sm" data-reveal data-reveal-order={String(i)}>
+        <h2 class="page-title">{pickI18nText(c.title, 'zh')}</h2>
+        <p class="badge-muted">{c.semester}</p>
+        {c.intro && <p>{pickI18nText(c.intro, 'zh')}</p>}
+        {c.contents && (
+          <details>
+            <summary class="btn btn-ghost">課程內容</summary>
+            <ul class="mt-4">
+              {c.contents.zh.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </details>
+        )}
+        <div class="detail-links">
+          <a class="btn btn-ghost" href={c.link} target="_blank" rel="noreferrer">課程目錄（NTU）</a>
+          {c.github && (
+            <a class="btn btn-ghost" href={c.github} target="_blank" rel="noreferrer">GitHub Repo</a>
+          )}
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

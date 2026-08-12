@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { pickI18nText } from '../../utils/i18n-text';
+
+const courseEntries = await getCollection('courses');
+const courses = courseEntries.map((e) => ({ slug: e.slug, ...e.data }));
+const pageDesc = 'Courses offered by DVLab with official NTU course-catalogue links.';
+---
+<BaseLayout title="Courses" desc={pageDesc} lang="en" pathPrefix="/en">
+  <section class="page-head" data-reveal>
+    <h1 class="page-title">Courses</h1>
+  </section>
+
+  <section class="detail-shell" data-reveal-group>
+    {courses.map((c, i) => (
+      <article class="card detail-content stack-sm" data-reveal data-reveal-order={String(i)}>
+        <h2 class="page-title">{pickI18nText(c.title, 'en')}</h2>
+        <p class="badge-muted">{c.semester}</p>
+        {c.intro && <p>{pickI18nText(c.intro, 'en')}</p>}
+        {c.contents && (
+          <details>
+            <summary class="btn btn-ghost">Course Contents</summary>
+            <ul class="mt-4">
+              {c.contents.en.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </details>
+        )}
+        <div class="detail-links">
+          <a class="btn btn-ghost" href={c.link} target="_blank" rel="noreferrer">NTU Course Catalogue</a>
+          {c.github && (
+            <a class="btn btn-ghost" href={c.github} target="_blank" rel="noreferrer">GitHub Repo</a>
+          )}
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>
