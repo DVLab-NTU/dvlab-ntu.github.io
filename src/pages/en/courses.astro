@@ -4,7 +4,14 @@ import { getCollection } from 'astro:content';
 import { pickI18nText } from '../../utils/i18n-text';
 
 const courseEntries = await getCollection('courses');
-const courses = courseEntries.map((e) => ({ slug: e.slug, ...e.data }));
+const courses = courseEntries
+  .map((e) => ({ slug: e.slug, ...e.data }))
+  // Newest semester first: "111-1" > "110-2" > "108-1"
+  .sort((a, b) => {
+    const [ay, at] = a.semester.split('-').map((v) => parseInt(v, 10));
+    const [by, bt] = b.semester.split('-').map((v) => parseInt(v, 10));
+    return by - ay || bt - at;
+  });
 const pageDesc = 'DVLab (Design Verification Lab, NTUEE) courses: Web Programming, SoC Verification, and Data Structure and Programming, with official NTU course-catalogue links.';
 ---
 <BaseLayout title="Courses" desc={pageDesc} lang="en" pathPrefix="/en">
@@ -15,8 +22,10 @@ const pageDesc = 'DVLab (Design Verification Lab, NTUEE) courses: Web Programmin
   <section class="detail-shell" data-reveal-group>
     {courses.map((c, i) => (
       <article class="card detail-content stack-sm" data-reveal data-reveal-order={String(i)}>
-        <h2 class="page-title">{pickI18nText(c.title, 'en')}</h2>
-        <p class="badge-muted">{c.semester}</p>
+        <div class="detail-meta">
+          <h2 class="page-title">{pickI18nText(c.title, 'en')}</h2>
+          <span class="badge-muted">{c.semester}</span>
+        </div>
         {c.intro && <p>{pickI18nText(c.intro, 'en')}</p>}
         {c.contents && (
           <details>
