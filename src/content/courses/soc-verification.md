@@ -2,13 +2,13 @@
 title:
   zh: "系統晶片驗證"
   en: "SoC Verification"
-semester: "110-2"
-link: "https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id=943%20U0250&class=&dpt_code=9210&ser_no=26928&semester=110-2&lang=CH"
+semester: "114-2"
+link: "https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id=943%20U0250&class=&dpt_code=9430&ser_no=12612&semester=114-2&lang=CH"
 intro:
   zh: |
-    系統晶片驗證（EEE5023）介紹系統晶片設計之形式化驗證技術。課程涵蓋布林推理引擎（BDD 與 SAT）、模型檢驗、性質導向可達性分析（PDR）與 SAT 輔助合成，兼重理論與現代驗證工具的實作練習。
+    系統晶片驗證（EEE5023）為台大電機所開設之選修課程，介紹系統晶片設計之形式化驗證技術。課程涵蓋形式化建模與性質規格、二元決策圖（BDD）、布林可滿足性（SAT）求解、模型檢驗與可達性分析，並探討形式化方法在邏輯合成與最佳化上的實務應用。
   en: |
-    SoC Verification (EEE5023) introduces formal verification techniques for system-on-chip designs. The course covers Boolean reasoning engines (BDD and SAT), model checking, property directed reachability, and SAT-assisted synthesis, with a strong emphasis on both the theory and hands-on use of modern verification tools.
+    SoC Verification (EEE5023) is a graduate elective at NTU GIIEE introducing formal verification techniques for system-on-chip designs. The course covers formal modeling and property specification, Binary Decision Diagrams (BDDs), Boolean satisfiability (SAT) solving, model checking and reachability analysis, and practical applications of formal methods in logic synthesis and optimization.
 contents:
   zh:
       - "課程介紹 / 設計驗證簡介"
