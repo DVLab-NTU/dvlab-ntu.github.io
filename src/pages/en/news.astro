@@ -5,7 +5,7 @@ import { buildLocalizedNews } from '../../utils/news-localized';
 
 const newsEntries = await getCollection('news');
 const news = buildLocalizedNews(newsEntries).filter((item) => item.entry.en);
-const pageDesc = 'Browse DVLab news updates and recent announcements.';
+const pageDesc = 'DVLab (Design Verification Lab, NTUEE) news: research progress, competition results, recruitment, and lab announcements.';
 ---
 <BaseLayout title="News" desc={pageDesc} lang="en" pathPrefix="/en">
   <section class="page-head" data-reveal>

@@ -5,7 +5,7 @@ import { pickI18nText } from '../utils/i18n-text';
 
 const courseEntries = await getCollection('courses');
 const courses = courseEntries.map((e) => ({ slug: e.slug, ...e.data }));
-const pageDesc = '檢視 DVLab 開設課程與授課資訊。';
+const pageDesc = 'DVLab（台大設計驗證實驗室）開設課程：網路服務程式設計、系統晶片驗證、資料結構與程式設計，連結台大官方課程目錄。';
 ---
 <BaseLayout title="課程" desc={pageDesc} lang="zh" pathPrefix="">
   <section class="page-head" data-reveal>

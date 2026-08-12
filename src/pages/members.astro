@@ -79,7 +79,7 @@ const membersWithId = memberEntries
 const roleSet = new Set(membersWithId.map((m) => m.role.zh));
 const extraRoles = Array.from(roleSet).filter((role) => !roleOrder.includes(role)).sort();
 const roles = ['全部', ...roleOrder.filter((role) => roleSet.has(role)), ...extraRoles];
-const pageDesc = '檢視 DVLab 成員列表、研究方向與當前狀態。';
+const pageDesc = 'DVLab（台大設計驗證實驗室）成員列表：由黃鐘揚教授領導，涵蓋碩士生、博士生與專題生，研究方向包括形式化驗證、量子電路合成與電子設計自動化（EDA）。';
 
 ---
 <BaseLayout title="成員" desc={pageDesc} lang="zh" pathPrefix="">

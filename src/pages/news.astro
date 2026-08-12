@@ -5,7 +5,7 @@ import { buildLocalizedNews } from '../utils/news-localized';
 
 const newsEntries = await getCollection('news');
 const news = newsEntries.length === 0 ? [] : buildLocalizedNews(newsEntries).filter((item) => item.entry.zh);
-const pageDesc = '檢視 DVLab 新聞動態與最近更新。';
+const pageDesc = 'DVLab（台大設計驗證實驗室）最新消息與活動公告：研究進展、競賽捷報、招生資訊與實驗室動態。';
 ---
 <BaseLayout title="新聞" desc={pageDesc} lang="zh" pathPrefix="">
   <section class="page-head" data-reveal>

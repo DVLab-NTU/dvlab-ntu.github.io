@@ -6,7 +6,7 @@ const paperEntries = await getCollection('papers');
 const papers = paperEntries
   .map((e) => ({ slug: e.slug, ...e.data }))
   .sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
-const pageDesc = '檢視 DVLab 論文列表與發表資訊。';
+const pageDesc = 'DVLab（台大設計驗證實驗室）研究成果：形式化驗證、量子電路合成與最佳化、EDA 相關論文，發表於 DAC、DATE、ICCAD、QCE 等頂尖會議與期刊。';
 ---
 <BaseLayout title="論文" desc={pageDesc} lang="zh" pathPrefix="">
   <section class="page-head" data-reveal>

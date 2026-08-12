@@ -7,7 +7,7 @@ const awardEntries = await getCollection('awards');
 const awards = awardEntries
   .map((e) => ({ slug: e.slug, ...e.data }))
   .sort((a, b) => b.year - a.year || a.month.localeCompare(b.month));
-const pageDesc = '檢視 DVLab 的獲獎紀錄，包含國際競賽與學術獎項。';
+const pageDesc = 'DVLab（台大設計驗證實驗室）獲獎紀錄：ICCAD CAD Contest 第一名等多項國際競賽與學術獎項，完整列出學生與指導教授。';
 ---
 <BaseLayout title="獲獎" desc={pageDesc} lang="zh" pathPrefix="">
   <section class="page-head" data-reveal>

@@ -6,7 +6,7 @@ const paperEntries = await getCollection('papers');
 const papers = paperEntries
   .map((e) => ({ slug: e.slug, ...e.data }))
   .sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
-const pageDesc = 'Browse DVLab papers and publication metadata.';
+const pageDesc = 'DVLab (Design Verification Lab, NTUEE) publications: formal verification, quantum circuit synthesis and optimization, and EDA research published at DAC, DATE, ICCAD, QCE, and more.';
 ---
 <BaseLayout title="Papers" desc={pageDesc} lang="en" pathPrefix="/en">
   <section class="page-head" data-reveal>

@@ -79,7 +79,7 @@ const membersWithId = memberEntries
 const roleSet = new Set(membersWithId.map((m) => m.role.en));
 const extraRoles = Array.from(roleSet).filter((role) => !roleOrder.includes(role)).sort();
 const roles = ['All', ...roleOrder.filter((role) => roleSet.has(role)), ...extraRoles];
-const pageDesc = 'Browse DVLab members, roles, research areas, and current status.';
+const pageDesc = 'DVLab (Design Verification Lab, NTUEE) members: students and researchers led by Prof. Chung-Yang (Ric) Huang, working on formal verification, quantum circuit synthesis, and EDA.';
 
 ---
 <BaseLayout title="Members" desc={pageDesc} lang="en" pathPrefix="/en">

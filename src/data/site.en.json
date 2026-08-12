@@ -10,7 +10,7 @@
     "news": "News"
   },
   "home": {
-    "intro": "The Design Verification Lab (DVLab) at the Department of Electrical Engineering, National Taiwan University, directed by Prof. Chung-Yang (Ric) Huang, focuses on formal verification, quantum circuit synthesis and optimization, and electronic design automation.",
+    "intro": "DVLab (Design Verification Lab) at NTU EE, led by Prof. Chung-Yang (Ric) Huang. Research on formal verification, quantum circuit synthesis and optimization, and EDA.",
     "sections": {
       "highlights": "Highlights",
       "recentProjects": "Research Areas"

@@ -21,7 +21,7 @@ const areaText = pickI18nText(member.area, 'en');
 const bio = pickI18nText(member.bio, 'en');
 const links = member.links;
 const hasLinks = Boolean(links?.scholar || links?.github || links?.homepage || links?.email || links?.linkedin);
-const pageDesc = bio || `${member.role.en}. Research area: ${areaText}.`;
+const pageDesc = (bio ? bio.slice(0, 150) : `${member.role.en}. Research area: ${areaText}.`);
 ---
 <BaseLayout title={nameText} desc={pageDesc} lang="en" pathPrefix="/en">
   <section class="detail-shell">
