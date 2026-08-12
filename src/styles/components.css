@@ -34,6 +34,12 @@
   letter-spacing: 0.04em;
 }
 
+.brand-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
