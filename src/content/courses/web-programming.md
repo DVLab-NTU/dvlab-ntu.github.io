@@ -2,8 +2,8 @@
 title:
   zh: "網路服務程式設計"
   en: "Web Programming"
-semester: "111-1"
-link: "https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id=901%2034300&class=&dpt_code=9010&ser_no=47380&semester=111-1&lang=CH"
+semester: "114-1"
+link: "https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id=901%2034300&class=&dpt_code=9010&ser_no=18235&semester=114-1&lang=CH"
 intro:
   zh: |
     網路服務程式設計（EE3035）介紹現代全端網頁應用程式的設計與實作。課程涵蓋以 React.js 進行的前端開發、後端服務、資料庫與部署，並透過課堂講授、線上黑客松與期末專題的方式進行實作練習。
