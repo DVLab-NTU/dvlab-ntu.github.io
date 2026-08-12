@@ -11,7 +11,7 @@ const highlightLinks = ['/members/', '/papers/', '/awards/'];
     <p class="hero-subtitle" data-reveal data-reveal-delay="120">{t.home.intro}</p>
     <div class="hero-actions" data-reveal data-reveal-delay="180">
       <a class="btn btn-primary" href="/members/">了解成員</a>
-      <a class="btn btn-ghost" href="/papers/">查看論文</a>
+      <a class="btn btn-ghost" href="/papers/">檢視論文</a>
       <a class="btn btn-ghost" href="/awards/">獲獎紀錄</a>
     </div>
   </section>
@@ -23,7 +23,7 @@ const highlightLinks = ['/members/', '/papers/', '/awards/'];
     <div class="grid grid-3" data-reveal-group>
       {t.home.highlights.map((h, i) => (
         <article class="card card-hover card-clickable" data-reveal data-reveal-order={String(i)}>
-          <a class="card-link-overlay" href={highlightLinks[i] ?? '/news'} aria-label={`查看 ${h.title} 詳情`}></a>
+          <a class="card-link-overlay" href={highlightLinks[i] ?? '/news'} aria-label={`檢視 ${h.title} 詳情`}></a>
           <h3>{h.title}</h3>
           <p class="mt-4">{h.desc}</p>
         </article>
