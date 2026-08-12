@@ -7,7 +7,7 @@ const awardEntries = await getCollection('awards');
 const awards = awardEntries
   .map((e) => ({ slug: e.slug, ...e.data }))
   .sort((a, b) => b.year - a.year || a.month.localeCompare(b.month));
-const pageDesc = 'Awards and honors won by DVLab members, including international competitions.';
+const pageDesc = 'DVLab (Design Verification Lab, NTUEE) awards: ICCAD CAD Contest first place and other international competition and academic honors, with students and advisors listed.';
 ---
 <BaseLayout title="Awards" desc={pageDesc} lang="en" pathPrefix="/en">
   <section class="page-head" data-reveal>

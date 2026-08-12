@@ -5,7 +5,7 @@ import { pickI18nText } from '../../utils/i18n-text';
 
 const courseEntries = await getCollection('courses');
 const courses = courseEntries.map((e) => ({ slug: e.slug, ...e.data }));
-const pageDesc = 'Courses offered by DVLab with official NTU course-catalogue links.';
+const pageDesc = 'DVLab (Design Verification Lab, NTUEE) courses: Web Programming, SoC Verification, and Data Structure and Programming, with official NTU course-catalogue links.';
 ---
 <BaseLayout title="Courses" desc={pageDesc} lang="en" pathPrefix="/en">
   <section class="page-head" data-reveal>
