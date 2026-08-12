@@ -6,8 +6,7 @@
     "members": "成員",
     "papers": "論文",
     "courses": "課程",
-    "awards": "獲獎",
-    "news": "最新消息"
+    "awards": "獲獎"
   },
   "home": {
     "intro": "DVLab 設計驗證實驗室隸屬於國立臺灣大學電機工程學系，由黃鐘揚教授主持。研究聚焦於形式化驗證、量子電路合成與最佳化、以及電子設計自動化（EDA），並在 ICCAD CAD Contest、DAC、DATE、QCE 等國際競賽與會議屢獲佳績。",

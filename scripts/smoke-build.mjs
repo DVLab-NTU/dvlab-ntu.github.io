@@ -108,10 +108,6 @@ const checks = [
     file: 'dist/awards/index.html',
     includes: ['獲獎紀錄', '學生'],
   },
-  {
-    file: 'dist/news/index.html',
-    includes: ['新聞動態', '搜尋新聞標題'],
-  },
   cmsConfigured
     ? {
         file: 'dist/admin/index.html',
@@ -137,7 +133,6 @@ const checks = [
           'Start with a lowercase letter',
           '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
           'structure: multiple_files',
-          '  - name: news',
           '  - name: members',
           '    folder: src/content/members',
           '  - name: papers',

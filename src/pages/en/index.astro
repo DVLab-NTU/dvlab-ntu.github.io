@@ -23,7 +23,7 @@ const highlightLinks = ['/en/members/', '/en/papers/', '/en/awards/'];
     <div class="grid grid-3" data-reveal-group>
       {t.home.highlights.map((h, i) => (
         <article class="card card-hover card-clickable" data-reveal data-reveal-order={String(i)}>
-          <a class="card-link-overlay" href={highlightLinks[i] ?? '/en/news'} aria-label={`View ${h.title}`}></a>
+          <a class="card-link-overlay" href={highlightLinks[i] ?? '/'} aria-label={`View ${h.title}`}></a>
           <h3>{h.title}</h3>
           <p class="mt-4">{h.desc}</p>
         </article>

@@ -32,7 +32,6 @@ const checks = [
       'href="/papers/"',
       'href="/courses/"',
       'href="/awards/"',
-      'href="/news/"',
     ],
   },
   {
@@ -47,7 +46,6 @@ const checks = [
       'href="/en/papers/"',
       'href="/en/courses/"',
       'href="/en/awards/"',
-      'href="/en/news/"',
     ],
   },
   {

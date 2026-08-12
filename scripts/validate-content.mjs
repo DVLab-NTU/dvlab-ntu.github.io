@@ -38,20 +38,6 @@ function parseMarkdown(filePath, requireFrontmatter = true) {
   };
 }
 
-function collectMarkdownFilesRecursive(dir) {
-  const files = [];
-  for (const name of fs.readdirSync(dir)) {
-    const filePath = path.join(dir, name);
-    const stat = fs.statSync(filePath);
-    if (stat.isDirectory()) {
-      files.push(...collectMarkdownFilesRecursive(filePath));
-    } else if (name.endsWith('.md')) {
-      files.push(filePath);
-    }
-  }
-  return files;
-}
-
 function collectDirectories(dir) {
   return fs
     .readdirSync(dir)
@@ -74,47 +60,10 @@ function assertLocalizedFrontmatterObject(frontmatter, field, message) {
   assert(hasLocalizedValue(block, 'zh') && hasLocalizedValue(block, 'en'), message);
 }
 
-function getFrontmatterScalar(frontmatter, field) {
-  const matched = frontmatter.match(new RegExp(`^${field}:\\s*(?:"([^"\\n]+)"|'([^'\\n]+)'|(\\S.*))\\s*$`, 'm'));
-  return matched ? (matched[1] || matched[2] || matched[3] || '').trim() : '';
-}
-
-function expectedNewsCmsSlug(routeSlug) {
-  const matched = routeSlug.match(/^\d{4}-\d{2}-\d{2}-(.+)$/);
-  return matched ? matched[1] : '';
-}
-
-function parseNewsFileInfo(relPath) {
-  const normalized = relPath.replaceAll('\\', '/');
-  const parts = normalized.split('/');
-
-  if (parts.length === 1) {
-    const matched = parts[0].match(/^(.+)\.(zh|en)\.md$/i);
-    assert(matched, `news filename must end with .zh.md or .en.md: ${normalized}`);
-    return {
-      slug: matched[1],
-      lang: matched[2].toLowerCase(),
-      format: 'flat',
-    };
-  }
-
-  if (parts.length === 2) {
-    const matched = parts[1].match(/^(.*)_(cn|en)\.md$/i);
-    assert(matched, `legacy news filename must end with _cn.md or _en.md: ${normalized}`);
-    return {
-      slug: parts[0],
-      lang: matched[2].toLowerCase() === 'cn' ? 'zh' : 'en',
-      format: 'legacy',
-    };
-  }
-
-  throw new Error(`news path depth invalid: ${normalized}`);
-}
-
 function validateSite(site, lang) {
   assert(isString(site.brand), `site.${lang}.brand invalid`);
   assert(isString(site.siteName), `site.${lang}.siteName invalid`);
-  ['home', 'members', 'papers', 'courses', 'awards', 'news'].forEach((key) => {
+  ['home', 'members', 'papers', 'courses', 'awards'].forEach((key) => {
     assert(isString(site.nav?.[key]), `site.${lang}.nav.${key} invalid`);
   });
   assert(isString(site.home?.intro), `site.${lang}.home.intro invalid`);
@@ -133,16 +82,13 @@ try {
     validateSite(readJson(file), lang);
   }
 
-  const newsDir = path.join(contentBase, 'news');
   const papersDir = path.join(contentBase, 'papers');
   const membersDir = path.join(contentBase, 'members');
   const joinDir = path.join(contentBase, 'join');
-  assert(fs.existsSync(newsDir), 'Missing src/content/news');
   assert(fs.existsSync(papersDir), 'Missing src/content/papers');
   assert(fs.existsSync(membersDir), 'Missing src/content/members');
   assert(fs.existsSync(joinDir), 'Missing src/content/join');
 
-  const newsFiles = collectMarkdownFilesRecursive(newsDir);
   const paperFiles = fs.readdirSync(papersDir).filter((name) => name.endsWith('.md')).map((name) => path.join(papersDir, name));
   const memberFiles = fs.readdirSync(membersDir).filter((name) => name.endsWith('.md')).map((name) => path.join(membersDir, name));
   const joinFolders = collectDirectories(joinDir);
@@ -150,38 +96,6 @@ try {
   assert(paperFiles.length > 0, 'No markdown files in src/content/papers');
   assert(memberFiles.length > 0, 'No markdown files in src/content/members');
   assert(joinFolders.length > 0, 'No join folders in src/content/join');
-
-  const newsLangMap = new Map();
-  const newsCmsSlugPattern = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
-  const forbiddenCmsResidue = ['testttttttt', 'testttttt', '测试后台功能', '测试使用后台更新'];
-  newsFiles.forEach((filePath) => {
-    const rel = path.relative(newsDir, filePath).replaceAll('\\', '/');
-    const { slug, lang } = parseNewsFileInfo(rel);
-    assert(/^\d{4}-\d{2}-\d{2}(?:-[a-z0-9]+(?:-[a-z0-9]+)*)?$/.test(slug), `news slug invalid: ${rel}`);
-
-    if (!newsLangMap.has(slug)) {
-      newsLangMap.set(slug, new Set());
-    }
-    newsLangMap.get(slug).add(lang);
-
-    const { frontmatter, body } = parseMarkdown(filePath);
-    const cmsSlug = getFrontmatterScalar(frontmatter, 'slug');
-    const expectedCmsSlug = expectedNewsCmsSlug(slug);
-    assert(newsCmsSlugPattern.test(cmsSlug), `news frontmatter slug invalid: ${rel}`);
-    if (expectedCmsSlug) {
-      assert(cmsSlug === expectedCmsSlug, `news frontmatter slug must match filename suffix: ${rel}`);
-    }
-    assertFrontmatter(/date:\s*['"]?\d{4}-\d{2}-\d{2}['"]?/, frontmatter, `news frontmatter date invalid: ${rel}`);
-    assertLocalizedFrontmatterObject(frontmatter, 'title', `news frontmatter title zh\/en invalid: ${rel}`);
-    assert(isString(body), `news body empty: ${rel}`);
-    forbiddenCmsResidue.forEach((needle) => {
-      assert(!body.includes(needle), `news body contains CMS test residue "${needle}": ${rel}`);
-    });
-  });
-
-  newsLangMap.forEach((langs, slug) => {
-    assert(langs.has('zh') && langs.has('en'), `news zh/en pair missing for slug: ${slug}`);
-  });
 
   paperFiles.forEach((filePath) => {
     const { frontmatter } = parseMarkdown(filePath);
