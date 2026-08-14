@@ -10,7 +10,6 @@
   --primary: #ffd700;
   --primary-2: #fcffcc;
   --surface-1: rgba(20, 38, 58, 0.55);
-  --surface-2: rgba(20, 38, 58, 0.85);
 
   --particle-color: rgba(252, 255, 204, 0.55);
 
@@ -18,7 +17,6 @@
     radial-gradient(900px 600px at 100% 0%, rgba(109, 170, 175, 0.16), transparent 50%),
     linear-gradient(180deg, #1f3751 0%, #14263a 100%);
   --gradient-accent: linear-gradient(180deg, #ffe14d 0%, #ffd700 100%);
-  --gradient-border: linear-gradient(130deg, rgba(252, 255, 204, 0.42), rgba(188, 221, 223, 0.24), rgba(252, 255, 204, 0.1));
 
   --radius-card: 12px;
   --radius-md: 8px;
@@ -29,7 +27,6 @@
 
   --shadow-sm: 0 8px 24px rgba(5, 12, 22, 0.35);
   --shadow-md: 0 16px 40px rgba(5, 12, 22, 0.45);
-  --shadow-ring: 0 0 0 1px rgba(188, 221, 223, 0.22);
   --shadow-focus: 0 0 0 3px rgba(255, 215, 0, 0.28);
   --glow-soft: 0 0 44px rgba(255, 215, 0, 0.1);
 
@@ -37,7 +34,6 @@
 
   --font-base: 'Helvetica Neue', 'Inter', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-title: 'Coolvetica', 'Helvetica Neue', 'Inter', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, sans-serif;
-  --font-script: 'La Belle Aurore', cursive;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --text-xs: 12px;
@@ -69,7 +65,6 @@
   --primary: #b8860b;
   --primary-2: #f5e6a3;
   --surface-1: #ffffff;
-  --surface-2: #f2f8f8;
 
   --particle-color: rgba(31, 55, 81, 0.22);
 
@@ -78,7 +73,6 @@
     linear-gradient(180deg, #f2f8f8 0%, #e4eff1 100%);
   --shadow-sm: 0 8px 22px rgba(31, 55, 81, 0.12);
   --shadow-md: 0 20px 44px rgba(31, 55, 81, 0.18);
-  --shadow-ring: 0 0 0 1px rgba(31, 55, 81, 0.14);
   --glow-soft: 0 0 40px rgba(184, 134, 11, 0.12);
   --shadow-focus: 0 0 0 3px rgba(184, 134, 11, 0.3);
 }

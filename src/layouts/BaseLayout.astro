@@ -161,7 +161,7 @@ const navItems = [
         <a class="brand" href={navPathResolved.home} aria-label={t.siteName}>
           <img class="brand-logo" src="/images/dvlab-logo.png" alt="DVLab" width="57" height="40" />
         </a>
-        <nav class="nav-links" aria-label="Site">
+        <nav class="nav-links" aria-label={lang === 'zh' ? '網站導覽' : 'Site'}>
           {navItems.map((item) => (
             <a
               class={`nav-link ${item.active ? 'is-active' : ''}`}
