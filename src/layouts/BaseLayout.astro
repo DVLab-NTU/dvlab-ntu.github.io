@@ -73,6 +73,17 @@ const navPathResolved = {
   courses: normalizeSitePath(navPath.courses),
   awards: normalizeSitePath(navPath.awards),
 };
+
+const navItems = [
+  { href: navPathResolved.home, label: t.nav.home, exact: true, icon: 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1v-9.5Z' },
+  { href: navPathResolved.members, label: t.nav.members, exact: false, icon: 'M8.5 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm0 1.5c-3 0-6.5 1.6-6.5 4.5V20h13v-3c0-2.9-3.5-4.5-6.5-4.5Zm8 1.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm.5 1c-1.2 0-2.4.3-3.4.8 2.4 1.1 3.9 3 3.9 5.2V20h6v-2.5c0-2.5-3-3.5-6.5-4.5Z' },
+  { href: navPathResolved.papers, label: t.nav.papers, exact: false, icon: 'M12 2a6.5 6.5 0 0 0-6.5 6.5c0 2.3 1.2 4.4 3 5.6V17h7v-2.9c1.8-1.2 3-3.3 3-5.6A6.5 6.5 0 0 0 12 2Zm-2 16.5h4v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-.5Z' },
+  { href: navPathResolved.courses, label: t.nav.courses, exact: false, icon: 'M12 2 2 6.5V11h2v-2l8 3.5L22 9V6.5L12 2ZM5 13v6c0 1.1 3.1 2 7 2s7-.9 7-2v-6l-7 3-7-3Z' },
+  { href: navPathResolved.awards, label: t.nav.awards, exact: false, icon: 'M5 2h14v3a7 7 0 0 1-6 6.9V15h4v2H7v-2h4v-3.1A7 7 0 0 1 5 5V2Zm2 2v1a5 5 0 0 0 10 0V4H7Z' },
+].map((item) => ({
+  ...item,
+  active: item.exact ? currentPath === item.href : currentPath.startsWith(item.href),
+}));
 ---
 <!doctype html>
 <html lang={lang === 'zh' ? 'zh-TW' : 'en'} class="js">
@@ -102,6 +113,7 @@ const navPathResolved = {
     <ClientRouter />
     <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/noto-sans-tc-vf.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/CoolveticaRg-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/png" href="/images/dvlab-logo.png" />
     <link rel="apple-touch-icon" href="/images/dvlab-logo.png" />
     <script type="application/ld+json" is:inline>
@@ -139,17 +151,29 @@ const navPathResolved = {
     </noscript>
   </head>
   <body>
+    <div class="page-loader" aria-hidden="true">
+      <div class="line-scale">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
     <header class="site-header">
       <div class="container nav">
-        <div class="brand">
+        <a class="brand" href={navPathResolved.home} aria-label={t.siteName}>
           <img class="brand-logo" src="/images/dvlab-logo.png" alt="DVLab" width="57" height="40" />
-        </div>
-        <nav class="nav-links">
-          <a class={`nav-link ${currentPath === navPathResolved.home ? 'is-active' : ''}`} href={navPathResolved.home}>{t.nav.home}</a>
-          <a class={`nav-link ${currentPath.startsWith(navPathResolved.members) ? 'is-active' : ''}`} href={navPathResolved.members}>{t.nav.members}</a>
-          <a class={`nav-link ${currentPath.startsWith(navPathResolved.papers) ? 'is-active' : ''}`} href={navPathResolved.papers}>{t.nav.papers}</a>
-          <a class={`nav-link ${currentPath.startsWith(navPathResolved.courses) ? 'is-active' : ''}`} href={navPathResolved.courses}>{t.nav.courses}</a>
-          <a class={`nav-link ${currentPath.startsWith(navPathResolved.awards) ? 'is-active' : ''}`} href={navPathResolved.awards}>{t.nav.awards}</a>
+        </a>
+        <nav class="nav-links" aria-label={lang === 'zh' ? '網站導覽' : 'Site'}>
+          {navItems.map((item) => (
+            <a
+              class={`nav-link ${item.active ? 'is-active' : ''}`}
+              href={item.href}
+              aria-current={item.active ? 'page' : undefined}
+            >
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d={item.icon} /></svg>
+              </span>
+              <span class="nav-text">{item.label}</span>
+            </a>
+          ))}
         </nav>
         <div class="nav-actions">
           <button class="btn btn-ghost" data-theme-toggle type="button" aria-label="Switch theme">Dark</button>
@@ -185,7 +209,7 @@ const navPathResolved = {
             </>
           )}
         </span>
-        <span>© 2026 {t.siteName}</span>
+        <span class="footer-copy">© 2026 {t.siteName}</span>
         <span>
           <a href="https://github.com/DVLab-NTU/dvlab-ntu.github.io" target="_blank" rel="noreferrer">
             GitHub

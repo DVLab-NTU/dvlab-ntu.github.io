@@ -1,39 +1,39 @@
 :root {
-  --bg: #0b1020;
-  --bg-elevated: #111a33;
-  --line: rgba(141, 163, 229, 0.24);
-  --line-strong: rgba(156, 177, 241, 0.48);
-  --text: #ecf2ff;
-  --text-soft: #c8d4f3;
-  --muted: #9fb0de;
-  --primary: #7da7ff;
-  --primary-2: #5dd2ff;
-  --surface-1: rgba(255, 255, 255, 0.06);
-  --surface-2: rgba(255, 255, 255, 0.02);
+  /* Old-site palette (2022 React site): navy + yellow on dark */
+  --bg: #1f3751;
+  --bg-elevated: #14263a;
+  --line: rgba(188, 221, 223, 0.24);
+  --line-strong: rgba(252, 255, 204, 0.5);
+  --text: #e6f1f1;
+  --text-soft: #bcdddf;
+  --muted: #8faeb2;
+  --primary: #ffd700;
+  --primary-2: #fcffcc;
+  --surface-1: rgba(20, 38, 58, 0.55);
 
-  --gradient-bg: radial-gradient(1200px 700px at 10% -10%, rgba(117, 157, 255, 0.25), transparent 60%),
-    radial-gradient(1000px 600px at 90% 0%, rgba(84, 220, 255, 0.16), transparent 55%),
-    linear-gradient(180deg, #0b1020 0%, #090e1b 100%);
-  --gradient-accent: linear-gradient(120deg, var(--primary), var(--primary-2));
-  --gradient-border: linear-gradient(130deg, rgba(125, 167, 255, 0.48), rgba(93, 210, 255, 0.32), rgba(125, 167, 255, 0.12));
+  --particle-color: rgba(252, 255, 204, 0.55);
 
-  --radius-card: 16px;
-  --radius-md: 12px;
+  --gradient-bg: radial-gradient(1200px 800px at 15% -10%, rgba(177, 208, 210, 0.22), transparent 55%),
+    radial-gradient(900px 600px at 100% 0%, rgba(109, 170, 175, 0.16), transparent 50%),
+    linear-gradient(180deg, #1f3751 0%, #14263a 100%);
+  --gradient-accent: linear-gradient(180deg, #ffe14d 0%, #ffd700 100%);
+
+  --radius-card: 12px;
+  --radius-md: 8px;
   --radius-pill: 999px;
 
   --space-page-y: 42px;
   --space-gap: 18px;
 
-  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.22);
-  --shadow-md: 0 16px 40px rgba(5, 12, 28, 0.34);
-  --shadow-ring: 0 0 0 1px rgba(116, 153, 255, 0.2);
-  --shadow-focus: 0 0 0 3px rgba(125, 167, 255, 0.32);
-  --glow-soft: 0 0 46px rgba(112, 165, 255, 0.24);
+  --shadow-sm: 0 8px 24px rgba(5, 12, 22, 0.35);
+  --shadow-md: 0 16px 40px rgba(5, 12, 22, 0.45);
+  --shadow-focus: 0 0 0 3px rgba(255, 215, 0, 0.28);
+  --glow-soft: 0 0 44px rgba(255, 215, 0, 0.1);
 
   --blur-card: 12px;
 
-  --font-base: 'Inter', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-title: 'Inter', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, sans-serif;
+  --font-base: 'Helvetica Neue', 'Inter', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-title: 'Coolvetica', 'Helvetica Neue', 'Inter', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --text-xs: 12px;
@@ -54,23 +54,25 @@
 }
 
 :root[data-theme='light'] {
-  --bg: #f3f6ff;
+  /* Same design, light variant of the old-site palette */
+  --bg: #eef5f5;
   --bg-elevated: #ffffff;
-  --line: rgba(69, 89, 146, 0.18);
-  --line-strong: rgba(58, 84, 159, 0.36);
-  --text: #121936;
-  --text-soft: #34416e;
-  --muted: #5e6f9e;
-  --primary: #3f6de0;
-  --primary-2: #0f9bc7;
-  --surface-1: rgba(255, 255, 255, 0.86);
-  --surface-2: rgba(235, 242, 255, 0.72);
-  --gradient-bg: radial-gradient(1100px 600px at 0% -10%, rgba(135, 174, 255, 0.26), transparent 60%),
-    radial-gradient(900px 580px at 95% 0%, rgba(95, 206, 255, 0.18), transparent 55%),
-    linear-gradient(180deg, #f7f9ff 0%, #edf2ff 100%);
-  --shadow-sm: 0 8px 22px rgba(27, 54, 126, 0.1);
-  --shadow-md: 0 20px 44px rgba(41, 70, 147, 0.16);
-  --shadow-ring: 0 0 0 1px rgba(63, 109, 224, 0.22);
-  --glow-soft: 0 0 44px rgba(72, 122, 246, 0.2);
-  --shadow-focus: 0 0 0 3px rgba(64, 106, 227, 0.25);
+  --line: rgba(31, 55, 81, 0.18);
+  --line-strong: rgba(184, 134, 11, 0.45);
+  --text: #14263a;
+  --text-soft: #1f3751;
+  --muted: #5f7a86;
+  --primary: #b8860b;
+  --primary-2: #f5e6a3;
+  --surface-1: #ffffff;
+
+  --particle-color: rgba(31, 55, 81, 0.22);
+
+  --gradient-bg: radial-gradient(1100px 700px at 12% -10%, rgba(177, 208, 210, 0.55), transparent 55%),
+    radial-gradient(900px 600px at 100% 0%, rgba(109, 170, 175, 0.25), transparent 50%),
+    linear-gradient(180deg, #f2f8f8 0%, #e4eff1 100%);
+  --shadow-sm: 0 8px 22px rgba(31, 55, 81, 0.12);
+  --shadow-md: 0 20px 44px rgba(31, 55, 81, 0.18);
+  --glow-soft: 0 0 40px rgba(184, 134, 11, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(184, 134, 11, 0.3);
 }
