@@ -40,7 +40,7 @@ CI runs the same command; GitHub Pages deploys only after it passes.
 
 | Collection | Path | Notes |
 |---|---|---|
-| Members | `src/content/members/*.md` | `id` must match filename; `name`/`role`/`area`/`bio`/`status` are `{zh, en}` objects; `links` supports scholar/github/homepage/email/linkedin; avatar auto-resolves from `public/member/images/<id>.jpg` |
+| Members | `src/content/members/*.md` | `id` must match filename; `name`/`role`/`area`/`bio`/`status` are `{zh, en}` objects; `firstEmployment` (alumni) also `{zh, en}`; `links` supports scholar/github/homepage/email/linkedin; avatar auto-resolves from `public/member/images/<id>.jpg` |
 | Papers | `src/content/papers/*.md` | `year`, `title`, `venue`, `authors`, optional `abstract`/`links`/`bibtex` |
 | Courses | `src/content/courses/*.md` | `title` `{zh,en}`, `semester`, official `link`, optional `intro`/`contents` `{zh,en}` |
 | Awards | `src/content/awards/*.md` | `title` `{zh,en}`, `year`, `month`, `students[]`, optional `advisors[]`, `source` URL |

@@ -232,10 +232,12 @@ function cmsCollections() {
     ...localizedTextField('Research Area', 'area'),
     ...stringField('Avatar Path', 'avatar', { required: false }),
     ...localizedTextField('Bio', 'bio', { required: false }),
+    ...localizedTextField('First Employment', 'firstEmployment', { required: false }),
     ...optionalLinksField([
       ['Google Scholar URL', 'scholar'],
       ['GitHub URL', 'github'],
       ['Homepage URL', 'homepage'],
+      ['LinkedIn URL', 'linkedin'],
       ['Email', 'email'],
     ]),
     '',
