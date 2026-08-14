@@ -57,9 +57,9 @@ html {
 }
 
 :root[data-theme='light'] {
-  --scroll-track: rgba(31, 55, 81, 0.1);
-  --scroll-thumb: rgba(31, 55, 81, 0.32);
-  --scroll-thumb-hover: rgba(184, 134, 11, 0.55);
+  --scroll-track: rgba(74, 94, 32, 0.1);
+  --scroll-thumb: rgba(74, 94, 32, 0.32);
+  --scroll-thumb-hover: rgba(157, 180, 31, 0.6);
 }
 
 * {
