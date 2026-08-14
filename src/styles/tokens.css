@@ -63,7 +63,7 @@
   --text-soft: #1f3751;
   --muted: #5f7a86;
   --primary: #b8860b;
-  --primary-2: #f5e6a3;
+  --primary-2: #8a6d00;
   --surface-1: #ffffff;
 
   --particle-color: rgba(31, 55, 81, 0.22);
@@ -71,6 +71,7 @@
   --gradient-bg: radial-gradient(1100px 700px at 12% -10%, rgba(177, 208, 210, 0.55), transparent 55%),
     radial-gradient(900px 600px at 100% 0%, rgba(109, 170, 175, 0.25), transparent 50%),
     linear-gradient(180deg, #f2f8f8 0%, #e4eff1 100%);
+  --gradient-accent: linear-gradient(180deg, #d9a514 0%, #b8860b 100%);
   --shadow-sm: 0 8px 22px rgba(31, 55, 81, 0.12);
   --shadow-md: 0 20px 44px rgba(31, 55, 81, 0.18);
   --glow-soft: 0 0 40px rgba(184, 134, 11, 0.12);
