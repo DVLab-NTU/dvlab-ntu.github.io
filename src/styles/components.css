@@ -342,8 +342,8 @@ html[lang^='en'] .nav-text {
 }
 
 [data-theme='light'] .hero {
-  background: radial-gradient(circle at 85% 0%, rgba(177, 208, 210, 0.6), transparent 55%),
-    linear-gradient(180deg, #ffffff, #f2f8f8);
+  background: radial-gradient(circle at 85% 0%, rgba(214, 228, 130, 0.55), transparent 55%),
+    linear-gradient(180deg, #fdfeea, #f0f5d4);
 }
 
 .hero-particles {
