@@ -364,99 +364,6 @@ html[lang^='en'] .nav-text {
   padding: clamp(18px, 4vw, 40px);
 }
 
-/* Old-site logo assembly: chip / bug / magnifier / NTU GIEE / DVLab / description */
-.hero-logo {
-  position: relative;
-  width: 100%;
-  max-width: 860px;
-  min-height: clamp(300px, 46vw, 520px);
-  margin: 0 auto;
-}
-
-.hero-logo img {
-  position: absolute;
-  display: block;
-  max-width: none;
-  opacity: 0;
-  animation: logoFade 0.9s var(--ease-snappy) forwards;
-}
-
-.hero-logo .chip-img {
-  z-index: 1;
-  width: 19%;
-  margin-left: 27.3%;
-  margin-top: 8%;
-  animation-delay: 0.15s;
-}
-
-.hero-logo .bug-img {
-  z-index: 2;
-  width: 6%;
-  margin-left: 29.6%;
-  margin-top: 11.3%;
-  animation-delay: 0.25s;
-}
-
-.hero-logo .magnifier-img {
-  z-index: 3;
-  width: 14.3%;
-  margin-left: 24.6%;
-  margin-top: 5.4%;
-  animation-delay: 0.35s;
-}
-
-.hero-logo .ntugiee-img {
-  z-index: 4;
-  width: 27%;
-  margin-left: 32.8%;
-  margin-top: 7.9%;
-  animation-delay: 0.45s;
-}
-
-.hero-logo .dvlab-img {
-  z-index: 5;
-  width: 39%;
-  margin-left: 20.2%;
-  margin-top: 27%;
-  animation-delay: 0.6s;
-}
-
-.hero-logo .description-img {
-  z-index: 6;
-  width: 60%;
-  margin-left: 10%;
-  margin-top: 33%;
-  animation-delay: 0.8s;
-}
-
-@keyframes logoFade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-logo img {
-    opacity: 1;
-    animation: none;
-  }
-}
-
-/* The old-site logo images are drawn for a dark background (white/light glyphs);
-   darken them in light mode so they stay legible. */
-[data-theme='light'] .hero-logo .ntugiee-img,
-[data-theme='light'] .hero-logo .dvlab-img,
-[data-theme='light'] .hero-logo .description-img {
-  filter: brightness(0.32);
-}
-
-[data-theme='light'] .hero-logo .magnifier-img {
-  filter: brightness(0.55);
-}
-
 .hero-title {
   margin-top: 10px;
   font-weight: 400;
@@ -897,4 +804,56 @@ html[lang^='en'] .nav-text {
   .page-loader {
     display: none;
   }
+}
+
+/* Lab group photo on the home hero */
+.lab-photo {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto 8px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.lab-photo-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+}
+
+.lab-photo-caption {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  padding: 4px 10px;
+  font-size: var(--text-sm);
+  color: #f4f8ff;
+  background: rgba(10, 15, 32, 0.55);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+/* Lab gallery on the home page */
+.lab-gallery-item {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.lab-gallery-img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.lab-gallery-item figcaption {
+  padding: 10px 14px;
+  font-size: var(--text-sm);
+  color: var(--muted);
 }
