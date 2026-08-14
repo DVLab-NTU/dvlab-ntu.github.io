@@ -38,6 +38,7 @@ const members = defineCollection({
     area: z.union([z.string().min(1), i18nText]),
     avatar: z.string().min(1).optional(),
     bio: z.union([z.string().min(1), i18nText]).optional(),
+    firstEmployment: z.union([z.string().min(1), i18nText]).optional(),
     links: z
       .object({
         scholar: z.string().min(1).optional(),
