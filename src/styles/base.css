@@ -14,6 +14,30 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/helvetica-neu.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('/fonts/CoolveticaRg-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'La Belle Aurore';
+  src: url('/fonts/LaBelleAurore.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -36,14 +60,14 @@ html {
 
 :root {
   --scroll-track: rgba(255, 255, 255, 0.08);
-  --scroll-thumb: rgba(188, 205, 247, 0.46);
-  --scroll-thumb-hover: rgba(206, 219, 252, 0.68);
+  --scroll-thumb: rgba(188, 221, 223, 0.42);
+  --scroll-thumb-hover: rgba(252, 255, 204, 0.6);
 }
 
 :root[data-theme='light'] {
-  --scroll-track: rgba(78, 96, 150, 0.12);
-  --scroll-thumb: rgba(58, 84, 160, 0.34);
-  --scroll-thumb-hover: rgba(46, 72, 146, 0.5);
+  --scroll-track: rgba(31, 55, 81, 0.1);
+  --scroll-thumb: rgba(31, 55, 81, 0.32);
+  --scroll-thumb-hover: rgba(184, 134, 11, 0.55);
 }
 
 * {
