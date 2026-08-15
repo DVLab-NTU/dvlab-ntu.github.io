@@ -6,6 +6,7 @@ const steps = [
   'validate:content',
   'build',
   'test:smoke',
+  'test:pages',
   'test:seo',
 ];
 
