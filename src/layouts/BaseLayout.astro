@@ -204,9 +204,15 @@ const navItems = [
     <header class="site-header">
       <div class="container nav">
         <a class="brand" href={navPathResolved.home} aria-label={t.siteName}>
-          <img class="brand-logo" src="/images/dvlab-logo.png" alt="DVLab" width="80" height="56" />
+          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+            <rect x="1.5" y="1.5" width="37" height="37" rx="7" fill="var(--primary)" />
+            <circle cx="16" cy="16" r="7.5" fill="none" stroke="var(--bg-elevated)" stroke-width="3" />
+            <line x1="21.5" y1="21.5" x2="29" y2="29" stroke="var(--bg-elevated)" stroke-width="4" stroke-linecap="round" />
+            <path d="M12 16a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" fill="var(--primary)" stroke="none" />
+          </svg>
+          <span class="brand-name">DVLab</span>
         </a>
-        <nav class="nav-links" aria-label={lang === 'zh' ? '網站導覽' : 'Site'}>
+        <nav id="site-nav" class="nav-links" aria-label={lang === 'zh' ? '網站導覽' : 'Site'}>
           {navItems.map((item) => (
             <a
               class={`nav-link ${item.active ? 'is-active' : ''}`}
@@ -223,6 +229,17 @@ const navItems = [
         <div class="nav-actions">
           <a class="lang-link" href={localeSwitchHref} aria-label={alternateLocaleLabel}>{alternateLocaleLabel}</a>
           <button class="theme-toggle-btn" data-theme-toggle type="button" aria-label="Switch theme">Dark</button>
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="site-nav"
+            aria-label={lang === 'zh' ? '開啟選單' : 'Open menu'}
+          >
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
         </div>
       </div>
     </header>
