@@ -21,7 +21,7 @@ const pageDesc = 'DVLab（台大設計驗證實驗室）開設課程：網路服
 
   <section class="detail-shell" data-reveal-group>
     {courses.map((c, i) => (
-      <article class="card detail-content stack-sm" data-reveal data-reveal-order={String(i)}>
+      <article class="card detail-content stack-sm course-card" data-reveal data-reveal-order={String(i)}>
         <div class="detail-meta">
           <h2 class="page-title">{pickI18nText(c.title, 'zh')}</h2>
           <span class="badge-muted">{c.semester}</span>
