@@ -26,19 +26,27 @@
 }
 
 .brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  gap: 10px;
   flex-shrink: 0;
-  font-family: var(--font-title);
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  text-decoration: none;
 }
 
-.brand-logo {
+.brand-mark {
   display: block;
-  height: 56px;
-  width: auto;
-  width: auto;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-strong);
+  white-space: nowrap;
 }
 
 .nav-links {
@@ -103,6 +111,47 @@ html[lang^='en'] .nav-text {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-standard);
+}
+
+.nav-toggle:hover {
+  background: var(--bg-soft);
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--text-strong);
+  transition: transform var(--motion-mid) var(--ease-standard),
+    opacity var(--motion-fast) var(--ease-standard);
+}
+
+.nav.is-open .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+.nav.is-open .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav.is-open .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
 }
 
 .footer {
@@ -804,42 +853,49 @@ html[lang^='en'] .nav-text {
 @media (max-width: 880px) {
   .nav {
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     min-height: 60px;
+    padding: 8px 0;
   }
 
-  .brand-logo {
-    height: 44px;
+  .brand-mark {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+
+  .nav-toggle {
+    display: flex;
   }
 
   .nav-links {
+    display: none;
     width: 100%;
     order: 3;
-    overflow-x: auto;
-    gap: 20px;
-    padding: 2px 0 6px;
-    justify-content: flex-start;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 12px;
+    padding: 8px 0 2px;
   }
 
-  .nav-links::-webkit-scrollbar {
-    display: none;
+  .nav.is-open .nav-links {
+    display: grid;
   }
 
   .nav-link {
-    gap: 4px;
-    padding: 4px 0;
-    flex: 0 0 auto;
+    gap: 3px;
+    padding: 5px 0;
   }
 
   .nav-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .nav-text {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .footer-inner {
