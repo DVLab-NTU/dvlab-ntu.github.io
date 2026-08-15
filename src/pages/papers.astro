@@ -35,7 +35,7 @@ const pageDesc = 'DVLab（台大設計驗證實驗室）研究成果：形式化
           data-search-text={`${p.title} ${p.authors || ''} ${p.venue} ${p.year}`}
         >
           <h3>{p.title}</h3>
-          <p>{p.year} · {p.venue}</p>
+          <p>{p.venue}</p>
           {p.authors && <p class="paper-authors">作者：{p.authors}</p>}
         </a>
       ))}

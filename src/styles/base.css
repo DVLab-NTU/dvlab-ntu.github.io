@@ -188,16 +188,7 @@ ul {
   margin-bottom: 8px;
 }
 
-.page-title::after {
-  content: '';
-  display: block;
-  width: clamp(88px, 24vw, 180px);
-  height: 2px;
-  margin-top: 10px;
-  border-radius: var(--radius-pill);
-  background: var(--gradient-accent);
-  opacity: 0.86;
-}
+
 
 .page-subtitle {
   max-width: 68ch;
