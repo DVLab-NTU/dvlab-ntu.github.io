@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageDesc = 'DVLab（台大設計驗證實驗室）活動花絮：登山、聚餐、運動等實驗室日常活動照片。';
+const photos = [
+  { src: '/images/lab/group-hiking.jpg', alt: 'DVLab 實驗室登山合照', caption: '實驗室登山活動', desc: '一起登山健行，享受戶外與自然。' },
+  { src: '/images/lab/group-lunch.jpg', alt: 'DVLab 實驗室聚餐合照', caption: '實驗室聚餐', desc: '忙碌之餘的聚餐時光，交流分享。' },
+  { src: '/images/lab/group-jogging.jpg', alt: 'DVLab 實驗室運動合照', caption: '實驗室運動活動', desc: '運動健身，保持健康的生活節奏。' },
+];
+---
+<BaseLayout title="活動" desc={pageDesc} lang="zh" pathPrefix="">
+  <section class="page-head" data-reveal>
+    <h1 class="page-title">實驗室活動</h1>
+  </section>
+
+  <section class="detail-shell" data-reveal-group>
+    {photos.map((p, i) => (
+      <article class="card lab-life-item" data-reveal data-reveal-order={String(i)}>
+        <img class="lab-life-img" src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+        <div class="lab-life-body">
+          <h2 class="page-title">{p.caption}</h2>
+          <p class="mt-4">{p.desc}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>
