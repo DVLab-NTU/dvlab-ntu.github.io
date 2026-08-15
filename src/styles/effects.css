@@ -14,6 +14,10 @@
   filter: blur(18px);
 }
 
+[data-theme='light'] .hero::before {
+  background: radial-gradient(circle at 35% 40%, rgba(120, 180, 255, 0.35), rgba(120, 180, 255, 0.08) 42%, transparent 70%);
+}
+
 @supports (view-transition-name: root) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
