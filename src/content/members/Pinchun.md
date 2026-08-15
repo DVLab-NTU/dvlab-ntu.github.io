@@ -19,4 +19,5 @@ bio:
 links:
     email: "r11921049@ntu.edu.tw"
     github: "https://github.com/Pinchun8894"
+    linkedin: "https://www.linkedin.com/in/pin-chun-yu-7b500022b"
 ---
