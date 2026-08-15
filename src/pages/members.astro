@@ -99,7 +99,7 @@ const pageDesc = 'DVLab（台大設計驗證實驗室）成員列表：由黃鐘
     <div class="filter-tags">
       {roles.map((role, i) => (
         <button
-          class={`filter-tag ${i === 0 ? 'is-selected' : ''}`}
+          class={`filter-tag btn-shine ${i === 0 ? 'is-selected' : ''}`}
           type="button"
           data-role-filter={i === 0 ? '__all' : role.toLowerCase()}
         >

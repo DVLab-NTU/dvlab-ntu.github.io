@@ -99,7 +99,7 @@ const pageDesc = 'DVLab (Design Verification Lab, NTUEE) members: students and r
     <div class="filter-tags">
       {roles.map((role, i) => (
         <button
-          class={`filter-tag ${i === 0 ? 'is-selected' : ''}`}
+          class={`filter-tag btn-shine ${i === 0 ? 'is-selected' : ''}`}
           type="button"
           data-role-filter={i === 0 ? '__all' : role.toLowerCase()}
         >
