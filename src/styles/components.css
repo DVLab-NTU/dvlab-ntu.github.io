@@ -109,6 +109,7 @@ html[lang^='en'] .nav-text {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-right: 16px;
 }
 
 .nav-toggle {
@@ -200,6 +201,8 @@ html[lang^='en'] .nav-text {
   font-weight: 600;
   text-decoration: none;
   padding: 7px 14px;
+  min-width: 88px;
+  text-align: center;
   border-radius: 8px;
   background: var(--surface-1);
   border: 1px solid var(--line);
@@ -213,10 +216,47 @@ html[lang^='en'] .nav-text {
     color var(--motion-fast) var(--ease-standard);
 }
 
+.btn-shine.lang-link,
+.btn-shine.theme-toggle-btn,
+.btn-shine.filter-tag {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine.lang-link:hover,
+.btn-shine.theme-toggle-btn:hover,
+.btn-shine.filter-tag:hover {
+  transform: none;
+}
+
+.btn-shine.lang-link:hover::before,
+.btn-shine.theme-toggle-btn:hover::before,
+.btn-shine.filter-tag:hover::before {
+  opacity: 1;
+  transform: translateX(130%) skewX(-12deg);
+}
+
 .lang-link:hover {
   color: var(--primary-2);
   text-decoration: none;
-  filter: brightness(1.1);
+  filter: brightness(1.15);
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 2px 3px rgba(0, 0, 0, 0.16),
+    0 4px 10px rgba(0, 0, 0, 0.28);
+}
+
+/* Light theme: brightening a near-white button blows it out; darken the
+   face and strengthen the border instead. */
+:root[data-theme='light'] .lang-link:hover {
+  color: var(--text);
+  filter: none;
+  background: #eef3cc;
+  border-color: rgba(74, 94, 32, 0.45);
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 2px 3px rgba(74, 94, 32, 0.18),
+    0 3px 8px rgba(74, 94, 32, 0.18);
 }
 
 .lang-link:active {
@@ -371,24 +411,30 @@ html[lang^='en'] .nav-text {
     background-color var(--motion-fast) var(--ease-standard);
 }
 
-.btn::before {
+.btn::before,
+.btn-shine::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.25) 40%, transparent 80%);
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.45) 48%, rgba(255, 255, 255, 0.9) 52%, transparent 70%);
+  background-size: 250% 100%;
+  background-position: 130% 0;
   opacity: 0;
-  transform: translateX(-120%);
+  transform: translateX(-130%) skewX(-12deg);
   transition: transform var(--motion-slow) var(--ease-standard), opacity var(--motion-mid) var(--ease-standard);
+  pointer-events: none;
 }
 
-.btn:hover {
+.btn:hover,
+.btn-shine:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
 
-.btn:hover::before {
+.btn:hover::before,
+.btn-shine:hover::before {
   opacity: 1;
-  transform: translateX(120%);
+  transform: translateX(130%) skewX(-12deg);
 }
 
 .btn-primary {
@@ -762,11 +808,34 @@ html[lang^='en'] .nav-text {
   width: min(380px, 100%);
   height: 40px;
   border-radius: var(--radius-md);
-  border: none;
-  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  background: var(--surface-1);
   color: var(--text);
   padding: 0 12px;
   font-size: var(--text-sm);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.14),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  transition: border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard);
+}
+
+.filter-input::placeholder {
+  color: var(--muted);
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 0 3px rgba(157, 180, 31, 0.28);
+}
+
+:root[data-theme='light'] .filter-input {
+  box-shadow:
+    inset 0 2px 4px rgba(74, 94, 32, 0.16),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .filter-tags {
