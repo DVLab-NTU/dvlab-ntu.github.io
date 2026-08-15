@@ -65,7 +65,7 @@ const navPath = {
   papers: `${pathPrefix}/papers`,
   courses: `${pathPrefix}/courses`,
   awards: `${pathPrefix}/awards`,
-  life: `${pathPrefix}/#lab-life`,
+  life: `${pathPrefix}/life`,
 };
 const navPathResolved = {
   home: normalizeSitePath(navPath.home),
@@ -73,7 +73,7 @@ const navPathResolved = {
   papers: normalizeSitePath(navPath.papers),
   courses: normalizeSitePath(navPath.courses),
   awards: normalizeSitePath(navPath.awards),
-  life: `${pathPrefix}/#lab-life`,
+  life: `${pathPrefix}/life`,
 };
 
 const navItems = [
@@ -87,8 +87,6 @@ const navItems = [
   ...item,
   active: item.exact
     ? currentPath === item.href
-    : item.href.includes('#')
-    ? false
     : currentPath.startsWith(item.href),
 }));
 ---

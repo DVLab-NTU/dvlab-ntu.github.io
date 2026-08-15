@@ -802,22 +802,33 @@ html[lang^='en'] .nav-text {
   pointer-events: none;
 }
 
-/* Lab gallery on the home page */
-.lab-gallery-item {
-  margin: 0;
-  padding: 0;
+/* Lab life page items */
+.lab-life-item {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 16px;
   overflow: hidden;
 }
 
-.lab-gallery-img {
-  display: block;
+.lab-life-img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
+  border-radius: 8px;
 }
 
-.lab-gallery-item figcaption {
-  padding: 10px 14px;
-  font-size: var(--text-sm);
-  color: var(--muted);
+.lab-life-body {
+  padding: 4px 8px;
+}
+
+@media (max-width: 640px) {
+  .lab-life-item {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-life-img {
+    height: 200px;
+  }
 }

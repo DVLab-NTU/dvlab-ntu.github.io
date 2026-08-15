@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pageDesc = 'DVLab (Design Verification Lab, NTUEE) lab life: photos from hiking trips, lunch gatherings, and sports activities.';
+const photos = [
+  { src: '/images/lab/group-hiking.jpg', alt: 'DVLab group photo during a hiking activity', caption: 'Lab hiking trip', desc: 'Hiking together and enjoying the outdoors.' },
+  { src: '/images/lab/group-lunch.jpg', alt: 'DVLab group photo during a lunch gathering', caption: 'Lab lunch gathering', desc: 'Lunch time together between busy schedules.' },
+  { src: '/images/lab/group-jogging.jpg', alt: 'DVLab group photo after a jogging activity', caption: 'Lab jogging activity', desc: 'Staying active and healthy as a team.' },
+];
+---
+<BaseLayout title="Life" desc={pageDesc} lang="en" pathPrefix="/en">
+  <section class="page-head" data-reveal>
+    <h1 class="page-title">Lab Life</h1>
+  </section>
+
+  <section class="detail-shell" data-reveal-group>
+    {photos.map((p, i) => (
+      <article class="card lab-life-item" data-reveal data-reveal-order={String(i)}>
+        <img class="lab-life-img" src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+        <div class="lab-life-body">
+          <h2 class="page-title">{p.caption}</h2>
+          <p class="mt-4">{p.desc}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>
