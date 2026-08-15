@@ -155,6 +155,22 @@ const navItems = [
         }
       </style>
     </noscript>
+    <style is:inline>
+      /* Critical inline styles: applied before the stylesheet loads so full
+         page navigations never flash a white background or oversized images.
+         Only html background is set here; the body gradient comes from the
+         stylesheet and must not be overridden. */
+      html {
+        background: #14263a;
+      }
+      html[data-theme='light'] {
+        background: #f5f8e4;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
   </head>
   <body id="top">
     <header class="site-header">
