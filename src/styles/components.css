@@ -338,7 +338,10 @@ html[lang^='en'] .nav-text {
   font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
-  color: var(--text);
+  /* The button face is always a light yellow-green block; use a fixed dark
+     ink in both themes so the label stays readable (var(--text) would be
+     near-white in dark mode and disappear). */
+  color: #2a3415;
   background: var(--primary-2);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.45),
