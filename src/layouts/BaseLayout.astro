@@ -221,7 +221,6 @@ const navItems = [
           ))}
         </nav>
         <div class="nav-actions">
-          <a class="lang-link" href={localeSwitchHref} aria-label={alternateLocaleLabel}>{alternateLocaleLabel}</a>
           <button class="theme-toggle-btn" data-theme-toggle type="button" aria-label="Switch theme">Dark</button>
           <button
             class="nav-toggle"
@@ -234,6 +233,7 @@ const navItems = [
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
           </button>
+          <a class="lang-link" href={localeSwitchHref} aria-label={alternateLocaleLabel}>{alternateLocaleLabel}</a>
         </div>
       </div>
     </header>
