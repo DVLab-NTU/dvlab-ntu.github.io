@@ -43,7 +43,7 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 28px;
 }
 
 .nav-link {
@@ -52,14 +52,8 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  width: 72px;
   padding: 6px 0;
-}
-
-/* English labels are longer (e.g. "Members", "Courses"); give them more room
-   so text never collides, while keeping all links evenly spaced. */
-html[lang='en'] .nav-link {
-  width: 100px;
+  white-space: nowrap;
 }
   color: var(--muted);
   font-size: var(--text-md);
@@ -810,13 +804,42 @@ html[lang^='en'] .nav-text {
 @media (max-width: 760px) {
   .nav {
     flex-wrap: wrap;
+    gap: 12px;
+    min-height: 60px;
+  }
+
+  .brand-logo {
+    height: 44px;
   }
 
   .nav-links {
     width: 100%;
     order: 3;
     overflow-x: auto;
-    padding-bottom: 4px;
+    gap: 20px;
+    padding: 2px 0 6px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    gap: 4px;
+    padding: 4px 0;
+    flex: 0 0 auto;
+  }
+
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-text {
+    font-size: 14px;
   }
 
   .footer-inner {
