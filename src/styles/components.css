@@ -85,6 +85,12 @@ html[lang^='en'] .nav-text {
   color: var(--primary-2);
 }
 
+.nav-link:active {
+  opacity: 1;
+  color: var(--primary);
+  transform: scale(0.94);
+}
+
 [data-theme='light'] .nav-link:hover,
 [data-theme='light'] .nav-link:focus-visible,
 [data-theme='light'] .nav-link.is-active {
