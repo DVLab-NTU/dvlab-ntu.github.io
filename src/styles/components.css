@@ -54,6 +54,13 @@
   gap: 6px;
   width: 72px;
   padding: 6px 0;
+}
+
+/* English labels are longer (e.g. "Members", "Courses"); give them more room
+   so text never collides, while keeping all links evenly spaced. */
+html[lang='en'] .nav-link {
+  width: 100px;
+}
   color: var(--muted);
   font-size: var(--text-md);
   opacity: 0.75;
