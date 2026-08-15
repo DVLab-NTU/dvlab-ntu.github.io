@@ -63,7 +63,7 @@ function assertLocalizedFrontmatterObject(frontmatter, field, message) {
 function validateSite(site, lang) {
   assert(isString(site.brand), `site.${lang}.brand invalid`);
   assert(isString(site.siteName), `site.${lang}.siteName invalid`);
-  ['home', 'members', 'papers', 'courses', 'awards'].forEach((key) => {
+  ['home', 'members', 'papers', 'courses', 'awards', 'life'].forEach((key) => {
     assert(isString(site.nav?.[key]), `site.${lang}.nav.${key} invalid`);
   });
   assert(isString(site.home?.intro), `site.${lang}.home.intro invalid`);
