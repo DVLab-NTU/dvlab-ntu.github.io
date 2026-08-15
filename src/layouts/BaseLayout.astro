@@ -156,7 +156,7 @@ const navItems = [
       </style>
     </noscript>
   </head>
-  <body>
+  <body id="top">
     <header class="site-header">
       <div class="container nav">
         <a class="brand" href={navPathResolved.home} aria-label={t.siteName}>
@@ -177,6 +177,7 @@ const navItems = [
           ))}
         </nav>
         <div class="nav-actions">
+          <a class="lang-link" href={localeSwitchHref} aria-label={alternateLocaleLabel}>{alternateLocaleLabel}</a>
           <button class="theme-toggle-btn" data-theme-toggle type="button" aria-label="Switch theme">Dark</button>
         </div>
       </div>
@@ -187,28 +188,8 @@ const navItems = [
     </main>
     <footer class="footer">
       <div class="container footer-inner">
-        <span class="lang-switch">
-          {lang === 'zh' ? (
-            <>
-              <span aria-current="page">{localeLabel}</span>
-              {localeSwitchHref && (
-                <>
-                  {' / '}
-                  <a href={localeSwitchHref}>{alternateLocaleLabel}</a>
-                </>
-              )}
-            </>
-          ) : (
-            <>
-              {localeSwitchHref && (
-                <>
-                  <a href={localeSwitchHref}>{alternateLocaleLabel}</a>
-                  {' / '}
-                </>
-              )}
-              <span aria-current="page">{localeLabel}</span>
-            </>
-          )}
+        <span class="footer-back-top">
+          <a href="#top" aria-label={lang === 'zh' ? '回到頂端' : 'Back to top'}>↑ {lang === 'zh' ? '回到頂端' : 'Back to top'}</a>
         </span>
         <span class="footer-copy">© 2026 {t.siteName}</span>
         <span>
