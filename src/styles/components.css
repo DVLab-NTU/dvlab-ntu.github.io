@@ -120,19 +120,15 @@ html[lang^='en'] .nav-text {
 
 .footer a {
   color: var(--muted);
-  border: 1px solid var(--muted);
-  border-radius: 5px;
-  padding: 2px 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: var(--text-xs);
-  transition: color var(--motion-fast) var(--ease-standard),
-    border-color var(--motion-fast) var(--ease-standard);
+  border: none;
+  border-radius: 0;
+  padding: 0 2px;
+  font-size: var(--text-sm);
+  transition: color var(--motion-fast) var(--ease-standard);
 }
 
 .footer a:hover {
   color: var(--primary-2);
-  border-color: var(--primary-2);
 }
 
 /* Language switcher: borderless plain link (navigation, not an external link) */
@@ -380,7 +376,7 @@ html[lang^='en'] .nav-text {
 
 .hero-title {
   margin-top: 10px;
-  font-weight: 400;
+  font-weight: 720;
 }
 
 .hero-subtitle {
