@@ -57,6 +57,14 @@ function resolveStatusTone(statusEn: string) {
   return 'current';
 }
 
+/** Graduate cohort year from the NTU student ID in the email
+    (e.g. r10921058 -> 10 => 110 academic year, r11943119 -> 11 => 111). */
+function gradYearOf(member: { links?: { email?: string } }): number {
+  const email = member.links?.email || '';
+  const match = email.match(/^r(\d{2})/);
+  return match ? parseInt(match[1], 10) : 0;
+}
+
 const membersWithId = memberEntries
   .map((e) => ({
     ...e.data,
@@ -74,7 +82,10 @@ const membersWithId = memberEntries
     }
     const rankA = getRoleRankEn(a.role.en);
     const rankB = getRoleRankEn(b.role.en);
-    return rankA - rankB || a.nameText.localeCompare(b.nameText);
+    if (rankA !== rankB) {
+      return rankA - rankB;
+    }
+    return gradYearOf(b) - gradYearOf(a) || a.nameText.localeCompare(b.nameText);
   });
 const roleSet = new Set(membersWithId.map((m) => m.role.en));
 const extraRoles = Array.from(roleSet).filter((role) => !roleOrder.includes(role)).sort();

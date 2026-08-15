@@ -13,4 +13,6 @@ area:
   zh: "Formal Verification"
   en: "Formal Verification"
 avatar: "/member/images/wish.jpg"
+links:
+    linkedin: "https://www.linkedin.com/in/wei-hsu-chen-335548247"
 ---

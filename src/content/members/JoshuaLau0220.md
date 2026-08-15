@@ -20,4 +20,5 @@ links:
     email: "r11921058@ntu.edu.tw"
     github: "https://github.com/JoshuaLau0220"
     linkedin: "https://www.linkedin.com/in/mu-te-joshua-lau-%E5%8A%89%E6%85%95%E5%BE%B7-184b29230/"
+    homepage: "https://joshmtlau.com/"
 ---

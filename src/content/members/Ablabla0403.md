@@ -19,4 +19,5 @@ bio:
 links:
     email: "r11943119@ntu.edu.tw"
     github: "https://github.com/Ablabla0403"
+    linkedin: "https://www.linkedin.com/in/tzu-yu-tung-28a93628b"
 ---
