@@ -26,27 +26,15 @@
 }
 
 .brand {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 10px;
   flex-shrink: 0;
-  text-decoration: none;
 }
 
-.brand-mark {
+.brand-logo {
   display: block;
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-}
-
-.brand-name {
-  font-family: var(--font-title);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--text-strong);
-  white-space: nowrap;
+  height: 84px;
+  width: auto;
 }
 
 .nav-links {
@@ -858,13 +846,8 @@ html[lang^='en'] .nav-text {
     padding: 8px 0;
   }
 
-  .brand-mark {
-    width: 32px;
-    height: 32px;
-  }
-
-  .brand-name {
-    font-size: 18px;
+  .brand-logo {
+    height: 56px;
   }
 
   .nav-toggle {
