@@ -13,6 +13,4 @@ area:
   zh: "Quantum"
   en: "Quantum"
 avatar: "/member/images/KuoKuo1521.jpg"
-links:
-    scholar: "https://orcid.org/0009-0007-5913-3130"
 ---
