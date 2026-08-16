@@ -1,7 +1,7 @@
 ---
 id: "wish"
 name:
-  zh: "Wei-Hsu Chen"
+  zh: "陳韋旭"
   en: "Wei-Hsu Chen"
 role:
   zh: "碩士生"

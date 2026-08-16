@@ -1,7 +1,7 @@
 ---
 id: "jimmyyang3125"
 name:
-  zh: "Hsiang-Chun Yang"
+  zh: "楊翔淳"
   en: "Hsiang-Chun Yang"
 role:
   zh: "碩士生"
