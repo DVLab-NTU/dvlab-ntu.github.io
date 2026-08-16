@@ -7,8 +7,8 @@ role:
   zh: "碩士生"
   en: "Master"
 status:
-  zh: "在讀"
-  en: "Current"
+  zh: "已畢業"
+  en: "Alumni"
 area:
   zh: "Formal Verification"
   en: "Formal Verification"
