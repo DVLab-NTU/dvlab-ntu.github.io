@@ -1,7 +1,7 @@
 ---
 id: "bob.sui"
 name:
-  zh: "Zhong-Yu Sui"
+  zh: "隋中彧"
   en: "Zhong-Yu Sui"
 role:
   zh: "碩士生"

@@ -1,7 +1,7 @@
 ---
 id: "ChingHuanWang"
 name:
-  zh: "Ching-Huan Wang"
+  zh: "王瀞桓"
   en: "Ching-Huan Wang"
 role:
   zh: "碩士生"
