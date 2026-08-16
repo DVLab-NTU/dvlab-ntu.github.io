@@ -838,6 +838,18 @@ html[lang^='en'] .nav-text {
     inset 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
+.cohort-title {
+  margin: 28px 0 14px;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--text);
+}
+
+.cohort-title:first-child {
+  margin-top: 0;
+}
+
 .filter-tags {
   display: flex;
   gap: 8px;
