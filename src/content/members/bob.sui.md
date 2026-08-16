@@ -1,4 +1,5 @@
 ---
+cohort: 12
 id: "bob.sui"
 name:
   zh: "隋中彧"
