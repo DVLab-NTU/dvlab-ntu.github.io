@@ -108,6 +108,24 @@ const membersWithId = memberEntries
 const roleSet = new Set(membersWithId.map((m) => m.role.zh));
 const extraRoles = Array.from(roleSet).filter((role) => !roleOrder.includes(role)).sort();
 const roles = ['全部', ...roleOrder.filter((role) => roleSet.has(role)), ...extraRoles];
+
+/** Split the sorted members into display groups. Current members are
+    grouped as one block; alumni are grouped by cohort year. */
+function cohortYearLabel(code: number): string {
+  return String(1911 + 100 + code);
+}
+
+const memberGroups = membersWithId.reduce<{ label: string | null; members: typeof membersWithId }[]>((acc, m) => {
+  const isCurrent = resolveStatusGroup(m.role.zh, m.statusText) === 1 || resolveStatusGroup(m.role.zh, m.statusText) === 0;
+  const key = isCurrent ? null : gradYearOf(m);
+  const last = acc[acc.length - 1];
+  if (last && last.label === (key === null ? null : `${cohortYearLabel(key)} 屆`)) {
+    last.members.push(m);
+  } else {
+    acc.push({ label: key === null ? null : `${cohortYearLabel(key)} 屆`, members: [m] });
+  }
+  return acc;
+}, []);
 const pageDesc = 'DVLab（台大設計驗證實驗室）成員列表：由黃鐘揚教授領導，涵蓋碩士生、博士生與專題生，研究方向包括形式化驗證、量子電路合成與電子設計自動化（EDA）。';
 
 ---
@@ -139,33 +157,38 @@ const pageDesc = 'DVLab（台大設計驗證實驗室）成員列表：由黃鐘
 
     <p class="empty-state" data-empty-state hidden>沒有匹配成員，請調整關鍵詞或篩選條件。</p>
 
-    <div class="grid grid-3" data-reveal-group>
-      {membersWithId.map((m, i) => (
-        <a
-          href={`/members/${m.id}/`}
-          class="card card-hover card-link member-card"
-          data-member-card
-          data-name={m.nameText}
-          data-role={m.role.zh}
-          data-area={m.areaText}
-          data-reveal
-          data-reveal-order={String(i)}
-        >
-          {m.statusText && !isLeadRoleZh(m.role.zh) && (
-            <span class={`member-status status-${resolveStatusTone(m.statusText)}`}>{m.statusText}</span>
-          )}
-          <img
-            class="member-avatar"
-            src={m.avatarResolved}
-            alt={`${m.nameText} 頭像`}
-            loading="lazy"
-            decoding="async"
-          />
-          <h3>{m.nameText}</h3>
-          <p class="member-role"><span class="badge-muted">{m.role.zh}</span></p>
-          <p class="mt-4">{m.areaText}</p>
-        </a>
-      ))}
-    </div>
+    {memberGroups.map((group, gi) => (
+      <section data-reveal-group>
+        {group.label && <h2 class="cohort-title">{group.label}</h2>}
+        <div class="grid grid-3">
+          {group.members.map((m, i) => (
+            <a
+              href={`/members/${m.id}/`}
+              class="card card-hover card-link member-card"
+              data-member-card
+              data-name={m.nameText}
+              data-role={m.role.zh}
+              data-area={m.areaText}
+              data-reveal
+              data-reveal-order={String(gi * 100 + i)}
+            >
+              {m.statusText && !isLeadRoleZh(m.role.zh) && (
+                <span class={`member-status status-${resolveStatusTone(m.statusText)}`}>{m.statusText}</span>
+              )}
+              <img
+                class="member-avatar"
+                src={m.avatarResolved}
+                alt={`${m.nameText} 頭像`}
+                loading="lazy"
+                decoding="async"
+              />
+              <h3>{m.nameText}</h3>
+              <p class="member-role"><span class="badge-muted">{m.role.zh}</span></p>
+              <p class="mt-4">{m.areaText}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
   </section>
 </BaseLayout>

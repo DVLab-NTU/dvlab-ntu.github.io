@@ -108,6 +108,24 @@ const membersWithId = memberEntries
 const roleSet = new Set(membersWithId.map((m) => m.role.en));
 const extraRoles = Array.from(roleSet).filter((role) => !roleOrder.includes(role)).sort();
 const roles = ['All', ...roleOrder.filter((role) => roleSet.has(role)), ...extraRoles];
+
+/** Split the sorted members into display groups. Current members are
+    grouped as one block; alumni are grouped by cohort year. */
+function cohortYearLabel(code: number): string {
+  return String(1911 + 100 + code);
+}
+
+const memberGroups = membersWithId.reduce<{ label: string | null; members: typeof membersWithId }[]>((acc, m) => {
+  const isCurrent = resolveStatusGroup(m.role.en, m.statusText) === 1 || resolveStatusGroup(m.role.en, m.statusText) === 0;
+  const key = isCurrent ? null : gradYearOf(m);
+  const last = acc[acc.length - 1];
+  if (last && last.label === (key === null ? null : `Class of ${cohortYearLabel(key)}`)) {
+    last.members.push(m);
+  } else {
+    acc.push({ label: key === null ? null : `Class of ${cohortYearLabel(key)}`, members: [m] });
+  }
+  return acc;
+}, []);
 const pageDesc = 'DVLab (Design Verification Lab, NTUEE) members: students and researchers led by Prof. Chung-Yang (Ric) Huang, working on formal verification, quantum circuit synthesis, and EDA.';
 
 ---
@@ -139,33 +157,38 @@ const pageDesc = 'DVLab (Design Verification Lab, NTUEE) members: students and r
 
     <p class="empty-state" data-empty-state hidden>No matching member found. Try another keyword or role.</p>
 
-    <div class="grid grid-3" data-reveal-group>
-      {membersWithId.map((m, i) => (
-        <a
-          href={`/en/members/${m.id}/`}
-          class="card card-hover card-link member-card"
-          data-member-card
-          data-name={m.nameText}
-          data-role={m.role.en}
-          data-area={m.areaText}
-          data-reveal
-          data-reveal-order={String(i)}
-        >
-          {m.statusText && !isLeadRoleEn(m.role.en) && (
-            <span class={`member-status status-${resolveStatusTone(m.statusText)}`}>{m.statusText}</span>
-          )}
-          <img
-            class="member-avatar"
-            src={m.avatarResolved}
-            alt={`${m.nameText} avatar`}
-            loading="lazy"
-            decoding="async"
-          />
-          <h3>{m.nameText}</h3>
-          <p class="member-role"><span class="badge-muted">{m.role.en}</span></p>
-          <p class="mt-4">{m.areaText}</p>
-        </a>
-      ))}
-    </div>
+    {memberGroups.map((group, gi) => (
+      <section data-reveal-group>
+        {group.label && <h2 class="cohort-title">{group.label}</h2>}
+        <div class="grid grid-3">
+          {group.members.map((m, i) => (
+            <a
+              href={`/en/members/${m.id}/`}
+              class="card card-hover card-link member-card"
+              data-member-card
+              data-name={m.nameText}
+              data-role={m.role.en}
+              data-area={m.areaText}
+              data-reveal
+              data-reveal-order={String(gi * 100 + i)}
+            >
+              {m.statusText && !isLeadRoleEn(m.role.en) && (
+                <span class={`member-status status-${resolveStatusTone(m.statusText)}`}>{m.statusText}</span>
+              )}
+              <img
+                class="member-avatar"
+                src={m.avatarResolved}
+                alt={`${m.nameText} avatar`}
+                loading="lazy"
+                decoding="async"
+              />
+              <h3>{m.nameText}</h3>
+              <p class="member-role"><span class="badge-muted">{m.role.en}</span></p>
+              <p class="mt-4">{m.areaText}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
   </section>
 </BaseLayout>
