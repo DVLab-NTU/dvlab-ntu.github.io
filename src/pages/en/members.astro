@@ -65,6 +65,14 @@ function gradYearOf(member: { links?: { email?: string } }): number {
   return match ? parseInt(match[1], 10) : 0;
 }
 
+/** Research-group order used for current members (en values). */
+const areaOrder = ['Quantum', 'Formal Verification', 'EDA', 'Design Verification', 'Computer Architecture'];
+
+function getAreaRank(areaText: string): number {
+  const index = areaOrder.indexOf(areaText);
+  return index === -1 ? areaOrder.length : index;
+}
+
 const membersWithId = memberEntries
   .map((e) => ({
     ...e.data,
@@ -80,11 +88,17 @@ const membersWithId = memberEntries
     if (groupA !== groupB) {
       return groupA - groupB;
     }
-    const rankA = getRoleRankEn(a.role.en);
-    const rankB = getRoleRankEn(b.role.en);
-    if (rankA !== rankB) {
-      return rankA - rankB;
+    if (groupA === 1) {
+      // Current members: group by research area, then role, then name.
+      const areaDiff = getAreaRank(a.areaText) - getAreaRank(b.areaText);
+      if (areaDiff !== 0) {
+        return areaDiff;
+      }
+      const rankA = getRoleRankEn(a.role.en);
+      const rankB = getRoleRankEn(b.role.en);
+      return rankA - rankB || a.nameText.localeCompare(b.nameText);
     }
+    // PI and alumni: by cohort year (latest first), then name.
     return gradYearOf(b) - gradYearOf(a) || a.nameText.localeCompare(b.nameText);
   });
 const roleSet = new Set(membersWithId.map((m) => m.role.en));
