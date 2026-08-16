@@ -1,7 +1,7 @@
 ---
 id: "jhl"
 name:
-  zh: "Jian-Heng Liu"
+  zh: "劉建亨"
   en: "Jian-Heng Liu"
 role:
   zh: "碩士生"
