@@ -57,9 +57,13 @@ function resolveStatusTone(statusZh: string) {
   return 'current';
 }
 
-/** Graduate cohort year from the NTU student ID in the email
-    (e.g. r10921058 -> 10 => 110 academic year, r11943119 -> 11 => 111). */
-function gradYearOf(member: { links?: { email?: string } }): number {
+/** Graduate cohort year: explicit cohort field first, else parsed from
+    the NTU student ID in the email (e.g. r10921058 -> 10 => 110 academic
+    year, r12943104 -> 12 => 112 academic year). */
+function gradYearOf(member: { cohort?: number; links?: { email?: string } }): number {
+  if (typeof member.cohort === 'number') {
+    return member.cohort;
+  }
   const email = member.links?.email || '';
   const match = email.match(/^r(\d{2})/);
   return match ? parseInt(match[1], 10) : 0;

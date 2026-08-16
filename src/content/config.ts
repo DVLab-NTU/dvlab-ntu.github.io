@@ -29,6 +29,7 @@ const members = defineCollection({
   type: 'content',
   schema: z.object({
     id: z.string().min(1).optional(),
+    cohort: z.number().int().min(1).max(99).optional(),
     name: z.union([z.string().min(1), i18nText]),
     role: z.object({
       zh: z.string().min(1),
