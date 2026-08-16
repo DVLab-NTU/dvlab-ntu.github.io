@@ -1,7 +1,7 @@
 ---
 id: "KuoKuo1521"
 name:
-  zh: "Yi-Hsiang Kuo"
+  zh: "郭亦翔"
   en: "Yi-Hsiang Kuo"
 role:
   zh: "碩士生"
@@ -13,4 +13,6 @@ area:
   zh: "Quantum"
   en: "Quantum"
 avatar: "/member/images/KuoKuo1521.jpg"
+links:
+    linkedin: "https://www.linkedin.com/in/yihsiangkuo"
 ---
