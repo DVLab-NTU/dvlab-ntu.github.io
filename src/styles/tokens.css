@@ -30,6 +30,23 @@
   --shadow-focus: 0 0 0 3px rgba(255, 215, 0, 0.28);
   --glow-soft: 0 0 44px rgba(255, 215, 0, 0.1);
 
+  /* Shared embossed-button shading: light top edge, dark inset bottom,
+     soft drop shadow. Overridden for the light theme below. */
+  --shadow-emboss:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 2px 3px rgba(0, 0, 0, 0.12),
+    0 3px 6px rgba(0, 0, 0, 0.2);
+  --shadow-emboss-hover:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 2px 3px rgba(0, 0, 0, 0.16),
+    0 4px 10px rgba(0, 0, 0, 0.28);
+  --shadow-emboss-pressed:
+    inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    0 1px 1px rgba(0, 0, 0, 0.1);
+  --shadow-field:
+    inset 0 2px 4px rgba(0, 0, 0, 0.14),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+
   --blur-card: 12px;
 
   --font-base: Arial, 'Helvetica Neue', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -77,4 +94,21 @@
   --shadow-md: 0 20px 44px rgba(74, 94, 32, 0.18);
   --glow-soft: 0 0 40px rgba(157, 180, 31, 0.18);
   --shadow-focus: 0 0 0 3px rgba(157, 180, 31, 0.35);
+
+  /* Light theme: hover shading uses green-tinted inset tones instead of
+     brightening the near-white face. */
+  --shadow-emboss:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 2px 3px rgba(74, 94, 32, 0.14),
+    0 2px 5px rgba(74, 94, 32, 0.14);
+  --shadow-emboss-hover:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 2px 3px rgba(74, 94, 32, 0.18),
+    0 3px 8px rgba(74, 94, 32, 0.18);
+  --shadow-emboss-pressed:
+    inset 0 2px 4px rgba(74, 94, 32, 0.22),
+    0 1px 1px rgba(74, 94, 32, 0.08);
+  --shadow-field:
+    inset 0 2px 4px rgba(74, 94, 32, 0.16),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
