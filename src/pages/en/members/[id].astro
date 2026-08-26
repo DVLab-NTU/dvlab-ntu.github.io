@@ -19,6 +19,7 @@ const { member } = Astro.props;
 const nameText = pickI18nText(member.name, 'en');
 const areaText = pickI18nText(member.area, 'en');
 const bio = pickI18nText(member.bio, 'en');
+const firstEmployment = pickI18nText(member.firstEmployment, 'en');
 const links = member.links;
 const hasLinks = Boolean(links?.scholar || links?.github || links?.homepage || links?.email || links?.linkedin);
 const pageDesc = (bio ? bio.slice(0, 150) : `${member.role.en}. Research area: ${areaText}.`);
@@ -46,6 +47,13 @@ const pageDesc = (bio ? bio.slice(0, 150) : `${member.role.en}. Research area: $
       <article class="card detail-content" data-reveal>
         <h2>About</h2>
         <p>{bio}</p>
+      </article>
+    )}
+
+    {firstEmployment && (
+      <article class="card detail-section" data-reveal>
+        <h2>First Employment</h2>
+        <p>{firstEmployment}</p>
       </article>
     )}
 
