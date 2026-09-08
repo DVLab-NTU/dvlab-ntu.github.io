@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MemberAvatar from './MemberAvatar.astro';
+import { roles, areas } from '../data/member-labels.mjs';
+import { resolveMemberAvatar } from '../utils/member-avatar';
+import { pickI18nText } from '../utils/i18n-text';
+import { pageCopy } from '../data/page-copy.mjs';
+
+const { lang } = Astro.props as { lang: 'zh' | 'en' };
+const t = pageCopy.member[lang];
+const pathPrefix = lang === 'en' ? '/en' : '';
+const { member } = Astro.props;
+const nameText = member.name[lang];
+const areaText = areas[member.area][lang];
+const bio = pickI18nText(member.bio, lang);
+const links = member.links;
+const hasLinks = Boolean(links?.scholar || links?.github || links?.homepage || links?.email || links?.linkedin);
+const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.role][lang]}，研究方向：${areaText}。` : `${roles[member.role][lang]}. Research area: ${areaText}.`));
+---
+<BaseLayout title={nameText} desc={pageDesc} lang={lang} pathPrefix={pathPrefix}>
+  <section class="detail-shell">
+    <article class="card detail-hero detail-hero-member" data-reveal>
+      <div class="detail-hero-main">
+        <h1 class="page-title">{nameText}</h1>
+        <div class="detail-meta">
+          <span class="badge">{roles[member.role][lang]}</span>
+          <span class="badge-muted">{areaText}</span>
+        </div>
+      </div>
+      <MemberAvatar src={resolveMemberAvatar(member)} alt={nameText} large />
+    </article>
+
+    {bio && (
+      <article class="card detail-content" data-reveal>
+        <h2>{t.about}</h2>
+        <p>{bio}</p>
+      </article>
+    )}
+
+    {hasLinks && (
+      <article class="card detail-section" data-reveal>
+        <h2>{t.links}</h2>
+        <div class="detail-links">
+          {links?.scholar && <a class="btn btn-ghost" href={links.scholar} target="_blank" rel="noreferrer">Google Scholar</a>}
+          {links?.github && <a class="btn btn-ghost" href={links.github} target="_blank" rel="noreferrer">GitHub</a>}
+          {links?.homepage && <a class="btn btn-ghost" href={links.homepage} target="_blank" rel="noreferrer">Homepage</a>}
+          {links?.linkedin && <a class="btn btn-ghost" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>}
+          {links?.email && (
+            <button
+              class="member-email"
+              type="button"
+              data-copy-text={links.email}
+              data-copy-label={links.email}
+              data-copy-success={t.copied}
+              title={t.copyEmail}
+            >
+              {links.email}
+            </button>
+          )}
+        </div>
+      </article>
+    )}
+
+    <div class="back-row" data-reveal>
+      <a class="btn btn-primary" href={`${pathPrefix}/members/`}>{t.back}</a>
+      <a class="btn btn-ghost" href={`${pathPrefix}/`}>{t.home}</a>
+    </div>
+  </section>
+</BaseLayout>

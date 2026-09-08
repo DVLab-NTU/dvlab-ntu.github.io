@@ -94,6 +94,15 @@ for (const page of pages) {
   assert((html.match(/<html/g) || []).length === (html.match(/<\/html>/g) || []).length, `${rel}: unbalanced <html>`);
   assert((html.match(/<body/g) || []).length === (html.match(/<\/body>/g) || []).length, `${rel}: unbalanced <body>`);
 
+  assert(!/<link[^>]*rel="preload"[^>]*as="font"/.test(html), `${rel}: unexpected font preload`);
+  for (const image of html.matchAll(/<img\b[^>]*class="[^"]*member-avatar[^"]*"[^>]*>/g)) {
+    const src = image[0].match(/src="([^"]+)"/)?.[1];
+    assert(src?.startsWith('/_astro/') && src.endsWith('.webp'), `${rel}: avatar must use a generated WebP`);
+    if (src && isExistingFile(path.join(distDir, src))) {
+      assert(fs.statSync(path.join(distDir, src)).size < 100_000, `${rel}: avatar exceeds 100 kB`);
+    }
+  }
+
   // 7. internal links and images resolve to real files
   const pageDir = path.dirname(page);
   for (const href of collectHrefs(html, pageDir)) {

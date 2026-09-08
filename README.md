@@ -41,7 +41,7 @@ PUBLIC_SITE_URL=https://dvlab-ntu.github.io npm run verify
 
 Runs five stages (see `docs/verification.md` for details):
 
-1. `validate:content` — content schema/bilingual checks
+1. `validate:content` — regression tests and shared content schema/bilingual checks
 2. `build` — production build
 3. `test:smoke` — key pages contain expected content
 4. `test:pages` — output-quality audit of every generated HTML page
@@ -62,7 +62,7 @@ CI runs the same command; GitHub Pages deploys only after it passes.
 
 | Collection | Path | Notes |
 |---|---|---|
-| Members | `src/content/members/*.md` | `id` must match filename; `name`/`role`/`area`/`bio`/`status` are `{zh, en}` objects; `links` supports scholar/github/homepage/email/linkedin; avatar auto-resolves from `public/member/images/<id>.jpg` |
+| Members | `src/content/members/*.md` | `id` must match filename; `name`/`bio` are `{zh, en}` objects; `role`/`area`/`status` use stable codes; `links` supports scholar/github/homepage/email/linkedin; avatar auto-resolves from `public/member/images/<id>.jpg` |
 | Papers | `src/content/papers/*.md` | `year`, `title`, `venue`, `authors`, optional `abstract`/`links`/`bibtex` |
 | Courses | `src/content/courses/*.md` | `title` `{zh,en}`, `semester`, official NTU course-catalogue `link`, optional `intro`/`contents` `{zh,en}` |
 | Awards | `src/content/awards/*.md` | `title` `{zh,en}`, `year`, `month`, `students[]`, optional `advisors[]`, `source` URL |
@@ -78,3 +78,9 @@ home hero/highlights) lives in `src/data/site.zh.json` / `site.en.json`.
 Pages at <https://dvlab-ntu.github.io/>. `sitemap-index.xml` is generated
 automatically. The `admin/` route is an optional Decap CMS backend (disabled
 until `CMS_GITHUB_REPO` / `CMS_OAUTH_BASE_URL` are configured).
+
+Page templates are shared by the Chinese and English routes. Activities live
+in `src/content/life/`; home highlights store their own links. Member images
+are optimized during build while retaining source files, and typography uses
+system fonts. CI covers both CMS configuration modes; see `docs/deployment.md`
+for the separate OAuth setup required for real editor login.

@@ -1,17 +1,12 @@
 ---
+cohort: 10
 id: "anitalu724"
 name:
   zh: "呂承樺"
   en: "Cheng-Hua Lu"
-role:
-  zh: "碩士生"
-  en: "Master"
-status:
-  zh: "已畢業"
-  en: "Alumni"
-area:
-  zh: "Quantum"
-  en: "Quantum"
+role: master
+status: alumni
+area: quantum
 avatar: "/member/images/anitalu724.jpg"
 bio:
   zh: "I am a master's student in the Electrical Engineering Department at National Taiwan University (NTU). I am working on the development of quantum circuit optimization, and also adept at web programming using ReactJS. Now, I have had the privilege to work with Prof. Chung-Yang (Ric) Huang at DV Lab, NTU.；I am fortunate to have worked with Prof. Eric Y. Chuang on analytical toolkit development in cancer genomics in my undergraduate research.；I worked as one of the TAs of the 2021 Fall Web Programming Class, and of the 2022 Spring Cornerstone EECS Design and Implementation Class.；Besides my studie"

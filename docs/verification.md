@@ -12,10 +12,12 @@ PUBLIC_SITE_URL=https://dvlab-ntu.github.io npm run verify
 
 ### 1. `validate:content` — `scripts/validate-content.mjs`
 
+- Runs `npm test`: schema/YAML, grouping, link ownership, CMS fields/IDs and
+  storage-failure regression checks.
 - Checks `src/data/site.{zh,en}.json`: required nav keys, home intro /
   sections / highlights.
 - Checks content collections exist and are non-empty; member files match
-  `id == filename`; member `name`/`role`/`area` have both `zh` and `en`;
+  `id == filename`; bilingual text is complete and classification codes are valid;
   join overviews exist.
 
 ### 2. `build` — `scripts/build-site.mjs`
@@ -26,7 +28,7 @@ PUBLIC_SITE_URL=https://dvlab-ntu.github.io npm run verify
 ### 3. `test:smoke` — `scripts/smoke-build.mjs`
 
 - Asserts key pages contain expected strings (home hero, members, papers,
-  courses, awards, news) and that the CMS page behaves correctly for the
+  courses, awards) and that the CMS page behaves correctly for the
   configured env.
 
 ### 4. `test:pages` — `scripts/verify-pages.mjs` (output-quality audit)
@@ -43,6 +45,7 @@ Console verification file):
 - Required routes exist for both locales: `/`, `/members/`, `/papers/`,
   `/courses/`, `/awards/`, `/life/`, `/join/`, `/404.html` (and `/en/`).
 - No `http://127.0.0.1` URLs or `undefined` in markup.
+- Member avatars use generated WebPs below 100 kB; pages do not preload fonts.
 
 ### 5. `test:seo` — `scripts/verify-seo-i18n.mjs`
 
@@ -63,3 +66,18 @@ npx serve dist      # or: npm run preview
 - Nav clicks respond immediately (there is no SPA router).
 - The **活動** tab goes to `/life/`, not back to the home page.
 - Deep links (e.g. `/members/anitalu724/`) return 200.
+
+CI verifies both disabled and enabled CMS builds. The enabled job uses
+`CMS_GITHUB_REPO=DVLab-NTU/dvlab-ntu.github.io` and
+`CMS_OAUTH_BASE_URL=https://example.com`; this checks generation and parsing,
+not OAuth login. It never connects to an OAuth service or publishes content.
+
+For browser checks, test both languages on mobile and desktop, blocked
+`localStorage`, blocked scripts, filtering, theme toggling and open navigation.
+Use the Decap `test-repo` backend only for disposable local editor checks.
+
+`npm run test:browser` runs those public-page browser checks against a running
+preview server (default `http://127.0.0.1:4321`, override `TEST_SITE_URL`). It
+uses an existing Playwright installation: set `PLAYWRIGHT_MODULE` to its module
+path and `BROWSER_EXECUTABLE` to an installed browser if they are not already
+available by default. This optional local check is not part of the CI matrix.

@@ -8,7 +8,7 @@ route is a complete HTML file generated at build time.
 
 | Piece | Choice | Why |
 |---|---|---|
-| Static site generator | Astro 5 | Content collections with Zod schemas, per-page SEO, i18n routing |
+| Static site generator | Astro 5 | Content collections with shared Zod schemas, per-page SEO, i18n routing |
 | Styling | Plain CSS (tokens + components) | No framework; variables drive theming |
 | Interactivity | Small vanilla scripts | reveal, particles, theme toggle, member filter |
 | Navigation | Plain full-page loads | No SPA router — instant click response, full SEO |
@@ -19,16 +19,17 @@ route is a complete HTML file generated at build time.
 ```
 src/
   content/            # Markdown content collections (members, papers, courses, awards, join)
-    config.ts         # Zod schemas for every collection
+    config.ts         # Registers the shared collection schemas
   data/
     site.zh.json      # Site-wide copy (brand, nav, home) — Traditional Chinese
     site.en.json      # Same, English
   layouts/
     BaseLayout.astro  # <head> (SEO/meta/fonts/theme), header/nav, footer, scripts
-  pages/              # One .astro file per route; /en/ mirrors each
+  components/         # Shared page templates and optimized MemberAvatar
+  pages/              # Thin language wrappers; /en/ mirrors each
     index.astro       # Home: hero (title + group photo + CTA buttons) + highlights
     members.astro     # Member list with search + role filter
-    members/[id].astro# Member detail (bio, links, education, publications)
+    members/[id].astro# Member detail (bio and links)
     papers.astro      # Publication list, newest first
     papers/[slug].astro
     courses.astro     # Courses sorted by semester, newest first
@@ -41,7 +42,7 @@ src/
     particles.mjs     # Home hero particle canvas
     ui.mjs            # Theme toggle, member filter, list search, copy-email
     navbar-scroll.mjs # Header shadow on scroll
-    progressive-list.mjs
+    cms.mjs            # CMS member ID guard and initialization
   styles/
     tokens.css        # Design tokens: colors (dark/light), fonts, radii, shadows
     base.css          # Reset, body, scrollbar
@@ -53,6 +54,8 @@ src/
     i18n-text.ts      # pickI18nText({zh, en})
     member-avatar.ts  # Resolve member photo path
     cms-config.ts     # Optional Decap CMS runtime config
+    content-schemas.mjs # Single schema source for Astro and validation
+    member-groups.mjs # Locale-independent grouping
 public/
   images/lab/         # Lab group photos (hero + life page)
   images/             # Logo, OG cover, favicons
@@ -89,9 +92,12 @@ scripts/              # Build/verify tooling (see verification.md)
 ## Data flow
 
 1. Content authors edit Markdown files in `src/content/<collection>/`.
-2. `src/content/config.ts` Zod schemas validate every file at build time.
-3. Pages query collections with `getCollection()` and render server-side.
-4. Bilingual text is `{ zh: '…', en: '…' }`; `pickI18nText()` picks per locale.
+2. Shared `src/utils/content-schemas.mjs` schemas validate content in the CLI
+   and Astro build. YAML is parsed with `js-yaml`, without field regexes.
+3. Shared page components query collections with `getCollection()` and render
+   static HTML. Route files supply only the locale and dynamic route entry.
+4. Bilingual text is `{ zh: '…', en: '…' }`. Member role/status/area codes
+   control grouping; labels are translated only when rendering.
 5. The build emits one static HTML per route (plus sitemap, robots, 404).
 
 ## Theming
@@ -112,3 +118,15 @@ scripts/              # Build/verify tooling (see verification.md)
   With full-page loads, a click starts navigation immediately and every page
   remains fully indexable.
 - The **活動 / Life** tab links to `/life/` (a real page, not a home anchor).
+
+## Resources and progressive enhancement
+
+Member originals remain in `public/`; `MemberAvatar.astro` imports local raster
+assets and uses Astro Image to emit small responsive WebPs. Both lists and
+profiles use this component. Typography uses the system font stack, with no
+web-font requests or preloads.
+
+Content is visible without scripts. The reveal script opts observed nodes into
+animation after initialization, and caps stagger delays. Mobile navigation is
+visible until its toggle initializes. Storage errors fall back to the system
+theme and do not prevent navigation or search initialization.

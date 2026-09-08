@@ -4,14 +4,8 @@ id: "wish"
 name:
   zh: "陳韋旭"
   en: "Wei-Hsu Chen"
-role:
-  zh: "碩士生"
-  en: "Master"
-status:
-  zh: "已畢業"
-  en: "Alumni"
-area:
-  zh: "Formal Verification"
-  en: "Formal Verification"
+role: master
+status: alumni
+area: formal
 avatar: "/member/images/wish.jpg"
 ---

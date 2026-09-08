@@ -958,12 +958,13 @@ html[lang^='en'] .nav-text {
     height: 56px;
   }
 
-  .nav-toggle {
+  .nav.nav-enhanced .nav-toggle {
     display: flex;
   }
 
   .nav-links {
-    display: none;
+    display: grid;
+    flex: 0 0 100%;
     width: 100%;
     order: 3;
     grid-template-columns: 1fr 1fr;
@@ -971,8 +972,8 @@ html[lang^='en'] .nav-text {
     padding: 8px 0 2px;
   }
 
-  .nav.is-open .nav-links {
-    display: grid;
+  .nav.nav-enhanced:not(.is-open) .nav-links {
+    display: none;
   }
 
   .nav-link {

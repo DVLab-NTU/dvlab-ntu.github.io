@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import siteEn from '../data/site.en.json';
+import siteZh from '../data/site.zh.json';
+import { getCollection } from 'astro:content';
+import particlesScript from '../scripts/particles.mjs?url';
+import { pageCopy } from '../data/page-copy.mjs';
+
+const { lang } = Astro.props as { lang: 'zh' | 'en' };
+const labels = pageCopy.home[lang];
+const pathPrefix = lang === 'en' ? '/en' : '';
+const t = lang === 'en' ? siteEn : siteZh;
+const photos = await getCollection('life');
+const hero = photos.find(entry => entry.slug === 'group-hiking')?.data;
+if (!hero) throw new Error('Missing group-hiking activity for home hero');
+---
+<BaseLayout title="" desc={t.home.intro} lang={lang} pathPrefix={pathPrefix}>
+  <section class="hero mb-5" data-reveal>
+    <canvas class="hero-particles" data-particles aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <h1 class="hero-title" data-reveal data-reveal-delay="70">{t.siteName}</h1>
+      <p class="hero-subtitle" data-reveal data-reveal-delay="120">{t.home.intro}</p>
+      <div class="lab-photo">
+        <img
+          class="lab-photo-img"
+          src={hero.photo}
+          alt={hero.alt[lang]}
+          loading="eager"
+          decoding="async"
+          width="1400"
+          height="1050"
+        />
+        <span class="lab-photo-caption">{hero.caption[lang]}</span>
+      </div>
+      <div class="hero-actions" data-reveal data-reveal-delay="180">
+        <a class="btn btn-primary" href={`${pathPrefix}/members/`}>{labels.meet}</a>
+        <a class="btn btn-primary" href={`${pathPrefix}/papers/`}>{labels.papers}</a>
+        <a class="btn btn-primary" href={`${pathPrefix}/courses/`}>{labels.courses}</a>
+        <a class="btn btn-primary" href={`${pathPrefix}/awards/`}>{labels.awards}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <div class="page-head" data-reveal>
+      <h2 class="page-title">{t.home.sections?.highlights ?? 'Highlights'}</h2>
+    </div>
+    <div class="grid grid-3" data-reveal-group>
+      {t.home.highlights.map((h, i) => (
+        <article class="card card-hover card-clickable" data-reveal data-reveal-order={String(i)}>
+          <a class="card-link-overlay" href={`${pathPrefix}${h.href}`} aria-label={`${labels.view} ${h.title}`}></a>
+          <h3>{h.title}</h3>
+          <p class="mt-4">{h.desc}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+</BaseLayout>

@@ -8,14 +8,17 @@
     "build": "node scripts/build-site.mjs",
     "preview": "astro preview",
     "astro": "astro",
-    "validate:content": "node scripts/validate-content.mjs",
+    "validate:content": "npm test && node scripts/validate-content.mjs",
     "test:smoke": "node scripts/smoke-build.mjs",
     "test:seo": "node scripts/verify-seo-i18n.mjs",
     "verify": "node scripts/verify.mjs",
-    "test:pages": "node scripts/verify-pages.mjs"
+    "test:pages": "node scripts/verify-pages.mjs",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "test:browser": "node tests/browser.mjs"
   },
   "devDependencies": {
     "astro": "^5.13.0",
+    "js-yaml": "^4.3.2",
     "vite": "^6.4.1"
   },
   "dependencies": {

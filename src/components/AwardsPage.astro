@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { pickI18nText } from '../utils/i18n-text';
+import { pageCopy } from '../data/page-copy.mjs';
+
+const awardEntries = await getCollection('awards');
+const awards = awardEntries
+  .map((e) => ({ slug: e.slug, ...e.data }))
+  .sort((a, b) => b.year - a.year || a.month.localeCompare(b.month));
+const { lang } = Astro.props as { lang: 'zh' | 'en' };
+const t = pageCopy.awards[lang];
+const pathPrefix = lang === 'en' ? '/en' : '';
+---
+<BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
+  <section class="page-head" data-reveal>
+    <h1 class="page-title">{t.title}</h1>
+  </section>
+
+  <section class="detail-shell" data-reveal-group>
+    {awards.map((a, i) => (
+      <article class="card detail-content stack-sm" data-reveal data-reveal-order={String(i)}>
+        <h2 class="page-title">{pickI18nText(a.title, lang)}</h2>
+        <p class="badge-muted">{a.year} · {a.month}</p>
+        <p><strong>{t.students}</strong>{a.students.join(t.separator)}</p>
+        {a.advisors && a.advisors.length > 0 && (
+          <p><strong>{t.advisors}</strong>{a.advisors.join(t.separator)}</p>
+        )}
+        <div class="detail-links">
+          <a class="btn btn-ghost" href={a.source} target="_blank" rel="noreferrer">{t.source}</a>
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

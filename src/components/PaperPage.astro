@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { render } from 'astro:content';
+import { summarizeParts } from '../utils/seo';
+import { pageCopy } from '../data/page-copy.mjs';
+
+const { lang } = Astro.props as { lang: 'zh' | 'en' };
+const t = pageCopy.paper[lang];
+const pathPrefix = lang === 'en' ? '/en' : '';
+const { entry } = Astro.props;
+const abstract = entry.data.abstract?.trim() ?? '';
+const bibtex = entry.data.bibtex?.trim() ?? '';
+const links = entry.data.links;
+const hasLinks = Boolean(links?.online || links?.pdf || links?.project || links?.code);
+const hasBody = Boolean(entry.body?.trim());
+const { Content } = await render(entry);
+const pageDesc = abstract || summarizeParts([entry.data.authors, entry.data.venue, entry.data.year], 160);
+---
+<BaseLayout title={entry.data.title} desc={pageDesc} lang={lang} pathPrefix={pathPrefix} ogType="article">
+  <section class="detail-shell">
+    <article class="card detail-hero" data-reveal>
+      <h1 class="page-title">{entry.data.title}</h1>
+      <div class="detail-meta">
+        <span class="badge">{entry.data.venue}</span>
+        <span class="badge-muted">{entry.data.year}</span>
+      </div>
+      {entry.data.authors && <p class="paper-authors">{t.authors}{entry.data.authors}</p>}
+    </article>
+
+    {abstract && (
+      <article class="card detail-section" data-reveal>
+        <h2>{t.abstract}</h2>
+        <p>{abstract}</p>
+      </article>
+    )}
+
+    {hasLinks && (
+      <article class="card detail-section" data-reveal>
+        <h2>{t.links}</h2>
+        <div class="detail-links">
+          {links?.online && <a class="btn btn-ghost" href={links.online} target="_blank" rel="noreferrer">{t.online}</a>}
+          {links?.pdf && <a class="btn btn-ghost" href={links.pdf} target="_blank" rel="noreferrer">{t.pdf}</a>}
+          {links?.project && <a class="btn btn-ghost" href={links.project} target="_blank" rel="noreferrer">{t.project}</a>}
+          {links?.code && <a class="btn btn-ghost" href={links.code} target="_blank" rel="noreferrer">{t.code}</a>}
+        </div>
+      </article>
+    )}
+
+    {bibtex && (
+      <article class="card detail-section" data-reveal>
+        <h2>{t.citation}</h2>
+        <details class="bibtex-details">
+          <summary>{t.bibtex}</summary>
+          <pre id={`bibtex-${entry.slug}`}><code>{bibtex}</code></pre>
+        </details>
+        <button
+          class="btn btn-ghost copy-btn"
+          type="button"
+          data-copy-target={`bibtex-${entry.slug}`}
+          data-copy-label={t.copy}
+          data-copy-success={t.copied}
+        >
+          {t.copy}
+        </button>
+      </article>
+    )}
+
+    {hasBody && (
+      <article class="card detail-content" data-reveal>
+        <Content />
+      </article>
+    )}
+
+    <div class="back-row" data-reveal>
+      <a class="btn btn-primary" href={`${pathPrefix}/papers/`} data-history-back>{t.back}</a>
+      <a class="btn btn-ghost" href={`${pathPrefix}/`}>{t.home}</a>
+    </div>
+  </section>
+</BaseLayout>

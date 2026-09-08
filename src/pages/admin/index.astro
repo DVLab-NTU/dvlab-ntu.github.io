@@ -1,4 +1,5 @@
 ---
+import cmsScript from '../../scripts/cms.mjs?url';
 import { getCmsRuntimeConfig } from '../../utils/cms-config';
 
 const cms = getCmsRuntimeConfig();
@@ -74,7 +75,9 @@ const title = 'DVLab CMS';
           <p class="muted">Loading Decap CMS for the content management workflow.</p>
           <p class="muted">Repository: <code>{cms.repo}</code></p>
         </main>
+        <script is:inline>window.CMS_MANUAL_INIT = true;</script>
         <script is:inline src="https://unpkg.com/decap-cms@3.10.1/dist/decap-cms.js"></script>
+        <script type="module" src={cmsScript}></script>
       </>
     ) : (
       <main>

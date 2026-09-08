@@ -1,17 +1,12 @@
 ---
+cohort: 10
 id: "jasbrocoli"
 name:
   zh: "許祐綾"
   en: "Yu-Ling Hsu"
-role:
-  zh: "碩士生"
-  en: "Master"
-status:
-  zh: "已畢業"
-  en: "Alumni"
-area:
-  zh: "Formal Verification"
-  en: "Formal Verification"
+role: master
+status: alumni
+area: formal
 avatar: "/member/images/jasbrocoli.jpg"
 bio:
   zh: "Bello!"
