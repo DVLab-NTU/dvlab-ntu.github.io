@@ -8,7 +8,8 @@ artifact after the verify pipeline passes**.
 
 ### `ci.yml` — pull requests and pushes
 
-Runs `npm run verify` (all five stages). Merging is blocked on this passing.
+Runs `npm run verify` (all five stages) in a disabled/enabled CMS matrix.
+The enabled test uses an example OAuth URL and does not test real login.
 
 ### `pages.yml` — pushes to `main`
 
@@ -23,8 +24,8 @@ Only the artifact from `dist/` is deployed — no source files, no secrets.
 
 | Variable | Where | Purpose |
 |---|---|---|
-| `PUBLIC_SITE_URL` | CI env, `.env.example` | Canonical base URL (`https://dvlab-ntu.github.io`) used for sitemap/canonical/OG |
-| `CMS_GITHUB_REPO`, `CMS_OAUTH_BASE_URL`, `CMS_BRANCH` | optional | Enable the Decap CMS admin backend; unset = admin shows "setup required" |
+| `PUBLIC_SITE_URL` | workflow environment | Canonical base URL (`https://dvlab-ntu.github.io`) used for sitemap/canonical/OG |
+| `CMS_GITHUB_REPO`, `CMS_OAUTH_BASE_URL`, `CMS_BRANCH` | GitHub repository Actions variables, optional | Enable the Decap CMS admin backend; unset = admin shows "setup required" |
 
 ## Manual deployment (backup)
 
@@ -51,3 +52,8 @@ When the lab's school-managed domain (e.g. `dvlab.ee.ntu.edu.tw`) is ready:
 Pages deploys are atomic per artifact. To roll back, re-run the previous
 commit's workflow via `gh workflow run pages.yml` on the desired ref, or push
 a revert to `main`.
+
+`pages.yml` reads `CMS_GITHUB_REPO`, `CMS_OAUTH_BASE_URL`, and `CMS_BRANCH`
+from repository Actions variables. Leave the first two unset to keep CMS
+inactive. Enabling real login requires an existing GitHub OAuth proxy; no
+proxy or credentials are provisioned by this static repository.

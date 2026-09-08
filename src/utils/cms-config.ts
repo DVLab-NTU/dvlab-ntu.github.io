@@ -1,5 +1,4 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import { roles, statuses, areas } from '../data/member-labels.mjs';
 
 const DEFAULT_SITE_URL = 'https://dvlab-ntu.github.io/';
 
@@ -55,248 +54,6 @@ function readEnv(source: EnvSource, key: string) {
   return typeof processValue === 'string' ? processValue.trim() : '';
 }
 
-function yamlString(value: string) {
-  return JSON.stringify(value);
-}
-
-function stringField(label: string, name: string, options: { required?: boolean; widget?: string; indent?: number } = {}) {
-  const pad = ' '.repeat(options.indent ?? 6);
-  const widget = options.widget || 'string';
-  const lines = [
-    `${pad}- label: ${yamlString(label)}`,
-    `${pad}  name: ${name}`,
-    `${pad}  widget: ${widget}`,
-  ];
-
-  if (options.required === false) {
-    lines.push(`${pad}  required: false`);
-  }
-
-  return lines;
-}
-
-function nestedStringField(label: string, name: string, options: { required?: boolean; indent?: number } = {}) {
-  const pad = ' '.repeat(options.indent ?? 10);
-  const lines = [
-    `${pad}- label: ${yamlString(label)}`,
-    `${pad}  name: ${name}`,
-    `${pad}  widget: string`,
-  ];
-
-  if (options.required === false) {
-    lines.push(`${pad}  required: false`);
-  }
-
-  return lines;
-}
-
-function localizedTextField(label: string, name: string, options: { required?: boolean } = {}) {
-  const lines = [
-    `      - label: ${yamlString(label)}`,
-    `        name: ${name}`,
-    '        widget: object',
-  ];
-
-  if (options.required === false) {
-    lines.push('        required: false');
-  }
-
-  return [
-    ...lines,
-    '        fields:',
-    ...nestedStringField('Chinese', 'zh'),
-    ...nestedStringField('English', 'en'),
-  ];
-}
-
-function optionalLinksField(fieldNames: Array<[string, string]>, indent = 6) {
-  const pad = ' '.repeat(indent);
-  const nestedIndent = indent + 4;
-  return [
-    `${pad}- label: "Links"`,
-    `${pad}  name: links`,
-    `${pad}  widget: object`,
-    `${pad}  required: false`,
-    `${pad}  fields:`,
-    ...fieldNames.flatMap(([label, name]) => nestedStringField(label, name, { required: false, indent: nestedIndent })),
-  ];
-}
-
-function bodyField(options: { required?: boolean; indent?: number } = {}) {
-  const pad = ' '.repeat(options.indent ?? 6);
-  const lines = [
-    `${pad}- label: "Body"`,
-    `${pad}  name: body`,
-    `${pad}  widget: markdown`,
-  ];
-
-  if (options.required === false) {
-    lines.push(`${pad}  required: false`);
-  }
-
-  return lines;
-}
-
-function listProjectSlugs() {
-  const projectsDir = path.resolve('src/content/projects');
-  try {
-    return fs
-      .readdirSync(projectsDir, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory())
-      .map((entry) => entry.name)
-      .sort((a, b) => a.localeCompare(b));
-  } catch {
-    return [];
-  }
-}
-
-function projectFileName(slug: string, section: 'overview' | 'background', locale: 'cn' | 'en') {
-  return `${slug.replace(/[^a-z0-9]+/gi, '_')}_${section}_${locale}`;
-}
-
-function projectOverviewFile(slug: string, locale: 'cn' | 'en') {
-  const labelLocale = locale === 'cn' ? 'Chinese' : 'English';
-  return [
-    `      - label: ${yamlString(`${slug} Overview (${labelLocale})`)}`,
-    `        name: ${projectFileName(slug, 'overview', locale)}`,
-    `        file: ${yamlString(`src/content/projects/${slug}/overview_${locale}.md`)}`,
-    '        fields:',
-    ...stringField('Title', 'title', { indent: 10 }),
-    ...stringField('Tag', 'tag', { required: false, indent: 10 }),
-    ...stringField('Time', 'time', { required: false, indent: 10 }),
-    ...stringField('Status', 'status', { indent: 10 }),
-    ...optionalLinksField([
-      ['Repository URL', 'repo'],
-      ['Demo URL', 'demo'],
-      ['Paper URL', 'paper'],
-    ], 10),
-    ...bodyField({ indent: 10 }),
-  ];
-}
-
-function projectBackgroundFile(slug: string, locale: 'cn' | 'en') {
-  const labelLocale = locale === 'cn' ? 'Chinese' : 'English';
-  return [
-    `      - label: ${yamlString(`${slug} Background (${labelLocale})`)}`,
-    `        name: ${projectFileName(slug, 'background', locale)}`,
-    `        file: ${yamlString(`src/content/projects/${slug}/background_${locale}.md`)}`,
-    '        fields:',
-    ...bodyField({ indent: 10 }),
-  ];
-}
-
-function projectFilesCollection() {
-  const projectFiles = listProjectSlugs().flatMap((slug) => [
-    ...projectOverviewFile(slug, 'cn'),
-    ...projectOverviewFile(slug, 'en'),
-    ...projectBackgroundFile(slug, 'cn'),
-    ...projectBackgroundFile(slug, 'en'),
-  ]);
-
-  return [
-    '  - name: projects',
-    '    label: Projects',
-    '    label_singular: Project File',
-    '    delete: false',
-    '    editor:',
-    '      preview: false',
-    '    files:',
-    ...projectFiles,
-  ];
-}
-
-function cmsCollections() {
-  return [
-    '  - name: members',
-    '    label: Members',
-    '    label_singular: Member',
-    '    folder: src/content/members',
-    '    create: true',
-    '    delete: true',
-    '    extension: md',
-    '    format: frontmatter',
-    '    identifier_field: id',
-    '    slug: "{{slug}}"',
-    '    summary: "{{id}} · {{name.zh}}"',
-    '    editor:',
-    '      preview: false',
-    '    fields:',
-    ...stringField('ID', 'id'),
-    '        hint: Use the same lowercase id as the generated filename, for example alice-phd.',
-    '        pattern:',
-    "          - '^[a-z0-9]+(?:-[a-z0-9]+)*$'",
-    "          - 'Use lowercase letters, numbers, and hyphens only.'",
-    ...localizedTextField('Name', 'name'),
-    ...localizedTextField('Role', 'role'),
-    ...localizedTextField('Status', 'status', { required: false }),
-    ...localizedTextField('Research Area', 'area'),
-    ...stringField('Avatar Path', 'avatar', { required: false }),
-    ...localizedTextField('Bio', 'bio', { required: false }),
-    ...optionalLinksField([
-      ['Google Scholar URL', 'scholar'],
-      ['GitHub URL', 'github'],
-      ['Homepage URL', 'homepage'],
-      ['Email', 'email'],
-    ]),
-    '',
-    '  - name: papers',
-    '    label: Papers',
-    '    label_singular: Paper',
-    '    folder: src/content/papers',
-    '    create: true',
-    '    delete: true',
-    '    extension: md',
-    '    format: frontmatter',
-    '    identifier_field: title',
-    '    slug: "{{year}}-{{slug}}"',
-    '    summary: "{{year}} · {{title}}"',
-    '    editor:',
-    '      preview: false',
-    '    fields:',
-    '      - label: "Year"',
-    '        name: year',
-    '        widget: number',
-    '        value_type: int',
-    '        min: 1900',
-    '        max: 2100',
-    ...stringField('Title', 'title'),
-    ...stringField('Venue', 'venue'),
-    ...stringField('Authors', 'authors', { required: false }),
-    ...stringField('Abstract', 'abstract', { required: false, widget: 'markdown' }),
-    ...optionalLinksField([
-      ['Online URL', 'online'],
-      ['PDF URL', 'pdf'],
-      ['Project URL', 'project'],
-      ['Code URL', 'code'],
-    ]),
-    ...stringField('BibTeX', 'bibtex', { required: false, widget: 'text' }),
-    ...bodyField({ required: false }),
-    '',
-    '  - name: join',
-    '    label: Recruitment & Collaboration',
-    '    label_singular: Recruitment Page',
-    '    delete: false',
-    '    editor:',
-    '      preview: false',
-    '    files:',
-    '      - label: "Recruitment Overview (Chinese)"',
-    '        name: recruitment_overview_cn',
-    '        file: src/content/join/recruitment/overview_cn.md',
-    '        fields:',
-    ...stringField('Title', 'title', { indent: 10 }),
-    ...bodyField({ indent: 10 }),
-    '      - label: "Recruitment Overview (English)"',
-    '        name: recruitment_overview_en',
-    '        file: src/content/join/recruitment/overview_en.md',
-    '        fields:',
-    ...stringField('Title', 'title', { indent: 10 }),
-    ...bodyField({ indent: 10 }),
-    '',
-    ...projectFilesCollection(),
-    '',
-  ];
-}
-
 export function getCmsRuntimeConfig(
   source: EnvSource = (((import.meta as ImportMeta & { env?: EnvSource }).env || {}) as EnvSource),
 ): CmsRuntimeConfig {
@@ -331,35 +88,75 @@ export function getCmsRuntimeConfig(
   };
 }
 
+const text = (name: string, required = true) => ({ name, label: name, widget: 'string', required });
+const multiline = (name: string, required = true) => ({ ...text(name, required), widget: 'text' });
+const localized = (name: string, required = true) => ({ name, label: name, widget: 'object', required, fields: [multiline('zh', required), multiline('en', required)] });
+const number = (name: string, required = true) => ({ name, label: name, widget: 'number', value_type: 'int', required });
+const list = (name: string, required = true) => ({ name, label: name, widget: 'list', required, field: text('value') });
+const links = (names: string[]) => ({ name: 'links', label: 'Links', widget: 'object', required: false, fields: names.map(name => text(name, false)) });
+const select = (name: string, labels: Record<string, { zh: string; en: string }>) => ({
+  name, label: name, widget: 'select', options: Object.entries(labels).map(([value, label]) => ({ value, label: `${label.zh} / ${label.en}` })),
+});
+const folder = (name: string, fields: object[]) => ({
+  name, label: name, folder: `src/content/${name}`, create: true, extension: 'md', format: 'frontmatter',
+  editor: { preview: false }, fields,
+  ...(['courses', 'awards'].includes(name) ? { identifier_field: 'title.en', summary: '{{title.zh}}' } : {}),
+});
+
+export function cmsCollections() {
+  return [
+    {
+      ...folder('members', [
+        { ...text('id'), hint: 'New IDs: lowercase letters, numbers and hyphens. Preserve existing IDs and URLs.', pattern: ['^[A-Za-z0-9][A-Za-z0-9._-]*$', 'Use letters, numbers, dots, underscores, or hyphens.'] },
+        localized('name'), select('role', roles), select('status', statuses), select('area', areas),
+        { ...number('cohort', false), min: 1, max: 99, hint: 'Admission cohort code: 12 means academic year 112 (2023). Leave empty if unknown.' },
+        { ...text('avatar', false), widget: 'image' }, localized('bio', false),
+        links(['scholar', 'github', 'homepage', 'email', 'linkedin']),
+      ]),
+      identifier_field: 'id', slug: '{{fields.id}}', summary: '{{id}} · {{name.zh}}',
+    },
+    {
+      ...folder('papers', [number('year'), text('title'), text('venue'), text('authors', false), multiline('abstract', false), links(['online', 'pdf', 'project', 'code']), multiline('bibtex', false), { ...text('body', false), widget: 'markdown' }]),
+      slug: '{{fields.year}}-{{slug}}',
+    },
+    folder('courses', [localized('title'), { ...text('semester'), pattern: ['^\\d{2,3}-[12]$', 'Use academic year and semester, for example 114-1.'] }, text('link'), text('github', false), localized('intro', false), { name: 'contents', label: 'Contents', widget: 'object', required: false, fields: [list('zh'), list('en')] }]),
+    folder('awards', [localized('title'), number('year'), text('month'), { ...list('students'), min: 1 }, list('advisors', false), text('source')]),
+    {
+      ...folder('life', [{ ...text('photo'), widget: 'image' }, localized('alt'), localized('caption'), localized('description'), number('order')]),
+      identifier_field: 'caption.en', summary: '{{caption.zh}}',
+    },
+    {
+      name: 'join', label: 'Recruitment', delete: false, editor: { preview: false },
+      files: ['cn', 'en'].map(locale => ({ name: `recruitment_${locale}`, label: `Recruitment (${locale})`, file: `src/content/join/recruitment/overview_${locale}.md`, fields: [text('title'), { ...text('body'), widget: 'markdown' }] })),
+    },
+    {
+      name: 'site', label: 'Site copy', delete: false, editor: { preview: false },
+      files: ['zh', 'en'].map(locale => ({
+        name: `site_${locale}`, label: `Site (${locale})`, file: `src/data/site.${locale}.json`, format: 'json',
+        fields: [text('brand'), text('siteName'), {
+          name: 'nav', label: 'Navigation', widget: 'object', fields: ['home', 'members', 'papers', 'courses', 'awards', 'life'].map(name => text(name)),
+        }, {
+          name: 'home', label: 'Home', widget: 'object', fields: [multiline('intro'), {
+            name: 'sections', label: 'Sections', widget: 'object', fields: [text('highlights')],
+          }, {
+            name: 'highlights', label: 'Highlights', widget: 'list', min: 1,
+            fields: [text('title'), multiline('desc'), { ...text('href'), hint: 'Language-neutral page path, e.g. /join/. English prefix is added automatically.' }],
+          }],
+        }],
+      })),
+    },
+  ];
+}
+
 export function renderCmsConfigYml(config: CmsRuntimeConfig) {
   if (!config.enabled) {
-    return [
-      '# Decap CMS is not configured for this build.',
-      '# Missing environment variables:',
-      ...config.missing.map((item) => `# - ${item}`),
-      '# Optional:',
-      '# - CMS_BRANCH (defaults to main)',
-      '',
-    ].join('\n');
+    return ['# Decap CMS is not configured for this build.', '# Missing environment variables:', ...config.missing.map(item => `# - ${item}`), ''].join('\n');
   }
-
-  return [
-    'backend:',
-    '  name: github',
-    `  repo: ${yamlString(config.repo)}`,
-    `  branch: ${yamlString(config.branch)}`,
-    `  base_url: ${yamlString(config.oauthBaseUrl)}`,
-    '  auth_endpoint: auth',
-    `  site_domain: ${yamlString(config.siteDomain)}`,
-    'publish_mode: editorial_workflow',
-    'media_folder: public/uploads',
-    'public_folder: /uploads',
-    'i18n:',
-    '  structure: multiple_files',
-    '  locales: [zh, en]',
-    '  default_locale: zh',
-    'collections:',
-    ...cmsCollections(),
-    '',
-  ].join('\n');
+  // JSON is valid YAML; serialize once rather than constructing YAML indentation.
+  return JSON.stringify({
+    backend: { name: 'github', repo: config.repo, branch: config.branch, base_url: config.oauthBaseUrl, auth_endpoint: 'auth', site_domain: config.siteDomain },
+    publish_mode: 'editorial_workflow', media_folder: 'public/uploads', public_folder: '/uploads',
+    slug: { encoding: 'unicode', clean_accents: false, sanitize_replacement: '-' },
+    collections: cmsCollections(),
+  }, null, 2) + '\n';
 }

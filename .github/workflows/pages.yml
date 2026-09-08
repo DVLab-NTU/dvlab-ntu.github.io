@@ -27,6 +27,9 @@ jobs:
       - run: npm run verify
         env:
           PUBLIC_SITE_URL: https://dvlab-ntu.github.io
+          CMS_GITHUB_REPO: ${{ vars.CMS_GITHUB_REPO }}
+          CMS_OAUTH_BASE_URL: ${{ vars.CMS_OAUTH_BASE_URL }}
+          CMS_BRANCH: ${{ vars.CMS_BRANCH }}
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

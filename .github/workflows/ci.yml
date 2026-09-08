@@ -9,6 +9,9 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cms: [disabled, enabled]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -26,3 +29,5 @@ jobs:
         run: npm run verify
         env:
           PUBLIC_SITE_URL: https://dvlab-ntu.github.io
+          CMS_GITHUB_REPO: ${{ matrix.cms == 'enabled' && 'DVLab-NTU/dvlab-ntu.github.io' || '' }}
+          CMS_OAUTH_BASE_URL: ${{ matrix.cms == 'enabled' && 'https://example.com' || '' }}

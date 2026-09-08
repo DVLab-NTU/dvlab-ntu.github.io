@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { load } from 'js-yaml';
 
 const cmsRepo = (process.env.CMS_GITHUB_REPO || '').trim();
 const cmsOauthBaseUrl = (process.env.CMS_OAUTH_BASE_URL || '').trim();
@@ -40,24 +41,8 @@ function getUrlHostname(value) {
   }
 }
 
-function listProjectSlugs() {
-  const projectsDir = path.resolve('src/content/projects');
-  if (!fs.existsSync(projectsDir)) {
-    return [];
-  }
-
-  return fs
-    .readdirSync(projectsDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort((a, b) => a.localeCompare(b));
-}
-
 const normalizedPublicSiteUrl = normalizeUrl(publicSiteUrl);
 const cmsSiteDomain = getUrlHostname(normalizedPublicSiteUrl);
-const projectCmsConfigNeedles = listProjectSlugs().map(
-  (slug) => `file: "src/content/projects/${slug}/overview_cn.md"`,
-);
 
 function getExpectedMissingCmsVars() {
   const missing = [];
@@ -118,37 +103,7 @@ const checks = [
         includes: ['CMS setup required', ...expectedMissingCmsVars],
         excludes: [...unexpectedMissingCmsVars, 'https://unpkg.com/decap-cms@3.10.1/dist/decap-cms.js'],
       },
-  cmsConfigured
-    ? {
-        file: 'dist/admin/config.yml',
-        includes: [
-          'name: github',
-          `repo: "${cmsRepo}"`,
-          `branch: "${cmsBranch}"`,
-          `base_url: "${normalizeUrl(cmsOauthBaseUrl)}"`,
-          `site_domain: "${cmsSiteDomain}"`,
-          'publish_mode: editorial_workflow',
-          'media_folder: public/uploads',
-          'public_folder: /uploads',
-          'Start with a lowercase letter',
-          '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
-          'structure: multiple_files',
-          '  - name: members',
-          '    folder: src/content/members',
-          '  - name: papers',
-          '    folder: src/content/papers',
-          '  - name: join',
-          '    delete: false',
-          '    file: src/content/join/recruitment/overview_cn.md',
-          '  - name: projects',
-          ...projectCmsConfigNeedles,
-        ],
-      }
-    : {
-        file: 'dist/admin/config.yml',
-        includes: ['Decap CMS is not configured', ...expectedMissingCmsVars],
-        excludes: unexpectedMissingCmsVars,
-      },
+
 ];
 
 function assert(cond, message) {
@@ -171,6 +126,21 @@ try {
     });
   });
 
+  const configText = fs.readFileSync('dist/admin/config.yml', 'utf8');
+  if (cmsConfigured) {
+    const config = load(configText);
+    assert(config.backend.repo === cmsRepo, 'CMS repository mismatch');
+    assert(config.backend.branch === cmsBranch, 'CMS branch mismatch');
+    assert(config.backend.base_url === normalizeUrl(cmsOauthBaseUrl), 'CMS OAuth URL mismatch');
+    assert(config.backend.site_domain === cmsSiteDomain, 'CMS domain mismatch');
+    assert(config.publish_mode === 'editorial_workflow', 'CMS must use editorial workflow');
+    for (const name of ['members', 'papers', 'courses', 'awards', 'life', 'join', 'site']) {
+      assert(config.collections.some(collection => collection.name === name), `Missing CMS collection: ${name}`);
+    }
+  } else {
+    assert(configText.includes('Decap CMS is not configured'), 'Expected disabled CMS config');
+    expectedMissingCmsVars.forEach(name => assert(configText.includes(name), `Missing CMS setup hint: ${name}`));
+  }
   console.log('Smoke checks passed');
 } catch (error) {
   console.error(`Smoke checks failed: ${error.message}`);

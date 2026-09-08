@@ -16,7 +16,7 @@ function resolveDelay(el) {
   if (orderAttr !== null) {
     const order = Number(orderAttr);
     if (Number.isFinite(order)) {
-      return order * 80;
+      return Math.min(order, 6) * 80;
     }
   }
 
@@ -28,7 +28,7 @@ function resolveDelay(el) {
     const step = Number.isFinite(groupStep) && groupStep > 0 ? groupStep : 80;
     const effectiveStep = siblings.length > 24 ? Math.min(step, 40) : step;
     if (index >= 0) {
-      return index * effectiveStep;
+      return Math.min(index, 6) * effectiveStep;
     }
   }
 
@@ -109,7 +109,10 @@ function registerRevealNodes(nodes) {
     );
   }
 
-  freshNodes.forEach((el) => observer?.observe(el));
+  freshNodes.forEach((el) => {
+    observer.observe(el);
+    el.classList.add('reveal-ready');
+  });
 }
 
 function bootReveal() {

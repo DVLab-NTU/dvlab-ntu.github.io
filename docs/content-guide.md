@@ -1,14 +1,14 @@
 # Content Guide
 
 How to edit the site's content. All content is Markdown with YAML frontmatter
-under `src/content/`, validated by Zod schemas in `src/content/config.ts`.
+under `src/content/`, validated by shared Zod schemas in `src/utils/content-schemas.mjs`.
 Bilingual fields are `{ zh, en }` objects — **both languages are required for
 user-facing text** (CI fails otherwise).
 
 ## Common rules
 
 - Run `npm run validate:content` (or the full `npm run verify`) after editing.
-- Do not remove keys — leave `""` or `{}` when a value is unknown.
+- Omit unknown optional fields. Required bilingual text needs non-empty `zh` and `en` values.
 - Member photo files: `public/member/images/<id>.jpg`; the `id` must match the
   member filename.
 - Course links must point to the official NTU course catalogue
@@ -22,9 +22,10 @@ user-facing text** (CI fails otherwise).
 ---
 id: "anitalu724"            # must match filename; part of the member URL
 name: { zh: "呂承樺", en: "Cheng-Hua Lu" }
-role: { zh: "碩士生", en: "Master" }   # 教授/博士生/碩士生/專題生…
-status: { zh: "在讀", en: "Current" }  # or 已畢業 / Alumni
-area: { zh: "Quantum", en: "Quantum" } # research team / direction
+role: master                        # pi / phd / master / ra / undergraduate
+status: current                     # current / active / alumni / former
+area: quantum                       # quantum / formal / eda / verification / architecture
+cohort: 12                          # admission year 112 (2023), optional
 avatar: "/member/images/anitalu724.jpg"
 bio: { zh: "…", en: "…" }              # optional
 links:                                # optional
@@ -37,10 +38,14 @@ links:                                # optional
 ```
 
 Notes:
-- `avatar` is optional — if omitted it resolves from the name via
-  `src/utils/member-avatar.ts`.
-- Members list groups by `role`; the detail page shows bio, links (copy-email
-  button), education and publications if present.
+- `avatar` is optional — if omitted it resolves from `public/member/images/<id>.jpg`,
+  or the default avatar if that file is missing. Explicit missing paths fail the build.
+  Use local JPG/PNG/WebP images, including CMS uploads under `/uploads/`. Original files
+  are retained; Astro generates responsive WebP thumbnails for list and detail pages.
+- Classification and order use stable role/status/area codes, shared across languages.
+  Labels live in `src/data/member-labels.mjs`; add a code there for a new category.
+  Unknown cohorts are labeled explicitly, never inferred from email addresses.
+  Detail pages show the bilingual bio and links.
 - New members: add the Markdown file **and** the photo with the same `id`.
 
 ## Papers (`src/content/papers/<slug>.md`)
@@ -74,7 +79,7 @@ title: { zh: "網路服務程式設計", en: "Web Programming" }
 semester: "114-1"            # e.g. 114-1 (2025 fall)
 link: "https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id=901%2034300&…&semester=114-1&lang=CH"
 github: "https://github.com/…"   # optional
-intro: { zh: |, en: | }          # optional
+intro: { zh: "課程簡介", en: "Course introduction" } # optional
 contents: { zh: […], en: […] }   # optional
 ---
 ```
@@ -111,8 +116,22 @@ Brand, nav labels, home intro, hero highlights. Keys must match between the
 two files; `scripts/validate-content.mjs` checks the required set
 (`home`, `members`, `papers`, `courses`, `awards`, `life`).
 
-## Lab photos (`public/images/lab/`)
+## Lab activities (`src/content/life/`)
 
-- `group-hiking.jpg`, `group-lunch.jpg`, `group-jogging.jpg` are referenced by
-  `src/pages/life.astro` and the home hero (`index.astro`).
+- Each activity has `photo` (local public path), bilingual `alt`, `caption`,
+  `description`, and an integer `order`. Both languages use the same record.
+- Keep the `group-hiking` entry: its photo and caption also supply the home hero.
 - Keep them web-sized (~1400px wide, JPEG) to avoid bloating the bundle.
+
+Each home highlight stores its own `href`, such as `/join/`, beside `title` and
+`desc`. The English prefix is added by the template. Reordering cards does not
+change their destinations. Page UI labels live in `src/data/page-copy.mjs`.
+
+## CMS editing
+
+When configured, `/admin/` edits members, papers, courses, awards, activities,
+recruitment, and site JSON. Bilingual objects stay in one file; recruitment
+keeps its explicit Chinese and English files. Optional fields may be omitted.
+New member IDs use lowercase letters, numbers and hyphens; existing IDs retain
+their original capitalization and dots. A pre-save guard prevents renaming an
+existing member ID or creating an ID that Decap would rewrite in the filename.

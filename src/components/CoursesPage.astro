@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { pickI18nText } from '../utils/i18n-text';
+import { pageCopy } from '../data/page-copy.mjs';
+
+const courseEntries = await getCollection('courses');
+const courses = courseEntries
+  .map((e) => ({ slug: e.slug, ...e.data }))
+  // Newest semester first: "111-1" > "110-2" > "108-1"
+  .sort((a, b) => {
+    const [ay, at] = a.semester.split('-').map((v) => parseInt(v, 10));
+    const [by, bt] = b.semester.split('-').map((v) => parseInt(v, 10));
+    return by - ay || bt - at;
+  });
+const { lang } = Astro.props as { lang: 'zh' | 'en' };
+const t = pageCopy.courses[lang];
+const pathPrefix = lang === 'en' ? '/en' : '';
+---
+<BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
+  <section class="page-head" data-reveal>
+    <h1 class="page-title">{t.title}</h1>
+  </section>
+
+  <section class="detail-shell" data-reveal-group>
+    {courses.map((c, i) => (
+      <article class="card detail-content stack-sm course-card" data-reveal data-reveal-order={String(i)}>
+        <div class="detail-meta">
+          <h2 class="page-title">{pickI18nText(c.title, lang)}</h2>
+          <span class="badge-muted">{c.semester}</span>
+        </div>
+        {c.intro && <p>{pickI18nText(c.intro, lang)}</p>}
+        {c.contents && (
+          <details>
+            <summary class="btn btn-ghost">{t.contents}</summary>
+            <ul class="mt-4">
+              {c.contents[lang].map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </details>
+        )}
+        <div class="detail-links">
+          <a class="btn btn-ghost" href={c.link} target="_blank" rel="noreferrer">{t.catalogue}</a>
+          {c.github && (
+            <a class="btn btn-ghost" href={c.github} target="_blank" rel="noreferrer">GitHub Repo</a>
+          )}
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

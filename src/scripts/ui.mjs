@@ -6,7 +6,8 @@ function initThemeToggle() {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const preferred = (() => {
-    const saved = localStorage.getItem(key);
+    let saved;
+    try { saved = localStorage.getItem(key); } catch {}
     if (saved === 'dark' || saved === 'light') {
       return saved;
     }
@@ -61,7 +62,7 @@ function initThemeToggle() {
     const supportsInkTransition = typeof document.startViewTransition === 'function';
 
     if (!supportsInkTransition || reduceMotion) {
-      localStorage.setItem(key, next);
+      try { localStorage.setItem(key, next); } catch {}
       applyTheme(next);
       return;
     }
@@ -74,7 +75,7 @@ function initThemeToggle() {
     root.setAttribute('data-theme-transition', 'ink');
 
     const transition = document.startViewTransition(() => {
-      localStorage.setItem(key, next);
+      try { localStorage.setItem(key, next); } catch {}
       applyTheme(next);
     });
 
@@ -113,6 +114,7 @@ function initMembersFilter() {
       roleButtons.forEach((btn) => {
         const isActive = btn.getAttribute('data-role-filter') === roleValue;
         btn.classList.toggle('is-selected', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
       });
     }
 
@@ -142,6 +144,9 @@ function initMembersFilter() {
         }
       });
 
+      root.querySelectorAll('[data-member-group]').forEach(group => {
+        group.hidden = !group.querySelector('[data-member-card]:not(.is-filter-hidden)');
+      });
       if (emptyState) {
         emptyState.hidden = visibleCount !== 0;
       }
@@ -250,6 +255,7 @@ function initListIntroGroups() {
 
   roots.forEach((root) => {
     const items = Array.from(root.querySelectorAll('[data-list-intro-item][data-list-intro-active]'));
+    root.classList.add('list-intro-ready');
     if (!items.length) {
       return;
     }
@@ -332,6 +338,7 @@ function initNavToggle() {
       setOpen(false);
     }
   });
+  nav.classList.add('nav-enhanced');
   window.matchMedia('(min-width: 881px)').addEventListener('change', (event) => {
     if (event.matches) {
       setOpen(false);

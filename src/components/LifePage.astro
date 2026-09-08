@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { pageCopy } from '../data/page-copy.mjs';
+
+const { lang } = Astro.props as { lang: 'zh' | 'en' };
+const t = pageCopy.life[lang];
+const pathPrefix = lang === 'en' ? '/en' : '';
+const photos = (await getCollection('life')).sort((a, b) => a.data.order - b.data.order).map(entry => entry.data);
+---
+<BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
+  <section class="page-head" data-reveal>
+    <h1 class="page-title">{t.heading}</h1>
+  </section>
+
+  <section class="detail-shell" data-reveal-group>
+    {photos.map((p, i) => (
+      <article class="card lab-life-item" data-reveal data-reveal-order={String(i)}>
+        <img class="lab-life-img" src={p.photo} alt={p.alt[lang]} loading="lazy" decoding="async" />
+        <div class="lab-life-body">
+          <h2 class="page-title">{p.caption[lang]}</h2>
+          <p class="mt-4">{p.description[lang]}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

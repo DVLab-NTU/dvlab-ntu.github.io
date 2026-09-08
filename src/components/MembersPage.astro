@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MemberAvatar from './MemberAvatar.astro';
+import { getCollection } from 'astro:content';
+import { resolveMemberAvatar } from '../utils/member-avatar';
+import { roles, statuses, areas } from '../data/member-labels.mjs';
+import { groupMembers, isFormer } from '../utils/member-groups.mjs';
+import { pageCopy } from '../data/page-copy.mjs';
+const { lang } = Astro.props as { lang: 'zh' | 'en' };
+const t = pageCopy.members[lang];
+const pathPrefix = lang === 'en' ? '/en' : '';
+
+const members = (await getCollection('members')).map(entry => entry.data);
+const groups = groupMembers(members);
+const availableRoles = Object.keys(roles).filter(role => members.some(member => member.role === role));
+---
+<BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
+  <section class="page-head" data-reveal><h1 class="page-title">{t.heading}</h1></section>
+  <section class="filter-wrap" data-members-filter-root data-reveal>
+    <input class="filter-input" type="search" data-member-search placeholder={t.placeholder} aria-label={t.search} />
+    <div class="filter-tags">
+      {['__all', ...availableRoles].map((role, i) => (
+        <button class={`filter-tag btn-shine ${i === 0 ? 'is-selected' : ''}`} type="button" data-role-filter={role} aria-pressed={i === 0}>
+          {role === '__all' ? t.all : roles[role][lang]}
+        </button>
+      ))}
+    </div>
+    <p class="empty-state" data-empty-state hidden>{t.empty}</p>
+    {groups.map(group => (
+      <section data-member-group data-reveal-group>
+        {group.key !== 'current' && <h2 class="cohort-title">{group.key === 'unknown' ? t.unknown : lang === 'zh' ? `${2011 + Number(group.key)} 屆` : `Class of ${2011 + Number(group.key)}`}</h2>}
+        <div class="grid grid-3">
+          {group.members.map((m, i) => (
+            <a href={`${pathPrefix}/members/${m.id}/`} class="card card-hover card-link member-card"
+              data-member-card data-name={`${m.name.zh} ${m.name.en}`} data-role={m.role}
+              data-area={`${areas[m.area].zh} ${areas[m.area].en} ${roles[m.role].zh} ${roles[m.role].en}`}
+              data-reveal data-reveal-order={String(i)}>
+              {m.role !== 'pi' && <span class={`member-status status-${isFormer(m) ? 'former' : 'current'}`}>{statuses[m.status][lang]}</span>}
+              <MemberAvatar src={resolveMemberAvatar(m)} alt={m.name[lang]} />
+              <h3>{m.name[lang]}</h3>
+              <p class="member-role"><span class="badge-muted">{roles[m.role][lang]}</span></p>
+              <p class="mt-4">{areas[m.area][lang]}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </section>
+</BaseLayout>
