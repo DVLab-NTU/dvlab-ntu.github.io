@@ -47,6 +47,7 @@ Notes:
   or the default avatar if that file is missing. Explicit missing paths fail the build.
   Use local JPG/PNG/WebP images, including CMS uploads under `/uploads/`. Original files
   are retained; Astro generates responsive WebP thumbnails for list and detail pages.
+- `avatarPosition` optionally sets `left`, `center` (default), or `right` to keep off-center portraits visible without editing the source image.
 - Classification and order use stable role/status/area codes, shared across languages.
   Labels live in `src/data/member-labels.mjs`; add a code there for a new category.
   Unknown cohorts are labeled explicitly, never inferred from email addresses.

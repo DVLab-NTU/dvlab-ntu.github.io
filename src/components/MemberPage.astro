@@ -29,7 +29,7 @@ const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.rol
           <span class="badge-muted">{areaText}</span>
         </div>
       </div>
-      <MemberAvatar src={resolveMemberAvatar(member)} alt={nameText} large />
+      <MemberAvatar src={resolveMemberAvatar(member)} position={member.avatarPosition} alt={nameText} large />
     </article>
 
     {bio && (

@@ -80,6 +80,8 @@ test('CMS accepts legacy IDs but protects new filenames and existing URLs', asyn
 test('submitted profile fields survive parsing and CMS editing', () => {
   const member = membersSchema.parse(readContent('src/content/members/swear01.md').data);
   assert.equal(member.nickname, 'Stanley');
+  assert.equal(membersSchema.parse(readContent('src/content/members/annoyingcutie.md').data).avatarPosition, 'left');
+  assert.equal(membersSchema.safeParse({ ...member, avatarPosition: 'invalid' }).success, false);
   assert.match(member.researchInterests.en, /SAT\/SMT/);
   assert.equal(member.links.linktree, 'https://linktr.ee/swear01');
   assert.equal(membersSchema.safeParse({ ...member, researchInterests: { zh: '量子', en: '' } }).success, false);
