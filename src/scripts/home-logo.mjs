@@ -11,7 +11,7 @@ if (logo) {
     logo.classList.add('is-playing');
   };
   const updateMotion = () => {
-    replay.hidden = !ready || motion.matches;
+    replay.disabled = !ready || motion.matches;
     if (motion.matches) logo.classList.remove('is-playing');
   };
   replay.addEventListener('click', play);

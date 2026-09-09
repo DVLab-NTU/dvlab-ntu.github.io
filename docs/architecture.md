@@ -138,21 +138,27 @@ theme and do not prevent navigation or search initialization.
 `frontend/public/assets/images/examples/logo/`. Sources are preserved in
 `src/assets/legacy-logo/`; Astro emits WebP assets. The old 9.4 MB GIF is not shipped.
 Layer coordinates preserve the original composition; `--delay` and the 600 ms
-fade set a total entrance duration of 1.8 seconds. A navy opening stage spanning
-the content width, at least 80svh tall, keeps the original white lettering
-legible in both themes. The centered logo grows to 960px;
-WebP dimensions are capped at the original source resolution. A normal anchor
-leads to the introduction and group photo below. The photo loads lazily.
+fade set a total entrance duration of 1.8 seconds. The opening stage spans the
+content width and is at least 80svh tall.
+Dark mode keeps the original white lettering on navy; light mode uses a pale
+yellow-green stage, dark lettering and a lighter chip through CSS filters.
+The centered logo grows to 960px;
+WebP dimensions are capped at the original source resolution. The introduction
+and group photo sit below, without duplicate navigation
+buttons. The photo loads lazily.
 The stage stays in document flow and never blocks scrolling or navigation.
 
 Only the two home routes include the component. Static HTML displays the full
 logo and reserves its space; the title and links never wait for the animation.
 After images decode, `home-logo.mjs` plays once per tab session using
 `sessionStorage['dvlab-home-logo-seen']`, shared by both languages. Storage errors
-skip autoplay. The bilingual replay button appears only after initialization.
+skip autoplay. The artwork itself is a native button with a bilingual
+accessible name;
+clicking it or pressing Enter/Space replays the animation. It becomes enabled
+after the images decode. There are no visible replay or Explore controls.
 Reduced-motion preference (including changes during playback) disables the
-animation and hides replay. With scripts blocked the full static logo remains.
+animation and the artwork button. With scripts blocked the full static logo remains.
 
 `npm run test:browser` covers the home entrance, navigation during playback,
-return/language-switch suppression, keyboard replay, stable logo geometry,
+return/language-switch suppression, pointer/keyboard replay, stable logo geometry,
 reduced motion, denied storage reads/writes, blocked scripts, and both themes.
