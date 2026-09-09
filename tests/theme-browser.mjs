@@ -1,6 +1,52 @@
 import assert from 'node:assert/strict';
 
+export async function testHeaderLogo(browser, base) {
+  for (const width of [390, 1280]) {
+    const context = await browser.newContext({ viewport: { width, height: 900 } });
+    let releaseScripts;
+    try {
+      await context.addInitScript(() => localStorage.setItem('lab-theme', 'light'));
+      const scriptsReady = new Promise(resolve => { releaseScripts = resolve; });
+      await context.route('**/*', async route => {
+        if (route.request().resourceType() === 'script') await scriptsReady;
+        await route.continue();
+      });
+      const page = await context.newPage();
+      await page.goto(base + '/members/', { waitUntil: 'commit' });
+      await page.waitForFunction(() => [...document.querySelectorAll('.brand-logo')].length === 2
+        && [...document.querySelectorAll('.brand-logo')].every(img => img.complete && img.naturalWidth > 0));
+      assert.equal(await page.locator('.brand-logo-light').evaluate(img => getComputedStyle(img).opacity), '1', 'Light logo must be visible before UI scripts execute');
+      assert.equal(await page.locator('.brand-logo-dark').evaluate(img => getComputedStyle(img).opacity), '0');
+      releaseScripts();
+      await page.waitForLoadState('load');
+      await context.addInitScript(() => {
+        window.wrongLogoFrames = [];
+        function sample() {
+          const dark = document.querySelector('.brand-logo-dark');
+          if (dark && document.documentElement.dataset.theme === 'light'
+            && getComputedStyle(dark).opacity !== '0') window.wrongLogoFrames.push(performance.now());
+          requestAnimationFrame(sample);
+        }
+        requestAnimationFrame(sample);
+      });
+      for (const path of ['/papers/', '/en/papers/', '/en/courses/']) {
+        await page.locator(`a[href="${path}"]`).first().evaluate(link => link.click());
+        await page.waitForURL(base + path);
+        await page.waitForLoadState('load');
+        await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+        assert.deepEqual(await page.evaluate(() => window.wrongLogoFrames), [], path);
+        assert.equal(await page.locator('.brand-logo-light').evaluate(img => getComputedStyle(img).opacity), '1');
+      }
+      console.log('PASS header logo before scripts and across navigation;', width);
+    } finally {
+      releaseScripts?.();
+      await context.close();
+    }
+  }
+}
+
 export async function testTheme(browser, base) {
+  await testHeaderLogo(browser, base);
   for (const width of [390, 1280]) {
     const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'no-preference' });
     try {
@@ -19,7 +65,7 @@ export async function testTheme(browser, base) {
       for (const route of ['/', '/en/members/']) {
         await page.goto(base + route);
         await page.waitForSelector('[data-theme-toggle-init="1"]');
-        await page.waitForSelector('.brand.has-light-logo');
+        await page.waitForFunction(() => document.querySelector('.brand-logo-light').complete);
         const toggle = page.locator('[data-theme-toggle]');
         await toggle.click();
         await page.waitForFunction(() => document.getAnimations().some(a => a.animationName === 'themeFade'));

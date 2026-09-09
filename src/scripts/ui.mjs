@@ -41,7 +41,7 @@ function initThemeToggle() {
   toggle.dataset.themeToggleInit = '1';
 
   const lightLogo = document.querySelector('.brand-logo-light');
-  lightLogo?.decode().then(() => lightLogo.closest('.brand').classList.add('has-light-logo')).catch(() => {});
+  lightLogo?.decode().catch(() => lightLogo.closest('.brand').classList.add('light-logo-failed'));
 
   let requestedTheme = preferred;
   let changing = false;

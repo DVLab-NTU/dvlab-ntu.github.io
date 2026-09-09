@@ -48,11 +48,11 @@
   width: auto;
 }
 
-/* Both variants load up front; keep the original visible until light decodes. */
+/* Select the theme before UI scripts run; only failed images need a fallback. */
 .brand { position: relative; }
 .brand-logo-light { position: absolute; inset: 0 auto auto 0; opacity: 0; }
-:root[data-theme='light'] .has-light-logo .brand-logo-light { opacity: 1; }
-:root[data-theme='light'] .has-light-logo .brand-logo-dark { opacity: 0; }
+:root[data-theme='light'] .brand:not(.light-logo-failed) .brand-logo-light { opacity: 1; }
+:root[data-theme='light'] .brand:not(.light-logo-failed) .brand-logo-dark { opacity: 0; }
 
 .nav-links {
   display: flex;

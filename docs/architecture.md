@@ -174,9 +174,12 @@ Keyboard and pointer activation share the same crossfade (no ripple coordinates)
 Unsupported View Transitions and storage failures still allow theme switching.
 Reduced-motion preference is read live; enabling it skips an active transition.
 
-Both header logo variants load in the HTML. The original stays visible until
-the light image has decoded successfully, avoiding a blank logo on a cold cache
-or failed image request. The large homepage entrance animation is unchanged.
+Both header logo variants load in the HTML. CSS selects the variant from the
+inline-initialized theme before UI scripts execute, so full-page navigation does
+not briefly show the dark logo in light mode. If the light image fails to decode,
+`ui.mjs` adds `light-logo-failed` to show the original as a fallback. The large
+homepage entrance animation is unchanged. Browser tests cover the pre-script
+state and subsequent navigation in both desktop and mobile layouts.
 
 ## Homepage content
 
