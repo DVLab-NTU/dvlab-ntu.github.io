@@ -27,6 +27,7 @@ const checks = [
       `<link rel="canonical" href="${siteUrl}">`,
       `<link rel="alternate" hreflang="en" href="${siteUrl}en/">`,
       `<meta property="og:url" content="${siteUrl}">`,
+      '"url": "https://dvlab.ee.ntu.edu.tw/"',
       'href="/en/"',
       'href="/members/"',
       'href="/papers/"',

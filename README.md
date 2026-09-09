@@ -5,7 +5,9 @@ University, directed by Prof. Chung-Yang (Ric) Huang. Bilingual (Traditional
 Chinese default at `/`, English at `/en/`), statically generated with Astro,
 with automatic dark mode and full per-page SEO.
 
-Live site: <https://dvlab-ntu.github.io/>
+Primary site (inari): <https://dvlab.ee.ntu.edu.tw/>
+
+Backup site (GitHub Pages): <https://dvlab-ntu.github.io/>
 
 ## Stack
 
@@ -36,7 +38,7 @@ npm run preview      # preview the production build
 ## Verification
 
 ```bash
-PUBLIC_SITE_URL=https://dvlab-ntu.github.io npm run verify
+PUBLIC_SITE_URL=https://dvlab.ee.ntu.edu.tw npm run verify
 ```
 
 Runs five stages (see `docs/verification.md` for details):
@@ -55,7 +57,7 @@ CI runs the same command; GitHub Pages deploys only after it passes.
 
 - `docs/architecture.md` — project structure, pages, data flow
 - `docs/content-guide.md` — how to edit content (collections, bilingual, photos)
-- `docs/deployment.md` — CI/CD pipeline and GitHub Pages deployment
+- `docs/deployment.md` — inari hosting and GitHub Pages backup deployment
 - `docs/verification.md` — the five-stage verify pipeline in detail
 
 ## Content
@@ -75,7 +77,10 @@ home hero/highlights) lives in `src/data/site.zh.json` / `site.en.json`.
 ## Deployment
 
 `.github/workflows/pages.yml` builds, verifies, and deploys `dist/` to GitHub
-Pages at <https://dvlab-ntu.github.io/>. `sitemap-index.xml` is generated
+Pages as a browsable backup at <https://dvlab-ntu.github.io/>. Both hosts use
+<https://dvlab.ee.ntu.edu.tw/> for canonical URLs and sitemap entries. Inari
+serves a copy of the verified `dist/` artifact; see `docs/deployment.md` for
+manual updates. `sitemap-index.xml` is generated
 automatically. The `admin/` route is an optional Decap CMS backend (disabled
 until `CMS_GITHUB_REPO` / `CMS_OAUTH_BASE_URL` are configured).
 

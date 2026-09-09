@@ -1,4 +1,4 @@
-const DEFAULT_SITE_URL = 'https://dvlab-ntu.github.io/';
+const DEFAULT_SITE_URL = 'https://dvlab.ee.ntu.edu.tw/';
 
 export type LocaleAlternates = {
   zh?: string;

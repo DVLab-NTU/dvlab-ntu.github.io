@@ -1,6 +1,6 @@
 import { roles, statuses, areas } from '../data/member-labels.mjs';
 
-const DEFAULT_SITE_URL = 'https://dvlab-ntu.github.io/';
+const DEFAULT_SITE_URL = 'https://dvlab.ee.ntu.edu.tw/';
 
 type EnvSource = Record<string, string | boolean | undefined>;
 

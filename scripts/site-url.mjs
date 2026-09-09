@@ -1,6 +1,6 @@
 import { loadEnv } from 'vite';
 
-export const DEFAULT_SITE_URL = 'https://dvlab-ntu.github.io/';
+export const DEFAULT_SITE_URL = 'https://dvlab.ee.ntu.edu.tw/';
 
 export function normalizeSiteUrl(value) {
   const raw = `${value || DEFAULT_SITE_URL}`.trim().replace(/^['"]|['"]$/g, '');
