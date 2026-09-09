@@ -7,6 +7,7 @@ name:
 role: "master"
 status: "current"
 area: "ai-formal"
+avatar: "/member/images/swear01.jpg"
 nickname: "Stanley"
 bio:
   zh: "國立臺灣大學重點科技學院積體電路設計與自動化學位學程碩士生，研究 Formal Verification 與 AI-assisted Verification；2026 春季擔任系統晶片驗證課程教學助理。"

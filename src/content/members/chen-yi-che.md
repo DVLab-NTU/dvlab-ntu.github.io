@@ -7,6 +7,7 @@ name:
 role: "master"
 status: "alumni"
 area: "3dic"
+avatar: "/member/images/chen-yi-che.jpg"
 nickname: "jerry"
 links:
   linkedin: "https://www.linkedin.com/in/%E4%BB%A5%E5%93%B2-%E9%99%B3-6999b1342/"
