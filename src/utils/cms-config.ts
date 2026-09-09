@@ -108,10 +108,10 @@ export function cmsCollections() {
     {
       ...folder('members', [
         { ...text('id'), hint: 'New IDs: lowercase letters, numbers and hyphens. Preserve existing IDs and URLs.', pattern: ['^[A-Za-z0-9][A-Za-z0-9._-]*$', 'Use letters, numbers, dots, underscores, or hyphens.'] },
-        localized('name'), select('role', roles), select('status', statuses), select('area', areas),
+        localized('name'), text('nickname', false), select('role', roles), select('status', statuses), select('area', areas),
         { ...number('cohort', false), min: 1, max: 99, hint: 'Admission cohort code: 12 means academic year 112 (2023). Leave empty if unknown.' },
-        { ...text('avatar', false), widget: 'image' }, localized('bio', false),
-        links(['scholar', 'github', 'homepage', 'email', 'linkedin']),
+        { ...text('avatar', false), widget: 'image' }, localized('bio', false), localized('researchInterests', false),
+        links(['scholar', 'github', 'homepage', 'email', 'linkedin', 'instagram', 'linktree', 'strava']),
       ]),
       identifier_field: 'id', slug: '{{fields.id}}', summary: '{{id}} · {{name.zh}}',
     },

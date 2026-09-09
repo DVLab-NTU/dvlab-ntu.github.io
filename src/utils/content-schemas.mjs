@@ -36,15 +36,20 @@ export const membersSchema = z.object({
   role: z.enum(Object.keys(roles)),
   status: z.enum(Object.keys(statuses)),
   area: z.enum(Object.keys(areas)),
+  nickname: optionalText,
   avatar: optionalText,
   bio: optionalI18nText,
+  researchInterests: optionalI18nText,
   links: z
     .object({
       scholar: optionalText,
       github: optionalText,
       homepage: optionalText,
       email: optionalText,
-      linkedin: optionalText
+      linkedin: optionalText,
+      instagram: optionalText,
+      linktree: optionalText,
+      strava: optionalText
     })
     .optional()
 });

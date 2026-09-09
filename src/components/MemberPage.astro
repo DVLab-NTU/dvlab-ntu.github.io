@@ -13,8 +13,9 @@ const { member } = Astro.props;
 const nameText = member.name[lang];
 const areaText = areas[member.area][lang];
 const bio = pickI18nText(member.bio, lang);
+const researchInterests = pickI18nText(member.researchInterests, lang);
 const links = member.links;
-const hasLinks = Boolean(links?.scholar || links?.github || links?.homepage || links?.email || links?.linkedin);
+const hasLinks = Boolean(links?.scholar || links?.github || links?.homepage || links?.email || links?.linkedin || links?.instagram || links?.linktree || links?.strava);
 const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.role][lang]}，研究方向：${areaText}。` : `${roles[member.role][lang]}. Research area: ${areaText}.`));
 ---
 <BaseLayout title={nameText} desc={pageDesc} lang={lang} pathPrefix={pathPrefix}>
@@ -22,6 +23,7 @@ const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.rol
     <article class="card detail-hero detail-hero-member" data-reveal>
       <div class="detail-hero-main">
         <h1 class="page-title">{nameText}</h1>
+        {member.nickname && <p>{member.nickname}</p>}
         <div class="detail-meta">
           <span class="badge">{roles[member.role][lang]}</span>
           <span class="badge-muted">{areaText}</span>
@@ -33,7 +35,14 @@ const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.rol
     {bio && (
       <article class="card detail-content" data-reveal>
         <h2>{t.about}</h2>
-        <p>{bio}</p>
+        <p style="white-space: pre-line">{bio}</p>
+      </article>
+    )}
+
+    {researchInterests && (
+      <article class="card detail-content" data-reveal>
+        <h2>{lang === 'zh' ? '研究興趣' : 'Research interests'}</h2>
+        <p style="white-space: pre-line">{researchInterests}</p>
       </article>
     )}
 
@@ -45,6 +54,9 @@ const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.rol
           {links?.github && <a class="btn btn-ghost" href={links.github} target="_blank" rel="noreferrer">GitHub</a>}
           {links?.homepage && <a class="btn btn-ghost" href={links.homepage} target="_blank" rel="noreferrer">Homepage</a>}
           {links?.linkedin && <a class="btn btn-ghost" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>}
+          {links?.instagram && <a class="btn btn-ghost" href={links.instagram} target="_blank" rel="noreferrer">Instagram</a>}
+          {links?.linktree && <a class="btn btn-ghost" href={links.linktree} target="_blank" rel="noreferrer">Linktree</a>}
+          {links?.strava && <a class="btn btn-ghost" href={links.strava} target="_blank" rel="noreferrer">Strava</a>}
           {links?.email && (
             <button
               class="member-email"

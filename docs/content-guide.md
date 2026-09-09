@@ -24,16 +24,21 @@ id: "anitalu724"            # must match filename; part of the member URL
 name: { zh: "呂承樺", en: "Cheng-Hua Lu" }
 role: master                        # pi / phd / master / ra / undergraduate
 status: current                     # current / active / alumni / former
-area: quantum                       # quantum / formal / eda / verification / architecture
+area: quantum                       # quantum / formal / ai-formal / 3dic / eda / verification / architecture
 cohort: 12                          # admission year 112 (2023), optional
 avatar: "/member/images/anitalu724.jpg"
+nickname: "Anita"                     # optional
 bio: { zh: "…", en: "…" }              # optional
+researchInterests: { zh: "…", en: "…" } # optional
 links:                                # optional
   email: "…"
   github: "https://github.com/…"
   homepage: "…"
   linkedin: "…"
   scholar: "…"
+  instagram: "…"
+  linktree: "…"
+  strava: "…"
 ---
 ```
 
@@ -45,8 +50,10 @@ Notes:
 - Classification and order use stable role/status/area codes, shared across languages.
   Labels live in `src/data/member-labels.mjs`; add a code there for a new category.
   Unknown cohorts are labeled explicitly, never inferred from email addresses.
-  Detail pages show the bilingual bio and links.
-- New members: add the Markdown file **and** the photo with the same `id`.
+  Detail pages show the nickname, bilingual bio, research interests, and links.
+  Nicknames are also searchable in the member list.
+- New members: add the Markdown file and the submitted photo with the same `id`.
+  If the photo is not yet available, omit `avatar` to use the default; do not substitute another person's image.
 
 ## Papers (`src/content/papers/<slug>.md`)
 

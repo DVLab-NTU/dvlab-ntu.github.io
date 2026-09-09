@@ -12,6 +12,8 @@ export const statuses = {
   former: { zh: '已離開', en: 'Former' },
 };
 export const areas = {
+  '3dic': { zh: '3DIC', en: '3DIC' },
+  'ai-formal': { zh: 'AI for Formal / Formal Verification', en: 'AI for Formal / Formal Verification' },
   quantum: { zh: 'Quantum', en: 'Quantum' },
   formal: { zh: 'Formal Verification', en: 'Formal Verification' },
   eda: { zh: 'EDA', en: 'EDA' },

@@ -75,3 +75,15 @@ test('CMS accepts legacy IDs but protects new filenames and existing URLs', asyn
   const partialBio = { get: key => key === 'data' ? new Map([['bio', new Map([['zh', '簡介'], ['en', '']])]]) : 'members' };
   assert.throws(() => validateEntry({ entry: partialBio }), /both Chinese and English/);
 });
+
+
+test('submitted profile fields survive parsing and CMS editing', () => {
+  const member = membersSchema.parse(readContent('src/content/members/swear01.md').data);
+  assert.equal(member.nickname, 'Stanley');
+  assert.match(member.researchInterests.en, /SAT\/SMT/);
+  assert.equal(member.links.linktree, 'https://linktr.ee/swear01');
+  assert.equal(membersSchema.safeParse({ ...member, researchInterests: { zh: '量子', en: '' } }).success, false);
+  const fields = cmsCollections().find(item => item.name === 'members').fields;
+  const linkFields = fields.find(item => item.name === 'links').fields;
+  for (const name of ['instagram', 'linktree', 'strava']) assert(linkFields.some(field => field.name === name));
+});

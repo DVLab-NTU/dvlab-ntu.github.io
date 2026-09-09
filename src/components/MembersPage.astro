@@ -32,12 +32,13 @@ const availableRoles = Object.keys(roles).filter(role => members.some(member => 
         <div class="grid grid-3">
           {group.members.map((m, i) => (
             <a href={`${pathPrefix}/members/${m.id}/`} class="card card-hover card-link member-card"
-              data-member-card data-name={`${m.name.zh} ${m.name.en}`} data-role={m.role}
+              data-member-card data-name={`${m.name.zh} ${m.name.en} ${m.nickname || ''}`} data-role={m.role}
               data-area={`${areas[m.area].zh} ${areas[m.area].en} ${roles[m.role].zh} ${roles[m.role].en}`}
               data-reveal data-reveal-order={String(i)}>
               {m.role !== 'pi' && <span class={`member-status status-${isFormer(m) ? 'former' : 'current'}`}>{statuses[m.status][lang]}</span>}
               <MemberAvatar src={resolveMemberAvatar(m)} alt={m.name[lang]} />
               <h3>{m.name[lang]}</h3>
+              {m.nickname && <p>{m.nickname}</p>}
               <p class="member-role"><span class="badge-muted">{roles[m.role][lang]}</span></p>
               <p class="mt-4">{areas[m.area][lang]}</p>
             </a>
