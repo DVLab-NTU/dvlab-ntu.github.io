@@ -21,7 +21,7 @@ const layers = [
     ? '台大電機設計驗證實驗室：放大鏡檢視晶片上的小蟲'
     : 'Design Verification Lab, NTUEE: a magnifying glass inspecting a bug on a chip'}>
     {layers.map(layer => <Image src={layer.src} alt="" aria-hidden="true"
-      width={Math.round(880 * layer.width / 100)} format="webp" quality={90}
+      width={Math.min(layer.src.width, Math.round(1800 * layer.width / 100))} format="webp" quality={90}
       loading="eager" decoding="async" class="logo-layer"
       style={`left:${layer.x}%;top:${layer.y}%;width:${layer.width}%;--delay:${layer.delay}ms`} />)}
   </div>
@@ -33,7 +33,7 @@ const layers = [
   import '../scripts/home-logo.mjs';
 </script>
 <style>
-  .home-logo { width: 100%; max-width: 440px; padding: 20px 16px 8px; border-radius: 16px; background: #1f3751; }
+  .home-logo { width: 100%; max-width: 960px; }
   .logo-art { position: relative; width: 100%; aspect-ratio: 60 / 32; }
   .logo-layer { position: absolute; height: auto; opacity: 1; }
   .is-playing .logo-layer { animation: logo-enter 600ms ease-out var(--delay) both; }

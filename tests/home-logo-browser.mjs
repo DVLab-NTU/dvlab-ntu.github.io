@@ -17,6 +17,7 @@ export async function testHomeLogo(browser, base) {
         const logo = page.locator('[data-home-logo]');
         await page.waitForFunction(() => [...document.querySelectorAll('[data-home-logo] img')].every(img => img.complete && img.naturalWidth > 0));
         assert.equal(await logo.locator('img').count(), 6);
+        assert((await page.locator('.home-opening').boundingBox()).height >= 844 * 0.8 - 1);
         assert(await page.locator('h1').isVisible());
         assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
         const replay = logo.locator('button');
@@ -61,7 +62,14 @@ export async function testHomeLogo(browser, base) {
       for (const path of ['/', '/en/']) {
         await page.goto(base + path);
         assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
-        assert.equal(await page.locator('[data-home-logo]').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(31, 55, 81)');
+        const stage = await page.locator('.home-opening').boundingBox();
+        const logo = await page.locator('[data-home-logo]').boundingBox();
+        const intro = await page.locator('#lab-introduction').boundingBox();
+        assert(stage.height >= 900 * 0.8 - 1);
+        assert(logo.width >= 800);
+        assert(intro.y >= stage.y + stage.height);
+        await page.locator('.opening-explore').click();
+        assert.equal(new URL(page.url()).hash, '#lab-introduction');
       }
     }
     console.log('PASS home logo desktop both themes and locales');

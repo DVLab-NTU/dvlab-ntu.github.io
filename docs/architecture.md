@@ -138,8 +138,12 @@ theme and do not prevent navigation or search initialization.
 `frontend/public/assets/images/examples/logo/`. Sources are preserved in
 `src/assets/legacy-logo/`; Astro emits WebP assets. The old 9.4 MB GIF is not shipped.
 Layer coordinates preserve the original composition; `--delay` and the 600 ms
-fade set a total entrance duration of 1.8 seconds. A navy backing keeps the
-original white lettering legible in both themes.
+fade set a total entrance duration of 1.8 seconds. A navy opening stage spanning
+the content width, at least 80svh tall, keeps the original white lettering
+legible in both themes. The centered logo grows to 960px;
+WebP dimensions are capped at the original source resolution. A normal anchor
+leads to the introduction and group photo below. The photo loads lazily.
+The stage stays in document flow and never blocks scrolling or navigation.
 
 Only the two home routes include the component. Static HTML displays the full
 logo and reserves its space; the title and links never wait for the animation.
