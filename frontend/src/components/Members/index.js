@@ -55,11 +55,10 @@ const Members = () => {
     })
   )
 
-  all_member_data.map((one_mem) =>
-    group_member_list[
-      group_list.findIndex((group_name) => group_name === one_mem.TEAM)
-    ].values.push(one_mem)
-  )
+  all_member_data.forEach((one_mem) => {
+    const idx = group_list.findIndex((group_name) => group_name === one_mem.TEAM)
+    if (idx !== -1) group_member_list[idx].values.push(one_mem)
+  })
 
   return (
     <>

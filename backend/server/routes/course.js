@@ -12,7 +12,7 @@ import Course from '../models/course'
 
 exports.GetCourse = async (req, res) => {
     // Get MemberBios from mongodb and return to frontend
-    Course.find()
+    Course.find().sort({ SEMESTER: -1 })
         .exec((err, data) => {
             if (err)
                 res.status(403).send({ message: 'error', contents: [] })

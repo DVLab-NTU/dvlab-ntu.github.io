@@ -80,7 +80,7 @@
     },
     "MEMBERS_PAGE": {
         "TITLE": "Members",
-        "GROUP": ["EDA", "Quantum"]
+        "GROUP": ["Quantum", "EDA", "Formal Verification", "Design Verification", "Computer Architecture"]
     },
     "COURSES_PAGE": {
         "TITLE": "Courses"

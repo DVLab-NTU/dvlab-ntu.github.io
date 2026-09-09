@@ -21,11 +21,11 @@ exports.GetPublications = async (req, res) => {
                 const mappedData = data.map(pub => {
                     return {
                         ...pub._doc,
-                        "DATE": pub.DATE.toLocaleDateString('en-US', {
+                        "DATE": pub.DATE ? pub.DATE.toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'short',
                             timeZone: 'Asia/Taipei'
-                        })
+                        }) : ''
                     }
                 })
                 res.status(200).send({ message: 'success', contents: mappedData })

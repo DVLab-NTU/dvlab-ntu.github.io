@@ -12,7 +12,7 @@ import NewsAward from '../models/newsAward'
 
 exports.GetNewsAward = async (req, res) => {
     // Get NewsAdwards from mongodb and return to frontend
-    NewsAward.find()
+    NewsAward.find().sort({ YEAR: -1 })
         .exec((err, data) => {
             if (err)
                 res.status(403).send({ message: 'error', contents: [] })

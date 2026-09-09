@@ -25,6 +25,8 @@ const Course = ({ course }) => {
     if (show) setShow(false)
     else setShow(true)
   }
+  const intro = Array.isArray(course.INTRO) ? course.INTRO : []
+  const contents = Array.isArray(course.CONTENTS) ? course.CONTENTS : []
   const linkExist = course.LINK !== ''
 
   return (
@@ -46,14 +48,14 @@ const Course = ({ course }) => {
               <></>
             )}
           </div>
-          {course.INTRO.map((paragraph) => (
+          {intro.map((paragraph) => (
             <p className="intro-block">{paragraph}</p>
           ))}
           {show ? (
             <div className="content-with-button">
               <div className="content-list">
                 <ul>
-                  {course.CONTENTS.map((item, idx) => (
+                  {contents.map((item, idx) => (
                     <li>{item}</li>
                   ))}
                 </ul>

@@ -106,3 +106,15 @@ dist
 
 # let's encrypt / certbot files
 tools/letsencrypt
+
+# Lockfile churn from local npm/yarn installs
+backend/yarn.lock
+frontend/yarn.lock
+
+# Local revival preview only — do not ship these to production.
+# Mongo data lives outside the repo (~/.local/share/dvlab-revival-mongo).
+# Member/lab photos were copied from the current Astro site for local testing.
+backend/.env
+frontend/build/
+frontend/public/member/
+frontend/public/images/

@@ -15,6 +15,8 @@ const Pub = ({ pub_info }) => {
     // * Pub: Implement Pub in "Publications" page.
     // @param imgExist    bool       If true, show image in Pub
     //        linkExist   bool       If true, show "learn more" in Pub
+    const authors = Array.isArray(pub_info.AUTHOR) ? pub_info.AUTHOR : []
+    const keywords = Array.isArray(pub_info.KEYWORDS) ? pub_info.KEYWORDS : []
     const imgExist = pub_info.IMG !== ''
     const linkExist = pub_info.LINK !== ''
     return (
@@ -33,17 +35,17 @@ const Pub = ({ pub_info }) => {
                 >
                     <h2>{pub_info.TITLE}</h2>
                     <div className="author-list">
-                        {pub_info.AUTHOR.map((name, idx) => (
+                        {authors.map((name, idx) => (
                             <span>
                                 {name}
-                                {idx !== pub_info.AUTHOR.length - 1 ? ', ' : ''}
+                                {idx !== authors.length - 1 ? ', ' : ''}
                             </span>
                         ))}
                     </div>
                     <div className="date">{pub_info.DATE}</div>
                     <div className="abstract">{pub_info.ABSTRACT}</div>
                     <div className="keywords-list">
-                        {pub_info.KEYWORDS.map((keyword) => (
+                        {keywords.map((keyword) => (
                             <div className="keyword">#{keyword}</div>
                         ))}
                     </div>

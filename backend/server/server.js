@@ -16,11 +16,14 @@ import mongoose from 'mongoose'
 require('dotenv').config()
 const app = express()
 
-// init middleware
-app.use(cors())
+const allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000']
+app.use(cors({ origin: allowedOrigins, credentials: true }))
 app.use(express.json())
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  const origin = req.headers.origin
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin)
+  }
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
   res.header('Access-Control-Allow-Credentials', 'true')
