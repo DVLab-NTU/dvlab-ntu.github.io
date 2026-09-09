@@ -1,5 +1,5 @@
 export function validateEntry({ entry }) {
-  for (const field of ['bio', 'intro']) {
+  for (const field of ['bio', 'intro', 'researchInterests']) {
     const value = entry.get('data').get(field);
     if (value && (value.get('zh')?.trim() || value.get('en')?.trim()) &&
         !(value.get('zh')?.trim() && value.get('en')?.trim())) {
