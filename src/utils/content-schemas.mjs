@@ -77,7 +77,7 @@ export const lifeSchema = z.object({
   photo: z.string().trim().min(1),
   alt: i18nText,
   caption: i18nText,
-  description: i18nText,
+  description: optionalI18nText,
   order: z.number().int(),
 });
 export const schemas = { members: membersSchema, papers: papersSchema, courses: coursesSchema, awards: awardsSchema, life: lifeSchema };

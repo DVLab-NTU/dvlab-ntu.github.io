@@ -89,3 +89,19 @@ test('submitted profile fields survive parsing and CMS editing', () => {
   const linkFields = fields.find(item => item.name === 'links').fields;
   for (const name of ['instagram', 'linktree', 'strava']) assert(linkFields.some(field => field.name === name));
 });
+
+test('activity descriptions may be omitted or cleared, but must be bilingual when supplied', async () => {
+  const { data } = readContent('src/content/life/group-hiking.md');
+  for (const description of [undefined, { zh: '', en: '' }]) {
+    assert.equal(schemas.life.parse({ ...data, description }).description, undefined);
+  }
+  assert.equal(schemas.life.safeParse({ ...data, description: { zh: '合照', en: '' } }).success, false);
+  assert.deepEqual(schemas.life.parse({ ...data, description: { zh: '合照', en: 'Group photo' } }).description, { zh: '合照', en: 'Group photo' });
+  const field = cmsCollections().find(item => item.name === 'life').fields.find(item => item.name === 'description');
+  assert.equal(field.required, false);
+  assert(field.fields.every(item => item.required === false));
+  const { validateEntry } = await import('../src/scripts/cms.mjs');
+  const entry = description => ({ get: key => key === 'data' ? new Map([['description', new Map(Object.entries(description))]]) : 'life' });
+  assert.doesNotThrow(() => validateEntry({ entry: entry({ zh: '', en: '' }) }));
+  assert.throws(() => validateEntry({ entry: entry({ zh: '合照', en: '' }) }), /both Chinese and English/);
+});

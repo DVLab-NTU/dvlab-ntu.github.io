@@ -19,7 +19,7 @@ const photos = (await getCollection('life')).sort((a, b) => a.data.order - b.dat
         <img class="lab-life-img" src={p.photo} alt={p.alt[lang]} loading="lazy" decoding="async" />
         <div class="lab-life-body">
           <h2 class="page-title">{p.caption[lang]}</h2>
-          <p class="mt-4">{p.description[lang]}</p>
+          {p.description && <p class="mt-4">{p.description[lang]}</p>}
         </div>
       </article>
     ))}

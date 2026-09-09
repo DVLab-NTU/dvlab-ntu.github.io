@@ -123,7 +123,7 @@ export function cmsCollections() {
     folder('courses', [localized('title'), { ...text('semester'), pattern: ['^\\d{2,3}-[12]$', 'Use academic year and semester, for example 114-1.'] }, text('link'), text('github', false), localized('intro', false), { name: 'contents', label: 'Contents', widget: 'object', required: false, fields: [list('zh'), list('en')] }]),
     folder('awards', [localized('title'), number('year'), text('month'), { ...list('students'), min: 1 }, list('advisors', false), text('source')]),
     {
-      ...folder('life', [{ ...text('photo'), widget: 'image' }, localized('alt'), localized('caption'), localized('description'), number('order')]),
+      ...folder('life', [{ ...text('photo'), widget: 'image' }, localized('alt'), localized('caption'), localized('description', false), number('order')]),
       identifier_field: 'caption.en', summary: '{{caption.zh}}',
     },
     {

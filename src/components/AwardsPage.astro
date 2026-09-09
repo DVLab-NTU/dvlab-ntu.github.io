@@ -27,9 +27,23 @@ const pathPrefix = lang === 'en' ? '/en' : '';
           <p><strong>{t.advisors}</strong>{a.advisors.join(t.separator)}</p>
         )}
         <div class="detail-links">
-          <a class="btn btn-ghost" href={a.source} target="_blank" rel="noreferrer">{t.source}</a>
+          <a class="award-source" href={a.source} target="_blank" rel="noreferrer">{t.source}</a>
         </div>
       </article>
     ))}
   </section>
 </BaseLayout>
+
+<style>
+  .award-source {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    color: var(--text-soft);
+    font-size: var(--text-sm);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .award-source:hover { color: var(--text); }
+  :global([data-theme='light']) .card { padding: 22px 24px; }
+</style>
