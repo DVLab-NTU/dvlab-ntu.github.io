@@ -11,7 +11,7 @@ export async function testParticles(browser, base) {
       CanvasRenderingContext2D.prototype[method] = function (...args) {
         if (this.canvas.matches('[data-particles]')) {
           if (method === 'clearRect') { window.draws.frames++; window.draws.points = []; }
-          else { window.draws.points.push(args.slice(0, 2)); window.draws.color = this.fillStyle; }
+          else { window.draws.points.push(args.slice(0, 2)); window.draws.color = this.fillStyle; window.draws.alpha = this.globalAlpha; }
         }
         return original.apply(this, args);
       };
@@ -44,8 +44,12 @@ export async function testParticles(browser, base) {
     await page.evaluate(() => document.documentElement.dataset.theme = 'dark');
     await page.waitForTimeout(80);
     const darkColor = await page.evaluate(() => window.draws.color);
+    assert.equal(darkColor, '#fcffcc');
+    assert.equal(await page.evaluate(() => window.draws.alpha), 0.5);
     await page.evaluate(() => document.documentElement.dataset.theme = 'light');
     await page.waitForFunction(color => window.draws.color !== color, darkColor);
+    assert.equal(await page.evaluate(() => window.draws.color), '#526326');
+    assert.equal(await page.evaluate(() => window.draws.alpha), 0.5);
     for (let i = 0; i < 30; i++) await page.mouse.click(opening.x + 10, opening.y + 10);
     await page.waitForTimeout(80);
     assert.equal(await count(), 100);

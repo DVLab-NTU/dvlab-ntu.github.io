@@ -196,3 +196,10 @@ clicks add four particles up to a total of 100. Logo and link clicks are exclude
 The canvas never intercepts input. Colors follow the current theme, smaller
 screens use fewer initial particles, and animation pauses outside the viewport
 or in hidden tabs. Reduced motion hides it, including live preference changes.
+
+Particle colors are opaque tokens so canvas opacity is applied only once. Dark
+mode uses the legacy pale yellow `#fcffcc`, 50% particles and 10% maximum link
+opacity; light mode uses olive `#526326` with 50% particles and 22% maximum
+links against the yellow-green opening. Square sizes are 2–6 CSS pixels and
+mouse repulsion reaches 200px, matching the legacy interaction radius. The
+canvas port preserves the old visual vocabulary rather than identical physics.

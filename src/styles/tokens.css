@@ -11,7 +11,8 @@
   --primary-2: #fcffcc;
   --surface-1: rgba(20, 38, 58, 0.55);
 
-  --particle-color: rgba(252, 255, 204, 0.55);
+  --particle-color: #fcffcc;
+  --particle-link-opacity: 0.1;
 
   --gradient-bg: radial-gradient(1200px 800px at 15% -10%, rgba(177, 208, 210, 0.22), transparent 55%),
     radial-gradient(900px 600px at 100% 0%, rgba(109, 170, 175, 0.16), transparent 50%),
@@ -84,7 +85,8 @@
   --primary-2: #f7fad8;
   --surface-1: #fdfeea;
 
-  --particle-color: rgba(122, 143, 32, 0.25);
+  --particle-color: #526326;
+  --particle-link-opacity: 0.22;
 
   --gradient-bg: radial-gradient(1100px 700px at 12% -10%, rgba(214, 228, 130, 0.5), transparent 55%),
     radial-gradient(900px 600px at 100% 0%, rgba(195, 210, 100, 0.3), transparent 50%),
