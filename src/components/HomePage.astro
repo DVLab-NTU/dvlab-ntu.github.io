@@ -18,21 +18,12 @@ if (!hero) throw new Error('Missing group-hiking activity for home hero');
   <section class="home-opening mb-5" aria-label={lang === 'zh' ? '實驗室開場動畫' : 'Lab introduction animation'}>
     <p class="opening-label">DESIGN VERIFICATION LAB · NTUEE</p>
     <HomeLogo lang={lang} />
-    <a class="opening-explore" href="#lab-introduction">
-      {lang === 'zh' ? '探索實驗室' : 'Explore the lab'} <span aria-hidden="true">↓</span>
-    </a>
   </section>
 
   <section id="lab-introduction" class="home-introduction mb-5" aria-labelledby="home-title">
     <div class="intro-copy">
       <h1 id="home-title" class="hero-title">{t.siteName}</h1>
       <p class="hero-subtitle">{t.home.intro}</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href={`${pathPrefix}/members/`}>{labels.meet}</a>
-        <a class="btn btn-primary" href={`${pathPrefix}/papers/`}>{labels.papers}</a>
-        <a class="btn btn-primary" href={`${pathPrefix}/courses/`}>{labels.courses}</a>
-        <a class="btn btn-primary" href={`${pathPrefix}/awards/`}>{labels.awards}</a>
-      </div>
     </div>
     <div class="lab-photo">
       <img class="lab-photo-img" src={hero.photo} alt={hero.alt[lang]}
@@ -65,7 +56,7 @@ if (!hero) throw new Error('Missing group-hiking activity for home hero');
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 24px;
     padding: clamp(24px, 4vw, 48px) clamp(12px, 3vw, 40px);
     border-radius: 24px;
@@ -73,12 +64,13 @@ if (!hero) throw new Error('Missing group-hiking activity for home hero');
     color: #f4f8ff;
   }
   .opening-label { margin: 0; font-size: 0.75rem; letter-spacing: 0.18em; text-align: center; color: #b8cdd6; }
-  .opening-explore { display: inline-flex; align-items: center; gap: 16px; color: #f2e7a2; padding: 10px 16px; text-decoration: none; }
-  .opening-explore:hover { text-decoration: underline; }
-  .opening-explore:focus-visible { outline: 2px solid #f2e7a2; outline-offset: 4px; }
+  :global([data-theme='light']) .home-opening {
+    background: radial-gradient(ellipse at 50% 42%, #fdfeea, #e8efbc 85%);
+    color: #293515;
+  }
+  :global([data-theme='light']) .opening-label { color: #536337; }
   .home-introduction { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; padding-block: 32px; scroll-margin-top: 140px; }
   .home-introduction .hero-title { margin-top: 0; }
-  .home-introduction .hero-actions { justify-content: flex-start; gap: 12px; }
   .home-introduction .lab-photo { margin: 0; }
   @media (max-width: 700px) {
     .home-introduction { grid-template-columns: minmax(0, 1fr); }
