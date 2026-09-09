@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { testHomeLogo, testHomeContent } from './home-logo-browser.mjs';
 import { testContrast } from './contrast-browser.mjs';
+import { testParticles } from './particles-browser.mjs';
 import { testTheme } from './theme-browser.mjs';
 const memberCount = fs.readdirSync('src/content/members').filter(file => file.endsWith('.md')).length;
 const browser = await chromium.launch({executablePath:process.env.BROWSER_EXECUTABLE,headless:true});
@@ -51,6 +52,7 @@ try {
  assert.equal(fontRequests,0);
  console.log('PASS 14 desktop routes; zero font requests');
  await context.close();
+ await testParticles(browser, base);
  await testHomeContent(browser, base);
  await testHomeLogo(browser, base);
  await testTheme(browser, base);

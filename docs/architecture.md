@@ -187,3 +187,12 @@ All content is rendered at build time and works without JavaScript.
 The recruitment collection, both `/join/` routes, and their CMS fields have
 been removed. Old recruitment URLs now use the site's normal 404 response;
 they are not navigation items or sitemap entries.
+
+## Homepage particles
+
+Both homepages load `particles.mjs` for a decorative canvas inside the logo
+opening. Square particles and faint links repel from the mouse; background
+clicks add four particles up to a total of 100. Logo and link clicks are excluded.
+The canvas never intercepts input. Colors follow the current theme, smaller
+screens use fewer initial particles, and animation pauses outside the viewport
+or in hidden tabs. Reduced motion hides it, including live preference changes.

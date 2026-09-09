@@ -22,6 +22,7 @@ const courses = (await getCollection('courses')).sort((a, b) =>
 ---
 <BaseLayout title="" desc={t.home.intro} lang={lang} pathPrefix={pathPrefix}>
   <section class="home-opening mb-5" aria-label={lang === 'zh' ? '實驗室開場動畫' : 'Lab introduction animation'}>
+    <canvas class="home-particles" data-particles aria-hidden="true"></canvas>
     <HomeLogo lang={lang} />
   </section>
 
@@ -74,8 +75,16 @@ const courses = (await getCollection('courses')).sort((a, b) =>
   </section>
 </BaseLayout>
 
+<script>
+  import '../scripts/particles.mjs';
+</script>
+
 <style>
+  .home-particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
   .home-opening {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     min-height: 80vh;
     min-height: 80svh;
     display: flex;
