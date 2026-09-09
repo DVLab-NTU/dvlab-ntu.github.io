@@ -108,10 +108,15 @@ html[lang^='en'] .nav-text {
   transform: scale(0.94);
 }
 
+[data-theme='light'] .nav-link {
+  color: var(--text-soft);
+  opacity: 1;
+}
+
 [data-theme='light'] .nav-link:hover,
 [data-theme='light'] .nav-link:focus-visible,
 [data-theme='light'] .nav-link.is-active {
-  color: var(--primary);
+  color: var(--text);
 }
 
 .nav-actions {
@@ -200,6 +205,10 @@ html[lang^='en'] .nav-text {
 
 .footer a:hover {
   color: var(--primary-2);
+}
+
+[data-theme='light'] .footer a:hover {
+  color: var(--text);
 }
 
 /* Language link in the top-right nav actions: shows the other language
@@ -327,6 +336,10 @@ html[lang^='en'] .nav-text {
 .badge {
   color: var(--primary-2);
   background: rgba(255, 215, 0, 0.08);
+}
+
+[data-theme='light'] .badge {
+  color: var(--text-soft);
 }
 
 .badge-muted {

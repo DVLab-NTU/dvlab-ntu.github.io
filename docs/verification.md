@@ -79,3 +79,8 @@ preview server (default `http://127.0.0.1:4321`, override `TEST_SITE_URL`). It
 uses an existing Playwright installation: set `PLAYWRIGHT_MODULE` to its module
 path and `BROWSER_EXECUTABLE` to an installed browser if they are not already
 available by default. This optional local check is not part of the CI matrix.
+
+Browser checks also measure light-theme text contrast (at least 4.5:1) for
+paper/member badges, navigation and footer links in normal, hover and keyboard
+focus states, in both locales and mobile/desktop layouts. Dark-theme badge
+colors are checked separately. Accent background tokens remain unchanged.
