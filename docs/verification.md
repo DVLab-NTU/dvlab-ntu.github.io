@@ -12,13 +12,11 @@ PUBLIC_SITE_URL=https://dvlab-ntu.github.io npm run verify
 
 ### 1. `validate:content` — `scripts/validate-content.mjs`
 
-- Runs `npm test`: schema/YAML, grouping, link ownership, CMS fields/IDs and
+- Runs `npm test`: schema/YAML, grouping, CMS fields/IDs and
   storage-failure regression checks.
-- Checks `src/data/site.{zh,en}.json`: required nav keys, home intro /
-  sections / highlights.
+- Checks `src/data/site.{zh,en}.json`: required nav keys, home introduction.
 - Checks content collections exist and are non-empty; member files match
-  `id == filename`; bilingual text is complete and classification codes are valid;
-  join overviews exist.
+  `id == filename`; bilingual text is complete and classification codes are valid.
 
 ### 2. `build` — `scripts/build-site.mjs`
 
@@ -43,7 +41,7 @@ Console verification file):
 - Every internal link and image resolves to a real file in `dist/`
   (directory links resolve to their `index.html`).
 - Required routes exist for both locales: `/`, `/members/`, `/papers/`,
-  `/courses/`, `/awards/`, `/life/`, `/join/`, `/404.html` (and `/en/`).
+  `/courses/`, `/awards/`, `/life/`, `/404.html` (and `/en/`).
 - No `http://127.0.0.1` URLs or `undefined` in markup.
 - Member avatars use generated WebPs below 100 kB; pages do not preload fonts.
 

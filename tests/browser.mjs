@@ -1,7 +1,7 @@
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { testHomeLogo } from './home-logo-browser.mjs';
+import { testHomeLogo, testHomeContent } from './home-logo-browser.mjs';
 import { testTheme } from './theme-browser.mjs';
 const memberCount = fs.readdirSync('src/content/members').filter(file => file.endsWith('.md')).length;
 const browser = await chromium.launch({executablePath:process.env.BROWSER_EXECUTABLE,headless:true});
@@ -41,15 +41,16 @@ try {
  const page=await context.newPage();
  let fontRequests=0;
  page.on('request',req=>{if(req.resourceType()==='font')fontRequests++});
- for(const path of ['/','/en/','/members/','/en/members/','/papers/','/en/papers/','/courses/','/en/courses/','/awards/','/en/awards/','/life/','/en/life/','/join/','/en/join/','/members/Pinchun/','/en/members/Pinchun/']){
+ for(const path of ['/','/en/','/members/','/en/members/','/papers/','/en/papers/','/courses/','/en/courses/','/awards/','/en/awards/','/life/','/en/life/','/members/Pinchun/','/en/members/Pinchun/']){
   await page.goto(base+path);await page.waitForTimeout(650);
   assert(await page.locator('h1').isVisible());
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   assert.equal(await page.locator('h1').evaluate(el=>getComputedStyle(el.closest('section')??el).opacity),'1');
  }
  assert.equal(fontRequests,0);
- console.log('PASS 16 desktop routes; zero font requests');
+ console.log('PASS 14 desktop routes; zero font requests');
  await context.close();
+ await testHomeContent(browser, base);
  await testHomeLogo(browser, base);
  await testTheme(browser, base);
 } finally { await browser.close(); }

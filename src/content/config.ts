@@ -6,6 +6,5 @@ export const collections = {
   papers: defineCollection({ type: 'content', schema: schemas.papers }),
   courses: defineCollection({ type: 'content', schema: schemas.courses }),
   awards: defineCollection({ type: 'content', schema: schemas.awards }),
-  join: defineCollection({ type: 'content', schema: schemas.join }),
   life: defineCollection({ type: 'content', schema: schemas.life }),
 };

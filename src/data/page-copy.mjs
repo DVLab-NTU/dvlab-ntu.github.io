@@ -1,18 +1,24 @@
 export const pageCopy = {
   "home": {
     "zh": {
-      "meet": "了解成員",
-      "papers": "檢視論文",
-      "courses": "檢視課程",
-      "awards": "獲獎紀錄",
-      "view": "檢視"
+      "team": "研究團隊",
+      "heading": "DVLab 設計驗證實驗室",
+      "allMembers": "認識成員",
+      "courses": "課程與教學",
+      "allCourses": "所有課程",
+      "semester": "學期",
+      "life": "實驗室日常",
+      "allLife": "更多活動"
     },
     "en": {
-      "meet": "Meet the Team",
-      "papers": "Publications",
-      "courses": "Courses",
-      "awards": "Awards",
-      "view": "View"
+      "team": "Our team",
+      "heading": "Design Verification Lab",
+      "allMembers": "Meet the team",
+      "courses": "Courses & teaching",
+      "allCourses": "All courses",
+      "semester": "Semester",
+      "life": "Life at DVLab",
+      "allLife": "More activities"
     }
   },
   "members": {
@@ -149,16 +155,6 @@ export const pageCopy = {
       "title": "Life",
       "heading": "Lab Life",
       "description": "DVLab (Design Verification Lab, NTUEE) lab life: photos from hiking trips, lunch gatherings, and sports activities."
-    }
-  },
-  "join": {
-    "zh": {
-      "home": "返回首頁",
-      "members": "檢視成員"
-    },
-    "en": {
-      "home": "Back to Home",
-      "members": "View Members"
     }
   }
 };

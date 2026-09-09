@@ -6,7 +6,7 @@ import { pageCopy } from '../data/page-copy.mjs';
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const t = pageCopy.life[lang];
 const pathPrefix = lang === 'en' ? '/en' : '';
-const photos = (await getCollection('life')).sort((a, b) => a.data.order - b.data.order).map(entry => entry.data);
+const photos = (await getCollection('life')).sort((a, b) => a.data.order - b.data.order).map(entry => ({ slug: entry.slug, ...entry.data }));
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
   <section class="page-head" data-reveal>
@@ -15,7 +15,7 @@ const photos = (await getCollection('life')).sort((a, b) => a.data.order - b.dat
 
   <section class="detail-shell" data-reveal-group>
     {photos.map((p, i) => (
-      <article class="card lab-life-item" data-reveal data-reveal-order={String(i)}>
+      <article id={p.slug} class="card lab-life-item" data-reveal data-reveal-order={String(i)}>
         <img class="lab-life-img" src={p.photo} alt={p.alt[lang]} loading="lazy" decoding="async" />
         <div class="lab-life-body">
           <h2 class="page-title">{p.caption[lang]}</h2>
@@ -25,3 +25,7 @@ const photos = (await getCollection('life')).sort((a, b) => a.data.order - b.dat
     ))}
   </section>
 </BaseLayout>
+
+<style>
+  .lab-life-item { scroll-margin-top: 140px; }
+</style>

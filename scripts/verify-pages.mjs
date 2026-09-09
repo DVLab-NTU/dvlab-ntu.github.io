@@ -130,7 +130,7 @@ for (const page of pages) {
 const required = ['/index.html', '/en/index.html', '/members/index.html', '/en/members/index.html',
   '/papers/index.html', '/en/papers/index.html', '/courses/index.html', '/en/courses/index.html',
   '/awards/index.html', '/en/awards/index.html', '/life/index.html', '/en/life/index.html',
-  '/join/index.html', '/en/join/index.html', '/404.html'];
+  '/404.html'];
 for (const r of required) {
   assert(isExistingFile(path.join(distDir, r)), `missing required page: ${r}`);
 }
