@@ -27,6 +27,7 @@ try {
    if(failure!=='scripts'){
     await page.locator('[data-member-search]').fill('Pin-Chun');
     assert.equal(await page.locator('[data-member-card]:visible').count(),1);
+    assert.equal(await page.locator('.nav-toggle-bar').first().evaluate(el => getComputedStyle(el).backgroundColor === getComputedStyle(document.body).color), true);
     await page.locator('.nav-toggle').click();
     assert.equal(await page.locator('.nav-toggle').getAttribute('aria-expanded'),'true');
     const before=await page.locator('html').getAttribute('data-theme');

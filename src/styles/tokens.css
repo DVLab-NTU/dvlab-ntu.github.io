@@ -72,45 +72,30 @@
 }
 
 :root[data-theme='light'] {
-  /* Yellow-green bright variant: high-contrast counterpart of the old-site
-     $light-yellow (#fcffcc) family, legible on a light background. */
-  --bg: #f5f8e4;
-  --bg-elevated: #fdfeea;
-  --line: rgba(74, 94, 32, 0.22);
-  --line-strong: rgba(150, 170, 30, 0.55);
-  --text: #2a3415;
-  --text-soft: #3d4d1f;
-  --muted: #6d7a48;
+  /* Warm off-white surfaces retain the old site's yellow-green accents. */
+  --bg: #f7f8f2;
+  --bg-elevated: #fdfef9;
+  --line: #d7dccb;
+  --line-strong: #a8b38b;
+  --text: #29321e;
+  --text-soft: #46503b;
+  --muted: #657046;
   --primary: #9db41f;
   --primary-2: #f7fad8;
-  --surface-1: #fdfeea;
+  --surface-1: #fdfef9;
 
   --particle-color: #526326;
   --particle-link-opacity: 0.22;
 
-  --gradient-bg: radial-gradient(1100px 700px at 12% -10%, rgba(214, 228, 130, 0.5), transparent 55%),
-    radial-gradient(900px 600px at 100% 0%, rgba(195, 210, 100, 0.3), transparent 50%),
-    linear-gradient(180deg, #fbfde8 0%, #eef4d0 100%);
+  --gradient-bg: var(--bg);
   --gradient-accent: linear-gradient(180deg, #c9d94f 0%, #9db41f 100%);
-  --shadow-sm: 0 8px 22px rgba(74, 94, 32, 0.12);
-  --shadow-md: 0 20px 44px rgba(74, 94, 32, 0.18);
-  --glow-soft: 0 0 40px rgba(157, 180, 31, 0.18);
+  --radius-card: 8px;
+  --shadow-sm: none;
+  --shadow-md: 0 2px 6px rgba(74, 94, 32, 0.08);
+  --glow-soft: 0 0 0 transparent;
   --shadow-focus: 0 0 0 3px rgba(157, 180, 31, 0.35);
-
-  /* Light theme: hover shading uses green-tinted inset tones instead of
-     brightening the near-white face. */
-  --shadow-emboss:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.35),
-    inset 0 2px 3px rgba(74, 94, 32, 0.14),
-    0 2px 5px rgba(74, 94, 32, 0.14);
-  --shadow-emboss-hover:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.35),
-    inset 0 2px 3px rgba(74, 94, 32, 0.18),
-    0 3px 8px rgba(74, 94, 32, 0.18);
-  --shadow-emboss-pressed:
-    inset 0 2px 4px rgba(74, 94, 32, 0.22),
-    0 1px 1px rgba(74, 94, 32, 0.08);
-  --shadow-field:
-    inset 0 2px 4px rgba(74, 94, 32, 0.16),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.5);
+  --shadow-emboss: none;
+  --shadow-emboss-hover: none;
+  --shadow-emboss-pressed: none;
+  --shadow-field: none;
 }

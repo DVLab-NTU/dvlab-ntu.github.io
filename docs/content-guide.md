@@ -122,7 +122,9 @@ two files; `scripts/validate-content.mjs` checks the required set
 ## Lab activities (`src/content/life/`)
 
 - Each activity has `photo` (local public path), bilingual `alt`, `caption`,
-  `description`, and an integer `order`. Both languages use the same record.
+  and an integer `order`. Both languages use the same record.
+- `description` is optional: omit it when only a photo and caption are verified.
+  If supplied, provide both languages; do not infer dates or locations.
 - Keep the `group-hiking` entry: its photo and caption also supply the home hero.
 - Keep them web-sized (~1400px wide, JPEG) to avoid bloating the bundle.
 

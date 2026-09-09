@@ -68,7 +68,7 @@ const courses = (await getCollection('courses')).sort((a, b) =>
           <a href={`${pathPrefix}/life/#${slug}`} aria-label={data.caption[lang]}>
             <img src={data.photo} alt={data.alt[lang]} loading="lazy" decoding="async" width="1400" height="1050" />
           </a>
-          <figcaption><h3>{data.caption[lang]}</h3><p>{data.description[lang]}</p></figcaption>
+          <figcaption><h3>{data.caption[lang]}</h3>{data.description && <p>{data.description[lang]}</p>}</figcaption>
         </figure>
       ))}
     </div>
@@ -98,7 +98,8 @@ const courses = (await getCollection('courses')).sort((a, b) =>
     color: #f4f8ff;
   }
   :global([data-theme='light']) .home-opening {
-    background: radial-gradient(ellipse at 50% 42%, #fdfeea, #e8efbc 85%);
+    background: #eef1e2;
+    border-radius: 12px;
     color: #293515;
   }
   .home-section { padding-block: clamp(36px, 6vw, 72px); }

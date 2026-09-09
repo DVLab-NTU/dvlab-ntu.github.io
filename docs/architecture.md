@@ -84,7 +84,7 @@ scripts/              # Build/verify tooling (see verification.md)
 | `/papers/:slug/` | Paper detail | Abstract, links (online/pdf/code), optional bibtex |
 | `/courses/` | Courses | Sorted by semester desc (e.g. 115-1 → 108-1) |
 | `/awards/` | Awards | Students/advisors/source per record |
-| `/life/` | Lab life | Group photos with captions + descriptions |
+| `/life/` | Lab life | Group photos with captions + optional descriptions |
 | `/en/*` | English | Mirrors every route under `/en/` |
 
 ## Data flow
@@ -102,10 +102,12 @@ scripts/              # Build/verify tooling (see verification.md)
 
 - Tokens live in `src/styles/tokens.css`: `:root` is the dark theme
   (old-site navy `#1f3751` + gold `#ffd700`); `:root[data-theme='light']`
-  overrides with the yellow-green variant.
+  overrides with warm off-white surfaces and yellow-green accents. Light cards
+  use thin borders, metadata badges have solid pale-green fills, and controls
+  use flat styling with visible keyboard focus outlines.
 - Theme is applied before paint by an inline script in `BaseLayout.astro`
   (`localStorage['lab-theme']` → `prefers-color-scheme` fallback).
-- The theme toggle button is an embossed block (`src/styles/components.css`,
+- The theme toggle button is embossed in dark mode and flat in light mode (`src/styles/components.css`,
   `.theme-toggle-btn`); a 180 ms crossfade is defined in `effects.css`.
 - All animation respects `prefers-reduced-motion`.
 
@@ -138,7 +140,7 @@ theme and do not prevent navigation or search initialization.
 Layer coordinates preserve the original composition; `--delay` and the 600 ms
 fade set a total entrance duration of 1.8 seconds. The opening stage spans the
 content width and is at least 80svh tall.
-Dark mode keeps the original white lettering on navy; light mode uses a pale
+Dark mode keeps the original white lettering on navy; light mode uses a solid pale
 yellow-green stage, dark lettering and a lighter chip through CSS filters.
 The centered logo grows to 960px;
 WebP dimensions are capped at the original source resolution. The introduction

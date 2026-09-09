@@ -8,15 +8,15 @@ export async function testContrast(browser, base) {
     for (const width of [390, 1280]) {
       await page.setViewportSize({ width, height: 900 });
       for (const prefix of ['', '/en']) {
-        for (const path of ['/papers/formal-deadlock-checking-on-high-level-systemc-designs/', '/members/Pinchun/']) {
+        for (const path of ['/papers/formal-deadlock-checking-on-high-level-systemc-designs/', '/members/Pinchun/', '/awards/']) {
           await page.goto(base + prefix + path);
           await page.waitForSelector('[data-theme-toggle-init="1"]');
           if (width === 390) await page.locator('.nav-toggle').click();
-          for (const selector of ['.badge', '.nav-link.is-active', '.nav-link:not(.is-active)', '.footer a']) {
+          for (const selector of ['.badge', '.badge-muted', '.award-source', '.nav-link.is-active', '.nav-link:not(.is-active)', '.footer a']) {
             const elements = page.locator(selector);
             for (const el of await elements.all()) {
               for (const state of ['normal', 'hover', 'focus']) {
-                if (state === 'focus' && selector === '.badge') continue;
+                if (state === 'focus' && selector.startsWith('.badge')) continue;
                 await el.scrollIntoViewIfNeeded();
                 await page.mouse.move(0, 0);
                 await el.evaluate(node => node.blur());
@@ -49,10 +49,20 @@ export async function testContrast(browser, base) {
               }
             }
           }
+          if (path === '/awards/') {
+            const badge = page.locator('.badge-muted').first();
+            assert.equal(await badge.evaluate(el => getComputedStyle(el).borderTopStyle), 'solid');
+            assert.equal(await badge.evaluate(el => getComputedStyle(el).borderTopWidth), '1px');
+            assert.equal(await badge.evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(238, 241, 226)');
+            assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+            await page.locator('.award-source').first().focus();
+            assert.equal(await page.locator('.award-source').first().evaluate(el => getComputedStyle(el).outlineStyle), 'solid');
+          }
           await page.mouse.move(0, 0);
           await page.locator('[data-theme-toggle]').click();
           await page.waitForTimeout(180);
-          assert.equal(await page.locator('.badge').evaluate(el => getComputedStyle(el).color), 'rgb(252, 255, 204)');
+          const selector = path === '/awards/' ? '.badge-muted' : '.badge';
+          assert.equal(await page.locator(selector).first().evaluate(el => getComputedStyle(el).color), path === '/awards/' ? 'rgb(143, 174, 178)' : 'rgb(252, 255, 204)');
           await page.locator('[data-theme-toggle]').click();
         }
       }
