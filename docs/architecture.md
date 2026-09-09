@@ -130,3 +130,25 @@ Content is visible without scripts. The reveal script opts observed nodes into
 animation after initialization, and caps stagger delays. Mobile navigation is
 visible until its toggle initializes. Storage errors fall back to the system
 theme and do not prevent navigation or search initialization.
+
+## Home logo entrance
+
+`HomeLogo.astro` restores the six original PNG layers from commit
+`5ff409fe16ae35e385f87f6385684340c704ccce`, formerly under
+`frontend/public/assets/images/examples/logo/`. Sources are preserved in
+`src/assets/legacy-logo/`; Astro emits WebP assets. The old 9.4 MB GIF is not shipped.
+Layer coordinates preserve the original composition; `--delay` and the 600 ms
+fade set a total entrance duration of 1.8 seconds. A navy backing keeps the
+original white lettering legible in both themes.
+
+Only the two home routes include the component. Static HTML displays the full
+logo and reserves its space; the title and links never wait for the animation.
+After images decode, `home-logo.mjs` plays once per tab session using
+`sessionStorage['dvlab-home-logo-seen']`, shared by both languages. Storage errors
+skip autoplay. The bilingual replay button appears only after initialization.
+Reduced-motion preference (including changes during playback) disables the
+animation and hides replay. With scripts blocked the full static logo remains.
+
+`npm run test:browser` covers the home entrance, navigation during playback,
+return/language-switch suppression, keyboard replay, stable logo geometry,
+reduced motion, denied storage reads/writes, blocked scripts, and both themes.
