@@ -21,18 +21,21 @@ function initParticles() {
   const density = 10000;
   const count = Math.max(12, Math.min(80, Math.floor((canvas.clientWidth * canvas.clientHeight) / density * reduceFactor)));
   let color;
+  let linkOpacity;
   function updateColor() {
-    color = getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim() || 'rgba(252, 255, 204, 0.55)';
+    const style = getComputedStyle(document.documentElement);
+    color = style.getPropertyValue('--particle-color').trim() || '#fcffcc';
+    linkOpacity = Number.parseFloat(style.getPropertyValue('--particle-link-opacity')) || 0.1;
   }
   updateColor();
 
   const particles = Array.from({ length: count }, () => ({
     x: Math.random() * canvas.clientWidth,
     y: Math.random() * canvas.clientHeight,
-    vx: (Math.random() - 0.5) * 0.5,
-    vy: (Math.random() - 0.5) * 0.5,
-    size: 1.5 + Math.random() * 2.5,
-    opacity: 0.3 + Math.random() * 0.4,
+    vx: (Math.random() - 0.5),
+    vy: (Math.random() - 0.5),
+    size: 2 + Math.random() * 4,
+    opacity: 0.5,
   }));
 
   let width = canvas.clientWidth;
@@ -71,8 +74,8 @@ function initParticles() {
       const dx = p.x - mouse.x;
       const dy = p.y - mouse.y;
       const dist = Math.hypot(dx, dy);
-      if (dist < 120 && dist > 0) {
-        const force = (120 - dist) / 120;
+      if (dist < 200 && dist > 0) {
+        const force = (200 - dist) / 200;
         p.x += (dx / dist) * force * 2 * elapsed;
         p.y += (dy / dist) * force * 2 * elapsed;
       }
@@ -98,7 +101,7 @@ function initParticles() {
         const b = particles[j];
         const d = Math.hypot(a.x - b.x, a.y - b.y);
         if (d < 150) {
-          ctx.globalAlpha = 0.1 * (1 - d / 150);
+          ctx.globalAlpha = linkOpacity * (1 - d / 150);
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -132,8 +135,8 @@ function initParticles() {
         y: event.clientY - rect.top,
         vx: (Math.random() - 0.5) * 1.2,
         vy: (Math.random() - 0.5) * 1.2,
-        size: 1.5 + Math.random() * 2.5,
-        opacity: 0.3 + Math.random() * 0.4,
+        size: 2 + Math.random() * 4,
+        opacity: 0.5,
       });
     }
   }
