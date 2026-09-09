@@ -15,7 +15,7 @@ Backup site (GitHub Pages): <https://dvlab-ntu.github.io/>
   complete HTML file; navigation is plain full-page loads (no SPA router), so
   clicks respond instantly and every page is indexable.
 - Content: Markdown with frontmatter under `src/content/` (members, papers,
-  courses, awards, join) — bilingual `zh`/`en` fields
+  courses, awards, life) — bilingual `zh`/`en` fields
 - Dark mode: automatic via `prefers-color-scheme` + manual toggle
   (localStorage `lab-theme`), FOUC-safe inline script
 - UI: styled after the lab's 2022 site (navy + gold palette, icon nav bar,
@@ -68,11 +68,10 @@ CI runs the same command; GitHub Pages deploys only after it passes.
 | Papers | `src/content/papers/*.md` | `year`, `title`, `venue`, `authors`, optional `abstract`/`links`/`bibtex` |
 | Courses | `src/content/courses/*.md` | `title` `{zh,en}`, `semester`, official NTU course-catalogue `link`, optional `intro`/`contents` `{zh,en}` |
 | Awards | `src/content/awards/*.md` | `title` `{zh,en}`, `year`, `month`, `students[]`, optional `advisors[]`, `source` URL |
-| Join | `src/content/join/recruitment/` | `overview_cn.md` / `overview_en.md` |
 
 Pages: home (`/`), members, papers, courses, awards, life (`/life/`, lab
-activity photos), join — each in `/` and `/en/`. Site-wide copy (brand, nav,
-home hero/highlights) lives in `src/data/site.zh.json` / `site.en.json`.
+activity photos) — each in `/` and `/en/`. Site-wide copy (brand, nav,
+home introduction) lives in `src/data/site.zh.json` / `site.en.json`.
 
 ## Deployment
 
@@ -85,7 +84,7 @@ automatically. The `admin/` route is an optional Decap CMS backend (disabled
 until `CMS_GITHUB_REPO` / `CMS_OAUTH_BASE_URL` are configured).
 
 Page templates are shared by the Chinese and English routes. Activities live
-in `src/content/life/`; home highlights store their own links. Member images
+in `src/content/life/`; homepage previews reuse course and activity collections. Member images
 are optimized during build while retaining source files, and typography uses
 system fonts. CI covers both CMS configuration modes; see `docs/deployment.md`
 for the separate OAuth setup required for real editor login.

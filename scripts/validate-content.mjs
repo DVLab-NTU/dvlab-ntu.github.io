@@ -23,14 +23,12 @@ export function validateContent() {
     assert(files.length, `Empty collection: ${name}`);
     for (const file of files) {
       const filename = path.join(directory, file);
-      const { data, body } = readContent(filename);
+      const { data } = readContent(filename);
       const result = schema.safeParse(data);
       assert(result.success, `${filename}: ${result.error?.message}`);
       if (name === 'members') assert.equal(data.id, path.basename(file, '.md'), `Member ID must match filename: ${file}`);
-      if (name === 'join') assert(body, `Empty recruitment page: ${file}`);
     }
   }
-  for (const lang of ['cn', 'en']) assert(fs.existsSync(`src/content/join/recruitment/overview_${lang}.md`));
   console.log('Content validation passed');
 }
 

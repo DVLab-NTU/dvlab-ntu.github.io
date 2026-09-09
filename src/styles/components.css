@@ -997,37 +997,6 @@ html[lang^='en'] .nav-text {
   }
 }
 
-/* Lab group photo on the home hero */
-.lab-photo {
-  position: relative;
-  width: 100%;
-  max-width: 860px;
-  margin: 0 auto 8px;
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-.lab-photo-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 420px;
-  object-fit: cover;
-}
-
-.lab-photo-caption {
-  position: absolute;
-  right: 12px;
-  bottom: 10px;
-  padding: 4px 10px;
-  font-size: var(--text-sm);
-  color: #f4f8ff;
-  background: rgba(10, 15, 32, 0.55);
-  border-radius: 6px;
-  backdrop-filter: blur(4px);
-  pointer-events: none;
-}
-
 /* Lab life page items */
 .lab-life-item {
   display: grid;

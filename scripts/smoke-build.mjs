@@ -71,11 +71,11 @@ const unexpectedMissingCmsVars = ['CMS_GITHUB_REPO', 'CMS_OAUTH_BASE_URL', 'PUBL
 const checks = [
   {
     file: 'dist/index.html',
-    includes: ['DVLab', '重點資訊', '研究團隊'],
+    includes: ['DVLab', '研究團隊', '課程與教學', '實驗室日常'],
   },
   {
     file: 'dist/en/index.html',
-    includes: ['DVLab', 'Highlights', 'Research Team'],
+    includes: ['DVLab', 'Our team', 'Courses &amp; teaching', 'Life at DVLab'],
   },
   {
     file: 'dist/members/index.html',
@@ -113,6 +113,9 @@ function assert(cond, message) {
 }
 
 try {
+  for (const route of ['join', 'en/join']) {
+    assert(!fs.existsSync(`dist/${route}/index.html`), `Removed recruitment route was generated: ${route}`);
+  }
   checks.forEach(({ file, includes, excludes = [] }) => {
     const filePath = path.resolve(file);
     assert(fs.existsSync(filePath), `Missing build output: ${file}`);
@@ -134,7 +137,7 @@ try {
     assert(config.backend.base_url === normalizeUrl(cmsOauthBaseUrl), 'CMS OAuth URL mismatch');
     assert(config.backend.site_domain === cmsSiteDomain, 'CMS domain mismatch');
     assert(config.publish_mode === 'editorial_workflow', 'CMS must use editorial workflow');
-    for (const name of ['members', 'papers', 'courses', 'awards', 'life', 'join', 'site']) {
+    for (const name of ['members', 'papers', 'courses', 'awards', 'life', 'site']) {
       assert(config.collections.some(collection => collection.name === name), `Missing CMS collection: ${name}`);
     }
   } else {

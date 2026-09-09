@@ -18,7 +18,7 @@ route is a complete HTML file generated at build time.
 
 ```
 src/
-  content/            # Markdown content collections (members, papers, courses, awards, join)
+  content/            # Markdown content collections (members, papers, courses, awards, life)
     config.ts         # Registers the shared collection schemas
   data/
     site.zh.json      # Site-wide copy (brand, nav, home) — Traditional Chinese
@@ -27,7 +27,7 @@ src/
     BaseLayout.astro  # <head> (SEO/meta/fonts/theme), header/nav, footer, scripts
   components/         # Shared page templates and optimized MemberAvatar
   pages/              # Thin language wrappers; /en/ mirrors each
-    index.astro       # Home: hero (title + group photo + CTA buttons) + highlights
+    index.astro       # Home: logo entrance, team overview, course and activity previews
     members.astro     # Member list with search + role filter
     members/[id].astro# Member detail (bio and links)
     papers.astro      # Publication list, newest first
@@ -35,7 +35,6 @@ src/
     courses.astro     # Courses sorted by semester, newest first
     awards.astro      # Awards with students/advisors/source
     life.astro        # Lab activity photos (hiking / lunch / jogging)
-    join.astro        # Recruitment overview (renders join collection markdown)
     404.astro         # noindex 404 with nav links
   scripts/            # Client-side interactivity (ES modules, no framework)
     reveal.mjs        # Scroll-reveal animations (IntersectionObserver)
@@ -86,7 +85,6 @@ scripts/              # Build/verify tooling (see verification.md)
 | `/courses/` | Courses | Sorted by semester desc (e.g. 115-1 → 108-1) |
 | `/awards/` | Awards | Students/advisors/source per record |
 | `/life/` | Lab life | Group photos with captions + descriptions |
-| `/join/` | Recruitment | Rendered from `src/content/join/` |
 | `/en/*` | English | Mirrors every route under `/en/` |
 
 ## Data flow
@@ -177,3 +175,15 @@ Reduced-motion preference is read live; enabling it skips an active transition.
 Both header logo variants load in the HTML. The original stays visible until
 the light image has decoded successfully, avoiding a blank logo on a cold cache
 or failed image request. The large homepage entrance animation is unchanged.
+
+## Homepage content
+
+Below the unchanged logo opening, the homepage presents the team introduction
+and hiking photo, three courses sorted by semester descending (then slug),
+and two other activities sorted by their `order`. Course and
+activity previews link to stable entry anchors on the full pages.
+All content is rendered at build time and works without JavaScript.
+
+The recruitment collection, both `/join/` routes, and their CMS fields have
+been removed. Old recruitment URLs now use the site's normal 404 response;
+they are not navigation items or sitemap entries.

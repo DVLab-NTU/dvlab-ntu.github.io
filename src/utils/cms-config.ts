@@ -126,22 +126,13 @@ export function cmsCollections() {
       identifier_field: 'caption.en', summary: '{{caption.zh}}',
     },
     {
-      name: 'join', label: 'Recruitment', delete: false, editor: { preview: false },
-      files: ['cn', 'en'].map(locale => ({ name: `recruitment_${locale}`, label: `Recruitment (${locale})`, file: `src/content/join/recruitment/overview_${locale}.md`, fields: [text('title'), { ...text('body'), widget: 'markdown' }] })),
-    },
-    {
       name: 'site', label: 'Site copy', delete: false, editor: { preview: false },
       files: ['zh', 'en'].map(locale => ({
         name: `site_${locale}`, label: `Site (${locale})`, file: `src/data/site.${locale}.json`, format: 'json',
         fields: [text('brand'), text('siteName'), {
           name: 'nav', label: 'Navigation', widget: 'object', fields: ['home', 'members', 'papers', 'courses', 'awards', 'life'].map(name => text(name)),
         }, {
-          name: 'home', label: 'Home', widget: 'object', fields: [multiline('intro'), {
-            name: 'sections', label: 'Sections', widget: 'object', fields: [text('highlights')],
-          }, {
-            name: 'highlights', label: 'Highlights', widget: 'list', min: 1,
-            fields: [text('title'), multiline('desc'), { ...text('href'), hint: 'Language-neutral page path, e.g. /join/. English prefix is added automatically.' }],
-          }],
+          name: 'home', label: 'Home', widget: 'object', fields: [multiline('intro')],
         }],
       })),
     },

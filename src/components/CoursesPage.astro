@@ -24,7 +24,7 @@ const pathPrefix = lang === 'en' ? '/en' : '';
 
   <section class="detail-shell" data-reveal-group>
     {courses.map((c, i) => (
-      <article class="card detail-content stack-sm course-card" data-reveal data-reveal-order={String(i)}>
+      <article id={c.slug} class="card detail-content stack-sm course-card" data-reveal data-reveal-order={String(i)}>
         <div class="detail-meta">
           <h2 class="page-title">{pickI18nText(c.title, lang)}</h2>
           <span class="badge-muted">{c.semester}</span>
@@ -50,3 +50,7 @@ const pathPrefix = lang === 'en' ? '/en' : '';
     ))}
   </section>
 </BaseLayout>
+
+<style>
+  .course-card { scroll-margin-top: 140px; }
+</style>

@@ -105,14 +105,9 @@ source: "https://www.iccad-contest.org/2025/Winners.html"
 - Every record needs a public `source` URL.
 - Students are the collaborators/recipients; the advisor is separate metadata.
 
-## Join (`src/content/join/recruitment/`)
-
-- `overview_cn.md` and `overview_en.md` — bilingual recruitment text rendered
-  on `/join/` (and `/en/join/`).
-
 ## Site-wide copy (`src/data/site.{zh,en}.json`)
 
-Brand, nav labels, home intro, hero highlights. Keys must match between the
+Brand, nav labels, and home introduction. Keys must match between the
 two files; `scripts/validate-content.mjs` checks the required set
 (`home`, `members`, `papers`, `courses`, `awards`, `life`).
 
@@ -123,15 +118,16 @@ two files; `scripts/validate-content.mjs` checks the required set
 - Keep the `group-hiking` entry: its photo and caption also supply the home hero.
 - Keep them web-sized (~1400px wide, JPEG) to avoid bloating the bundle.
 
-Each home highlight stores its own `href`, such as `/join/`, beside `title` and
-`desc`. The English prefix is added by the template. Reordering cards does not
-change their destinations. Page UI labels live in `src/data/page-copy.mjs`.
+The homepage shows the team introduction, the three newest course records,
+and two activity photos excluding the main hiking photo. These previews use
+the same collections as their destination pages; no duplicate homepage content
+needs editing. Course semesters describe the stored records, not a live course
+offering. Page UI labels live in `src/data/page-copy.mjs`.
 
 ## CMS editing
 
 When configured, `/admin/` edits members, papers, courses, awards, activities,
-recruitment, and site JSON. Bilingual objects stay in one file; recruitment
-keeps its explicit Chinese and English files. Optional fields may be omitted.
+and site JSON. Bilingual objects stay in one file. Optional fields may be omitted.
 New member IDs use lowercase letters, numbers and hyphens; existing IDs retain
 their original capitalization and dots. A pre-save guard prevents renaming an
 existing member ID or creating an ID that Decap would rewrite in the filename.

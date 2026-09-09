@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import { dump, load } from 'js-yaml';
-import { schemas, membersSchema, siteSchema } from '../src/utils/content-schemas.mjs';
+import { schemas, membersSchema } from '../src/utils/content-schemas.mjs';
 import { groupMembers } from '../src/utils/member-groups.mjs';
 import { cmsCollections, renderCmsConfigYml } from '../src/utils/cms-config.ts';
 import { readContent } from '../scripts/validate-content.mjs';
@@ -29,15 +29,6 @@ test('member grouping does not depend on translated names or missing cohorts', (
   assert.deepEqual(groups.map(group => group.key), ['current', 12, 'unknown']);
   assert.deepEqual(groups[0].members.map(member => member.id), ['pi', 'student']);
   assert.deepEqual(groupMembers(members.map(member => ({ ...member, name: { zh: '改名', en: 'Renamed' } }))).map(group => group.key), groups.map(group => group.key));
-});
-
-test('home links remain attached to their content when reordered', () => {
-  const site = siteSchema.parse(JSON.parse(fs.readFileSync('src/data/site.zh.json', 'utf8')));
-  const recruitment = site.home.highlights.at(-1);
-  site.home.highlights.reverse();
-  assert.equal(site.home.highlights[0], recruitment);
-  assert.equal(site.home.highlights[0].href, '/join/');
-  assert.equal(siteSchema.safeParse({ ...site, home: { ...site.home, highlights: [{ title: 'X', desc: 'Y' }] } }).success, false);
 });
 
 test('CMS supports every collection field and existing member IDs', () => {

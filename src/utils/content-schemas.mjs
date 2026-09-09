@@ -49,10 +49,6 @@ export const membersSchema = z.object({
     .optional()
 });
 
-export const joinSchema = z.object({
-  title: optionalText
-});
-
 export const coursesSchema = z.object({
   title: i18nText,
   semester: z.string().regex(/^\d{2,3}-[12]$/),
@@ -78,17 +74,12 @@ export const lifeSchema = z.object({
   description: i18nText,
   order: z.number().int(),
 });
-export const schemas = { members: membersSchema, papers: papersSchema, courses: coursesSchema, awards: awardsSchema, join: joinSchema, life: lifeSchema };
+export const schemas = { members: membersSchema, papers: papersSchema, courses: coursesSchema, awards: awardsSchema, life: lifeSchema };
 export const siteSchema = z.object({
   brand: z.string().trim().min(1),
   siteName: z.string().trim().min(1),
   nav: z.object(Object.fromEntries(['home', 'members', 'papers', 'courses', 'awards', 'life'].map(key => [key, z.string().trim().min(1)]))),
   home: z.object({
     intro: z.string().trim().min(1),
-    sections: z.object({ highlights: z.string().trim().min(1) }),
-    highlights: z.array(z.object({
-      title: z.string().trim().min(1), desc: z.string().trim().min(1),
-      href: z.string().regex(/^\/(?!\/)[^?#]*\/$/),
-    })).min(1),
   }),
 });
