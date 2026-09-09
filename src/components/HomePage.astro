@@ -16,7 +16,6 @@ if (!hero) throw new Error('Missing group-hiking activity for home hero');
 ---
 <BaseLayout title="" desc={t.home.intro} lang={lang} pathPrefix={pathPrefix}>
   <section class="home-opening mb-5" aria-label={lang === 'zh' ? '實驗室開場動畫' : 'Lab introduction animation'}>
-    <p class="opening-label">DESIGN VERIFICATION LAB · NTUEE</p>
     <HomeLogo lang={lang} />
   </section>
 
@@ -63,12 +62,10 @@ if (!hero) throw new Error('Missing group-hiking activity for home hero');
     background: radial-gradient(ellipse at 50% 42%, #294961, #14263a 80%);
     color: #f4f8ff;
   }
-  .opening-label { margin: 0; font-size: 0.75rem; letter-spacing: 0.18em; text-align: center; color: #b8cdd6; }
   :global([data-theme='light']) .home-opening {
     background: radial-gradient(ellipse at 50% 42%, #fdfeea, #e8efbc 85%);
     color: #293515;
   }
-  :global([data-theme='light']) .opening-label { color: #536337; }
   .home-introduction { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; padding-block: 32px; scroll-margin-top: 140px; }
   .home-introduction .hero-title { margin-top: 0; }
   .home-introduction .lab-photo { margin: 0; }
