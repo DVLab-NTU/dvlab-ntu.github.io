@@ -3,7 +3,7 @@ function initThemeToggle() {
   const toggle = document.querySelector('[data-theme-toggle]');
   const key = 'lab-theme';
   const isZh = root.lang?.startsWith('zh');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const preferred = (() => {
     let saved;
@@ -29,23 +29,6 @@ function initThemeToggle() {
     }
   }
 
-  function getRippleCenter(event) {
-    if (event && Number.isFinite(event.clientX) && Number.isFinite(event.clientY)) {
-      return { x: event.clientX, y: event.clientY };
-    }
-    if (toggle) {
-      const rect = toggle.getBoundingClientRect();
-      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
-    }
-    return { x: window.innerWidth / 2, y: 0 };
-  }
-
-  function getRippleRadius(x, y) {
-    const dx = Math.max(x, window.innerWidth - x);
-    const dy = Math.max(y, window.innerHeight - y);
-    return Math.hypot(dx, dy);
-  }
-
   applyTheme(preferred);
 
   if (!toggle) {
@@ -57,34 +40,54 @@ function initThemeToggle() {
   }
   toggle.dataset.themeToggleInit = '1';
 
-  toggle.addEventListener('click', (event) => {
-    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    const supportsInkTransition = typeof document.startViewTransition === 'function';
+  const lightLogo = document.querySelector('.brand-logo-light');
+  lightLogo?.decode().then(() => lightLogo.closest('.brand').classList.add('has-light-logo')).catch(() => {});
 
-    if (!supportsInkTransition || reduceMotion) {
-      try { localStorage.setItem(key, next); } catch {}
-      applyTheme(next);
-      return;
+  let requestedTheme = preferred;
+  let changing = false;
+  let activeTransition;
+
+  async function updateTheme() {
+    if (changing) return;
+    changing = true;
+    try {
+      while (root.getAttribute('data-theme') !== requestedTheme) {
+        const update = () => applyTheme(requestedTheme);
+        if (motion.matches || typeof document.startViewTransition !== 'function') {
+          update();
+        } else {
+          try {
+            activeTransition = document.startViewTransition(update);
+            await activeTransition.finished;
+          } catch {
+            update();
+          } finally {
+            activeTransition = undefined;
+          }
+        }
+      }
+    } finally {
+      changing = false;
     }
+  }
 
-    const { x, y } = getRippleCenter(event);
-    const radius = getRippleRadius(x, y);
-    root.style.setProperty('--theme-x', `${x}px`);
-    root.style.setProperty('--theme-y', `${y}px`);
-    root.style.setProperty('--theme-r', `${radius}px`);
-    root.setAttribute('data-theme-transition', 'ink');
-
-    const transition = document.startViewTransition(() => {
-      try { localStorage.setItem(key, next); } catch {}
-      applyTheme(next);
-    });
-
-    transition.finished.finally(() => {
-      root.removeAttribute('data-theme-transition');
-      root.style.removeProperty('--theme-x');
-      root.style.removeProperty('--theme-y');
-      root.style.removeProperty('--theme-r');
-    });
+  motion.addEventListener('change', () => {
+    if (motion.matches) {
+      activeTransition?.skipTransition();
+      applyTheme(requestedTheme);
+    }
+  });
+  document.addEventListener('click', event => {
+    if (!toggle.contains(event.target)) {
+      // Captured View Transition content is hit-tested as the root element.
+      if (!activeTransition || event.target !== root || event.detail === 0) return;
+      const box = toggle.getBoundingClientRect();
+      if (event.clientX < box.left || event.clientX > box.right
+        || event.clientY < box.top || event.clientY > box.bottom) return;
+    }
+    requestedTheme = requestedTheme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem(key, requestedTheme); } catch {}
+    void updateTheme();
   });
 }
 
