@@ -73,6 +73,17 @@ for (const page of pages) {
 
   checked.html++;
 
+  const logoLayers = [...html.matchAll(/<img\b[^>]*class="[^"]*logo-layer[^>]*>/g)];
+  const isHome = rel === 'index.html' || rel === path.join('en', 'index.html');
+  assert(logoLayers.length === (isHome ? 6 : 0), `${rel}: home logo must have six layers on home routes only`);
+  let logoBytes = 0;
+  for (const [image] of logoLayers) {
+    const src = image.match(/src="([^"]+)"/)?.[1];
+    assert(src?.startsWith('/_astro/') && src.endsWith('.webp'), `${rel}: logo must use generated WebP`);
+    if (src && isExistingFile(path.join(distDir, src))) logoBytes += fs.statSync(path.join(distDir, src)).size;
+  }
+  assert(logoBytes <= 200_000, `${rel}: home logo exceeds 200 kB`);
+
   // 1. no stray template text (e.g. "/BaseLayout>" from a mangled closing tag)
   assert(!/\/\s*[A-Z][A-Za-z]*\s*>/.test(visible), `${rel}: stray '/Tag>' text found`);
   assert(!visible.includes('BaseLayout'), `${rel}: stray 'BaseLayout' text found`);
