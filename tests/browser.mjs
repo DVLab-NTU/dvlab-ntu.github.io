@@ -2,6 +2,7 @@ const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright')
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { testHomeLogo } from './home-logo-browser.mjs';
+import { testTheme } from './theme-browser.mjs';
 const memberCount = fs.readdirSync('src/content/members').filter(file => file.endsWith('.md')).length;
 const browser = await chromium.launch({executablePath:process.env.BROWSER_EXECUTABLE,headless:true});
 const base=process.env.TEST_SITE_URL || 'http://127.0.0.1:4321';
@@ -50,4 +51,5 @@ try {
  console.log('PASS 16 desktop routes; zero font requests');
  await context.close();
  await testHomeLogo(browser, base);
+ await testTheme(browser, base);
 } finally { await browser.close(); }

@@ -43,9 +43,11 @@
   width: auto;
 }
 
-:root[data-theme='light'] .brand-logo {
-  content: url('/images/dvlab-logo-light.png');
-}
+/* Both variants load up front; keep the original visible until light decodes. */
+.brand { position: relative; }
+.brand-logo-light { position: absolute; inset: 0 auto auto 0; opacity: 0; }
+:root[data-theme='light'] .has-light-logo .brand-logo-light { opacity: 1; }
+:root[data-theme='light'] .has-light-logo .brand-logo-dark { opacity: 0; }
 
 .nav-links {
   display: flex;

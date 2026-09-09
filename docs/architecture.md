@@ -108,7 +108,7 @@ scripts/              # Build/verify tooling (see verification.md)
 - Theme is applied before paint by an inline script in `BaseLayout.astro`
   (`localStorage['lab-theme']` → `prefers-color-scheme` fallback).
 - The theme toggle button is an embossed block (`src/styles/components.css`,
-  `.theme-toggle-btn`); the ink transition is defined in `effects.css`.
+  `.theme-toggle-btn`); a 180 ms crossfade is defined in `effects.css`.
 - All animation respects `prefers-reduced-motion`.
 
 ## Navigation
@@ -162,3 +162,18 @@ animation and the artwork button. With scripts blocked the full static logo rema
 `npm run test:browser` covers the home entrance, navigation during playback,
 return/language-switch suppression, pointer/keyboard replay, stable logo geometry,
 reduced motion, denied storage reads/writes, blocked scripts, and both themes.
+
+## Theme switching
+
+`ui.mjs` tracks the requested theme separately from the rendered theme, finishes
+one transition at a time, and then applies any newer request. The View Transition
+overlay ignores pointer events; while captured content is
+hit-tested as the root element, clicks within the toggle bounds still reach
+the same theme handler.
+Keyboard and pointer activation share the same crossfade (no ripple coordinates).
+Unsupported View Transitions and storage failures still allow theme switching.
+Reduced-motion preference is read live; enabling it skips an active transition.
+
+Both header logo variants load in the HTML. The original stays visible until
+the light image has decoded successfully, avoiding a blank logo on a cold cache
+or failed image request. The large homepage entrance animation is unchanged.

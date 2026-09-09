@@ -180,7 +180,8 @@ const navItems = [
     <header class="site-header">
       <div class="container nav">
         <a class="brand" href={navPathResolved.home} aria-label={t.siteName}>
-          <img class="brand-logo" src="/images/dvlab-logo.png" alt="DVLab" width="120" height="84" />
+          <img class="brand-logo brand-logo-dark" src="/images/dvlab-logo.png" alt="DVLab" width="120" height="84" />
+          <img class="brand-logo brand-logo-light" src="/images/dvlab-logo-light.png" alt="" aria-hidden="true" width="120" height="84" loading="eager" />
         </a>
         <nav id="site-nav" class="nav-links" aria-label={lang === 'zh' ? '網站導覽' : 'Site'}>
           {navItems.map((item) => (
