@@ -5,7 +5,7 @@ in order and stops at the first failure. CI and the GitHub Pages workflow run
 exactly this command.
 
 ```bash
-PUBLIC_SITE_URL=https://dvlab-ntu.github.io npm run verify
+PUBLIC_SITE_URL=https://dvlab.ee.ntu.edu.tw npm run verify
 ```
 
 ## Stages

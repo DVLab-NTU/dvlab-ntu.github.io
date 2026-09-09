@@ -28,6 +28,6 @@ jobs:
       - name: Run full verification
         run: npm run verify
         env:
-          PUBLIC_SITE_URL: https://dvlab-ntu.github.io
+          PUBLIC_SITE_URL: https://dvlab.ee.ntu.edu.tw
           CMS_GITHUB_REPO: ${{ matrix.cms == 'enabled' && 'DVLab-NTU/dvlab-ntu.github.io' || '' }}
           CMS_OAUTH_BASE_URL: ${{ matrix.cms == 'enabled' && 'https://example.com' || '' }}
