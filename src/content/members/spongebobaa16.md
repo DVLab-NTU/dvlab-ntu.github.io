@@ -5,7 +5,7 @@ name:
   en: "CHEN, TING-WEI"
 cohort: 13
 role: "master"
-status: "current"
+status: "alumni"
 area: "eda"
 nickname: "CHEN, TING-WEI"
 bio:

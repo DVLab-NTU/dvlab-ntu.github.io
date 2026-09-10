@@ -4,7 +4,7 @@ import MemberAvatar from './MemberAvatar.astro';
 import { getCollection } from 'astro:content';
 import { resolveMemberAvatar } from '../utils/member-avatar';
 import { roles, statuses, areas } from '../data/member-labels.mjs';
-import { groupMembers, isFormer } from '../utils/member-groups.mjs';
+import { groupMembers, isFormer, admissionCohortLabel } from '../utils/member-groups.mjs';
 import { pageCopy } from '../data/page-copy.mjs';
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const t = pageCopy.members[lang];
@@ -15,7 +15,10 @@ const groups = groupMembers(members);
 const availableRoles = Object.keys(roles).filter(role => members.some(member => member.role === role));
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
-  <section class="page-head" data-reveal><h1 class="page-title">{t.heading}</h1></section>
+  <section class="page-head" data-reveal>
+    <h1 class="page-title">{t.heading}</h1>
+    <p>{t.cohortNote}</p>
+  </section>
   <section class="filter-wrap" data-members-filter-root data-reveal>
     <input class="filter-input" type="search" data-member-search placeholder={t.placeholder} aria-label={t.search} />
     <div class="filter-tags">
@@ -28,7 +31,7 @@ const availableRoles = Object.keys(roles).filter(role => members.some(member => 
     <p class="empty-state" data-empty-state hidden>{t.empty}</p>
     {groups.map(group => (
       <section data-member-group data-reveal-group>
-        {group.key !== 'current' && <h2 class="cohort-title">{group.key === 'unknown' ? t.unknown : lang === 'zh' ? `${2011 + Number(group.key)} 屆` : `Class of ${2011 + Number(group.key)}`}</h2>}
+        {group.key !== 'current' && <h2 class="cohort-title">{admissionCohortLabel(group.key === 'unknown' ? undefined : Number(group.key), lang)}</h2>}
         <div class="grid grid-3">
           {group.members.map((m, i) => (
             <a href={`${pathPrefix}/members/${m.id}/`} class="card card-hover card-link member-card"

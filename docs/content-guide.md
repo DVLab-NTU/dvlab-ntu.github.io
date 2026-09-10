@@ -52,7 +52,14 @@ Notes:
 - `avatarPosition` optionally sets `left`, `center` (default), or `right` to keep off-center portraits visible without editing the source image.
 - Classification and order use stable role/status/area codes, shared across languages.
   Labels live in `src/data/member-labels.mjs`; add a code there for a new category.
-  Unknown cohorts are labeled explicitly, never inferred from email addresses.
+  `cohort` is the admission academic year, not the graduation year or the year
+  a profile/photo was uploaded: R13 / ROC 113 / 2024 all map to `cohort: 13`.
+  Honor the member's latest form response when it differs from a legacy folder
+  or student identifier. Graduation status is independent of the admission cohort.
+  Unknown cohorts are labeled explicitly, never inferred from email addresses or
+  estimated by subtracting a degree duration from a graduation year.
+  Both list group headings and member details label the admission year explicitly;
+  detail pages also display the member's current/alumni status.
   Detail pages show the nickname, bilingual bio, research interests, and links.
   Nicknames are also searchable in the member list.
 - New members: add the Markdown file and the submitted photo with the same `id`.
