@@ -17,7 +17,6 @@ const availableRoles = Object.keys(roles).filter(role => members.some(member => 
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
   <section class="page-head" data-reveal>
     <h1 class="page-title">{t.heading}</h1>
-    <p>{t.cohortNote}</p>
   </section>
   <section class="filter-wrap" data-members-filter-root data-reveal>
     <input class="filter-input" type="search" data-member-search placeholder={t.placeholder} aria-label={t.search} />
