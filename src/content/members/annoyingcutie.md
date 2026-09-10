@@ -20,4 +20,6 @@ links:
   linkedin: "https://www.linkedin.com/in/chenyingtung"
   github: "https://github.com/annoyingcutie"
   strava: "https://www.strava.com/athletes/159988937"
+  email: "r13921120@ntu.edu.tw"
+  facebook: "https://www.facebook.com/profile.php?id=100000656599706"
 ---

@@ -50,7 +50,9 @@ export const membersSchema = z.object({
       linkedin: optionalText,
       instagram: optionalText,
       linktree: optionalText,
-      strava: optionalText
+      strava: optionalText,
+      facebook: optionalText,
+      researchgate: optionalText
     })
     .optional()
 });

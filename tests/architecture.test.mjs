@@ -80,6 +80,8 @@ test('CMS accepts legacy IDs but protects new filenames and existing URLs', asyn
 test('submitted profile fields survive parsing and CMS editing', () => {
   const member = membersSchema.parse(readContent('src/content/members/swear01.md').data);
   assert.equal(member.nickname, 'Stanley');
+  assert.match(membersSchema.parse(readContent('src/content/members/r14921053.md').data).links.facebook, /facebook\.com/);
+  assert.match(membersSchema.parse(readContent('src/content/members/KuoKuo1521.md').data).links.researchgate, /researchgate\.net/);
   assert.equal(membersSchema.parse(readContent('src/content/members/annoyingcutie.md').data).avatarPosition, 'left');
   assert.equal(membersSchema.safeParse({ ...member, avatarPosition: 'invalid' }).success, false);
   assert.match(member.researchInterests.en, /SAT\/SMT/);
@@ -87,7 +89,7 @@ test('submitted profile fields survive parsing and CMS editing', () => {
   assert.equal(membersSchema.safeParse({ ...member, researchInterests: { zh: '量子', en: '' } }).success, false);
   const fields = cmsCollections().find(item => item.name === 'members').fields;
   const linkFields = fields.find(item => item.name === 'links').fields;
-  for (const name of ['instagram', 'linktree', 'strava']) assert(linkFields.some(field => field.name === name));
+  for (const name of ['instagram', 'linktree', 'strava', 'facebook', 'researchgate']) assert(linkFields.some(field => field.name === name));
 });
 
 test('activity descriptions may be omitted or cleared, but must be bilingual when supplied', async () => {

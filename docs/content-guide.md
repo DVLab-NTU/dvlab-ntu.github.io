@@ -39,6 +39,8 @@ links:                                # optional
   instagram: "…"
   linktree: "…"
   strava: "…"
+  facebook: "…"
+  researchgate: "…"
 ---
 ```
 
