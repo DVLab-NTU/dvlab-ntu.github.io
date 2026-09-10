@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { dump, load } from 'js-yaml';
 import { schemas, membersSchema } from '../src/utils/content-schemas.mjs';
-import { groupMembers } from '../src/utils/member-groups.mjs';
+import { groupMembers, admissionCohortLabel } from '../src/utils/member-groups.mjs';
 import { cmsCollections, renderCmsConfigYml } from '../src/utils/cms-config.ts';
 import { readContent } from '../scripts/validate-content.mjs';
 
@@ -106,4 +106,21 @@ test('activity descriptions may be omitted or cleared, but must be bilingual whe
   const entry = description => ({ get: key => key === 'data' ? new Map([['description', new Map(Object.entries(description))]]) : 'life' });
   assert.doesNotThrow(() => validateEntry({ entry: entry({ zh: '', en: '' }) }));
   assert.throws(() => validateEntry({ entry: entry({ zh: '合照', en: '' }) }), /both Chinese and English/);
+});
+
+
+test('admission cohorts stay independent of graduation status and use explicit year labels', () => {
+  assert.equal(admissionCohortLabel(13, 'zh'), '113 學年度入學（2024）');
+  assert.equal(admissionCohortLabel(15, 'en'), '2026 admission cohort (ROC 115)');
+  assert.equal(admissionCohortLabel(undefined, 'zh'), '入學屆別未提供');
+  assert.equal(admissionCohortLabel(undefined, 'en'), 'Admission cohort not provided');
+  const alumni = ['spongebobaa16', 'r13921049'].map(id => membersSchema.parse(readContent(`src/content/members/${id}.md`).data));
+  for (const member of alumni) {
+    assert.equal(member.status, 'alumni');
+    assert.equal(member.cohort, 13);
+  }
+  const current = membersSchema.parse(readContent('src/content/members/annoyingcutie.md').data);
+  const groups = groupMembers([current, ...alumni]);
+  assert.deepEqual(groups.map(group => group.key), ['current', 13]);
+  assert.equal(groups[1].members.length, 2);
 });

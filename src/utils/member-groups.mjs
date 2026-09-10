@@ -25,3 +25,8 @@ export function groupMembers(members) {
   }
   return groups;
 }
+
+export function admissionCohortLabel(cohort, lang) {
+  if (cohort == null) return lang === 'zh' ? '入學屆別未提供' : 'Admission cohort not provided';
+  return lang === 'zh' ? `${100 + cohort} 學年度入學（${2011 + cohort}）` : `${2011 + cohort} admission cohort (ROC ${100 + cohort})`;
+}
