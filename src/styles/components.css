@@ -680,6 +680,17 @@ html[lang^='en'] .nav-text {
   gap: 8px;
 }
 
+.research-tags {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.research-tags .badge-muted {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 .paper-authors {
   margin-top: 2px;
   color: var(--text-soft);

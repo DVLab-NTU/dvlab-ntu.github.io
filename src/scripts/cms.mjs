@@ -1,5 +1,5 @@
 export function validateEntry({ entry }) {
-  for (const field of ['bio', 'intro', 'researchInterests', 'description']) {
+  for (const field of ['bio', 'intro', 'description']) {
     const value = entry.get('data').get(field);
     if (value && (value.get('zh')?.trim() || value.get('en')?.trim()) &&
         !(value.get('zh')?.trim() && value.get('en')?.trim())) {
@@ -7,6 +7,11 @@ export function validateEntry({ entry }) {
     }
   }
   if (entry.get('collection') !== 'members') return entry;
+  for (const topic of entry.get('data').get('researchInterests') || []) {
+    if (!(topic.get('zh')?.trim() && topic.get('en')?.trim())) {
+      throw new Error('Research topics: provide both Chinese and English for each tag.');
+    }
+  }
   const id = entry.get('data').get('id');
   if (entry.get('newRecord')) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) {

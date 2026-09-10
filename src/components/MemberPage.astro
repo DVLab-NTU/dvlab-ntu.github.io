@@ -14,7 +14,7 @@ const { member } = Astro.props;
 const nameText = member.name[lang];
 const areaText = areas[member.area][lang];
 const bio = pickI18nText(member.bio, lang);
-const researchInterests = pickI18nText(member.researchInterests, lang);
+const researchInterests = member.researchInterests || [];
 const links = member.links;
 const hasLinks = Boolean(links?.scholar || links?.github || links?.homepage || links?.email || links?.linkedin || links?.instagram || links?.linktree || links?.strava || links?.facebook || links?.researchgate);
 const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.role][lang]}，研究方向：${areaText}。` : `${roles[member.role][lang]}. Research area: ${areaText}.`));
@@ -28,9 +28,14 @@ const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.rol
         <div class="detail-meta">
           <span class="badge">{roles[member.role][lang]}</span>
           <span class="badge-muted">{statuses[member.status][lang]}</span>
-          <span class="badge-muted">{areaText}</span>
+          {!researchInterests.length && <span class="badge-muted">{areaText}</span>}
         </div>
         <p>{admissionCohortLabel(member.cohort, lang)}</p>
+        {researchInterests.length > 0 && (
+          <ul class="detail-meta research-tags" aria-label={lang === 'zh' ? '研究主題' : 'Research topics'}>
+            {researchInterests.map(topic => <li class="badge-muted">{topic[lang]}</li>)}
+          </ul>
+        )}
       </div>
       <MemberAvatar src={resolveMemberAvatar(member)} position={member.avatarPosition} alt={nameText} large />
     </article>
@@ -39,13 +44,6 @@ const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.rol
       <article class="card detail-content" data-reveal>
         <h2>{t.about}</h2>
         <p style="white-space: pre-line">{bio}</p>
-      </article>
-    )}
-
-    {researchInterests && (
-      <article class="card detail-content" data-reveal>
-        <h2>{lang === 'zh' ? '研究興趣' : 'Research interests'}</h2>
-        <p style="white-space: pre-line">{researchInterests}</p>
       </article>
     )}
 

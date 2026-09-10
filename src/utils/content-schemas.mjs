@@ -40,7 +40,7 @@ export const membersSchema = z.object({
   avatar: optionalText,
   avatarPosition: z.enum(['left', 'center', 'right']).optional(),
   bio: optionalI18nText,
-  researchInterests: optionalI18nText,
+  researchInterests: z.array(i18nText).optional(),
   links: z
     .object({
       scholar: optionalText,

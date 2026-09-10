@@ -111,7 +111,7 @@ export function cmsCollections() {
         localized('name'), text('nickname', false), select('role', roles), select('status', statuses), select('area', areas),
         { ...number('cohort', false), min: 1, max: 99, hint: 'Admission cohort code: 12 means academic year 112 (2023). Leave empty if unknown.' },
         { ...text('avatar', false), widget: 'image' },
-        { ...text('avatarPosition', false), widget: 'select', options: ['left', 'center', 'right'] }, localized('bio', false), localized('researchInterests', false),
+        { ...text('avatarPosition', false), widget: 'select', options: ['left', 'center', 'right'] }, localized('bio', false), { name: 'researchInterests', label: 'Research topics', widget: 'list', required: false, fields: [text('zh'), text('en')] },
         links(['scholar', 'github', 'homepage', 'email', 'linkedin', 'instagram', 'linktree', 'strava', 'facebook', 'researchgate']),
       ]),
       identifier_field: 'id', slug: '{{fields.id}}', summary: '{{id}} · {{name.zh}}',
