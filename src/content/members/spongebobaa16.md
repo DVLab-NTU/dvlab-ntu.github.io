@@ -12,8 +12,14 @@ bio:
   zh: "專注於 LLM 在 EDA 驗證中的應用及數位 IC 設計。\n與隊友共同獲得 2024 ICCAD Contest Problem A 第一名。\n2024 年於 Cadence Design Systems 擔任軟體工程實習生。\n熟悉 Python、C/C++、Verilog/SystemVerilog。\n喜歡騎機車走山路與海岸線，或單純在沙發上放鬆。"
   en: "Specializing in LLM Applications in EDA Verification and Digital IC Design\n\nMy teammates and I won first place in 2024 ICCAD Contest Problem A\n\nInterned as a Software Engineering Intern at Cadence Design Systems in 2024\n\nProficient in Python, C/C++, Verilog/SystemVerilog\n\nEnjoy motorcycle rides along mountain roads and coastlines, or simply chilling on the couch"
 researchInterests:
-  zh: "電子設計自動化、大型語言模型、硬體驗證、數位 IC 設計"
-  en: "EDA, LLM, Hardware Verification, Digital IC Design"
+  - zh: "電子設計自動化"
+    en: "EDA"
+  - zh: "大型語言模型"
+    en: "Large Language Models"
+  - zh: "硬體驗證"
+    en: "Hardware Verification"
+  - zh: "數位 IC 設計"
+    en: "Digital IC Design"
 links:
   email: "spongebobaa16@gmail.com"
   github: "https://github.com/spongebobaa16"

@@ -13,8 +13,8 @@ bio:
   zh: "嗨，我是 Wish。填寫這份簡介時，我是設計驗證實驗室的研究生，指導教授為黃鐘揚教授。\n\n我是程式設計師、魔術師，也是創客。"
   en: "Hi, I am Wish. I am a graduate student at the Design Verification Lab supervised by Prof. Chung-Yang (Ric) Huang.\n\nI am a programmer, magician, and maker."
 researchInterests:
-  zh: "電子設計自動化"
-  en: "Electronic Design Automation"
+  - zh: "電子設計自動化"
+    en: "EDA"
 links:
   github: "https://github.com/ChenWish"
   facebook: "https://www.facebook.com/wish878787"

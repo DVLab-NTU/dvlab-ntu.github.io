@@ -29,7 +29,9 @@ cohort: 12                          # admission year 112 (2023), optional
 avatar: "/member/images/anitalu724.jpg"
 nickname: "Anita"                     # optional
 bio: { zh: "…", en: "…" }              # optional
-researchInterests: { zh: "…", en: "…" } # optional
+researchInterests:                  # optional; one bilingual tag per item
+  - { zh: "形式化驗證", en: "Formal Verification" }
+  - { zh: "SAT/SMT 求解器", en: "SAT/SMT Solvers" }
 links:                                # optional
   email: "…"
   github: "https://github.com/…"
@@ -60,7 +62,12 @@ Notes:
   estimated by subtracting a degree duration from a graduation year.
   Both list group headings and member details label the admission year explicitly;
   detail pages also display the member's current/alumni status.
-  Detail pages show the nickname, bilingual bio, research interests, and links.
+  Detail pages show the nickname, bilingual bio, research topic tags, and links.
+  Research topics are a list of short bilingual labels, shown below the profile
+  metadata. Use consistent names for the same topic; do not infer missing topics.
+  Keep research explanations and personal hobbies in `bio`, preserving submitted
+  details. Do not split free-text submissions automatically by punctuation.
+  The broad `area` badge is shown on the detail page only when no topics are supplied.
   Nicknames are also searchable in the member list.
 - New members: add the Markdown file and the submitted photo with the same `id`.
   If the photo is not yet available, omit `avatar` to use the default; do not substitute another person's image.

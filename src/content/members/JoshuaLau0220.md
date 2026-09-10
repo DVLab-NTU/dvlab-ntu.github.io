@@ -18,6 +18,10 @@ links:
   homepage: "https://joshmtlau.com"
 nickname: "Joshua"
 researchInterests:
-  en: "Quantum Computing, Quantum Compilation, Quantum Software"
-  zh: "量子運算、量子編譯、量子軟體"
+  - zh: "量子運算"
+    en: "Quantum Computing"
+  - zh: "量子編譯"
+    en: "Quantum Compilation"
+  - zh: "量子軟體"
+    en: "Quantum Software"
 ---

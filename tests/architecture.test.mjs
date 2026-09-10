@@ -84,9 +84,9 @@ test('submitted profile fields survive parsing and CMS editing', () => {
   assert.match(membersSchema.parse(readContent('src/content/members/KuoKuo1521.md').data).links.researchgate, /researchgate\.net/);
   assert.equal(membersSchema.parse(readContent('src/content/members/annoyingcutie.md').data).avatarPosition, 'left');
   assert.equal(membersSchema.safeParse({ ...member, avatarPosition: 'invalid' }).success, false);
-  assert.match(member.researchInterests.en, /SAT\/SMT/);
+  assert(member.researchInterests.some(topic => topic.en === 'SAT/SMT Solvers'));
   assert.equal(member.links.linktree, 'https://linktr.ee/swear01');
-  assert.equal(membersSchema.safeParse({ ...member, researchInterests: { zh: '量子', en: '' } }).success, false);
+  assert.equal(membersSchema.safeParse({ ...member, researchInterests: [{ zh: '量子', en: '' }] }).success, false);
   const fields = cmsCollections().find(item => item.name === 'members').fields;
   const linkFields = fields.find(item => item.name === 'links').fields;
   for (const name of ['instagram', 'linktree', 'strava', 'facebook', 'researchgate']) assert(linkFields.some(field => field.name === name));
@@ -123,4 +123,22 @@ test('admission cohorts stay independent of graduation status and use explicit y
   const groups = groupMembers([current, ...alumni]);
   assert.deepEqual(groups.map(group => group.key), ['current', 13]);
   assert.equal(groups[1].members.length, 2);
+});
+
+test('research tags require bilingual items and preserve prose in biographies', async () => {
+  const { data } = readContent('src/content/members/swear01.md');
+  for (const researchInterests of [undefined, [], [{ zh: '形式化驗證', en: 'Formal Verification' }]]) {
+    assert.equal(membersSchema.safeParse({ ...data, researchInterests }).success, true);
+  }
+  for (const researchInterests of [{ zh: '文字', en: 'Prose' }, ['EDA'], [{ zh: '量子', en: ' ' }]]) {
+    assert.equal(membersSchema.safeParse({ ...data, researchInterests }).success, false);
+  }
+  assert.match(data.bio.en, /candidate predicates/);
+  assert.match(readContent('src/content/members/yang-heng.md').data.bio.en, /painting, guitar, and volleyball/);
+  assert.match(readContent('src/content/members/HHHUUUGGGOOO.md').data.bio.en, /Functional ECO algorithms and PPA optimization/);
+  const { validateEntry } = await import('../src/scripts/cms.mjs');
+  const entry = topics => ({ get: key => ({ collection: 'members', slug: data.id, data: new Map([['id', data.id], ['researchInterests', topics.map(topic => new Map(Object.entries(topic)))]]) })[key] });
+  assert.doesNotThrow(() => validateEntry({ entry: entry([]) }));
+  assert.doesNotThrow(() => validateEntry({ entry: entry(data.researchInterests) }));
+  assert.throws(() => validateEntry({ entry: entry([{ zh: '量子', en: '' }]) }), /both Chinese and English/);
 });
