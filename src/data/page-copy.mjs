@@ -115,7 +115,7 @@ export const pageCopy = {
     "zh": {
       "title": "課程",
       "contents": "課程內容",
-      "catalogue": "課程目錄（NTU）",
+      "catalogue": "課程目錄",
       "description": "DVLab（台大設計驗證實驗室）開設課程：網路服務程式設計、系統晶片驗證、資料結構與程式設計，連結台大官方課程目錄。"
     },
     "en": {
