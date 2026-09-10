@@ -14,4 +14,12 @@ bio:
   en: "I love research, creative work, and exploring the world."
 links:
   instagram: "https://www.instagram.com/henning_0908"
+  email: "r13943074@ntu.edu.tw"
+  github: "https://github.com/HenningY"
+  facebook: "https://www.facebook.com/share/1S6AgbxV5X/?mibextid=wwXIfr"
+  linkedin: "https://www.linkedin.com/in/heng-yang-41314b254/"
+  homepage: "https://henningyang.netlify.app"
+researchInterests:
+  zh: "演算法、電子設計自動化、數位 IC 設計、繪畫、吉他、排球"
+  en: "Algorithm, EDA, Digital IC Design, Painting, Guitar, Volleyball"
 ---

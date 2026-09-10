@@ -15,7 +15,7 @@ const areaText = areas[member.area][lang];
 const bio = pickI18nText(member.bio, lang);
 const researchInterests = pickI18nText(member.researchInterests, lang);
 const links = member.links;
-const hasLinks = Boolean(links?.scholar || links?.github || links?.homepage || links?.email || links?.linkedin || links?.instagram || links?.linktree || links?.strava);
+const hasLinks = Boolean(links?.scholar || links?.github || links?.homepage || links?.email || links?.linkedin || links?.instagram || links?.linktree || links?.strava || links?.facebook || links?.researchgate);
 const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.role][lang]}，研究方向：${areaText}。` : `${roles[member.role][lang]}. Research area: ${areaText}.`));
 ---
 <BaseLayout title={nameText} desc={pageDesc} lang={lang} pathPrefix={pathPrefix}>
@@ -57,6 +57,8 @@ const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh' ? `${roles[member.rol
           {links?.instagram && <a class="btn btn-ghost" href={links.instagram} target="_blank" rel="noreferrer">Instagram</a>}
           {links?.linktree && <a class="btn btn-ghost" href={links.linktree} target="_blank" rel="noreferrer">Linktree</a>}
           {links?.strava && <a class="btn btn-ghost" href={links.strava} target="_blank" rel="noreferrer">Strava</a>}
+          {links?.facebook && <a class="btn btn-ghost" href={links.facebook} target="_blank" rel="noreferrer">Facebook</a>}
+          {links?.researchgate && <a class="btn btn-ghost" href={links.researchgate} target="_blank" rel="noreferrer">ResearchGate</a>}
           {links?.email && (
             <button
               class="member-email"
