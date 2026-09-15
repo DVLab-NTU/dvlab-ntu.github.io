@@ -7,4 +7,5 @@ cohort: 15
 role: "master"
 status: "current"
 area: "ai-formal"
+avatar: "/member/images/lai-cheng-han.jpg"
 ---
