@@ -8,7 +8,8 @@ export const pageCopy = {
       "allCourses": "所有課程",
       "semester": "學期",
       "life": "實驗室日常",
-      "allLife": "更多活動"
+      "allLife": "更多活動",
+      "hostCta": "主持人簡介"
     },
     "en": {
       "team": "Our team",
@@ -18,7 +19,34 @@ export const pageCopy = {
       "allCourses": "All courses",
       "semester": "Semester",
       "life": "Life at DVLab",
-      "allLife": "More activities"
+      "allLife": "More activities",
+      "hostCta": "Host profile"
+    }
+  },
+  "host": {
+    "zh": {
+      "title": "主持人",
+      "eyebrow": "HOST PROFILE",
+      "tagline": "理性思考，信任你的直覺。",
+      "description": "DVLab 主持人黃鐘揚教授簡介：形式化驗證、量子電路最佳化與 EDA 研究。",
+      "photoLabel": "主持人照片",
+      "socialLabel": "聯絡方式",
+      "email": "電子郵件",
+      "homepage": "個人網頁",
+      "members": "查看成員",
+      "home": "回到首頁"
+    },
+    "en": {
+      "title": "Host",
+      "eyebrow": "HOST PROFILE",
+      "tagline": "Think Rationally, and Trust Your Intuition.",
+      "description": "Host profile of Prof. Chung-Yang (Ric) Huang: formal verification, quantum circuit optimization, and EDA.",
+      "photoLabel": "Host photo",
+      "socialLabel": "Contact",
+      "email": "Email",
+      "homepage": "Homepage",
+      "members": "Meet the team",
+      "home": "Back to Home"
     }
   },
   "members": {

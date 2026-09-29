@@ -32,6 +32,7 @@ const courses = (await getCollection('courses')).sort((a, b) =>
       <h1 id="home-title">{labels.heading}</h1>
       <p class="team-intro">{t.home.intro}</p>
       <div class="team-detail">
+        <a class="home-link" href={`${pathPrefix}/host/`}>{labels.hostCta} <span aria-hidden="true">↗</span></a>
         <a class="home-link" href={`${pathPrefix}/members/`}>{labels.allMembers} <span aria-hidden="true">↗</span></a>
       </div>
     </div>

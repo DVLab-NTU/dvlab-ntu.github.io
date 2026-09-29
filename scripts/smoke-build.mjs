@@ -78,6 +78,14 @@ const checks = [
     includes: ['DVLab', 'Our team', 'Courses &amp; teaching', 'Life at DVLab'],
   },
   {
+    file: 'dist/host/index.html',
+    includes: ['HOST PROFILE', '理性思考'],
+  },
+  {
+    file: 'dist/en/host/index.html',
+    includes: ['HOST PROFILE', 'Think Rationally'],
+  },
+  {
     file: 'dist/members/index.html',
     includes: ['成員列表', '搜尋成員'],
   },
