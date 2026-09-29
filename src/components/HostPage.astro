@@ -31,7 +31,7 @@ const pageDesc = paragraphs[0]?.slice(0, 160) || t.description;
     </header>
 
     <div class="host-body">
-      <div class="host-copy card host-copy-panel">
+      <div class="host-copy host-copy-panel">
         {paragraphs.map((paragraph) => (
           <p>{paragraph}</p>
         ))}
@@ -40,7 +40,7 @@ const pageDesc = paragraphs[0]?.slice(0, 160) || t.description;
         </p>
       </div>
 
-      <aside class="host-aside card" aria-label={t.photoLabel}>
+      <aside class="host-aside" aria-label={t.photoLabel}>
         <MemberAvatar src={resolveMemberAvatar(member)} alt={member.name[lang]} large />
         <ul class="host-social" aria-label={t.socialLabel}>
           {links?.email && (

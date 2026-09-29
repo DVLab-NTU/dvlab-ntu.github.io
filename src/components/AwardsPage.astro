@@ -14,12 +14,12 @@ const pathPrefix = lang === 'en' ? '/en' : '';
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
   <section class="page-head" data-reveal>
-    <h1 class="page-title">{t.title}</h1>
+    <h1 class="page-title cra-page-title">{t.title}</h1>
   </section>
 
   <section class="detail-shell" data-reveal-group>
     {awards.map((a, i) => (
-      <article class="card detail-content stack-sm" data-reveal data-reveal-order={String(i)}>
+      <article id={a.slug} class="flat-entry" data-reveal data-reveal-order={String(i)}>
         <h2 class="page-title">{pickI18nText(a.title, lang)}</h2>
         <p class="badge-muted">{a.year} · {a.month}</p>
         <p><strong>{t.students}</strong>{a.students.join(t.separator)}</p>
@@ -45,5 +45,4 @@ const pathPrefix = lang === 'en' ? '/en' : '';
     text-underline-offset: 4px;
   }
   .award-source:hover { color: var(--text); }
-  :global([data-theme='light']) .card { padding: 22px 24px; }
 </style>

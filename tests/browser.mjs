@@ -45,14 +45,14 @@ try {
  const page=await context.newPage();
  let fontRequests=0;
  page.on('request',req=>{if(req.resourceType()==='font')fontRequests++});
- for(const path of ['/','/en/','/host/','/en/host/','/members/','/en/members/','/papers/','/en/papers/','/courses/','/en/courses/','/awards/','/en/awards/','/life/','/en/life/','/members/Pinchun/','/en/members/Pinchun/']){
+ for(const path of ['/','/en/','/host/','/en/host/','/members/','/en/members/','/papers/','/en/papers/','/courses/','/en/courses/','/awards/','/en/awards/','/members/Pinchun/','/en/members/Pinchun/']){
   await page.goto(base+path);await page.waitForTimeout(650);
   assert(await page.locator('h1').isVisible());
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   assert.equal(await page.locator('h1').evaluate(el=>getComputedStyle(el.closest('section')??el).opacity),'1');
  }
  assert.equal(fontRequests,0);
- console.log('PASS 16 desktop routes; zero font requests');
+ console.log('PASS 14 desktop routes; zero font requests');
  await context.close();
  await testResearchTags(browser, base);
  await testParticles(browser, base);

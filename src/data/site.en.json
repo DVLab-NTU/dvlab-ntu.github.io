@@ -7,8 +7,7 @@
     "members": "Members",
     "papers": "Papers",
     "courses": "Courses",
-    "awards": "Awards",
-    "life": "Life"
+    "awards": "Awards"
   },
   "home": {
     "intro": "DVLab (Design Verification Lab) at NTU EE, led by Prof. Chung-Yang (Ric) Huang. Research on formal verification, quantum circuit synthesis and optimization, and EDA."

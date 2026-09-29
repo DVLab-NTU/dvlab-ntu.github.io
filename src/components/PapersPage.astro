@@ -13,7 +13,7 @@ const pathPrefix = lang === 'en' ? '/en' : '';
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
   <section class="page-head" data-reveal>
-    <h1 class="page-title">{t.title}</h1>
+    <h1 class="page-title cra-page-title">{t.title}</h1>
     <p>{t.intro}</p>
   </section>
 
@@ -27,18 +27,18 @@ const pathPrefix = lang === 'en' ? '/en' : '';
     />
     <p class="empty-state" data-empty-state hidden>{t.empty}</p>
 
-    <div class="grid project-grid" data-list-intro>
+    <div class="paper-list" data-list-intro>
       {papers.map((p, i) => (
         <a
           href={`${pathPrefix}/papers/${p.slug}/`}
-          class="card card-hover card-link stack-sm"
+          class="paper-list-item"
           data-list-intro-item
           {...(i < 8 ? { 'data-list-intro-active': true } : {})}
           data-list-card
           data-search-text={`${p.title} ${p.authors || ''} ${p.venue} ${p.year}`}
         >
           <h3>{p.title}</h3>
-          <p>{p.venue}</p>
+          <p>{p.year} · {p.venue}</p>
           {p.authors && <p class="paper-authors">{t.authors}{p.authors}</p>}
         </a>
       ))}

@@ -19,12 +19,12 @@ const pathPrefix = lang === 'en' ? '/en' : '';
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
   <section class="page-head" data-reveal>
-    <h1 class="page-title">{t.title}</h1>
+    <h1 class="page-title cra-page-title">{t.title}</h1>
   </section>
 
   <section class="detail-shell" data-reveal-group>
     {courses.map((c, i) => (
-      <article id={c.slug} class="card detail-content stack-sm course-card" data-reveal data-reveal-order={String(i)}>
+      <article id={c.slug} class="flat-entry course-card" data-reveal data-reveal-order={String(i)}>
         <div class="detail-meta">
           <h2 class="page-title">{pickI18nText(c.title, lang)}</h2>
           <span class="badge-muted">{c.semester}</span>

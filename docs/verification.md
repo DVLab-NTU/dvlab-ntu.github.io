@@ -40,8 +40,8 @@ Console verification file):
 - `<html>` / `<body>` tags balanced.
 - Every internal link and image resolves to a real file in `dist/`
   (directory links resolve to their `index.html`).
-- Required routes exist for both locales: `/`, `/members/`, `/papers/`,
-  `/courses/`, `/awards/`, `/life/`, `/404.html` (and `/en/`).
+- Required routes exist for both locales: `/`, `/host/`, `/members/`,
+  `/papers/`, `/courses/`, `/awards/`, `/404.html` (and `/en/`).
 - No `http://127.0.0.1` URLs or `undefined` in markup.
 - Member avatars use generated WebPs below 100 kB; pages do not preload fonts.
 
@@ -62,7 +62,7 @@ npx serve dist      # or: npm run preview
 
 - Dark / light themes render correctly (toggle + `prefers-color-scheme`).
 - Nav clicks respond immediately (there is no SPA router).
-- The **活動** tab goes to `/life/`, not back to the home page.
+- Home shows the legacy-style **NEWS &amp; AWARDS** band; `/life/` is not published.
 - Deep links (e.g. `/members/anitalu724/`) return 200.
 
 CI verifies both disabled and enabled CMS builds. The enabled job uses

@@ -1,25 +1,21 @@
 export const pageCopy = {
   "home": {
     "zh": {
-      "team": "研究團隊",
       "heading": "DVLab 設計驗證實驗室",
+      "newsAwards": "NEWS & AWARDS",
+      "allAwards": "所有獲獎紀錄",
+      "awardSeparator": "、",
       "allMembers": "認識成員",
-      "courses": "課程與教學",
-      "allCourses": "所有課程",
-      "semester": "學期",
-      "life": "實驗室日常",
-      "allLife": "更多活動",
+      "allPapers": "論文列表",
       "hostCta": "主持人簡介"
     },
     "en": {
-      "team": "Our team",
       "heading": "Design Verification Lab",
+      "newsAwards": "NEWS & AWARDS",
+      "allAwards": "All awards",
+      "awardSeparator": ", ",
       "allMembers": "Meet the team",
-      "courses": "Courses & teaching",
-      "allCourses": "All courses",
-      "semester": "Semester",
-      "life": "Life at DVLab",
-      "allLife": "More activities",
+      "allPapers": "Publications",
       "hostCta": "Host profile"
     }
   },
