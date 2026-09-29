@@ -3,8 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import MemberAvatar from './MemberAvatar.astro';
 import { getCollection } from 'astro:content';
 import { resolveMemberAvatar } from '../utils/member-avatar';
-import { roles, areas } from '../data/member-labels.mjs';
-import { groupMembers, isFormer, admissionCohortLabel } from '../utils/member-groups.mjs';
 import { pageCopy } from '../data/page-copy.mjs';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
@@ -13,72 +11,38 @@ const pathPrefix = lang === 'en' ? '/en' : '';
 
 const members = (await getCollection('members')).map(entry => entry.data);
 const listMembers = members.filter((member) => member.role !== 'pi');
-const availableRoles = Object.keys(roles).filter(
-  (role) => role !== 'pi' && listMembers.some(member => member.role === role),
-);
 
 function buildCraGroups(all) {
+  const quantum = all.filter((m) => m.area === 'quantum');
+  const eda = all.filter((m) => m.area !== 'quantum');
   const blocks = [];
-  const current = all.filter((m) => !isFormer(m));
-  const alumni = all.filter((m) => isFormer(m));
-  const quantum = current.filter((m) => m.area === 'quantum');
-  const eda = current.filter((m) => m.area !== 'quantum');
   if (eda.length) blocks.push({ key: 'eda', title: 'EDA', members: eda });
   if (quantum.length) blocks.push({ key: 'quantum', title: 'Quantum', members: quantum });
-  for (const group of groupMembers(alumni)) {
-    if (group.key === 'current') continue;
-    blocks.push({
-      key: `alumni-${group.key}`,
-      title: admissionCohortLabel(group.key === 'unknown' ? undefined : Number(group.key), lang),
-      members: group.members,
-    });
-  }
   return blocks;
 }
 
 const craGroups = buildCraGroups(listMembers);
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
-  <div class="members-cra">
-    <h1 class="page-title cra-page-title">{t.heading}</h1>
-
-    <section class="members-tools filter-wrap" data-members-filter-root data-reveal>
-      <input class="filter-input" type="search" data-member-search placeholder={t.placeholder} aria-label={t.search} />
-      <div class="filter-tags">
-        {['__all', ...availableRoles].map((role, i) => (
-          <button class={`filter-tag btn-shine ${i === 0 ? 'is-selected' : ''}`} type="button" data-role-filter={role} aria-pressed={i === 0}>
-            {role === '__all' ? t.all : roles[role][lang]}
-          </button>
-        ))}
-      </div>
-      <p class="empty-state" data-empty-state hidden>{t.empty}</p>
-    </section>
+  <div class="members-cra subpage-members">
+    <h1 class="page-title cra-page-title section-title members-page-title">{t.heading}</h1>
 
     {craGroups.map((group) => (
-      <section class="member-group-block" data-member-group data-reveal-group>
-        <h2>{group.title}</h2>
-        <div class="members-track" data-members-track>
-          <div class="members-track-scroll" data-members-track-scroll tabindex="0" aria-label={group.title}>
-            {group.members.map((m) => (
-              <a
-                href={`${pathPrefix}/members/${m.id}/`}
-                class="member-tile"
-                data-member-card
-                data-name={`${m.name.zh} ${m.name.en} ${m.nickname || ''}`}
-                data-role={m.role}
-                data-area={`${areas[m.area].zh} ${areas[m.area].en} ${roles[m.role].zh} ${roles[m.role].en}`}
-              >
-                <MemberAvatar src={resolveMemberAvatar(m)} position={m.avatarPosition} alt={m.name[lang]} />
-                <h3>{m.name[lang]}</h3>
-              </a>
-            ))}
-          </div>
+      <section class="member-group-block" data-member-group>
+        <h2 class="group-title">{group.title}</h2>
+        <div class="member-grid">
+          {group.members.map((m) => (
+            <a
+              href={`${pathPrefix}/members/${m.id}/`}
+              class="member-card"
+              data-member-card
+            >
+              <MemberAvatar src={resolveMemberAvatar(m)} position={m.avatarPosition} alt={m.name[lang]} />
+              <div class="member-name">{m.name[lang]}</div>
+            </a>
+          ))}
         </div>
       </section>
     ))}
   </div>
 </BaseLayout>
-
-<script>
-  import '../scripts/members-carousel.mjs';
-</script>

@@ -13,8 +13,13 @@ const pathPrefix = lang === 'en' ? '/en' : '';
 const t = lang === 'en' ? siteEn : siteZh;
 const awards = (await getCollection('awards'))
   .map((entry) => ({ slug: entry.slug, ...entry.data }))
-  .sort((a, b) => b.year - a.year || a.month.localeCompare(b.month))
-  .slice(0, 6);
+  .sort((a, b) => b.year - a.year || a.month.localeCompare(b.month));
+
+function awardAttendants(award: { students: string[]; advisors?: string[] }) {
+  const people = [...award.students];
+  if (award.advisors?.length) people.push(...award.advisors);
+  return people.join(labels.awardSeparator);
+}
 ---
 <BaseLayout title="" desc={t.home.intro} lang={lang} pathPrefix={pathPrefix}>
   <div class="home-cra">
@@ -25,34 +30,23 @@ const awards = (await getCollection('awards'))
 
     <section id="lab-introduction" class="home-news" aria-labelledby="home-news-title">
       <div class="home-news-inner">
-        <h2 id="home-news-title">{labels.newsAwards}</h2>
+        <h1 id="home-news-title" class="section-title home-news-heading">{labels.newsAwards}</h1>
         {awards.map((award) => (
-          <a class="home-news-item" href={`${pathPrefix}/awards/#${award.slug}`}>
+          <article class="home-news-item">
             <div class="home-news-date">
-              <span>{award.year}</span><br />
-              <span>{award.month}</span>
+              <p>{award.year}</p>
+              <p>{award.month}</p>
             </div>
-            <div>
-              <h3 class="home-news-title">{pickI18nText(award.title, lang)}</h3>
-              <p class="home-news-meta">{award.students.join(labels.awardSeparator)}</p>
+            <div class="home-news-detail">
+              <h3 class="home-news-title">
+                <a href={award.source} target="_blank" rel="noreferrer">
+                  {pickI18nText(award.title, lang)}
+                </a>
+              </h3>
+              <p class="home-news-meta">{awardAttendants(award)}</p>
             </div>
-          </a>
+          </article>
         ))}
-        <p class="home-news-more">
-          <a href={`${pathPrefix}/awards/`}>{labels.allAwards} <span aria-hidden="true">↗</span></a>
-        </p>
-      </div>
-    </section>
-
-    <section class="home-intro-band" aria-labelledby="home-title">
-      <div class="container">
-        <h1 id="home-title" class="page-title cra-page-title">{labels.heading}</h1>
-        <p>{t.home.intro}</p>
-        <div class="home-intro-links">
-          <a href={`${pathPrefix}/host/`}>{labels.hostCta}</a>
-          <a href={`${pathPrefix}/members/`}>{labels.allMembers}</a>
-          <a href={`${pathPrefix}/papers/`}>{labels.allPapers}</a>
-        </div>
       </div>
     </section>
   </div>
@@ -75,16 +69,5 @@ const awards = (await getCollection('awards'))
     gap: 24px;
     padding: clamp(24px, 4vw, 48px) clamp(12px, 3vw, 40px);
     color: #f4f8ff;
-  }
-  .home-news-more {
-    margin: 8px 0 0;
-    font-weight: 600;
-  }
-  .home-news-more a {
-    color: var(--cra-dark-blue);
-    text-decoration: none;
-  }
-  .home-news-more a:hover {
-    text-decoration: underline;
   }
 </style>

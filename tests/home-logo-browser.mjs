@@ -18,7 +18,7 @@ export async function testHomeLogo(browser, base) {
         await page.waitForFunction(() => [...document.querySelectorAll('[data-home-logo] img')].every(img => img.complete && img.naturalWidth > 0));
         assert.equal(await logo.locator('img').count(), 6);
         assert.equal(await page.locator('a[href*="/join/"]').count(), 0);
-        assert.equal(await page.locator('.home-news-item').count(), 6);
+        assert.equal(await page.locator('.home-news-item').count(), 7);
         assert((await page.locator('.home-opening').boundingBox()).height >= 844 * 0.8 - 1);
         assert(await page.locator('h1').isVisible());
         assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
@@ -96,11 +96,11 @@ export async function testHomeContent(browser, base) {
     const page = await context.newPage();
     for (const prefix of ['', '/en']) {
       await page.goto(base + prefix + '/');
-      const links = await page.locator('.home-news-item, .home-intro-links a').evaluateAll(anchors => anchors.map(a => a.getAttribute('href')));
+      const links = await page.locator('.home-news-item h3 a').evaluateAll(anchors => anchors.map(a => a.getAttribute('href')));
       assert(links.length >= 4);
       for (const href of links.slice(0, 4)) {
-        assert(href.startsWith(prefix + '/') || href.startsWith(prefix === '' ? '/' : prefix));
-        const response = await page.goto(base + (href.startsWith('http') ? href : href));
+        assert(href.startsWith('http'), `expected external award link, got ${href}`);
+        const response = await page.goto(href);
         assert.equal(response.status(), 200);
       }
       const removed = await page.goto(base + prefix + '/join/');
@@ -108,6 +108,6 @@ export async function testHomeContent(browser, base) {
       const life = await page.goto(base + prefix + '/life/');
       assert.equal(life.status(), 404);
     }
-    console.log('PASS homepage award links, intro links without JS, removed life/join routes');
+    console.log('PASS homepage award links without JS, removed life/join routes');
   } finally { await context.close(); }
 }
