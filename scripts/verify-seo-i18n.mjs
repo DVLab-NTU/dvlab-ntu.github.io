@@ -29,6 +29,7 @@ const checks = [
       `<meta property="og:url" content="${siteUrl}">`,
       '"url": "https://dvlab.ee.ntu.edu.tw/"',
       'href="/en/"',
+      'href="/host/"',
       'href="/members/"',
       'href="/papers/"',
       'href="/courses/"',
@@ -43,6 +44,7 @@ const checks = [
       `<link rel="alternate" hreflang="zh-TW" href="${siteUrl}">`,
       `<meta property="og:url" content="${siteUrl}en/">`,
       'href="/"',
+      'href="/en/host/"',
       'href="/en/members/"',
       'href="/en/papers/"',
       'href="/en/courses/"',
@@ -56,6 +58,15 @@ const checks = [
       `<link rel="alternate" hreflang="en" href="${siteUrl}en/courses/">`,
       'href="/en/courses/"',
       'href="/courses/"',
+    ],
+  },
+  {
+    file: 'dist/host/index.html',
+    includes: [
+      `<link rel="canonical" href="${siteUrl}host/">`,
+      `<link rel="alternate" hreflang="en" href="${siteUrl}en/host/">`,
+      'href="/en/host/"',
+      'href="/host/"',
     ],
   },
   {

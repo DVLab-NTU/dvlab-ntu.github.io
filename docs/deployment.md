@@ -84,8 +84,12 @@ sudo tail -50 /Library/Logs/dvlab-website.log
 
 ## Updating and rollback
 
-GitHub Pages updates automatically; inari updates are manual. For each site
-change, build the same reviewed commit used by Pages:
+GitHub Pages updates automatically when changes merge to `main` and the Pages
+workflow succeeds. Inari (`https://dvlab.ee.ntu.edu.tw/`) does not pull from
+GitHub automatically; a maintainer must deploy the same verified `dist/` artifact
+after each production release (see steps below).
+
+For each site change, build the same reviewed commit used by Pages:
 
 ```sh
 npm ci
