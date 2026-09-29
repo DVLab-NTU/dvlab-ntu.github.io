@@ -7,6 +7,7 @@ import { testParticles } from './particles-browser.mjs';
 import { testResearchTags } from './research-tags-browser.mjs';
 import { testTheme } from './theme-browser.mjs';
 const memberCount = fs.readdirSync('src/content/members').filter(file => file.endsWith('.md')).length;
+const membersOnListPage = memberCount - 1; // Host (PI) has a dedicated /host page, not the carousel.
 const browser = await chromium.launch({executablePath:process.env.BROWSER_EXECUTABLE,headless:true});
 const base=process.env.TEST_SITE_URL || 'http://127.0.0.1:4321';
 try {
@@ -24,7 +25,7 @@ try {
    await page.waitForTimeout(150);
    assert.equal(await page.locator('h1').innerText(),prefix?'Members':'成員列表');
    assert.equal(await page.locator('h1').evaluate(el=>getComputedStyle(el.closest('section')).opacity),'1');
-   assert.equal(await page.locator('[data-member-card]').count(),memberCount);
+   assert.equal(await page.locator('[data-member-card]').count(), membersOnListPage);
    if(failure!=='scripts'){
     await page.locator('[data-member-search]').fill('Pin-Chun');
     assert.equal(await page.locator('[data-member-card]:visible').count(),1);

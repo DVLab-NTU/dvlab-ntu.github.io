@@ -12,7 +12,10 @@ const t = pageCopy.members[lang];
 const pathPrefix = lang === 'en' ? '/en' : '';
 
 const members = (await getCollection('members')).map(entry => entry.data);
-const availableRoles = Object.keys(roles).filter(role => members.some(member => member.role === role));
+const listMembers = members.filter((member) => member.role !== 'pi');
+const availableRoles = Object.keys(roles).filter(
+  (role) => role !== 'pi' && listMembers.some(member => member.role === role),
+);
 
 function buildCraGroups(all) {
   const blocks = [];
@@ -33,7 +36,7 @@ function buildCraGroups(all) {
   return blocks;
 }
 
-const craGroups = buildCraGroups(members);
+const craGroups = buildCraGroups(listMembers);
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
   <div class="members-cra">
@@ -67,7 +70,6 @@ const craGroups = buildCraGroups(members);
               >
                 <MemberAvatar src={resolveMemberAvatar(m)} position={m.avatarPosition} alt={m.name[lang]} />
                 <h3>{m.name[lang]}</h3>
-                <p>{roles[m.role][lang]}</p>
               </a>
             ))}
           </div>
