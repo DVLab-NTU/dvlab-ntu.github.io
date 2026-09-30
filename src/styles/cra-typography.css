@@ -1,0 +1,79 @@
+/* Locale-aware weight tuning on top of CRA Helvetica Neue / Coolvetica stack. */
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html[lang^='zh'] body {
+  font-weight: 300;
+}
+
+html[lang^='en'] body {
+  font-weight: 400;
+}
+
+html[lang^='zh'] :is(h1, h2, h3) {
+  font-weight: 500;
+}
+
+html[lang^='en'] :is(h1, h2, h3) {
+  font-weight: 600;
+}
+
+html[lang^='en'] .nav-text {
+  font-weight: 500;
+}
+
+html[lang^='zh'] .nav-text {
+  font-weight: 400;
+}
+
+html[lang^='en'] .page-title,
+html[lang^='en'] .section-title,
+html[lang^='en'] .members-page-title,
+html[lang^='en'] .host-cra-title {
+  font-weight: 600;
+}
+
+html[lang^='zh'] .page-title,
+html[lang^='zh'] .section-title,
+html[lang^='zh'] .members-page-title,
+html[lang^='zh'] .host-cra-title {
+  font-weight: 500;
+}
+
+html[lang^='en'] .home-news-heading.section-title {
+  font-weight: 600;
+}
+
+html[lang^='zh'] .home-news-heading.section-title {
+  font-weight: 500;
+}
+
+html[lang^='en'] .home-news-title {
+  font-weight: 700;
+}
+
+html[lang^='zh'] .home-news-title {
+  font-weight: 600;
+}
+
+/* Award attendant lines are Latin on both locales. */
+.home-news-meta {
+  font-weight: 500;
+}
+
+html[lang^='en'] .home-news-meta {
+  font-weight: 500;
+}
+
+html[lang^='en'] .btn,
+html[lang^='en'] .theme-toggle-btn {
+  font-weight: 600;
+}
+
+html[lang^='en'] .cra-site p,
+html[lang^='en'] .cra-site li {
+  font-weight: 400;
+}
