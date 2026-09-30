@@ -31,22 +31,26 @@ function awardAttendants(award: { students: string[]; advisors?: string[] }) {
     <section id="lab-introduction" class="home-news" aria-labelledby="home-news-title">
       <div class="home-news-inner">
         <h1 id="home-news-title" class="section-title home-news-heading">{labels.newsAwards}</h1>
-        {awards.map((award) => (
-          <article class="home-news-item">
-            <div class="home-news-date">
-              <p>{award.year}</p>
-              <p>{award.month}</p>
-            </div>
-            <div class="home-news-detail">
-              <h3 class="home-news-title">
-                <a href={award.source} target="_blank" rel="noreferrer">
-                  {pickI18nText(award.title, lang)}
-                </a>
-              </h3>
-              <p class="home-news-meta">{awardAttendants(award)}</p>
-            </div>
-          </article>
-        ))}
+        <div class="home-news-list">
+          {awards.map((award) => (
+            <article class="home-news-item">
+              <div class="home-news-date">
+                <div class="home-news-date-chip">
+                  <span class="home-news-date-year">{award.year}</span>
+                  <span class="home-news-date-month">{award.month}</span>
+                </div>
+              </div>
+              <div class="home-news-detail">
+                <h3 class="home-news-title">
+                  <a href={award.source} target="_blank" rel="noreferrer">
+                    {pickI18nText(award.title, lang)}
+                  </a>
+                </h3>
+                <p class="home-news-meta">{awardAttendants(award)}</p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   </div>
