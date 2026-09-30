@@ -128,7 +128,9 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
 ### Navigation vs buttons
 
 - **Nav tabs** (`.nav-link` + icons) stay text/icon links on the glass bar —
-  no chip borders, blur stacks, or `.btn` shine. The **hamburger** (`.nav-toggle`)
+  no chip borders, blur stacks, or `.btn` shine. Nav glyphs are **Lucide**
+  v0.469.0 stroke SVGs (`src/data/lucide-icons.mjs`, `LucideIcon.astro`, ISC);
+  LINE on the host row uses Font Awesome 6 Brands. The **hamburger** (`.nav-toggle`)
   is a minimal icon control with a light hover wash only.
 - **Header utilities** (theme toggle, locale switch) use compact liquid-glass
   styling in `.nav-actions` — they are controls, not section nav items.
@@ -164,8 +166,8 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
 ### Host page
 
 - Portrait: `public/images/host/ric.jpeg` (`HOST_PHOTO` in `src/utils/host-member.ts`).
-- Social row: `HostSocialSquareIcon.astro` — light square tiles with masked brand
-  glyphs; includes `links.homepage` when present plus legacy LINE URL.
+- Social row: `HostSocialSquareIcon.astro` — Lucide (and FA LINE) icons on gold
+  tiles; includes `links.homepage` when present plus legacy LINE URL.
 - No “PI” badge on host or member list.
 
 ## Theming
