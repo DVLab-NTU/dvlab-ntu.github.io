@@ -146,6 +146,8 @@
 .home-cra {
   position: relative;
   isolation: isolate;
+  margin-top: 0;
+  overflow: clip;
 }
 
 .home-cra::before {
@@ -176,6 +178,7 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  overflow: hidden;
 }
 
 .home-opening {
@@ -499,8 +502,8 @@
   transform: translateY(-1px);
 }
 
-.host-social-cra .host-social-link-square:hover rect,
-.host-social-cra .host-social-link-square:focus-visible rect {
+.host-social-cra .host-social-link-square:hover path,
+.host-social-cra .host-social-link-square:focus-visible path {
   fill: var(--cra-light-gold);
 }
 

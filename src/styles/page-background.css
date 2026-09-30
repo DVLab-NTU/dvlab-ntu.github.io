@@ -167,6 +167,7 @@ body.has-unified-page-backdrop > .footer {
 
 .page-shell[data-page-bg='home'] .page-content {
   padding: 0;
+  margin-top: 0;
 }
 
 /* Full-bleed home / host sections sit inside the same backdrop family */

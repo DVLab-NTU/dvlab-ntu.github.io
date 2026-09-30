@@ -23,9 +23,8 @@ function awardAttendants(award: { students: string[]; advisors?: string[] }) {
 ---
 <BaseLayout title="" desc={t.home.intro} lang={lang} pathPrefix={pathPrefix}>
   <div class="home-cra">
-    <canvas class="home-particles" data-particles aria-hidden="true"></canvas>
-
     <section class="home-opening" aria-label={lang === 'zh' ? '實驗室開場動畫' : 'Lab introduction animation'}>
+      <canvas class="home-particles" data-particles aria-hidden="true"></canvas>
       <HomeLogo lang={lang} />
     </section>
 
