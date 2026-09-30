@@ -1,4 +1,5 @@
 ---
+import { craHostSocialIcons } from '../data/cra-fontawesome-icons.mjs';
 import { lucideHostSocialIcons } from '../data/lucide-icons.mjs';
 import LucideIcon from './LucideIcon.astro';
 
@@ -6,15 +7,32 @@ type Variant = 'email' | 'linkedin' | 'facebook' | 'line' | 'homepage';
 
 const { variant } = Astro.props as { variant: Variant; uid: string };
 
-const glyph = lucideHostSocialIcons[variant];
-if (!glyph) {
+const craGlyph = craHostSocialIcons[variant];
+const lucideGlyph = lucideHostSocialIcons[variant];
+if (!lucideGlyph) {
   throw new Error(`Unknown host social icon variant: ${variant}`);
 }
 ---
 
-<LucideIcon
-  class="host-social-square-icon"
-  nodes={glyph.nodes}
-  viewBox={glyph.viewBox ?? '0 0 24 24'}
-  variant={glyph.filled ? 'filled' : 'stroke'}
-/>
+{craGlyph ? (
+  <svg
+    class="host-social-square-icon host-social-square-icon--solid"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox={`0 0 ${craGlyph.width} ${craGlyph.height}`}
+    width="24"
+    height="24"
+    fill="currentColor"
+    stroke="none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d={craGlyph.d} />
+  </svg>
+) : (
+  <LucideIcon
+    class="host-social-square-icon"
+    nodes={lucideGlyph.nodes}
+    viewBox={lucideGlyph.viewBox ?? '0 0 24 24'}
+    variant={lucideGlyph.filled ? 'filled' : 'stroke'}
+  />
+)}

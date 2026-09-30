@@ -618,12 +618,16 @@ html[lang^='en'] .home-news-meta {
 }
 
 .host-social-cra .host-social-square-icon {
-  color: var(--host-social-tile);
+  color: var(--host-social-glyph);
 }
 
 .host-social-cra .host-social-link-square:hover .host-social-square-icon,
 .host-social-cra .host-social-link-square:focus-visible .host-social-square-icon {
   color: var(--cra-light-gold);
+}
+
+[data-theme='light'] .host-social-cra .host-social-square-icon {
+  color: var(--cra-dark-blue);
 }
 
 .host-cra-actions {

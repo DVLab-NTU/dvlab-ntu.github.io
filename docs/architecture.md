@@ -170,8 +170,10 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
 ### Host page
 
 - Portrait: `public/images/host/ric.jpeg` (`HOST_PHOTO` in `src/utils/host-member.ts`).
-- Social row: `HostSocialSquareIcon.astro` — Lucide (and FA LINE) icons on gold
-  tiles; includes `links.homepage` when present plus legacy LINE URL.
+- Social row: `HostSocialSquareIcon.astro` — email and homepage use legacy CRA
+  Font Awesome solid paths (`cra-fontawesome-icons.mjs`, `fill="currentColor"`,
+  transparent negative space); LinkedIn/Facebook/LINE use Lucide stroke or FA
+  brand fill. Glyph color is `--host-social-glyph` (not a second tile fill).
 - No “PI” badge on host or member list.
 
 ## Theming

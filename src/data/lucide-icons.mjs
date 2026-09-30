@@ -50,9 +50,10 @@ export const lucideNavIcons = {
 
 /** @type {Record<string, { nodes: LucideNode[]; filled?: boolean; viewBox?: string }>} */
 export const lucideHostSocialIcons = {
+  /** Outline envelope (paths only — interior stays transparent). */
   email: {
     nodes: [
-      ['rect', { width: '20', height: '16', x: '2', y: '4', rx: '2' }],
+      ['path', { d: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z' }],
       ['path', { d: 'm22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7' }],
     ],
   },
@@ -66,6 +67,7 @@ export const lucideHostSocialIcons = {
   facebook: {
     nodes: [['path', { d: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z' }]],
   },
+  /** Lucide `globe` outline fallback when CRA path is not used. */
   homepage: {
     nodes: [
       ['circle', { cx: '12', cy: '12', r: '10' }],
