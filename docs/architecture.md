@@ -84,7 +84,7 @@ scripts/              # Build/verify tooling (see verification.md)
 |---|---|---|
 | `/` | Home | Full-bleed particles + logo; **NEWS & AWARDS** on same backdrop (no gray band) |
 | `/host/` | Host | CRA profile: `ric.jpeg`, bio, square social tiles incl. homepage |
-| `/members/` | Members | Three horizontal carousels (AI / EDA 3DIC / Quantum); no PI card |
+| `/members/` | Members | Three horizontal carousels (AI Formal / EDA 3DIC / Quantum); no PI card |
 | `/members/:id/` | Member bio | Liquid-glass link buttons; copy-email control |
 | `/papers/` | Publications | CRA subpage gradient; search + year filters |
 | `/papers/:slug/` | Paper detail | Abstract, links, bibtex disclosure + copy |
@@ -158,7 +158,7 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
 ### Members layout
 
 - Grouping is defined in `src/data/member-labels.mjs` (`memberDisplayGroups`:
-  AI, EDA 3DIC, Quantum) and rendered by `buildMemberDisplayGroups`
+  AI Formal, EDA 3DIC, Quantum) and rendered by `buildMemberDisplayGroups`
   in `src/utils/member-groups.mjs`.
 - Each group is a horizontal track (`.members-track-scroll`, `members-carousel.mjs`).
   The PI (`cyhuang`) is excluded from the list page; profile lives on `/host/`.

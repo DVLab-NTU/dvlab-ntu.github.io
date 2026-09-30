@@ -70,7 +70,7 @@ Notes:
   The broad `area` badge is shown on the detail page only when no topics are supplied.
   Members with `role: pi` are omitted from `/members/` (no PI chip); the host
   profile is edited via `cyhuang.md` and rendered on `/host/` with `ric.jpeg`.
-  The public list uses three horizontal carousels (AI / EDA 3DIC / Quantum)
+  The public list uses three horizontal carousels (AI Formal / EDA 3DIC / Quantum)
   from `memberDisplayGroups` in `member-labels.mjs`, not a single searchable grid.
 - New members: add the Markdown file and the submitted photo with the same `id`.
   If the photo is not yet available, omit `avatar` to use the default; do not substitute another person's image.

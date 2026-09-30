@@ -24,9 +24,9 @@ export const areas = {
 /** Members page: three research pillars (maps fine-grained `area` codes). */
 export const memberDisplayGroups = [
   {
-    key: 'ai',
+    key: 'ai-formal',
     areas: ['formal', 'ai-formal', 'verification'],
-    label: { zh: 'AI', en: 'AI' },
+    label: { zh: 'AI Formal', en: 'AI Formal' },
   },
   {
     key: 'eda-3dic',

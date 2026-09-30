@@ -27,7 +27,8 @@ test('member display groups use three research pillars', () => {
   ];
   const groups = buildMemberDisplayGroups(members);
   assert.equal(groups.length, 3);
-  assert.deepEqual(groups.map((group) => group.key), ['ai', 'eda-3dic', 'quantum']);
+  assert.deepEqual(groups.map((group) => group.key), ['ai-formal', 'eda-3dic', 'quantum']);
+  assert.equal(groups[0].label.en, 'AI Formal');
 });
 
 test('page backdrop keys follow route shape', () => {
