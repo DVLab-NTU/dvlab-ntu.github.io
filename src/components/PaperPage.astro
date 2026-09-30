@@ -50,7 +50,7 @@ const pageDesc = abstract || summarizeParts([entry.data.authors, entry.data.venu
       <article class="card detail-section" data-reveal>
         <h2>{t.citation}</h2>
         <details class="bibtex-details">
-          <summary>{t.bibtex}</summary>
+          <summary class="btn btn-ghost bibtex-summary">{t.bibtex}</summary>
           <pre id={`bibtex-${entry.slug}`}><code>{bibtex}</code></pre>
         </details>
         <button

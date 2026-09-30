@@ -61,8 +61,11 @@ npx serve dist      # or: npm run preview
 ```
 
 - Dark / light themes render correctly (toggle + `prefers-color-scheme`).
-- Nav clicks respond immediately (there is no SPA router).
+- Nav clicks respond immediately (there is no SPA router); nav tabs are plain links
+  on the glass header — page CTAs use liquid-glass `.btn` styling (see
+  `docs/architecture.md`).
 - Home shows the legacy-style **NEWS &amp; AWARDS** band; `/life/` is not published.
+- Host page uses `ric.jpeg`; members list shows three carousels without the PI card.
 - Deep links (e.g. `/members/anitalu724/`) return 200.
 
 CI verifies both disabled and enabled CMS builds. The enabled job uses

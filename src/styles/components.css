@@ -155,12 +155,15 @@ html[lang^='en'] .nav-text {
   transition: background var(--motion-fast) var(--ease-standard);
 }
 
-.nav-toggle:hover {
-  background: var(--glass-bg-hover);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+/* Hamburger stays a plain icon control — not a liquid-glass page button. */
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+  background: rgba(188, 221, 223, 0.14);
+}
+
+[data-theme='light'] .nav-toggle:hover,
+[data-theme='light'] .nav-toggle:focus-visible {
+  background: rgba(41, 50, 30, 0.08);
 }
 
 .nav-toggle-bar {
@@ -448,6 +451,8 @@ html[lang^='en'] .nav-text {
   border-color: rgba(64, 182, 129, 0.4);
 }
 
+/* Liquid-glass controls for page content and header utility actions (theme, locale).
+   Nav tabs (.nav-link) and the mobile hamburger (.nav-toggle) are intentionally excluded. */
 .btn {
   position: relative;
   overflow: hidden;
@@ -533,7 +538,7 @@ html[lang^='en'] .nav-text {
   color: var(--text);
 }
 
-/* Embossed theme toggle: no outline, solid tinted block with inset shading */
+/* Header utility control (liquid glass, not a nav tab). */
 .theme-toggle-btn {
   min-width: 84px;
   padding: 7px 14px;
@@ -827,27 +832,38 @@ html[lang^='en'] .nav-text {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  border: 1px solid var(--line);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
-  background: var(--surface-1);
+  background: var(--glass-bg);
   color: var(--text-soft);
   padding: 10px 12px;
   font-size: var(--text-sm);
-  box-shadow: var(--shadow-emboss);
+  font-weight: 620;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   text-align: left;
   cursor: pointer;
   overflow-wrap: anywhere;
   word-break: break-word;
   white-space: normal;
-  transition: border-color var(--motion-fast) var(--ease-standard),
+  transition: transform var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
     color var(--motion-fast) var(--ease-standard),
     background-color var(--motion-fast) var(--ease-standard);
 }
 
 .member-email:hover {
+  color: var(--primary-2);
+  border-color: var(--glass-border-strong);
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-1px);
+}
+
+:root[data-theme='light'] .member-email:hover {
   color: var(--text);
-  border-color: var(--line-strong);
-  background: rgba(255, 215, 0, 0.08);
 }
 
 .bibtex-details {
@@ -857,11 +873,14 @@ html[lang^='en'] .nav-text {
   overflow: hidden;
 }
 
-.bibtex-details summary {
+.bibtex-details summary.bibtex-summary {
+  list-style: none;
   cursor: pointer;
-  padding: 10px 12px;
-  color: var(--text-soft);
-  font-size: var(--text-sm);
+  width: fit-content;
+}
+
+.bibtex-details summary.bibtex-summary::-webkit-details-marker {
+  display: none;
 }
 
 .bibtex-details pre {

@@ -18,7 +18,7 @@ route is a complete HTML file generated at build time.
 
 ```
 src/
-  content/            # Markdown content collections (members, papers, courses, awards, life)
+  content/            # Markdown content collections (members, papers, courses, awards; life CMS-only)
     config.ts         # Registers the shared collection schemas
   data/
     site.zh.json      # Site-wide copy (brand, nav, home) — Traditional Chinese
@@ -28,24 +28,27 @@ src/
   components/         # Shared page templates and optimized MemberAvatar
   pages/              # Thin language wrappers; /en/ mirrors each
     index.astro       # Home: logo entrance, team overview, course and activity previews
-    members.astro     # Member list with search + role filter
+    host.astro        # Lab host (PI) profile — CRA layout, not in member list
+    members.astro     # Three research-pillar horizontal carousels (PI excluded)
     members/[id].astro# Member detail (bio and links)
     papers.astro      # Publication list, newest first
     papers/[slug].astro
     courses.astro     # Courses sorted by semester, newest first
     awards.astro      # Awards with students/advisors/source
-    life.astro        # Lab activity photos (hiking / lunch / jogging)
     404.astro         # noindex 404 with nav links
   scripts/            # Client-side interactivity (ES modules, no framework)
     reveal.mjs        # Scroll-reveal animations (IntersectionObserver)
     particles.mjs     # Home hero particle canvas
     ui.mjs            # Theme toggle, member filter, list search, copy-email
-    navbar-scroll.mjs # Header shadow on scroll
+    navbar-scroll.mjs # Fixed header scroll state + --site-header-height sync
+    members-carousel.mjs # Horizontal member tracks (wheel / drag)
     cms.mjs            # CMS member ID guard and initialization
   styles/
-    tokens.css        # Design tokens: colors (dark/light), fonts, radii, shadows
-    base.css          # Reset, body, scrollbar
-    components.css    # Nav, hero, cards, footer, buttons, theme toggle
+    tokens.css        # Design tokens, liquid-glass (--glass-*), themes
+    base.css          # Reset, body padding-top for fixed header
+    components.css    # Header bar, nav, liquid-glass .btn, filters, host
+    cra-layout.css    # CRA subpage gradient, members tracks, host/home CRA
+    cra-fonts.css     # Helvetica Neue + Coolvetica (@font-face)
     effects.css       # Hero glow, view-transition, ink theme transition
     utilities.css     # Grid, reveal states, small helpers
   utils/
@@ -56,10 +59,11 @@ src/
     content-schemas.mjs # Single schema source for Astro and validation
     member-groups.mjs # Locale-independent grouping
 public/
-  images/lab/         # Lab group photos (hero + life page)
+  images/host/        # Host portrait ric.jpeg (official CRA asset)
+  images/lab/         # Lab group photos (home hero)
   images/             # Logo, OG cover, favicons
   member/images/      # Member photos (<id>.jpg)
-  fonts/              # Inter, Noto Sans TC, Coolvetica
+  fonts/cra/          # CRA reference webfonts (Helvetica Neue, Coolvetica)
   robots.txt
 scripts/              # Build/verify tooling (see verification.md)
   build-site.mjs      # Wraps astro build (clean dist, telemetry off)
@@ -77,15 +81,17 @@ scripts/              # Build/verify tooling (see verification.md)
 
 | Route | Page | Notes |
 |---|---|---|
-| `/` | Home | Hero: title, intro, lab group photo, 4 CTA buttons; Highlights cards |
-| `/members/` | Members | Searchable/filterable member cards; `data-*` hooks in `ui.mjs` |
-| `/members/:id/` | Member bio | Uses `links.*` for Scholar/GitHub/Homepage/LinkedIn/email |
-| `/papers/` | Publications | Sorted by year desc |
-| `/papers/:slug/` | Paper detail | Abstract, links (online/pdf/code), optional bibtex |
-| `/courses/` | Courses | Sorted by semester desc (e.g. 115-1 → 108-1) |
-| `/awards/` | Awards | Students/advisors/source per record |
-| `/life/` | Lab life | Group photos with captions + optional descriptions |
+| `/` | Home | Animated logo entrance, intro, **NEWS & AWARDS** (7 items, external links) |
+| `/host/` | Host | CRA profile: `ric.jpeg`, bio, square social tiles incl. homepage |
+| `/members/` | Members | Three horizontal carousels (Formal / EDA·3DIC / Quantum); no PI card |
+| `/members/:id/` | Member bio | Liquid-glass link buttons; copy-email control |
+| `/papers/` | Publications | CRA subpage gradient; search + year filters |
+| `/papers/:slug/` | Paper detail | Abstract, links, bibtex disclosure + copy |
+| `/courses/` | Courses | CRA subpage gradient; sorted by semester desc |
+| `/awards/` | Awards | CRA subpage gradient |
 | `/en/*` | English | Mirrors every route under `/en/` |
+
+`/life/` and `/join/` are **not** published (404). The `life` content collection may remain for CMS/home hiking metadata only.
 
 ## Data flow
 
@@ -98,26 +104,74 @@ scripts/              # Build/verify tooling (see verification.md)
    control grouping; labels are translated only when rendering.
 5. The build emits one static HTML per route (plus sitemap, robots, 404).
 
+## CRA visual system
+
+The site follows the legacy CRA (2022 React) look while staying a static Astro build.
+
+### Typography
+
+- Body: **Helvetica Neue** (weight 300) from `public/fonts/cra/`, loaded in
+  `src/styles/cra-fonts.css`.
+- Display titles: **Coolvetica** via `--font-title`.
+- Chinese fallback: Noto Sans TC (system stack in `tokens.css`).
+
+### Fixed liquid-glass header
+
+- `.site-header` is a full-width frosted bar (`--glass-*` in `tokens.css`):
+  semi-transparent fill, blur, soft border, shadow. Scrolled state deepens
+  slightly via `.is-scrolled` (`navbar-scroll.mjs`).
+- `body` uses `padding-top: var(--site-header-height)` (`base.css`). The
+  height is measured at runtime and written back to `--site-header-height` so
+  the bar and content never overlap when the mobile menu opens.
+
+### Navigation vs buttons
+
+- **Nav tabs** (`.nav-link` + icons) stay text/icon links on the glass bar —
+  no chip borders, blur stacks, or `.btn` shine. The **hamburger** (`.nav-toggle`)
+  is a minimal icon control with a light hover wash only.
+- **Header utilities** (theme toggle, locale switch) use compact liquid-glass
+  styling in `.nav-actions` — they are controls, not section nav items.
+- **All other actionable controls** on pages share `.btn` / `.btn-primary` /
+  `.btn-ghost` (Host CTAs, 404 links, paper/member/course actions, filter
+  tags, search inputs, bibtex summary, copy-email, etc.): frosted fill,
+  `backdrop-filter`, border, hover lift, optional `.btn-shine` sweep.
+
+### Subpage background
+
+- Members, Papers, Courses, and Awards wrap content in `.cra-subpage-gradient`
+  (`cra-layout.css`): full-bleed navy→teal gradient (light: pale yellow-green).
+  Home (`home-cra`) and Host (`host-cra`) keep their own layouts.
+
+### Members layout
+
+- Grouping is defined in `src/data/member-labels.mjs` (`memberDisplayGroups`:
+  Formal verification, EDA/3DIC, Quantum) and rendered by `buildMemberDisplayGroups`
+  in `src/utils/member-groups.mjs`.
+- Each group is a horizontal track (`.members-track-scroll`, `members-carousel.mjs`).
+  The PI (`cyhuang`) is excluded from the list page; profile lives on `/host/`.
+
+### Host page
+
+- Portrait: `public/images/host/ric.jpeg` (`HOST_PHOTO` in `src/utils/host-member.ts`).
+- Social row: `HostSocialSquareIcon.astro` — light square tiles with masked brand
+  glyphs; includes `links.homepage` when present plus legacy LINE URL.
+- No “PI” badge on host or member list.
+
 ## Theming
 
-- Tokens live in `src/styles/tokens.css`: `:root` is the dark theme
-  (old-site navy `#1f3751` + gold `#ffd700`); `:root[data-theme='light']`
-  overrides with warm off-white surfaces and yellow-green accents. Light cards
-  use thin borders, metadata badges have solid pale-green fills, and controls
-  use flat styling with visible keyboard focus outlines.
+- Tokens live in `src/styles/tokens.css`: dark CRA navy/gold; light yellow-green
+  surfaces. Liquid-glass tokens (`--glass-bg`, `--glass-border`, …) have
+  paired dark/light values.
 - Theme is applied before paint by an inline script in `BaseLayout.astro`
   (`localStorage['lab-theme']` → `prefers-color-scheme` fallback).
-- The theme toggle button is embossed in dark mode and flat in light mode (`src/styles/components.css`,
-  `.theme-toggle-btn`); a 180 ms crossfade is defined in `effects.css`.
-- All animation respects `prefers-reduced-motion`.
+- Theme crossfade: `effects.css` (~180 ms). All animation respects
+  `prefers-reduced-motion`.
 
 ## Navigation
 
-- The nav is plain `<a>` links (no SPA router). Removing the Astro
-  ClientRouter was deliberate: it caused input lag during view-transitions.
-  With full-page loads, a click starts navigation immediately and every page
-  remains fully indexable.
-- The **活動 / Life** tab links to `/life/` (a real page, not a home anchor).
+- The nav is plain `<a>` links (no SPA router). Full-page loads keep clicks
+  instant and every route indexable.
+- Primary nav: Home, Host, Members, Papers, Courses, Awards (no Life tab).
 
 ## Resources and progressive enhancement
 
@@ -184,15 +238,12 @@ state and subsequent navigation in both desktop and mobile layouts.
 
 ## Homepage content
 
-Below the unchanged logo opening, the homepage presents the team introduction
-and hiking photo, three courses sorted by semester descending (then slug),
-and two other activities sorted by their `order`. Course and
-activity previews link to stable entry anchors on the full pages.
-All content is rendered at build time and works without JavaScript.
+Below the logo opening, the homepage shows the team introduction, hiking photo,
+and a **NEWS & AWARDS** band (seven award lines linking to external sources).
+There are no duplicate nav CTAs under the logo. Content is static HTML.
 
-The recruitment collection, both `/join/` routes, and their CMS fields have
-been removed. Old recruitment URLs now use the site's normal 404 response;
-they are not navigation items or sitemap entries.
+Recruitment (`/join/`) and the public **Life** route are removed (404). Old URLs
+are not in the nav or sitemap.
 
 ## Homepage particles
 

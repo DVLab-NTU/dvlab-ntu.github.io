@@ -68,7 +68,10 @@ Notes:
   Keep research explanations and personal hobbies in `bio`, preserving submitted
   details. Do not split free-text submissions automatically by punctuation.
   The broad `area` badge is shown on the detail page only when no topics are supplied.
-  Nicknames are also searchable in the member list.
+  Members with `role: pi` are omitted from `/members/` (no PI chip); the host
+  profile is edited via `cyhuang.md` and rendered on `/host/` with `ric.jpeg`.
+  The public list uses three horizontal carousels (Formal / EDA·3DIC / Quantum)
+  from `memberDisplayGroups` in `member-labels.mjs`, not a single searchable grid.
 - New members: add the Markdown file and the submitted photo with the same `id`.
   If the photo is not yet available, omit `avatar` to use the default; do not substitute another person's image.
 
@@ -131,24 +134,20 @@ source: "https://www.iccad-contest.org/2025/Winners.html"
 
 ## Site-wide copy (`src/data/site.{zh,en}.json`)
 
-Brand, nav labels, and home introduction. Keys must match between the
-two files; `scripts/validate-content.mjs` checks the required set
-(`home`, `members`, `papers`, `courses`, `awards`, `life`).
+Brand, nav labels, and home introduction. Nav keys must match between the
+two files (`home`, `host`, `members`, `papers`, `courses`, `awards`) — validated
+by `siteSchema` in `content-schemas.mjs`.
 
-## Lab activities (`src/content/life/`)
+## Lab activities (`src/content/life/`) — CMS only
 
-- Each activity has `photo` (local public path), bilingual `alt`, `caption`,
-  and an integer `order`. Both languages use the same record.
-- `description` is optional: omit it when only a photo and caption are verified.
-  If supplied, provide both languages; do not infer dates or locations.
-- Keep the `group-hiking` entry: its photo and caption also supply the home hero.
-- Keep them web-sized (~1400px wide, JPEG) to avoid bloating the bundle.
+There is **no** public `/life/` page. The collection may remain for Decap CMS
+and for the home hiking hero (`group-hiking` photo path). Do not add Life to the
+site nav or sitemap.
 
-The homepage shows the team introduction, the three newest course records,
-and two activity photos excluding the main hiking photo. These previews use
-the same collections as their destination pages; no duplicate homepage content
-needs editing. Course semesters describe the stored records, not a live course
-offering. Page UI labels live in `src/data/page-copy.mjs`.
+The homepage shows the team introduction, hiking photo, and the **NEWS & AWARDS**
+band (award records with external `source` links). Page UI labels live in
+`src/data/page-copy.mjs`. Visual styling (gradients, liquid-glass controls, fonts)
+is documented in `docs/architecture.md` under **CRA visual system**.
 
 ## CMS editing
 
