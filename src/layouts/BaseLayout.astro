@@ -11,7 +11,9 @@ import '../styles/components.css';
 import '../styles/effects.css';
 import '../styles/utilities.css';
 import '../styles/cra-layout.css';
+import '../styles/page-background.css';
 
+import { resolvePageBackgroundKey } from '../utils/page-background.mjs';
 import revealScript from '../scripts/reveal.mjs?url';
 import uiScript from '../scripts/ui.mjs?url';
 import navbarScrollScript from '../scripts/navbar-scroll.mjs?url';
@@ -77,6 +79,8 @@ const navPathResolved = {
   awards: normalizeSitePath(navPath.awards),
 };
 
+const pageBgKey = resolvePageBackgroundKey(currentPath);
+
 const navItems = [
   { href: navPathResolved.home, label: t.nav.home, exact: true, icon: 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1v-9.5Z' },
   { href: navPathResolved.host, label: t.nav.host, exact: false, icon: 'M12 3.5a4.5 4.5 0 0 0-4.5 4.5V9H6a3 3 0 0 0-3 3v8a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-8a3 3 0 0 0-3-3h-1.5V8A4.5 4.5 0 0 0 12 3.5Zm-2.5 4.5A2.5 2.5 0 0 1 12 5.5a2.5 2.5 0 0 1 2.5 2.5V9h-5V8ZM7 12h10v7H7v-7Z' },
@@ -92,7 +96,7 @@ const navItems = [
 }));
 ---
 <!doctype html>
-<html lang={lang === 'zh' ? 'zh-TW' : 'en'}>
+<html lang={lang === 'zh' ? 'zh-TW' : 'en'} data-page-bg={pageBgKey}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -178,7 +182,11 @@ const navItems = [
       }
     </style>
   </head>
-  <body id="top">
+  <body id="top" class="has-unified-page-backdrop">
+    <div class="page-backdrop" aria-hidden="true">
+      <div class="page-backdrop__noise"></div>
+      <div class="page-backdrop__vignette"></div>
+    </div>
     <header class="site-header">
       <div class="container nav">
         <a class="brand" href={navPathResolved.home} aria-label={t.siteName}>
@@ -217,8 +225,10 @@ const navItems = [
       </div>
     </header>
 
-    <main class="container site-shell cra-site">
-      <slot />
+    <main class="container site-shell cra-site page-shell" data-page-bg={pageBgKey}>
+      <div class="page-content">
+        <slot />
+      </div>
     </main>
     <footer class="footer">
       <div class="container footer-inner">

@@ -47,7 +47,8 @@ src/
     tokens.css        # Design tokens, liquid-glass (--glass-*), themes
     base.css          # Reset, body padding-top for fixed header
     components.css    # Header bar, nav, liquid-glass .btn, filters, host
-    cra-layout.css    # CRA subpage gradient, members tracks, host/home CRA
+    page-background.css # Full-viewport gradient + noise backdrop per route
+    cra-layout.css    # CRA home/news, members tracks, host layout
     cra-fonts.css     # Helvetica Neue + Coolvetica (@font-face)
     effects.css       # Hero glow, view-transition, ink theme transition
     utilities.css     # Grid, reveal states, small helpers
@@ -81,9 +82,9 @@ scripts/              # Build/verify tooling (see verification.md)
 
 | Route | Page | Notes |
 |---|---|---|
-| `/` | Home | Animated logo entrance, intro, **NEWS & AWARDS** (7 items, external links) |
+| `/` | Home | Full-bleed particles + logo; **NEWS & AWARDS** on same backdrop (no gray band) |
 | `/host/` | Host | CRA profile: `ric.jpeg`, bio, square social tiles incl. homepage |
-| `/members/` | Members | Three horizontal carousels (Formal / EDA·3DIC / Quantum); no PI card |
+| `/members/` | Members | Three horizontal carousels (AI / EDA 3DIC / Quantum); no PI card |
 | `/members/:id/` | Member bio | Liquid-glass link buttons; copy-email control |
 | `/papers/` | Publications | CRA subpage gradient; search + year filters |
 | `/papers/:slug/` | Paper detail | Abstract, links, bibtex disclosure + copy |
@@ -136,16 +137,22 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
   tags, search inputs, bibtex summary, copy-email, etc.): frosted fill,
   `backdrop-filter`, border, hover lift, optional `.btn-shine` sweep.
 
-### Subpage background
+### Unified page backdrop
 
-- Members, Papers, Courses, and Awards wrap content in `.cra-subpage-gradient`
-  (`cra-layout.css`): full-bleed navy→teal gradient (light: pale yellow-green).
-  Home (`home-cra`) and Host (`host-cra`) keep their own layouts.
+- Every route sets `html[data-page-bg]` via `resolvePageBackgroundKey()` in
+  `src/utils/page-background.mjs`. `BaseLayout.astro` renders a fixed
+  `.page-backdrop` (muted CRA gradient + SVG film grain + vignette) in
+  `src/styles/page-background.css`. Per-route CSS tweaks angle and accent mix
+  so pages feel related but not identical (including `member-detail` and
+  `paper-detail`).
+- Home adds a soft radial highlight on `.home-cra::before`; the logo stage and
+  **NEWS & AWARDS** share the same backdrop (no gray news band). Particles canvas
+  spans the full `.home-cra` column.
 
 ### Members layout
 
 - Grouping is defined in `src/data/member-labels.mjs` (`memberDisplayGroups`:
-  Formal verification, EDA/3DIC, Quantum) and rendered by `buildMemberDisplayGroups`
+  AI, EDA 3DIC, Quantum) and rendered by `buildMemberDisplayGroups`
   in `src/utils/member-groups.mjs`.
 - Each group is a horizontal track (`.members-track-scroll`, `members-carousel.mjs`).
   The PI (`cyhuang`) is excluded from the list page; profile lives on `/host/`.

@@ -24,14 +24,14 @@ export const areas = {
 /** Members page: three research pillars (maps fine-grained `area` codes). */
 export const memberDisplayGroups = [
   {
-    key: 'formal',
+    key: 'ai',
     areas: ['formal', 'ai-formal', 'verification'],
-    label: { zh: '形式化驗證', en: 'Formal Verification' },
+    label: { zh: 'AI', en: 'AI' },
   },
   {
-    key: 'eda',
+    key: 'eda-3dic',
     areas: ['eda', '3dic', 'architecture'],
-    label: { zh: 'EDA / 3DIC', en: 'EDA / 3DIC' },
+    label: { zh: 'EDA 3DIC', en: 'EDA 3DIC' },
   },
   {
     key: 'quantum',

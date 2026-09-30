@@ -15,7 +15,7 @@ const listMembers = members.filter((member) => member.role !== 'pi');
 const displayGroups = buildMemberDisplayGroups(listMembers);
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
-  <div class="cra-subpage-gradient members-cra subpage-members">
+  <div class="members-cra subpage-members">
     <h1 class="page-title cra-page-title section-title members-page-title">{t.heading}</h1>
 
     {displayGroups.map((group) => (

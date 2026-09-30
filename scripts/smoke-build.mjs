@@ -87,7 +87,7 @@ const checks = [
   },
   {
     file: 'dist/members/index.html',
-    includes: ['成員列表', 'members-track-scroll', '形式化驗證', 'Quantum'],
+    includes: ['成員列表', 'members-track-scroll', 'EDA 3DIC', 'Quantum'],
   },
   {
     file: 'dist/papers/index.html',

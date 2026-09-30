@@ -5,6 +5,7 @@ import vm from 'node:vm';
 import { dump, load } from 'js-yaml';
 import { schemas, membersSchema } from '../src/utils/content-schemas.mjs';
 import { groupMembers, admissionCohortLabel, buildMemberDisplayGroups } from '../src/utils/member-groups.mjs';
+import { resolvePageBackgroundKey } from '../src/utils/page-background.mjs';
 import { cmsCollections, renderCmsConfigYml } from '../src/utils/cms-config.ts';
 import { readContent } from '../scripts/validate-content.mjs';
 
@@ -26,7 +27,13 @@ test('member display groups use three research pillars', () => {
   ];
   const groups = buildMemberDisplayGroups(members);
   assert.equal(groups.length, 3);
-  assert.deepEqual(groups.map((group) => group.key), ['formal', 'eda', 'quantum']);
+  assert.deepEqual(groups.map((group) => group.key), ['ai', 'eda-3dic', 'quantum']);
+});
+
+test('page backdrop keys follow route shape', () => {
+  assert.equal(resolvePageBackgroundKey('/'), 'home');
+  assert.equal(resolvePageBackgroundKey('/en/members/anitalu724/'), 'member-detail');
+  assert.equal(resolvePageBackgroundKey('/papers/foo/'), 'paper-detail');
 });
 
 test('member grouping does not depend on translated names or missing cohorts', () => {
