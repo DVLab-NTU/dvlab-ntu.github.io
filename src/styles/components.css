@@ -156,6 +156,31 @@ html[lang^='en'] .nav-text {
   margin-left: auto;
 }
 
+/* Header theme + locale pills share one box model (Latin and CJK). */
+.nav-actions .theme-toggle-btn,
+.nav-actions .lang-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  min-height: 36px;
+  max-height: 36px;
+  margin: 0;
+  padding: 0 14px;
+  line-height: 1;
+  font-family: var(--font-base);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.nav-actions .theme-toggle-btn {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -252,10 +277,7 @@ html[lang^='en'] .nav-text {
    label (English page -> 中文, Chinese page -> English), no border */
 .lang-link {
   color: var(--text-soft);
-  font-size: var(--text-sm);
-  font-weight: 600;
   text-decoration: none;
-  padding: 7px 14px;
   min-width: 88px;
   text-align: center;
   border-radius: 8px;
@@ -557,12 +579,8 @@ html[lang^='en'] .nav-text {
 /* Header utility control (liquid glass, not a nav tab). */
 .theme-toggle-btn {
   min-width: 84px;
-  padding: 7px 14px;
   border: 1px solid var(--glass-border);
   border-radius: 8px;
-  font-family: var(--font-base);
-  font-size: var(--text-sm);
-  font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
   color: var(--text-soft);
@@ -1159,15 +1177,14 @@ html[lang^='en'] .nav-text {
     letter-spacing: 0.04em;
   }
 
-  .lang-link {
+  .nav-actions .lang-link,
+  .nav-actions .theme-toggle-btn {
+    height: 34px;
+    min-height: 34px;
+    max-height: 34px;
     min-width: 72px;
-    padding: 7px 10px;
+    padding: 0 10px;
     font-size: 13px;
-  }
-
-  .theme-toggle-btn {
-    min-width: 72px;
-    padding: 7px 10px;
   }
 
   .footer-inner {
