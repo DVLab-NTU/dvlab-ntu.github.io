@@ -1,85 +1,140 @@
-/* Locale-aware weight tuning on top of CRA Helvetica Neue / Coolvetica stack. */
+/* Locale-aware weight tuning on top of CRA Helvetica Neue / Coolvetica stack.
+   Loaded after layout/components so these rules win on conflicts. */
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-html[lang^='zh'] body {
-  font-weight: 300;
-}
-
-html[lang^='en'] body {
-  font-weight: 500;
+  font-weight: var(--fw-body);
 }
 
 html[lang^='zh'] :is(h1, h2, h3) {
-  font-weight: 500;
+  font-weight: var(--fw-heading);
 }
 
 html[lang^='en'] :is(h1, h2, h3) {
-  font-weight: 650;
+  font-weight: var(--fw-heading-lg);
 }
 
 html[lang^='en'] .nav-text {
-  font-weight: 600;
+  font-weight: var(--fw-nav);
 }
 
 html[lang^='zh'] .nav-text {
-  font-weight: 400;
+  font-weight: var(--fw-nav);
 }
 
 html[lang^='en'] .page-title,
 html[lang^='en'] .section-title,
 html[lang^='en'] .members-page-title,
 html[lang^='en'] .host-cra-title {
-  font-weight: 650;
-}
-
-html[lang^='en'] .group-title {
-  font-weight: 600;
+  font-weight: var(--fw-heading-lg);
 }
 
 html[lang^='zh'] .page-title,
 html[lang^='zh'] .section-title,
 html[lang^='zh'] .members-page-title,
 html[lang^='zh'] .host-cra-title {
-  font-weight: 500;
+  font-weight: var(--fw-heading);
+}
+
+html[lang^='en'] .group-title {
+  font-weight: var(--fw-latin-copy);
+}
+
+html[lang^='zh'] .group-title {
+  font-weight: var(--fw-heading);
 }
 
 html[lang^='en'] .home-news-heading.section-title {
-  font-weight: 650;
+  font-weight: var(--fw-heading-lg);
 }
 
 html[lang^='zh'] .home-news-heading.section-title {
-  font-weight: 500;
+  font-weight: var(--fw-heading);
 }
 
 html[lang^='en'] .home-news-title {
-  font-weight: 700;
+  font-weight: var(--fw-latin-strong);
 }
 
 html[lang^='zh'] .home-news-title {
-  font-weight: 600;
+  font-weight: var(--fw-heading-lg);
 }
 
-/* Award attendant lines are Latin on both locales. */
-.home-news-meta {
-  font-weight: 600;
+/* Award author lines and similar Latin meta (both locales). */
+.home-news-meta,
+.paper-list-item p,
+.paper-authors,
+.cra-site .meta,
+.news-contex,
+.detail-contex {
+  font-weight: var(--fw-latin-meta);
 }
 
 html[lang^='en'] .btn,
 html[lang^='en'] .theme-toggle-btn,
 html[lang^='en'] .lang-link {
-  font-weight: 600;
+  font-weight: var(--fw-latin-ui);
+}
+
+html[lang^='zh'] .nav-actions .theme-toggle-btn,
+html[lang^='zh'] .nav-actions .lang-link {
+  font-weight: var(--fw-latin-ui);
 }
 
 html[lang^='en'] .cra-site p,
 html[lang^='en'] .cra-site li,
 html[lang^='en'] .footer {
-  font-weight: 500;
+  font-weight: var(--fw-latin-copy);
 }
 
 html[lang^='en'] .member-tile h3 {
-  font-weight: 600;
+  font-weight: var(--fw-member-name);
+}
+
+html[lang^='zh'] .member-tile h3 {
+  font-weight: var(--fw-member-name);
+}
+
+html[lang^='en'] .paper-list-item h3 {
+  font-weight: var(--fw-latin-strong);
+}
+
+html[lang^='zh'] .paper-list-item h3 {
+  font-weight: var(--fw-heading-lg);
+}
+
+html[lang^='en'] .badge,
+html[lang^='en'] .badge-muted,
+html[lang^='en'] .status-chip {
+  font-weight: var(--fw-latin-ui);
+}
+
+html[lang^='en'] .btn {
+  font-weight: var(--fw-latin-ui);
+}
+
+html[lang^='en'] .btn-primary {
+  font-weight: var(--fw-latin-strong);
+}
+
+html[lang^='en'] .footer-back-top a,
+html[lang^='en'] .footer .footer-copy {
+  font-weight: var(--fw-latin-ui);
+}
+
+html[lang^='en'] .flat-entry h2 {
+  font-weight: var(--fw-latin-copy);
+}
+
+html[lang^='en'] .host-cra-tagline {
+  font-weight: var(--fw-latin-strong);
+}
+
+.home-news-date-year {
+  font-weight: var(--fw-latin-chip);
+}
+
+.home-news-date-month {
+  font-weight: var(--fw-latin-chip-sub);
 }

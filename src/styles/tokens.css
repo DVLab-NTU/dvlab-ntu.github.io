@@ -66,6 +66,19 @@
   --font-title: Coolvetica, 'Helvetica Neue', HelveticaNeue, Arial, 'Noto Sans TC', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
+  /* Locale weight scale — Latin/English reads heavier; zh body stays light (overridden on html[lang]). */
+  --fw-body: 300;
+  --fw-heading: 500;
+  --fw-heading-lg: 600;
+  --fw-nav: 400;
+  --fw-latin-copy: 600;
+  --fw-latin-meta: 650;
+  --fw-latin-strong: 700;
+  --fw-latin-ui: 620;
+  --fw-latin-chip: 600;
+  --fw-latin-chip-sub: 550;
+  --fw-member-name: 500;
+
   --text-xs: 12px;
   --text-sm: 14px;
   --text-md: 16px;
@@ -81,6 +94,34 @@
   --ease-standard: cubic-bezier(0.2, 0.78, 0.22, 1);
   --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
   --stagger-step: 80ms;
+}
+
+html[lang^='zh'] {
+  --fw-body: 300;
+  --fw-heading: 500;
+  --fw-heading-lg: 600;
+  --fw-nav: 400;
+  --fw-latin-copy: 600;
+  --fw-latin-meta: 650;
+  --fw-latin-strong: 700;
+  --fw-latin-ui: 620;
+  --fw-latin-chip: 600;
+  --fw-latin-chip-sub: 550;
+  --fw-member-name: 500;
+}
+
+html[lang^='en'] {
+  --fw-body: 600;
+  --fw-heading: 700;
+  --fw-heading-lg: 720;
+  --fw-nav: 650;
+  --fw-latin-copy: 600;
+  --fw-latin-meta: 700;
+  --fw-latin-strong: 720;
+  --fw-latin-ui: 650;
+  --fw-latin-chip: 650;
+  --fw-latin-chip-sub: 600;
+  --fw-member-name: 650;
 }
 
 :root[data-theme='light'] {
