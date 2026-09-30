@@ -26,14 +26,13 @@
   isolation: isolate;
   overflow: hidden;
   background: var(--glass-bg);
-  border-bottom: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  border: none;
+  box-shadow: var(--glass-shadow-header);
   backdrop-filter: blur(18px) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(18px) saturate(var(--glass-saturate));
   transition:
     box-shadow var(--motion-mid) var(--ease-standard),
-    background-color var(--motion-mid) var(--ease-standard),
-    border-color var(--motion-mid) var(--ease-standard);
+    background-color var(--motion-mid) var(--ease-standard);
 }
 
 /* Unified backdrop sits at z-index 0; header must stay fixed above it. */
@@ -44,8 +43,7 @@ body.has-unified-page-backdrop > .site-header {
 
 .site-header.is-scrolled {
   background: var(--glass-bg-hover);
-  box-shadow: var(--glass-shadow-hover);
-  border-bottom-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-header-hover);
 }
 
 .nav {
@@ -290,7 +288,7 @@ html[lang^='en'] .nav-text {
   text-align: center;
   border-radius: 8px;
   background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  border: none;
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
@@ -298,8 +296,7 @@ html[lang^='en'] .nav-text {
     transform var(--motion-fast) var(--ease-standard),
     box-shadow var(--motion-fast) var(--ease-standard),
     color var(--motion-fast) var(--ease-standard),
-    background-color var(--motion-fast) var(--ease-standard),
-    border-color var(--motion-fast) var(--ease-standard);
+    background-color var(--motion-fast) var(--ease-standard);
 }
 
 .btn-shine.lang-link,
@@ -326,7 +323,6 @@ html[lang^='en'] .nav-text {
   color: var(--primary-2);
   text-decoration: none;
   background: var(--glass-bg-hover);
-  border-color: var(--glass-border-strong);
   box-shadow: var(--glass-shadow-hover);
 }
 
@@ -336,7 +332,7 @@ html[lang^='en'] .nav-text {
 
 .lang-link:active {
   transform: translateY(1px);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--glass-shadow-pressed);
 }
 
 .card {
@@ -502,7 +498,7 @@ html[lang^='en'] .nav-text {
 .btn {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--glass-border);
+  border: none;
   border-radius: var(--radius-md);
   height: 40px;
   padding: 0 16px;
@@ -519,8 +515,7 @@ html[lang^='en'] .nav-text {
   transition: transform var(--motion-fast) var(--ease-standard),
     box-shadow var(--motion-fast) var(--ease-standard),
     color var(--motion-fast) var(--ease-standard),
-    background-color var(--motion-fast) var(--ease-standard),
-    border-color var(--motion-fast) var(--ease-standard);
+    background-color var(--motion-fast) var(--ease-standard);
 }
 
 .btn::before,
@@ -552,14 +547,14 @@ html[lang^='en'] .nav-text {
 .btn-primary {
   color: var(--primary-2);
   background: var(--glass-bg-accent);
-  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-accent);
   font-weight: var(--fw-latin-strong);
 }
 
 .btn-primary:hover {
   color: var(--primary-2);
   background: var(--glass-bg-accent-hover);
-  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-accent-hover);
 }
 
 :root[data-theme='light'] .btn-primary {
@@ -577,7 +572,11 @@ html[lang^='en'] .nav-text {
 .btn-ghost:hover {
   color: var(--primary-2);
   background: var(--glass-bg-hover);
-  border-color: var(--glass-border-strong);
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: var(--glass-shadow-pressed);
 }
 
 :root[data-theme='light'] .btn-ghost:hover {
@@ -587,7 +586,7 @@ html[lang^='en'] .nav-text {
 /* Header utility control (liquid glass, not a nav tab). */
 .theme-toggle-btn {
   min-width: 84px;
-  border: 1px solid var(--glass-border);
+  border: none;
   border-radius: 8px;
   letter-spacing: 0.01em;
   cursor: pointer;
@@ -599,8 +598,7 @@ html[lang^='en'] .nav-text {
   transition: transform var(--motion-fast) var(--ease-standard),
     box-shadow var(--motion-fast) var(--ease-standard),
     color var(--motion-fast) var(--ease-standard),
-    background-color var(--motion-fast) var(--ease-standard),
-    border-color var(--motion-fast) var(--ease-standard);
+    background-color var(--motion-fast) var(--ease-standard);
 }
 
 :root[data-theme='light'] .theme-toggle-btn {
@@ -610,7 +608,6 @@ html[lang^='en'] .nav-text {
 .theme-toggle-btn:hover {
   color: var(--primary-2);
   background: var(--glass-bg-hover);
-  border-color: var(--glass-border-strong);
   box-shadow: var(--glass-shadow-hover);
 }
 
@@ -620,7 +617,7 @@ html[lang^='en'] .nav-text {
 
 .theme-toggle-btn:active {
   transform: translateY(1px);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--glass-shadow-pressed);
 }
 
 .hero {
@@ -906,7 +903,7 @@ html[lang^='en'] .nav-text {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  border: 1px solid var(--glass-border);
+  border: none;
   border-radius: var(--radius-md);
   background: var(--glass-bg);
   color: var(--text-soft);
@@ -923,14 +920,12 @@ html[lang^='en'] .nav-text {
   white-space: normal;
   transition: transform var(--motion-fast) var(--ease-standard),
     box-shadow var(--motion-fast) var(--ease-standard),
-    border-color var(--motion-fast) var(--ease-standard),
     color var(--motion-fast) var(--ease-standard),
     background-color var(--motion-fast) var(--ease-standard);
 }
 
 .member-email:hover {
   color: var(--primary-2);
-  border-color: var(--glass-border-strong);
   background: var(--glass-bg-hover);
   box-shadow: var(--glass-shadow-hover);
   transform: translateY(-1px);
@@ -990,7 +985,7 @@ html[lang^='en'] .nav-text {
   width: min(380px, 100%);
   height: 40px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--glass-border);
+  border: none;
   background: var(--glass-bg);
   color: var(--text);
   padding: 0 12px;
@@ -998,8 +993,7 @@ html[lang^='en'] .nav-text {
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  transition: border-color var(--motion-fast) var(--ease-standard),
-    box-shadow var(--motion-fast) var(--ease-standard),
+  transition: box-shadow var(--motion-fast) var(--ease-standard),
     background-color var(--motion-fast) var(--ease-standard);
 }
 
@@ -1009,8 +1003,8 @@ html[lang^='en'] .nav-text {
 
 .filter-input:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: var(--shadow-focus);
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover), var(--shadow-focus);
 }
 
 .cohort-title {
@@ -1032,7 +1026,7 @@ html[lang^='en'] .nav-text {
 }
 
 .filter-tag {
-  border: 1px solid var(--glass-border);
+  border: none;
   border-radius: var(--radius-pill);
   background: var(--glass-bg);
   padding: 6px 12px;
@@ -1041,20 +1035,28 @@ html[lang^='en'] .nav-text {
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  transition: all var(--motion-fast) var(--ease-standard);
+  transition: color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 
 .filter-tag:hover {
   color: var(--text);
   background: var(--glass-bg-hover);
-  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-hover);
 }
 
 .filter-tag.is-selected {
   color: var(--primary-2);
   background: var(--glass-bg-accent);
-  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-accent);
   font-weight: var(--fw-latin-strong);
+}
+
+.filter-tag.is-selected:hover {
+  background: var(--glass-bg-accent-hover);
+  box-shadow: var(--glass-shadow-accent-hover);
 }
 
 :root[data-theme='light'] .filter-tag.is-selected {
@@ -1185,7 +1187,7 @@ html[lang^='en'] .nav-text {
 
   .nav.nav-enhanced.is-open .nav-links {
     background: var(--glass-bg-hover);
-    border: 1px solid var(--glass-border);
+    border: none;
     box-shadow: var(--glass-shadow);
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
     -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));

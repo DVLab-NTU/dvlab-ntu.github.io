@@ -119,8 +119,8 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
 ### Fixed liquid-glass header
 
 - `.site-header` is a full-width frosted bar (`--glass-*` in `tokens.css`):
-  semi-transparent fill, blur, soft border, shadow. Scrolled state deepens
-  slightly via `.is-scrolled` (`navbar-scroll.mjs`).
+  translucent fill, blur/saturate, **embossed inset rim** (no 1px stroke border),
+  soft outer lift. Scrolled state deepens via `.is-scrolled` (`navbar-scroll.mjs`).
 - `body` uses `padding-top: var(--site-header-height)` (`base.css`). The
   height is measured at runtime and written back to `--site-header-height` so
   the bar and content never overlap when the mobile menu opens.
@@ -137,7 +137,8 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
 - **All other actionable controls** on pages share `.btn` / `.btn-primary` /
   `.btn-ghost` (Host CTAs, 404 links, paper/member/course actions, filter
   tags, search inputs, bibtex summary, copy-email, etc.): frosted fill,
-  `backdrop-filter`, border, hover lift, optional `.btn-shine` sweep.
+  `backdrop-filter`, embossed inset highlights (no outline border), hover lift,
+  optional `.btn-shine` sweep. Tokens: `--glass-rim-inset`, `--glass-lift`.
 
 ### Unified page backdrop
 
