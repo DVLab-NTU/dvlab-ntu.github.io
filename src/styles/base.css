@@ -68,6 +68,10 @@ body {
   letter-spacing: 0.004em;
 }
 
+body.has-unified-page-backdrop {
+  background: transparent;
+}
+
 body::before {
   content: '';
   pointer-events: none;

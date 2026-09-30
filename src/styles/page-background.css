@@ -3,23 +3,26 @@
 
 :root {
   --page-bg-angle: 228deg;
-  --page-bg-accent: 18%;
-  --page-noise-opacity: 0.12;
-  --page-noise-size: 200px;
-  --page-vignette-strength: 0.42;
-  --page-bg-c0: #111f30;
-  --page-bg-c1: #162a40;
-  --page-bg-c2: #1c3349;
-  --page-bg-c3: #3d5c66;
+  --page-bg-accent: 22%;
+  --page-noise-opacity: 0.2;
+  --page-noise-size: 180px;
+  --page-vignette-strength: 0.48;
+  /* CRA navy → teal (muted luminance for readability) */
+  --page-bg-c0: #0f1c2b;
+  --page-bg-c1: #14263a;
+  --page-bg-c2: #1f3751;
+  --page-bg-c3: #4a6d78;
+  --page-bg-c4: #6daaaf;
 }
 
 :root[data-theme='light'] {
-  --page-noise-opacity: 0.1;
-  --page-vignette-strength: 0.18;
-  --page-bg-c0: #e4e9dc;
+  --page-noise-opacity: 0.14;
+  --page-vignette-strength: 0.22;
+  --page-bg-c0: #e0e6d6;
   --page-bg-c1: #e8ece0;
   --page-bg-c2: #eef1e6;
-  --page-bg-c3: #c8d4b8;
+  --page-bg-c3: #d0dcc0;
+  --page-bg-c4: #b8c9a0;
 }
 
 html[data-page-bg='home'] {
@@ -68,8 +71,10 @@ html[data-page-bg='misc'] {
   --page-bg-angle: 230deg;
 }
 
+/* Body must stay transparent so the fixed backdrop is visible (negative z-index
+   sits behind the body background painting layer and reads as a flat fill). */
 body.has-unified-page-backdrop {
-  background: var(--page-bg-c0);
+  background: transparent;
 }
 
 body.has-unified-page-backdrop::before,
@@ -77,19 +82,33 @@ body.has-unified-page-backdrop::after {
   display: none;
 }
 
+html.has-unified-page-backdrop {
+  background: var(--page-bg-c0);
+}
+
 .page-backdrop {
   position: fixed;
   inset: 0;
-  z-index: -5;
+  z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background: linear-gradient(
-    var(--page-bg-angle),
-    var(--page-bg-c0) 0%,
-    var(--page-bg-c1) 28%,
-    color-mix(in srgb, var(--page-bg-c2) calc(100% - var(--page-bg-accent)), var(--page-bg-c3)) 72%,
-    color-mix(in srgb, var(--page-bg-c3) 70%, var(--page-bg-c0)) 100%
-  );
+  background:
+    radial-gradient(ellipse 90% 70% at 88% 8%, color-mix(in srgb, var(--page-bg-c4) 42%, transparent), transparent 55%),
+    linear-gradient(
+      var(--page-bg-angle),
+      var(--page-bg-c0) 0%,
+      var(--page-bg-c1) 22%,
+      var(--page-bg-c2) 48%,
+      color-mix(in srgb, var(--page-bg-c3) calc(100% - var(--page-bg-accent)), var(--page-bg-c4)) 78%,
+      color-mix(in srgb, var(--page-bg-c4) 55%, var(--page-bg-c1)) 100%
+    );
+}
+
+body.has-unified-page-backdrop > .site-header,
+body.has-unified-page-backdrop > .site-shell,
+body.has-unified-page-backdrop > .footer {
+  position: relative;
+  z-index: 1;
 }
 
 .page-backdrop__noise {
@@ -127,7 +146,19 @@ body.has-unified-page-backdrop::after {
 
 .page-shell .page-content {
   position: relative;
-  z-index: 0;
+  z-index: 1;
+  background: transparent;
+}
+
+.cra-site .page-content,
+.cra-site .detail-shell,
+.cra-site .papers-cra,
+.cra-site .courses-cra,
+.cra-site .awards-cra,
+.cra-site .members-cra,
+.cra-site .home-cra,
+.cra-site .host-cra {
+  background: transparent;
 }
 
 .page-shell:not([data-page-bg='home']) .page-content {
