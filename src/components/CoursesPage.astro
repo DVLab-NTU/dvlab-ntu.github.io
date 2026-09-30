@@ -31,17 +31,17 @@ const pathPrefix = lang === 'en' ? '/en' : '';
           <span class="badge-muted">{c.semester}</span>
         </div>
         {c.intro && <p>{pickI18nText(c.intro, lang)}</p>}
-        {c.contents && (
-          <details>
-            <summary class="btn btn-ghost">{t.contents}</summary>
-            <ul class="mt-4">
-              {c.contents[lang].map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </details>
-        )}
-        <div class="detail-links">
+        <div class="course-card-actions">
+          {c.contents && (
+            <details class="course-contents-details">
+              <summary class="btn btn-ghost">{t.contents}</summary>
+              <ul class="course-contents-list">
+                {c.contents[lang].map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </details>
+          )}
           <a class="btn btn-ghost" href={c.link} target="_blank" rel="noreferrer">{t.catalogue}</a>
           {c.github && (
             <a class="btn btn-ghost" href={c.github} target="_blank" rel="noreferrer">GitHub Repo</a>

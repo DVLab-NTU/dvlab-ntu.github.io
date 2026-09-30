@@ -9,6 +9,7 @@ import { pickI18nText } from '../utils/i18n-text';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const labels = pageCopy.home[lang];
+const awardLabels = pageCopy.awards[lang];
 const pathPrefix = lang === 'en' ? '/en' : '';
 const t = lang === 'en' ? siteEn : siteZh;
 const awards = (await getCollection('awards'))
@@ -41,12 +42,16 @@ function awardAttendants(award: { students: string[]; advisors?: string[] }) {
                 </div>
               </div>
               <div class="home-news-detail">
-                <h3 class="home-news-title">
-                  <a href={award.source} target="_blank" rel="noreferrer">
-                    {pickI18nText(award.title, lang)}
-                  </a>
-                </h3>
+                <h3 class="home-news-title">{pickI18nText(award.title, lang)}</h3>
                 <p class="home-news-meta">{awardAttendants(award)}</p>
+                <a
+                  class="btn btn-ghost home-news-source-link"
+                  href={award.source}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {awardLabels.source}
+                </a>
               </div>
             </article>
           ))}
