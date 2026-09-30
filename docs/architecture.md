@@ -144,7 +144,9 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
   `.page-backdrop` (muted CRA gradient + SVG film grain + vignette) in
   `src/styles/page-background.css`. The backdrop uses `z-index: 0` with a
   **transparent** `body`/`main` — negative z-index or a solid `body` background
-  would hide the layer and look like a flat fill. Per-route CSS tweaks angle
+  would hide the layer and look like a flat fill. The fixed `.site-header` must
+  **not** be given `position: relative` in backdrop rules (that breaks the bar).
+  Per-route CSS tweaks angle
   and accent mix so pages feel related but not identical (including
   `member-detail` and `paper-detail`).
 - Home adds a soft radial highlight on `.home-cra::before`; the logo stage and
