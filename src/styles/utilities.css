@@ -94,7 +94,9 @@
   transition: opacity var(--motion-mid) var(--ease-standard), transform var(--motion-mid) var(--ease-standard);
 }
 
-.member-card.is-filter-hidden {
+.member-card.is-filter-hidden,
+.member-tile.is-filter-hidden,
+[data-member-card].is-filter-hidden {
   display: none;
 }
 

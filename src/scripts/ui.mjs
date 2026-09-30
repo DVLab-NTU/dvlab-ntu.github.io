@@ -102,18 +102,21 @@ function initMembersFilter() {
       return;
     }
     root.dataset.membersFilterInit = '1';
+    root.setAttribute('data-members-filter-init', '');
     const input = root.querySelector('[data-member-search]');
     const cards = Array.from(root.querySelectorAll('[data-member-card]'));
     const roleButtons = Array.from(root.querySelectorAll('[data-role-filter]'));
+    const statusButtons = Array.from(root.querySelectorAll('[data-status-filter]'));
     const emptyState = root.querySelector('[data-empty-state]');
 
-    if (!input || !cards.length) {
+    if (!cards.length) {
       return;
     }
 
     let activeRole = '__all';
+    let activeStatus = statusButtons[0]?.getAttribute('data-status-filter') || 'enrolled';
 
-    function setActiveButton(roleValue) {
+    function setActiveRoleButton(roleValue) {
       roleButtons.forEach((btn) => {
         const isActive = btn.getAttribute('data-role-filter') === roleValue;
         btn.classList.toggle('is-selected', isActive);
@@ -121,19 +124,29 @@ function initMembersFilter() {
       });
     }
 
+    function setActiveStatusButton(statusValue) {
+      statusButtons.forEach((btn) => {
+        const isActive = btn.getAttribute('data-status-filter') === statusValue;
+        btn.classList.toggle('is-selected', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
+      });
+    }
+
     function applyFilter() {
-      const q = input.value.trim().toLowerCase();
+      const q = input ? input.value.trim().toLowerCase() : '';
       let visibleCount = 0;
 
       cards.forEach((card) => {
         const role = (card.getAttribute('data-role') || '').toLowerCase();
         const name = (card.getAttribute('data-name') || '').toLowerCase();
         const area = (card.getAttribute('data-area') || '').toLowerCase();
+        const enrollment = card.getAttribute('data-member-enrollment') || '';
         const text = `${name} ${area} ${role}`;
 
         const roleMatch = activeRole === '__all' || role === activeRole;
         const queryMatch = !q || text.includes(q);
-        const shouldShow = roleMatch && queryMatch;
+        const statusMatch = !statusButtons.length || enrollment === activeStatus;
+        const shouldShow = roleMatch && queryMatch && statusMatch;
 
         if (shouldShow) {
           if (card.classList.contains('is-filter-hidden')) {
@@ -158,14 +171,27 @@ function initMembersFilter() {
     roleButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
         activeRole = btn.getAttribute('data-role-filter') || '__all';
-        setActiveButton(activeRole);
+        setActiveRoleButton(activeRole);
         applyFilter();
       });
     });
 
-    input.addEventListener('input', applyFilter);
+    statusButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeStatus = btn.getAttribute('data-status-filter') || 'enrolled';
+        setActiveStatusButton(activeStatus);
+        applyFilter();
+      });
+    });
 
-    setActiveButton(activeRole);
+    if (input) {
+      input.addEventListener('input', applyFilter);
+    }
+
+    setActiveRoleButton(activeRole);
+    if (statusButtons.length) {
+      setActiveStatusButton(activeStatus);
+    }
     applyFilter();
   });
 }

@@ -4,7 +4,7 @@ import MemberAvatar from './MemberAvatar.astro';
 import { getCollection } from 'astro:content';
 import { resolveMemberAvatar } from '../utils/member-avatar';
 import { pageCopy } from '../data/page-copy.mjs';
-import { buildMemberDisplayGroups } from '../utils/member-groups.mjs';
+import { buildMemberDisplayGroups, memberEnrollmentKey } from '../utils/member-groups.mjs';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const t = pageCopy.members[lang];
@@ -15,8 +15,30 @@ const listMembers = members.filter((member) => member.role !== 'pi');
 const displayGroups = buildMemberDisplayGroups(listMembers);
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
-  <div class="members-cra subpage-members">
+  <div class="members-cra subpage-members" data-members-filter-root>
     <h1 class="page-title cra-page-title section-title members-page-title">{t.heading}</h1>
+
+    <div class="members-toolbar">
+      <div class="members-status-toggle" role="group" aria-label={t.statusFilter}>
+        <button
+          type="button"
+          class="filter-tag btn-shine is-selected"
+          data-status-filter="enrolled"
+          aria-pressed="true"
+        >
+          {t.statusEnrolled}
+        </button>
+        <button
+          type="button"
+          class="filter-tag btn-shine"
+          data-status-filter="graduated"
+          aria-pressed="false"
+        >
+          {t.statusGraduated}
+        </button>
+      </div>
+      <p class="members-empty-state" data-empty-state hidden>{t.emptyStatus}</p>
+    </div>
 
     {displayGroups.map((group) => (
       <section class="member-group-block" data-member-group>
@@ -33,6 +55,7 @@ const displayGroups = buildMemberDisplayGroups(listMembers);
                 href={`${pathPrefix}/members/${m.id}/`}
                 class="member-tile"
                 data-member-card
+                data-member-enrollment={memberEnrollmentKey(m)}
               >
                 <MemberAvatar src={resolveMemberAvatar(m)} position={m.avatarPosition} alt={m.name[lang]} />
                 <h3>{m.name[lang]}</h3>

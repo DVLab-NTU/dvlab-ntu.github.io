@@ -360,6 +360,69 @@ html[lang^='en'] .home-news-meta {
   font-size: clamp(40px, 6vw, 60px);
 }
 
+.members-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 clamp(20px, 3vw, 28px);
+}
+
+.members-status-toggle {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+
+.members-status-toggle .filter-tag {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  min-width: 7.5rem;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-latin-ui);
+  color: var(--text-soft);
+}
+
+.members-status-toggle .filter-tag:hover {
+  color: var(--text);
+  background: var(--glass-bg-hover);
+}
+
+.members-status-toggle .filter-tag.is-selected {
+  color: var(--primary-2);
+  background: var(--glass-bg-accent);
+  border-radius: calc(var(--radius-pill) - 4px);
+  font-weight: var(--fw-latin-strong);
+}
+
+[data-theme='light'] .members-status-toggle .filter-tag.is-selected {
+  color: #29321e;
+}
+
+.members-empty-state {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--cra-light-blue);
+}
+
+[data-theme='light'] .members-empty-state {
+  color: var(--text-soft);
+}
+
+/* Enrolled-first default before members filter script initializes */
+[data-members-filter-root]:not([data-members-filter-init]) [data-member-card][data-member-enrollment='graduated'] {
+  display: none;
+}
+
 [data-theme='light'] .members-page-title {
   color: var(--text);
 }

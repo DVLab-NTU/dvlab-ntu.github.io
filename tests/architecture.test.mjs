@@ -4,7 +4,12 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { dump, load } from 'js-yaml';
 import { schemas, membersSchema } from '../src/utils/content-schemas.mjs';
-import { groupMembers, admissionCohortLabel, buildMemberDisplayGroups } from '../src/utils/member-groups.mjs';
+import {
+  groupMembers,
+  admissionCohortLabel,
+  buildMemberDisplayGroups,
+  memberEnrollmentKey,
+} from '../src/utils/member-groups.mjs';
 import { resolvePageBackgroundKey } from '../src/utils/page-background.mjs';
 import { cmsCollections, renderCmsConfigYml } from '../src/utils/cms-config.ts';
 import { readContent } from '../scripts/validate-content.mjs';
@@ -17,6 +22,13 @@ test('one schema accepts YAML serialization and rejects incomplete bilingual val
   assert.equal(membersSchema.safeParse({ ...data, name: { zh: '姓名' } }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, status: 'Alumni' }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, name: { zh: ' ', en: 'Name' } }).success, false);
+});
+
+test('member enrollment filter maps CMS status metadata', () => {
+  assert.equal(memberEnrollmentKey({ status: 'current' }), 'enrolled');
+  assert.equal(memberEnrollmentKey({ status: 'active' }), 'enrolled');
+  assert.equal(memberEnrollmentKey({ status: 'alumni' }), 'graduated');
+  assert.equal(memberEnrollmentKey({ status: 'former' }), 'graduated');
 });
 
 test('member display groups use three research pillars', () => {

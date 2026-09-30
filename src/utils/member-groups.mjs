@@ -11,6 +11,14 @@ export function buildMemberDisplayGroups(members) {
   return blocks;
 }
 export const isFormer = member => member.status === 'alumni' || member.status === 'former';
+
+/** Members list filter: enrolled (在學) vs graduated (已畢業), from CMS `status`. */
+export function memberEnrollmentKey(member) {
+  if (member.status === 'alumni' || member.status === 'former') {
+    return 'graduated';
+  }
+  return 'enrolled';
+}
 export function groupMembers(members) {
   const rank = (values, key) => Object.keys(values).indexOf(key);
   const group = member => isFormer(member) ? 2 : member.role === 'pi' ? 0 : 1;
