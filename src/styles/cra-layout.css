@@ -348,6 +348,8 @@
 
 /* Host profile (CRA HostProfile) */
 .host-cra {
+  --host-social-tile: rgba(188, 221, 223, 0.92);
+  --host-social-glyph: var(--cra-dark-blue);
   margin-inline: calc(-1 * max(4vw, (100vw - min(1120px, 92vw)) / 2));
   width: 100vw;
   max-width: 100vw;
@@ -426,33 +428,48 @@
 
 .host-social-cra {
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
-  gap: 8px;
-  max-width: 320px;
+  align-items: center;
+  gap: 4px;
+  width: min(100%, 320px);
   margin: 0 auto;
-  padding: 0;
+  padding: 18px 0 0;
   list-style: none;
 }
 
-.host-social-cra .host-social-link {
-  width: auto;
-  height: auto;
+.host-social-cra li {
+  flex: 0 0 auto;
+}
+
+.host-social-cra .host-social-link-square {
+  display: block;
+  width: clamp(40px, 4.8vw, 50px);
+  height: clamp(40px, 4.8vw, 50px);
   padding: 0;
   background: transparent;
-  opacity: 0.65;
-  color: #fff;
+  border-radius: 10px;
+  opacity: 0.88;
+  transition:
+    opacity var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 
-.host-social-cra .host-social-link svg {
-  width: clamp(44px, 5vw, 60px);
-  height: clamp(44px, 5vw, 60px);
+.host-social-cra .host-social-square-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.host-social-cra .host-social-link:hover,
-.host-social-cra .host-social-link:focus-visible {
-  opacity: 0.95;
-  transform: none;
-  color: var(--cra-light-gold);
+.host-social-cra .host-social-link-square:hover,
+.host-social-cra .host-social-link-square:focus-visible {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.host-social-cra .host-social-link-square:hover rect,
+.host-social-cra .host-social-link-square:focus-visible rect {
+  fill: var(--cra-light-gold);
 }
 
 .host-cra-actions {

@@ -79,11 +79,11 @@ const checks = [
   },
   {
     file: 'dist/host/index.html',
-    includes: ['理性思考', '/images/host/ric.jpeg'],
+    includes: ['理性思考', '/images/host/ric.jpeg', 'cc.ee.ntu.edu.tw/~ric/'],
   },
   {
     file: 'dist/en/host/index.html',
-    includes: ['Think Rationally', '/images/host/ric.jpeg'],
+    includes: ['Think Rationally', '/images/host/ric.jpeg', 'cc.ee.ntu.edu.tw/~ric/'],
   },
   {
     file: 'dist/members/index.html',
