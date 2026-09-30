@@ -573,9 +573,13 @@ html[lang^='en'] .home-news-meta {
   transform: translateY(-1px);
 }
 
-.host-social-cra .host-social-link-square:hover path,
-.host-social-cra .host-social-link-square:focus-visible path {
-  fill: var(--cra-light-gold);
+.host-social-cra .host-social-square-icon {
+  color: var(--host-social-tile);
+}
+
+.host-social-cra .host-social-link-square:hover .host-social-square-icon,
+.host-social-cra .host-social-link-square:focus-visible .host-social-square-icon {
+  color: var(--cra-light-gold);
 }
 
 .host-cra-actions {

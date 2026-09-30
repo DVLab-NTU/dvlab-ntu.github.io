@@ -15,7 +15,8 @@ import '../styles/cra-layout.css';
 import '../styles/page-background.css';
 
 import { resolvePageBackgroundKey } from '../utils/page-background.mjs';
-import { craNavIcons } from '../data/cra-fontawesome-icons.mjs';
+import { lucideNavIcons } from '../data/lucide-icons.mjs';
+import LucideIcon from '../components/LucideIcon.astro';
 import revealScript from '../scripts/reveal.mjs?url';
 import uiScript from '../scripts/ui.mjs?url';
 import navbarScrollScript from '../scripts/navbar-scroll.mjs?url';
@@ -203,9 +204,7 @@ const navItems = [
               aria-current={item.active ? 'page' : undefined}
             >
               <span class="nav-icon">
-                <svg viewBox={`0 0 ${craNavIcons[item.iconKey].width} ${craNavIcons[item.iconKey].height}`} aria-hidden="true">
-                  <path d={craNavIcons[item.iconKey].d} />
-                </svg>
+                <LucideIcon class="nav-lucide-icon" nodes={lucideNavIcons[item.iconKey]} />
               </span>
               <span class="nav-text">{item.label}</span>
             </a>

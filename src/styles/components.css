@@ -112,11 +112,19 @@ body.has-unified-page-backdrop > .site-header {
   height: 24px;
 }
 
-.nav-icon svg {
+.nav-icon svg,
+.nav-icon .nav-lucide-icon {
   width: 100%;
   height: 100%;
   display: block;
-  fill: currentColor;
+}
+
+.nav-icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 html[lang^='en'] .nav-text {
