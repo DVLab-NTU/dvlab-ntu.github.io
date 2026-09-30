@@ -20,3 +20,22 @@ export const areas = {
   verification: { zh: 'Design Verification', en: 'Design Verification' },
   architecture: { zh: 'Computer Architecture', en: 'Computer Architecture' },
 };
+
+/** Members page: three research pillars (maps fine-grained `area` codes). */
+export const memberDisplayGroups = [
+  {
+    key: 'formal',
+    areas: ['formal', 'ai-formal', 'verification'],
+    label: { zh: '形式化驗證', en: 'Formal Verification' },
+  },
+  {
+    key: 'eda',
+    areas: ['eda', '3dic', 'architecture'],
+    label: { zh: 'EDA / 3DIC', en: 'EDA / 3DIC' },
+  },
+  {
+    key: 'quantum',
+    areas: ['quantum'],
+    label: { zh: 'Quantum', en: 'Quantum' },
+  },
+];

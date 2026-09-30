@@ -87,7 +87,7 @@ const checks = [
   },
   {
     file: 'dist/members/index.html',
-    includes: ['成員列表', 'member-grid', 'EDA'],
+    includes: ['成員列表', 'members-track-scroll', '形式化驗證', 'Quantum'],
   },
   {
     file: 'dist/papers/index.html',

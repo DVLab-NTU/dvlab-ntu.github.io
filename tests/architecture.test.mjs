@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { dump, load } from 'js-yaml';
 import { schemas, membersSchema } from '../src/utils/content-schemas.mjs';
-import { groupMembers, admissionCohortLabel } from '../src/utils/member-groups.mjs';
+import { groupMembers, admissionCohortLabel, buildMemberDisplayGroups } from '../src/utils/member-groups.mjs';
 import { cmsCollections, renderCmsConfigYml } from '../src/utils/cms-config.ts';
 import { readContent } from '../scripts/validate-content.mjs';
 
@@ -16,6 +16,17 @@ test('one schema accepts YAML serialization and rejects incomplete bilingual val
   assert.equal(membersSchema.safeParse({ ...data, name: { zh: '姓名' } }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, status: 'Alumni' }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, name: { zh: ' ', en: 'Name' } }).success, false);
+});
+
+test('member display groups use three research pillars', () => {
+  const members = [
+    { id: 'a', role: 'master', area: 'formal', status: 'current' },
+    { id: 'b', role: 'master', area: 'eda', status: 'current' },
+    { id: 'c', role: 'master', area: 'quantum', status: 'current' },
+  ];
+  const groups = buildMemberDisplayGroups(members);
+  assert.equal(groups.length, 3);
+  assert.deepEqual(groups.map((group) => group.key), ['formal', 'eda', 'quantum']);
 });
 
 test('member grouping does not depend on translated names or missing cohorts', () => {

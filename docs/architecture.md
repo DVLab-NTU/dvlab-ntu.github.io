@@ -123,8 +123,9 @@ scripts/              # Build/verify tooling (see verification.md)
 
 Member originals remain in `public/`; `MemberAvatar.astro` imports local raster
 assets and uses Astro Image to emit small responsive WebPs. Both lists and
-profiles use this component. Typography uses the system font stack, with no
-web-font requests or preloads.
+profiles use this component. Typography loads the CRA reference webfonts from
+`public/fonts/cra/` (Helvetica Neue at 300 for body, Coolvetica for display
+titles) via `src/styles/cra-fonts.css`, with Noto Sans TC fallbacks for Chinese.
 
 Content is visible without scripts. The reveal script opts observed nodes into
 animation after initialization, and caps stagger delays. Mobile navigation is

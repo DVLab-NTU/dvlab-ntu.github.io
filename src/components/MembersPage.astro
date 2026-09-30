@@ -4,6 +4,7 @@ import MemberAvatar from './MemberAvatar.astro';
 import { getCollection } from 'astro:content';
 import { resolveMemberAvatar } from '../utils/member-avatar';
 import { pageCopy } from '../data/page-copy.mjs';
+import { buildMemberDisplayGroups } from '../utils/member-groups.mjs';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const t = pageCopy.members[lang];
@@ -11,38 +12,39 @@ const pathPrefix = lang === 'en' ? '/en' : '';
 
 const members = (await getCollection('members')).map(entry => entry.data);
 const listMembers = members.filter((member) => member.role !== 'pi');
-
-function buildCraGroups(all) {
-  const quantum = all.filter((m) => m.area === 'quantum');
-  const eda = all.filter((m) => m.area !== 'quantum');
-  const blocks = [];
-  if (eda.length) blocks.push({ key: 'eda', title: 'EDA', members: eda });
-  if (quantum.length) blocks.push({ key: 'quantum', title: 'Quantum', members: quantum });
-  return blocks;
-}
-
-const craGroups = buildCraGroups(listMembers);
+const displayGroups = buildMemberDisplayGroups(listMembers);
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
   <div class="members-cra subpage-members">
     <h1 class="page-title cra-page-title section-title members-page-title">{t.heading}</h1>
 
-    {craGroups.map((group) => (
+    {displayGroups.map((group) => (
       <section class="member-group-block" data-member-group>
-        <h2 class="group-title">{group.title}</h2>
-        <div class="member-grid">
-          {group.members.map((m) => (
-            <a
-              href={`${pathPrefix}/members/${m.id}/`}
-              class="member-card"
-              data-member-card
-            >
-              <MemberAvatar src={resolveMemberAvatar(m)} position={m.avatarPosition} alt={m.name[lang]} />
-              <div class="member-name">{m.name[lang]}</div>
-            </a>
-          ))}
+        <h2 class="group-title">{group.label[lang]}</h2>
+        <div class="members-track" data-members-track>
+          <div
+            class="members-track-scroll"
+            data-members-track-scroll
+            tabindex="0"
+            aria-label={group.label[lang]}
+          >
+            {group.members.map((m) => (
+              <a
+                href={`${pathPrefix}/members/${m.id}/`}
+                class="member-tile"
+                data-member-card
+              >
+                <MemberAvatar src={resolveMemberAvatar(m)} position={m.avatarPosition} alt={m.name[lang]} />
+                <h3>{m.name[lang]}</h3>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
     ))}
   </div>
 </BaseLayout>
+
+<script>
+  import '../scripts/members-carousel.mjs';
+</script>

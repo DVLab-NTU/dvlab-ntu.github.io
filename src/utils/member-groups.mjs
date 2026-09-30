@@ -1,4 +1,15 @@
-import { roles, areas } from '../data/member-labels.mjs';
+import { roles, areas, memberDisplayGroups } from '../data/member-labels.mjs';
+
+export function buildMemberDisplayGroups(members) {
+  const blocks = [];
+  for (const group of memberDisplayGroups) {
+    const list = members
+      .filter((member) => group.areas.includes(member.area))
+      .sort((a, b) => a.id.localeCompare(b.id, 'en'));
+    if (list.length) blocks.push({ ...group, members: list });
+  }
+  return blocks;
+}
 export const isFormer = member => member.status === 'alumni' || member.status === 'former';
 export function groupMembers(members) {
   const rank = (values, key) => Object.keys(values).indexOf(key);

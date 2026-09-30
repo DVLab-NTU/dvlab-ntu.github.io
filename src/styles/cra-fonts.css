@@ -1,0 +1,17 @@
+/* CRA reference fonts (commit 6e33b72 static mirror). Licensed for site branding parity. */
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/cra/helvetica-neu.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Coolvetica;
+  src: url('/fonts/cra/CoolveticaRg-Regular.woff2') format('woff2'),
+    url('/fonts/cra/CoolveticaRg-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
