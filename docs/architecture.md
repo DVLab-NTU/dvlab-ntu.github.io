@@ -151,9 +151,9 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
   Per-route CSS tweaks angle
   and accent mix so pages feel related but not identical (including
   `member-detail` and `paper-detail`).
-- Home adds a soft radial highlight on `.home-cra::before`; the logo stage and
-  **NEWS & AWARDS** share the same backdrop (no gray news band). Particles canvas
-  spans the full `.home-cra` column.
+- Home has no extra hero overlay or solid header band: the logo stage and
+  **NEWS & AWARDS** share the unified noisy backdrop only. The opening section
+  clears the fixed header via padding; particles canvas is clipped to `.home-opening`.
 
 ### Members layout
 

@@ -171,12 +171,17 @@ const navItems = [
     <style is:inline>
       /* Critical inline styles: applied before the stylesheet loads so full
          page navigations never flash a white background or oversized images.
-         Only html background is set here; the body gradient comes from the
-         stylesheet and must not be overridden. */
-      html {
+         Unified-backdrop routes use gradient stops; legacy flat fill is fallback only. */
+      html.has-unified-page-backdrop {
+        background: #0f1c2b;
+      }
+      html.has-unified-page-backdrop[data-theme='light'] {
+        background: #e0e6d6;
+      }
+      html:not(.has-unified-page-backdrop) {
         background: #14263a;
       }
-      html[data-theme='light'] {
+      html:not(.has-unified-page-backdrop)[data-theme='light'] {
         background: #f5f8e4;
       }
       img {
@@ -185,7 +190,7 @@ const navItems = [
       }
     </style>
   </head>
-  <body id="top" class="has-unified-page-backdrop">
+  <body id="top" class:list={['has-unified-page-backdrop', pageBgKey === 'home' && 'is-home-route']}>
     <div class="page-backdrop" aria-hidden="true">
       <div class="page-backdrop__noise"></div>
       <div class="page-backdrop__vignette"></div>

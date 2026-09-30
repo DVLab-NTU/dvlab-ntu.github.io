@@ -83,7 +83,18 @@ body.has-unified-page-backdrop::after {
 }
 
 html.has-unified-page-backdrop {
-  background: var(--page-bg-c0);
+  background: transparent;
+}
+
+/* Home: hero sits under the fixed glass nav — no body offset band above opening */
+body.has-unified-page-backdrop.is-home-route {
+  padding-top: 0;
+}
+
+.page-shell[data-page-bg='home'] .home-opening {
+  padding-top: calc(var(--site-header-height, 96px) + clamp(24px, 4vw, 48px));
+  min-height: calc(85vh + var(--site-header-height, 96px));
+  min-height: calc(85svh + var(--site-header-height, 96px));
 }
 
 .page-backdrop {
