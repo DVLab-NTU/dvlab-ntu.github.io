@@ -19,11 +19,11 @@
   left: 0;
   right: 0;
   z-index: 20;
-  background: rgba(20, 38, 58, 0.42);
-  border-bottom: 1px solid rgba(188, 221, 223, 0.14);
-  box-shadow: 0 4px 24px rgba(5, 12, 22, 0.18);
-  backdrop-filter: blur(18px) saturate(1.35);
-  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(18px) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(18px) saturate(var(--glass-saturate));
   transition:
     box-shadow var(--motion-mid) var(--ease-standard),
     background-color var(--motion-mid) var(--ease-standard),
@@ -31,19 +31,9 @@
 }
 
 .site-header.is-scrolled {
-  background: rgba(20, 38, 58, 0.52);
-  box-shadow: 0 10px 32px rgba(5, 12, 22, 0.28);
-  border-bottom-color: rgba(188, 221, 223, 0.2);
-}
-
-[data-theme='light'] .site-header {
-  background: rgba(253, 254, 249, 0.55);
-  border-bottom: 1px solid rgba(41, 50, 30, 0.12);
-  box-shadow: 0 4px 20px rgba(41, 50, 30, 0.08);
-}
-
-[data-theme='light'] .site-header.is-scrolled {
-  background: rgba(253, 254, 249, 0.72);
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover);
+  border-bottom-color: var(--glass-border-strong);
 }
 
 .nav {
@@ -166,7 +156,11 @@ html[lang^='en'] .nav-text {
 }
 
 .nav-toggle:hover {
-  background: var(--surface-1);
+  background: var(--glass-bg-hover);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 }
 
 .nav-toggle-bar {
@@ -246,13 +240,17 @@ html[lang^='en'] .nav-text {
   min-width: 88px;
   text-align: center;
   border-radius: 8px;
-  background: var(--surface-1);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow-emboss);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   transition: filter var(--motion-fast) var(--ease-standard),
     transform var(--motion-fast) var(--ease-standard),
     box-shadow var(--motion-fast) var(--ease-standard),
-    color var(--motion-fast) var(--ease-standard);
+    color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard);
 }
 
 .btn-shine.lang-link,
@@ -278,23 +276,18 @@ html[lang^='en'] .nav-text {
 .lang-link:hover {
   color: var(--primary-2);
   text-decoration: none;
-  filter: brightness(1.15);
-  box-shadow: var(--shadow-emboss-hover);
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-hover);
 }
 
-/* Light theme: brightening a near-white button blows it out; darken the
-   face and strengthen the border instead. */
 :root[data-theme='light'] .lang-link:hover {
   color: var(--text);
-  filter: none;
-  background: #eef3cc;
-  border-color: rgba(74, 94, 32, 0.45);
-  box-shadow: var(--shadow-emboss-hover);
 }
 
 .lang-link:active {
   transform: translateY(1px);
-  box-shadow: var(--shadow-emboss-pressed);
+  box-shadow: var(--glass-shadow);
 }
 
 .card {
@@ -458,7 +451,7 @@ html[lang^='en'] .nav-text {
 .btn {
   position: relative;
   overflow: hidden;
-  border: none;
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   height: 40px;
   padding: 0 16px;
@@ -468,10 +461,15 @@ html[lang^='en'] .nav-text {
   gap: 8px;
   font-size: var(--text-sm);
   font-weight: 620;
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   transition: transform var(--motion-fast) var(--ease-standard),
     box-shadow var(--motion-fast) var(--ease-standard),
     color var(--motion-fast) var(--ease-standard),
-    background-color var(--motion-fast) var(--ease-standard);
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard);
 }
 
 .btn::before,
@@ -491,7 +489,7 @@ html[lang^='en'] .nav-text {
 .btn:hover,
 .btn-shine:hover {
   transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--glass-shadow-hover);
 }
 
 .btn:hover::before,
@@ -501,69 +499,81 @@ html[lang^='en'] .nav-text {
 }
 
 .btn-primary {
-  color: #14263a;
-  background: var(--gradient-accent);
-  border-color: transparent;
+  color: var(--primary-2);
+  background: var(--glass-bg-accent);
+  border-color: var(--glass-border-strong);
+  font-weight: 650;
+}
+
+.btn-primary:hover {
+  color: var(--primary-2);
+  background: var(--glass-bg-accent-hover);
+  border-color: var(--glass-border-strong);
+}
+
+:root[data-theme='light'] .btn-primary {
+  color: #29321e;
+}
+
+:root[data-theme='light'] .btn-primary:hover {
+  color: #29321e;
 }
 
 .btn-ghost {
   color: var(--text-soft);
-  background: var(--surface-1);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow-emboss);
 }
 
 .btn-ghost:hover {
-  color: var(--primary);
-  border-color: var(--line-strong);
-  box-shadow: var(--shadow-emboss-hover);
+  color: var(--primary-2);
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-strong);
 }
 
 :root[data-theme='light'] .btn-ghost:hover {
   color: var(--text);
-  background: #eef3cc;
-  border-color: rgba(74, 94, 32, 0.45);
-  box-shadow: var(--shadow-emboss-hover);
 }
 
 /* Embossed theme toggle: no outline, solid tinted block with inset shading */
 .theme-toggle-btn {
   min-width: 84px;
   padding: 7px 14px;
-  border: none;
+  border: 1px solid var(--glass-border);
   border-radius: 8px;
   font-family: var(--font-base);
   font-size: var(--text-sm);
   font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
-  /* The button face is always a light yellow-green block; use a fixed dark
-     ink in both themes so the label stays readable (var(--text) would be
-     near-white in dark mode and disappear). */
-  color: #2a3415;
-  background: var(--primary-2);
-  box-shadow: var(--shadow-emboss);
-  transition: filter var(--motion-fast) var(--ease-standard),
-    transform var(--motion-fast) var(--ease-standard),
-    box-shadow var(--motion-fast) var(--ease-standard);
+  color: var(--text-soft);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  transition: transform var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard);
 }
 
 :root[data-theme='light'] .theme-toggle-btn {
-  color: var(--primary-2);
-  background: #2a3415;
-}
-
-:root[data-theme='light'] .theme-toggle-btn:hover {
-  filter: brightness(1.2);
+  color: var(--text);
 }
 
 .theme-toggle-btn:hover {
-  filter: brightness(1.06);
+  color: var(--primary-2);
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-strong);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+:root[data-theme='light'] .theme-toggle-btn:hover {
+  color: var(--text);
 }
 
 .theme-toggle-btn:active {
-  transform: translateY(2px);
-  box-shadow: var(--shadow-emboss-pressed);
+  transform: translateY(1px);
+  box-shadow: var(--glass-shadow);
 }
 
 .hero {
@@ -887,14 +897,17 @@ html[lang^='en'] .nav-text {
   width: min(380px, 100%);
   height: 40px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--line);
-  background: var(--surface-1);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
   color: var(--text);
   padding: 0 12px;
   font-size: var(--text-sm);
-  box-shadow: var(--shadow-field);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   transition: border-color var(--motion-fast) var(--ease-standard),
-    box-shadow var(--motion-fast) var(--ease-standard);
+    box-shadow var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard);
 }
 
 .filter-input::placeholder {
@@ -926,25 +939,33 @@ html[lang^='en'] .nav-text {
 }
 
 .filter-tag {
-  border: 1px solid var(--line);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-pill);
-  background: var(--surface-1);
+  background: var(--glass-bg);
   padding: 6px 12px;
   font-size: var(--text-xs);
   color: var(--muted);
-  box-shadow: var(--shadow-emboss);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   transition: all var(--motion-fast) var(--ease-standard);
 }
 
 .filter-tag:hover {
   color: var(--text);
-  border-color: var(--line-strong);
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-strong);
 }
 
 .filter-tag.is-selected {
-  color: #14263a;
-  background: var(--gradient-accent);
+  color: var(--primary-2);
+  background: var(--glass-bg-accent);
+  border-color: var(--glass-border-strong);
   font-weight: 700;
+}
+
+:root[data-theme='light'] .filter-tag.is-selected {
+  color: #29321e;
 }
 
 .member-avatar {

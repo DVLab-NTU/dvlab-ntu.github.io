@@ -50,6 +50,18 @@
 
   --blur-card: 12px;
 
+  /* Liquid glass (navbar + controls) */
+  --glass-blur: 14px;
+  --glass-saturate: 1.35;
+  --glass-bg: rgba(20, 38, 58, 0.42);
+  --glass-bg-hover: rgba(20, 38, 58, 0.52);
+  --glass-bg-accent: rgba(255, 215, 0, 0.2);
+  --glass-bg-accent-hover: rgba(255, 215, 0, 0.28);
+  --glass-border: rgba(188, 221, 223, 0.22);
+  --glass-border-strong: rgba(252, 255, 204, 0.38);
+  --glass-shadow: 0 4px 18px rgba(5, 12, 22, 0.16);
+  --glass-shadow-hover: 0 6px 22px rgba(5, 12, 22, 0.22);
+
   --font-base: 'Helvetica Neue', HelveticaNeue, Arial, 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-title: Coolvetica, 'Helvetica Neue', HelveticaNeue, Arial, 'Noto Sans TC', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -98,4 +110,13 @@
   --shadow-emboss-hover: none;
   --shadow-emboss-pressed: none;
   --shadow-field: none;
+
+  --glass-bg: rgba(253, 254, 249, 0.58);
+  --glass-bg-hover: rgba(253, 254, 249, 0.74);
+  --glass-bg-accent: rgba(201, 217, 79, 0.38);
+  --glass-bg-accent-hover: rgba(201, 217, 79, 0.48);
+  --glass-border: rgba(41, 50, 30, 0.14);
+  --glass-border-strong: rgba(74, 94, 32, 0.32);
+  --glass-shadow: 0 4px 16px rgba(41, 50, 30, 0.08);
+  --glass-shadow-hover: 0 6px 20px rgba(41, 50, 30, 0.12);
 }
