@@ -66,6 +66,17 @@
   padding: 0;
 }
 
+/* Member profile hero: liquid-glass panel (list tiles use .member-tile) */
+.cra-site .detail-shell .card.detail-hero-member {
+  border: none;
+  border-radius: var(--radius-card);
+  padding: clamp(18px, 3vw, 26px);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+
 .cra-site .card-hover:hover {
   transform: none;
   box-shadow: none;
@@ -462,19 +473,33 @@ html[lang^='en'] .home-news-meta {
   justify-content: center;
   min-height: 240px;
   padding: 14px 10px;
-  border-radius: 8px;
-  background: var(--cra-light-blue);
-  color: var(--cra-dark-blue);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  color: var(--cra-light-blue);
   text-decoration: none;
   text-align: center;
-  transition: background-color var(--motion-fast) var(--ease-standard),
-    color var(--motion-fast) var(--ease-standard);
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 
 .member-tile:hover,
 .member-tile:focus-visible {
-  background: var(--cra-gray-blue);
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover);
   color: var(--cra-light-gold);
+  transform: translateY(-1px);
+}
+
+.member-tile:active {
+  transform: translateY(0);
+  box-shadow: var(--glass-shadow-pressed);
 }
 
 .member-tile .member-avatar {
@@ -494,13 +519,11 @@ html[lang^='en'] .home-news-meta {
 }
 
 [data-theme='light'] .member-tile {
-  background: #e4ebe0;
   color: var(--text);
 }
 
 [data-theme='light'] .member-tile:hover,
 [data-theme='light'] .member-tile:focus-visible {
-  background: #d5e0c8;
   color: var(--text);
 }
 

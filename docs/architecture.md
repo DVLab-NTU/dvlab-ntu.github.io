@@ -162,6 +162,9 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
   AI Formal, EDA 3DIC, Quantum) and rendered by `buildMemberDisplayGroups`
   in `src/utils/member-groups.mjs`.
 - Each group is a horizontal track (`.members-track-scroll`, `members-carousel.mjs`).
+  Member tiles (`.member-tile`) use shared liquid-glass tokens (translucent fill,
+  embossed inset shadows, no stroke border). Member detail hero uses the same glass
+  panel treatment (`.detail-hero-member`).
   The PI (`cyhuang`) is excluded from the list page; profile lives on `/host/`.
 - A liquid-glass segmented toggle (`.members-status-toggle`, `.filter-tag`) filters
   **在學 / Current students** vs **已畢業 / Alumni** using CMS `status` (`current`/`active`
