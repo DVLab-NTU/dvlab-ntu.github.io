@@ -1,3 +1,56 @@
+/* Liquid-glass controls: embossed rim (inset) + lift — never a 1px stroke border. */
+.glass-surface {
+  border: none;
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+
+.glass-surface:hover {
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+.glass-surface-accent {
+  background: var(--glass-bg-accent);
+  box-shadow: var(--glass-shadow-accent);
+}
+
+.glass-surface-accent:hover {
+  background: var(--glass-bg-accent-hover);
+  box-shadow: var(--glass-shadow-accent-hover);
+}
+
+/* Interactive glass panel (member tiles, detail hero, etc.) */
+.glass-card {
+  border: none;
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
+}
+
+a.glass-card:hover,
+a.glass-card:focus-visible,
+.glass-card-interactive:hover,
+.glass-card-interactive:focus-visible {
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-1px);
+}
+
+a.glass-card:active,
+.glass-card-interactive:active {
+  transform: translateY(0);
+  box-shadow: var(--glass-shadow-pressed);
+}
+
 .grid {
   display: grid;
   gap: var(--space-gap);
@@ -94,7 +147,9 @@
   transition: opacity var(--motion-mid) var(--ease-standard), transform var(--motion-mid) var(--ease-standard);
 }
 
-.member-card.is-filter-hidden {
+.member-card.is-filter-hidden,
+.member-tile.is-filter-hidden,
+[data-member-card].is-filter-hidden {
   display: none;
 }
 

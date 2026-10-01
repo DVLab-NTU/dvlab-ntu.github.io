@@ -5,133 +5,70 @@ import siteZh from '../data/site.zh.json';
 import { getCollection } from 'astro:content';
 import HomeLogo from './HomeLogo.astro';
 import { pageCopy } from '../data/page-copy.mjs';
-import { summarizeText } from '../utils/seo';
 import { pickI18nText } from '../utils/i18n-text';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const labels = pageCopy.home[lang];
+const awardLabels = pageCopy.awards[lang];
 const pathPrefix = lang === 'en' ? '/en' : '';
 const t = lang === 'en' ? siteEn : siteZh;
-const photos = (await getCollection('life')).sort((a, b) => a.data.order - b.data.order);
-const hero = photos.find(entry => entry.slug === 'group-hiking')?.data;
-if (!hero) throw new Error('Missing group-hiking activity for home hero');
-const activities = photos.filter(entry => entry.slug !== 'group-hiking').slice(0, 2);
-const courses = (await getCollection('courses')).sort((a, b) =>
-  b.data.semester.localeCompare(a.data.semester, 'en', { numeric: true }) || a.slug.localeCompare(b.slug)
-).slice(0, 3);
+const awards = (await getCollection('awards'))
+  .map((entry) => ({ slug: entry.slug, ...entry.data }))
+  .sort((a, b) => b.year - a.year || a.month.localeCompare(b.month));
+
+function awardAttendants(award: { students: string[]; advisors?: string[] }) {
+  const people = [...award.students];
+  if (award.advisors?.length) people.push(...award.advisors);
+  return people.join(labels.awardSeparator);
+}
 ---
 <BaseLayout title="" desc={t.home.intro} lang={lang} pathPrefix={pathPrefix}>
-  <section class="home-opening mb-5" aria-label={lang === 'zh' ? '實驗室開場動畫' : 'Lab introduction animation'}>
-    <canvas class="home-particles" data-particles aria-hidden="true"></canvas>
-    <HomeLogo lang={lang} />
-  </section>
+  <div class="home-cra">
+    <section class="home-opening" aria-label={lang === 'zh' ? '實驗室開場動畫' : 'Lab introduction animation'}>
+      <canvas class="home-particles" data-particles aria-hidden="true"></canvas>
+      <HomeLogo lang={lang} />
+    </section>
 
-  <section id="lab-introduction" class="home-team home-section" aria-labelledby="home-title">
-    <div class="team-copy">
-      <p class="section-label">{labels.team}</p>
-      <h1 id="home-title">{labels.heading}</h1>
-      <p class="team-intro">{t.home.intro}</p>
-      <div class="team-detail">
-        <a class="home-link" href={`${pathPrefix}/host/`}>{labels.hostCta} <span aria-hidden="true">↗</span></a>
-        <a class="home-link" href={`${pathPrefix}/members/`}>{labels.allMembers} <span aria-hidden="true">↗</span></a>
+    <section id="lab-introduction" class="home-mission" aria-label={lang === 'zh' ? '實驗室簡介' : 'Lab mission'}>
+      <div class="home-mission-inner">
+        {labels.missionParagraphs.map((paragraph) => (
+          <p class="home-mission-text">{paragraph}</p>
+        ))}
       </div>
-    </div>
-    <figure class="team-photo">
-      <img src={hero.photo} alt={hero.alt[lang]} loading="lazy" decoding="async" width="1400" height="1050" />
-      <figcaption>{hero.caption[lang]}</figcaption>
-    </figure>
-  </section>
+    </section>
 
-  <section class="home-section" aria-labelledby="home-courses-title">
-    <div class="home-section-head">
-      <h2 id="home-courses-title">{labels.courses}</h2>
-      <a class="home-link" href={`${pathPrefix}/courses/`}>{labels.allCourses} <span aria-hidden="true">↗</span></a>
-    </div>
-    <div class="home-courses">
-      {courses.map(course => (
-        <article class="home-course">
-          <p class="course-semester">{labels.semester} {course.data.semester}</p>
-          <h3><a href={`${pathPrefix}/courses/#${course.slug}`}>{pickI18nText(course.data.title, lang)} <span aria-hidden="true">↗</span></a></h3>
-          {course.data.intro && <p>{summarizeText(pickI18nText(course.data.intro, lang), lang === 'zh' ? 100 : 220)}</p>}
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="home-section" aria-labelledby="home-life-title">
-    <div class="home-section-head">
-      <h2 id="home-life-title">{labels.life}</h2>
-      <a class="home-link" href={`${pathPrefix}/life/`}>{labels.allLife} <span aria-hidden="true">↗</span></a>
-    </div>
-    <div class="home-activities">
-      {activities.map(({ slug, data }) => (
-        <figure class="home-activity">
-          <a href={`${pathPrefix}/life/#${slug}`} aria-label={data.caption[lang]}>
-            <img src={data.photo} alt={data.alt[lang]} loading="lazy" decoding="async" width="1400" height="1050" />
-          </a>
-          <figcaption><h3>{data.caption[lang]}</h3>{data.description && <p>{data.description[lang]}</p>}</figcaption>
-        </figure>
-      ))}
-    </div>
-  </section>
+    <section class="home-news" aria-labelledby="home-news-title">
+      <div class="home-news-inner">
+        <h1 id="home-news-title" class="section-title home-news-heading">{labels.newsAwards}</h1>
+        <div class="home-news-list">
+          {awards.map((award) => (
+            <article class="home-news-item">
+              <div class="home-news-date">
+                <div class="home-news-date-chip">
+                  <span class="home-news-date-year">{award.year}</span>
+                  <span class="home-news-date-month">{award.month}</span>
+                </div>
+              </div>
+              <div class="home-news-detail">
+                <h3 class="home-news-title">{pickI18nText(award.title, lang)}</h3>
+                <p class="home-news-meta">{awardAttendants(award)}</p>
+                <a
+                  class="btn btn-ghost home-news-source-link"
+                  href={award.source}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {awardLabels.source}
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 
 <script>
   import '../scripts/particles.mjs';
 </script>
-
-<style>
-  .home-particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
-  .home-opening {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    min-height: 80vh;
-    min-height: 80svh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    padding: clamp(24px, 4vw, 48px) clamp(12px, 3vw, 40px);
-    border-radius: 24px;
-    background: radial-gradient(ellipse at 50% 42%, #294961, #14263a 80%);
-    color: #f4f8ff;
-  }
-  :global([data-theme='light']) .home-opening {
-    background: #eef1e2;
-    border-radius: 12px;
-    color: #293515;
-  }
-  .home-section { padding-block: clamp(36px, 6vw, 72px); }
-  .home-section + .home-section { border-top: 1px solid var(--line); }
-  .home-team { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
-  .section-label, .course-semester { color: var(--text-soft); font-size: var(--text-sm); margin: 0 0 16px; }
-  h1 { font-size: clamp(26px, 3vw, 38px); line-height: 1.35; margin: 0 0 24px; }
-  .team-intro { color: var(--text-soft); line-height: 1.9; }
-  .team-detail { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 16px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
-  .home-link { color: var(--text); font-size: var(--text-sm); white-space: nowrap; }
-  a:hover { text-decoration: underline; text-underline-offset: 4px; }
-  a:focus-visible { outline: 2px solid var(--text); outline-offset: 5px; border-radius: 3px; }
-  figure { margin: 0; min-width: 0; }
-  figure img { width: 100%; height: auto; border-radius: 14px; }
-  .team-photo figcaption { font-size: var(--text-sm); color: var(--muted); margin-top: 10px; }
-  .home-section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
-  h2 { font-size: clamp(24px, 2.5vw, 30px); margin: 0; }
-  h3 { font-size: 20px; line-height: 1.5; margin: 0 0 16px; }
-  .home-courses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
-  .home-course { padding-top: 20px; border-top: 2px solid var(--line-strong); }
-  .home-course > p:last-child { color: var(--text-soft); font-size: var(--text-sm); margin-bottom: 0; }
-  .home-activities { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
-  .home-activity img { aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
-  .home-activity figcaption { padding-top: 20px; }
-  .home-activity h3 { margin-bottom: 6px; }
-  .home-activity p { margin: 0; color: var(--text-soft); font-size: var(--text-sm); }
-  @media (max-width: 800px) {
-    .home-team, .home-courses { grid-template-columns: 1fr; }
-    .home-opening { border-radius: 16px; }
-  }
-  @media (max-width: 540px) {
-    .home-activities { grid-template-columns: 1fr; }
-  }
-</style>

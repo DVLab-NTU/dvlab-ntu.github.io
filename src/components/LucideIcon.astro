@@ -1,0 +1,42 @@
+---
+type LucideNode = [string, Record<string, string>];
+type Variant = 'stroke' | 'filled';
+
+const {
+  nodes,
+  class: className = '',
+  viewBox = '0 0 24 24',
+  variant = 'stroke',
+} = Astro.props as {
+  nodes: LucideNode[];
+  class?: string;
+  viewBox?: string;
+  variant?: Variant;
+};
+
+const isFilled = variant === 'filled';
+---
+
+<svg
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox={viewBox}
+  width="24"
+  height="24"
+  fill={isFilled ? 'currentColor' : 'none'}
+  stroke={isFilled ? 'none' : 'currentColor'}
+  stroke-width={isFilled ? undefined : '2'}
+  stroke-linecap={isFilled ? undefined : 'round'}
+  stroke-linejoin={isFilled ? undefined : 'round'}
+  aria-hidden="true"
+  focusable="false"
+>
+  {nodes.map(([tag, attrs]) => {
+    if (tag === 'path') return <path {...attrs} />;
+    if (tag === 'circle') return <circle {...attrs} />;
+    if (tag === 'line') return <line {...attrs} />;
+    if (tag === 'rect') return <rect {...attrs} />;
+    if (tag === 'polygon') return <polygon {...attrs} />;
+    return null;
+  })}
+</svg>

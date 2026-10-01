@@ -4,7 +4,13 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { dump, load } from 'js-yaml';
 import { schemas, membersSchema } from '../src/utils/content-schemas.mjs';
-import { groupMembers, admissionCohortLabel } from '../src/utils/member-groups.mjs';
+import {
+  groupMembers,
+  admissionCohortLabel,
+  buildMemberDisplayGroups,
+  memberEnrollmentKey,
+} from '../src/utils/member-groups.mjs';
+import { resolvePageBackgroundKey } from '../src/utils/page-background.mjs';
 import { cmsCollections, renderCmsConfigYml } from '../src/utils/cms-config.ts';
 import { readContent } from '../scripts/validate-content.mjs';
 
@@ -16,6 +22,31 @@ test('one schema accepts YAML serialization and rejects incomplete bilingual val
   assert.equal(membersSchema.safeParse({ ...data, name: { zh: '姓名' } }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, status: 'Alumni' }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, name: { zh: ' ', en: 'Name' } }).success, false);
+});
+
+test('member enrollment filter maps CMS status metadata', () => {
+  assert.equal(memberEnrollmentKey({ status: 'current' }), 'enrolled');
+  assert.equal(memberEnrollmentKey({ status: 'active' }), 'enrolled');
+  assert.equal(memberEnrollmentKey({ status: 'alumni' }), 'graduated');
+  assert.equal(memberEnrollmentKey({ status: 'former' }), 'graduated');
+});
+
+test('member display groups use three research pillars', () => {
+  const members = [
+    { id: 'a', role: 'master', area: 'formal', status: 'current' },
+    { id: 'b', role: 'master', area: 'eda', status: 'current' },
+    { id: 'c', role: 'master', area: 'quantum', status: 'current' },
+  ];
+  const groups = buildMemberDisplayGroups(members);
+  assert.equal(groups.length, 3);
+  assert.deepEqual(groups.map((group) => group.key), ['ai-formal', 'eda-3dic', 'quantum']);
+  assert.equal(groups[0].label.en, 'AI Formal');
+});
+
+test('page backdrop keys follow route shape', () => {
+  assert.equal(resolvePageBackgroundKey('/'), 'home');
+  assert.equal(resolvePageBackgroundKey('/en/members/anitalu724/'), 'member-detail');
+  assert.equal(resolvePageBackgroundKey('/papers/foo/'), 'paper-detail');
 });
 
 test('member grouping does not depend on translated names or missing cohorts', () => {

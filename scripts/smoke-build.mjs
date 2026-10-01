@@ -71,23 +71,23 @@ const unexpectedMissingCmsVars = ['CMS_GITHUB_REPO', 'CMS_OAUTH_BASE_URL', 'PUBL
 const checks = [
   {
     file: 'dist/index.html',
-    includes: ['DVLab', '研究團隊', '課程與教學', '實驗室日常'],
+    includes: ['DVLab', 'NEWS &amp; AWARDS', '設計驗證實驗室'],
   },
   {
     file: 'dist/en/index.html',
-    includes: ['DVLab', 'Our team', 'Courses &amp; teaching', 'Life at DVLab'],
+    includes: ['DVLab', 'NEWS &amp; AWARDS', 'Design Verification Lab'],
   },
   {
     file: 'dist/host/index.html',
-    includes: ['HOST PROFILE', '理性思考'],
+    includes: ['理性思考', '/images/host/ric.jpeg', 'cc.ee.ntu.edu.tw/~ric/'],
   },
   {
     file: 'dist/en/host/index.html',
-    includes: ['HOST PROFILE', 'Think Rationally'],
+    includes: ['Think Rationally', '/images/host/ric.jpeg', 'cc.ee.ntu.edu.tw/~ric/'],
   },
   {
     file: 'dist/members/index.html',
-    includes: ['成員列表', '搜尋成員'],
+    includes: ['成員列表', 'members-track-scroll', 'EDA 3DIC', 'Quantum'],
   },
   {
     file: 'dist/papers/index.html',

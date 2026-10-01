@@ -1,25 +1,29 @@
 export const pageCopy = {
   "home": {
     "zh": {
-      "team": "研究團隊",
       "heading": "DVLab 設計驗證實驗室",
+      "missionParagraphs": [
+        "在 DVLab，我們聚焦三大研究軸線：AI 形式方法、EDA 與 3DIC、以及量子設計自動化。面對系統層級設計的驗證瓶頸，我們以自動抽象降低問題複雜度，並以學習與引導式精化捕捉關鍵設計意圖，朝向可重現、可分享的開源驗證與設計流程努力。",
+        "我們也關注量子計算如何重塑設計堆疊——從合成、映射、最佳化到在實際裝置上的驗證；同時在 3DIC 與異質整合場景延伸時序、簽核與系統級 EDA 方法。無論是哪一條路線，我們都希望在嚴謹理論、實用工具與探索未知的好奇心之間取得平衡。"
+      ],
+      "newsAwards": "NEWS & AWARDS",
+      "allAwards": "所有獲獎紀錄",
+      "awardSeparator": "、",
       "allMembers": "認識成員",
-      "courses": "課程與教學",
-      "allCourses": "所有課程",
-      "semester": "學期",
-      "life": "實驗室日常",
-      "allLife": "更多活動",
+      "allPapers": "論文列表",
       "hostCta": "主持人簡介"
     },
     "en": {
-      "team": "Our team",
       "heading": "Design Verification Lab",
+      "missionParagraphs": [
+        "At DVLab, we advance three connected directions—AI Formal Methods, EDA for 3DIC, and Quantum Design Automation. To ease system-level verification bottlenecks, we combine automatic abstraction that tames complexity with learning-guided refinement that captures essential design intent, building open, reproducible frameworks our collaborators can rely on.",
+        "We are equally curious about how quantum techniques reshape the computing stack—from synthesis and optimization to verification on practical devices—and how classical EDA must evolve for heterogeneous 3DIC integration and sign-off. Across AI Formal, EDA 3DIC, and Quantum, we pursue rigorous theory, useful tools, and the curiosity that keeps hard engineering problems worth solving."
+      ],
+      "newsAwards": "NEWS & AWARDS",
+      "allAwards": "All awards",
+      "awardSeparator": ", ",
       "allMembers": "Meet the team",
-      "courses": "Courses & teaching",
-      "allCourses": "All courses",
-      "semester": "Semester",
-      "life": "Life at DVLab",
-      "allLife": "More activities",
+      "allPapers": "Publications",
       "hostCta": "Host profile"
     }
   },
@@ -57,6 +61,10 @@ export const pageCopy = {
       "placeholder": "搜尋 name / area / role...",
       "empty": "沒有匹配成員，請調整關鍵詞或篩選條件。",
       "all": "全部",
+      "statusFilter": "依在學狀態篩選成員",
+      "statusEnrolled": "在學",
+      "statusGraduated": "已畢業",
+      "emptyStatus": "此狀態下沒有成員。",
       "description": "DVLab（台大設計驗證實驗室）成員列表：由黃鐘揚教授領導，涵蓋碩士生、博士生與專題生，研究方向包括形式化驗證、量子電路合成與電子設計自動化（EDA）。"
     },
     "en": {
@@ -66,6 +74,10 @@ export const pageCopy = {
       "placeholder": "Search name / area / role...",
       "empty": "No matching members. Try another keyword or filter.",
       "all": "All",
+      "statusFilter": "Filter members by enrollment status",
+      "statusEnrolled": "Current students",
+      "statusGraduated": "Alumni",
+      "emptyStatus": "No members in this category.",
       "description": "DVLab (Design Verification Lab, NTUEE) members: students and researchers led by Prof. Chung-Yang (Ric) Huang, working on formal verification, quantum circuit synthesis, and EDA."
     }
   },

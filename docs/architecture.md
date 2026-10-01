@@ -18,7 +18,7 @@ route is a complete HTML file generated at build time.
 
 ```
 src/
-  content/            # Markdown content collections (members, papers, courses, awards, life)
+  content/            # Markdown content collections (members, papers, courses, awards; life CMS-only)
     config.ts         # Registers the shared collection schemas
   data/
     site.zh.json      # Site-wide copy (brand, nav, home) — Traditional Chinese
@@ -28,24 +28,28 @@ src/
   components/         # Shared page templates and optimized MemberAvatar
   pages/              # Thin language wrappers; /en/ mirrors each
     index.astro       # Home: logo entrance, team overview, course and activity previews
-    members.astro     # Member list with search + role filter
+    host.astro        # Lab host (PI) profile — CRA layout, not in member list
+    members.astro     # Three research-pillar horizontal carousels (PI excluded)
     members/[id].astro# Member detail (bio and links)
     papers.astro      # Publication list, newest first
     papers/[slug].astro
     courses.astro     # Courses sorted by semester, newest first
     awards.astro      # Awards with students/advisors/source
-    life.astro        # Lab activity photos (hiking / lunch / jogging)
     404.astro         # noindex 404 with nav links
   scripts/            # Client-side interactivity (ES modules, no framework)
     reveal.mjs        # Scroll-reveal animations (IntersectionObserver)
     particles.mjs     # Home hero particle canvas
     ui.mjs            # Theme toggle, member filter, list search, copy-email
-    navbar-scroll.mjs # Header shadow on scroll
+    navbar-scroll.mjs # Fixed header scroll state + --site-header-height sync
+    members-carousel.mjs # Horizontal member tracks (wheel / drag)
     cms.mjs            # CMS member ID guard and initialization
   styles/
-    tokens.css        # Design tokens: colors (dark/light), fonts, radii, shadows
-    base.css          # Reset, body, scrollbar
-    components.css    # Nav, hero, cards, footer, buttons, theme toggle
+    tokens.css        # Design tokens, liquid-glass (--glass-*), themes
+    base.css          # Reset, body padding-top for fixed header
+    components.css    # Header bar, nav, liquid-glass .btn, filters, host
+    page-background.css # Full-viewport gradient + noise backdrop per route
+    cra-layout.css    # CRA home/news, members tracks, host layout
+    cra-fonts.css     # Helvetica Neue + Coolvetica (@font-face)
     effects.css       # Hero glow, view-transition, ink theme transition
     utilities.css     # Grid, reveal states, small helpers
   utils/
@@ -56,10 +60,11 @@ src/
     content-schemas.mjs # Single schema source for Astro and validation
     member-groups.mjs # Locale-independent grouping
 public/
-  images/lab/         # Lab group photos (hero + life page)
+  images/host/        # Host portrait ric.jpeg (official CRA asset)
+  images/lab/         # Lab group photos (home hero)
   images/             # Logo, OG cover, favicons
   member/images/      # Member photos (<id>.jpg)
-  fonts/              # Inter, Noto Sans TC, Coolvetica
+  fonts/cra/          # CRA reference webfonts (Helvetica Neue, Coolvetica)
   robots.txt
 scripts/              # Build/verify tooling (see verification.md)
   build-site.mjs      # Wraps astro build (clean dist, telemetry off)
@@ -77,15 +82,17 @@ scripts/              # Build/verify tooling (see verification.md)
 
 | Route | Page | Notes |
 |---|---|---|
-| `/` | Home | Hero: title, intro, lab group photo, 4 CTA buttons; Highlights cards |
-| `/members/` | Members | Searchable/filterable member cards; `data-*` hooks in `ui.mjs` |
-| `/members/:id/` | Member bio | Uses `links.*` for Scholar/GitHub/Homepage/LinkedIn/email |
-| `/papers/` | Publications | Sorted by year desc |
-| `/papers/:slug/` | Paper detail | Abstract, links (online/pdf/code), optional bibtex |
-| `/courses/` | Courses | Sorted by semester desc (e.g. 115-1 → 108-1) |
-| `/awards/` | Awards | Students/advisors/source per record |
-| `/life/` | Lab life | Group photos with captions + optional descriptions |
+| `/` | Home | Full-bleed particles + logo; **NEWS & AWARDS** on same backdrop (no gray band) |
+| `/host/` | Host | CRA profile: `ric.jpeg`, bio, square social tiles incl. homepage |
+| `/members/` | Members | Three horizontal carousels (AI Formal / EDA 3DIC / Quantum); no PI card |
+| `/members/:id/` | Member bio | Liquid-glass link buttons; copy-email control |
+| `/papers/` | Publications | CRA subpage gradient; search + year filters |
+| `/papers/:slug/` | Paper detail | Abstract, links, bibtex disclosure + copy |
+| `/courses/` | Courses | CRA subpage gradient; sorted by semester desc |
+| `/awards/` | Awards | CRA subpage gradient |
 | `/en/*` | English | Mirrors every route under `/en/` |
+
+`/life/` and `/join/` are **not** published (404). The `life` content collection may remain for CMS/home hiking metadata only.
 
 ## Data flow
 
@@ -98,33 +105,112 @@ scripts/              # Build/verify tooling (see verification.md)
    control grouping; labels are translated only when rendering.
 5. The build emits one static HTML per route (plus sitemap, robots, 404).
 
+## CRA visual system
+
+The site follows the legacy CRA (2022 React) look while staying a static Astro build.
+
+### Typography
+
+- Body: **Helvetica Neue** (Ultra Light, weight 300) from `public/fonts/cra/`,
+  loaded in `src/styles/cra-fonts.css`. Heavier Latin weights (500–700) use
+  system Helvetica/Arial bold faces plus `font-synthesis: weight` — the CRA
+  `.ttf` must not be registered at 400–700 or Latin stays thin. `--fw-latin-*`
+  tokens live on `:root` (typically 700) for both zh and en; only CJK body,
+  headings, and nav weights differ by `html[lang]`.   On `html lang="zh-TW"`,
+  `html[lang^='zh'] :is(h1,h2,h3)` must not override Latin-heavy classes
+  (`.home-news-title`, `.group-title`, `.paper-list-item h3`, etc.) — see
+  `cra-typography.css`. Mixed zh body copy uses `--font-base-zh`: `DVLab Latin Mix`
+  (`unicode-range` + system bold Latin) before Noto/PingFang so inline years and
+  English names are not rendered in ultra-light Helvetica at `--fw-body` 300.
+- Display titles: **Coolvetica** via `--font-title`.
+- Chinese fallback: Noto Sans TC (system stack in `tokens.css`).
+
+### Fixed liquid-glass header
+
+- `.site-header` is a full-width frosted bar (`--glass-*` in `tokens.css`):
+  translucent fill, blur/saturate, **embossed inset rim** (no 1px stroke border),
+  soft outer lift. Scrolled state deepens via `.is-scrolled` (`navbar-scroll.mjs`).
+- `body` uses `padding-top: var(--site-header-height)` (`base.css`). The
+  height is measured at runtime and written back to `--site-header-height` so
+  the bar and content never overlap when the mobile menu opens.
+
+### Navigation vs buttons
+
+- **Nav tabs** (`.nav-link` + icons) stay text/icon links on the glass bar —
+  no chip borders, blur stacks, or `.btn` shine. Nav glyphs are **Lucide**
+  v0.469.0 stroke SVGs (`src/data/lucide-icons.mjs`, `LucideIcon.astro`, ISC);
+  LINE on the host row uses Font Awesome 6 Brands. The **hamburger** (`.nav-toggle`)
+  is a minimal icon control with a light hover wash only.
+- **Header utilities** (theme toggle, locale switch) use compact liquid-glass
+  styling in `.nav-actions` — they are controls, not section nav items.
+- **All other actionable controls** on pages share `.btn` / `.btn-primary` /
+  `.btn-ghost` (Host CTAs, 404 links, paper/member/course actions, filter
+  tags, search inputs, bibtex summary, copy-email, etc.): frosted fill,
+  `backdrop-filter`, embossed inset highlights (no outline border), hover lift,
+  optional `.btn-shine` sweep. Tokens: `--glass-rim-inset`, `--glass-lift`.
+
+### Unified page backdrop
+
+- Every route sets `html[data-page-bg]` via `resolvePageBackgroundKey()` in
+  `src/utils/page-background.mjs`. `BaseLayout.astro` renders a fixed
+  `.page-backdrop` (muted CRA gradient + SVG film grain + vignette) in
+  `src/styles/page-background.css`. The backdrop uses `z-index: 0` with a
+  **transparent** `body`/`main` — negative z-index or a solid `body` background
+  would hide the layer and look like a flat fill. The fixed `.site-header` must
+  **not** be given `position: relative` in backdrop rules (that breaks the bar).
+  Per-route CSS tweaks angle
+  and accent mix so pages feel related but not identical (including
+  `member-detail` and `paper-detail`).
+- Home has no extra hero overlay or solid header band: the logo stage and
+  **NEWS & AWARDS** share the unified noisy backdrop only. The opening section
+  clears the fixed header via padding; particles canvas is clipped to `.home-opening`.
+
+### Members layout
+
+- Grouping is defined in `src/data/member-labels.mjs` (`memberDisplayGroups`:
+  AI Formal, EDA 3DIC, Quantum) and rendered by `buildMemberDisplayGroups`
+  in `src/utils/member-groups.mjs`.
+- Each group is a horizontal track (`.members-track-scroll`, `members-carousel.mjs`).
+  Member tiles (`.member-tile`) use shared liquid-glass tokens (translucent fill,
+  embossed inset shadows, no stroke border). Member detail hero uses the same glass
+  panel treatment (`.detail-hero-member`).
+  The PI (`cyhuang`) is excluded from the list page; profile lives on `/host/`.
+- A liquid-glass segmented toggle (`.members-status-toggle`, `.filter-tag`) filters
+  **在學 / Current students** vs **已畢業 / Alumni** using CMS `status` (`current`/`active`
+  → enrolled; `alumni`/`former` → graduated). Client filter in `ui.mjs`; carousels unchanged.
+
+### Host page
+
+- Portrait: `public/images/host/ric.jpeg` (`HOST_PHOTO` in `src/utils/host-member.ts`).
+- Social row: `HostSocialSquareIcon.astro` — email and homepage use legacy CRA
+  Font Awesome solid paths (`cra-fontawesome-icons.mjs`, `fill="currentColor"`,
+  transparent negative space); LinkedIn/Facebook/LINE use Lucide stroke or FA
+  brand fill. Glyph color is `--host-social-glyph` (not a second tile fill).
+- No “PI” badge on host or member list.
+
 ## Theming
 
-- Tokens live in `src/styles/tokens.css`: `:root` is the dark theme
-  (old-site navy `#1f3751` + gold `#ffd700`); `:root[data-theme='light']`
-  overrides with warm off-white surfaces and yellow-green accents. Light cards
-  use thin borders, metadata badges have solid pale-green fills, and controls
-  use flat styling with visible keyboard focus outlines.
+- Tokens live in `src/styles/tokens.css`: dark CRA navy/gold; light yellow-green
+  surfaces. Liquid-glass tokens (`--glass-bg`, `--glass-border`, …) have
+  paired dark/light values.
 - Theme is applied before paint by an inline script in `BaseLayout.astro`
   (`localStorage['lab-theme']` → `prefers-color-scheme` fallback).
-- The theme toggle button is embossed in dark mode and flat in light mode (`src/styles/components.css`,
-  `.theme-toggle-btn`); a 180 ms crossfade is defined in `effects.css`.
-- All animation respects `prefers-reduced-motion`.
+- Theme crossfade: `effects.css` (~180 ms). All animation respects
+  `prefers-reduced-motion`.
 
 ## Navigation
 
-- The nav is plain `<a>` links (no SPA router). Removing the Astro
-  ClientRouter was deliberate: it caused input lag during view-transitions.
-  With full-page loads, a click starts navigation immediately and every page
-  remains fully indexable.
-- The **活動 / Life** tab links to `/life/` (a real page, not a home anchor).
+- The nav is plain `<a>` links (no SPA router). Full-page loads keep clicks
+  instant and every route indexable.
+- Primary nav: Home, Host, Members, Papers, Courses, Awards (no Life tab).
 
 ## Resources and progressive enhancement
 
 Member originals remain in `public/`; `MemberAvatar.astro` imports local raster
 assets and uses Astro Image to emit small responsive WebPs. Both lists and
-profiles use this component. Typography uses the system font stack, with no
-web-font requests or preloads.
+profiles use this component. Typography loads the CRA reference webfonts from
+`public/fonts/cra/` (Helvetica Neue at 300 for body, Coolvetica for display
+titles) via `src/styles/cra-fonts.css`, with Noto Sans TC fallbacks for Chinese.
 
 Content is visible without scripts. The reveal script opts observed nodes into
 animation after initialization, and caps stagger delays. Mobile navigation is
@@ -183,15 +269,12 @@ state and subsequent navigation in both desktop and mobile layouts.
 
 ## Homepage content
 
-Below the unchanged logo opening, the homepage presents the team introduction
-and hiking photo, three courses sorted by semester descending (then slug),
-and two other activities sorted by their `order`. Course and
-activity previews link to stable entry anchors on the full pages.
-All content is rendered at build time and works without JavaScript.
+Below the logo opening, the homepage shows the team introduction, hiking photo,
+and a **NEWS & AWARDS** band (seven award lines linking to external sources).
+There are no duplicate nav CTAs under the logo. Content is static HTML.
 
-The recruitment collection, both `/join/` routes, and their CMS fields have
-been removed. Old recruitment URLs now use the site's normal 404 response;
-they are not navigation items or sitemap entries.
+Recruitment (`/join/`) and the public **Life** route are removed (404). Old URLs
+are not in the nav or sitemap.
 
 ## Homepage particles
 

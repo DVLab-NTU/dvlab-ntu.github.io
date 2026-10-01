@@ -3,50 +3,71 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import MemberAvatar from './MemberAvatar.astro';
 import { getCollection } from 'astro:content';
 import { resolveMemberAvatar } from '../utils/member-avatar';
-import { roles, statuses, areas } from '../data/member-labels.mjs';
-import { groupMembers, isFormer, admissionCohortLabel } from '../utils/member-groups.mjs';
 import { pageCopy } from '../data/page-copy.mjs';
+import { buildMemberDisplayGroups, memberEnrollmentKey } from '../utils/member-groups.mjs';
+
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const t = pageCopy.members[lang];
 const pathPrefix = lang === 'en' ? '/en' : '';
 
 const members = (await getCollection('members')).map(entry => entry.data);
-const groups = groupMembers(members);
-const availableRoles = Object.keys(roles).filter(role => members.some(member => member.role === role));
+const listMembers = members.filter((member) => member.role !== 'pi');
+const displayGroups = buildMemberDisplayGroups(listMembers);
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
-  <section class="page-head" data-reveal>
-    <h1 class="page-title">{t.heading}</h1>
-  </section>
-  <section class="filter-wrap" data-members-filter-root data-reveal>
-    <input class="filter-input" type="search" data-member-search placeholder={t.placeholder} aria-label={t.search} />
-    <div class="filter-tags">
-      {['__all', ...availableRoles].map((role, i) => (
-        <button class={`filter-tag btn-shine ${i === 0 ? 'is-selected' : ''}`} type="button" data-role-filter={role} aria-pressed={i === 0}>
-          {role === '__all' ? t.all : roles[role][lang]}
+  <div class="members-cra subpage-members" data-members-filter-root>
+    <h1 class="page-title cra-page-title section-title members-page-title">{t.heading}</h1>
+
+    <div class="members-toolbar">
+      <div class="members-status-toggle" role="group" aria-label={t.statusFilter}>
+        <button
+          type="button"
+          class="filter-tag btn-shine is-selected"
+          data-status-filter="enrolled"
+          aria-pressed="true"
+        >
+          {t.statusEnrolled}
         </button>
-      ))}
+        <button
+          type="button"
+          class="filter-tag btn-shine"
+          data-status-filter="graduated"
+          aria-pressed="false"
+        >
+          {t.statusGraduated}
+        </button>
+      </div>
+      <p class="members-empty-state" data-empty-state hidden>{t.emptyStatus}</p>
     </div>
-    <p class="empty-state" data-empty-state hidden>{t.empty}</p>
-    {groups.map(group => (
-      <section data-member-group data-reveal-group>
-        {group.key !== 'current' && <h2 class="cohort-title">{admissionCohortLabel(group.key === 'unknown' ? undefined : Number(group.key), lang)}</h2>}
-        <div class="grid grid-3">
-          {group.members.map((m, i) => (
-            <a href={`${pathPrefix}/members/${m.id}/`} class="card card-hover card-link member-card"
-              data-member-card data-name={`${m.name.zh} ${m.name.en} ${m.nickname || ''}`} data-role={m.role}
-              data-area={`${areas[m.area].zh} ${areas[m.area].en} ${roles[m.role].zh} ${roles[m.role].en}`}
-              data-reveal data-reveal-order={String(i)}>
-              {m.role !== 'pi' && <span class={`member-status status-${isFormer(m) ? 'former' : 'current'}`}>{statuses[m.status][lang]}</span>}
-              <MemberAvatar src={resolveMemberAvatar(m)} position={m.avatarPosition} alt={m.name[lang]} />
-              <h3>{m.name[lang]}</h3>
-              {m.nickname && <p>{m.nickname}</p>}
-              <p class="member-role"><span class="badge-muted">{roles[m.role][lang]}</span></p>
-              <p class="mt-4">{areas[m.area][lang]}</p>
-            </a>
-          ))}
+
+    {displayGroups.map((group) => (
+      <section class="member-group-block" data-member-group>
+        <h2 class="group-title">{group.label[lang]}</h2>
+        <div class="members-track" data-members-track>
+          <div
+            class="members-track-scroll"
+            data-members-track-scroll
+            tabindex="0"
+            aria-label={group.label[lang]}
+          >
+            {group.members.map((m) => (
+              <a
+                href={`${pathPrefix}/members/${m.id}/`}
+                class="member-tile glass-card"
+                data-member-card
+                data-member-enrollment={memberEnrollmentKey(m)}
+              >
+                <MemberAvatar src={resolveMemberAvatar(m)} position={m.avatarPosition} alt={m.name[lang]} />
+                <h3>{m.name[lang]}</h3>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
     ))}
-  </section>
+  </div>
 </BaseLayout>
+
+<script>
+  import '../scripts/members-carousel.mjs';
+</script>

@@ -4,8 +4,8 @@
   --bg-elevated: #14263a;
   --line: rgba(188, 221, 223, 0.24);
   --line-strong: rgba(252, 255, 204, 0.5);
-  --text: #e6f1f1;
-  --text-soft: #bcdddf;
+  --text: #bcdddf;
+  --text-soft: #d4e8ea;
   --muted: #8faeb2;
   --primary: #ffd700;
   --primary-2: #fcffcc;
@@ -50,9 +50,52 @@
 
   --blur-card: 12px;
 
-  --font-base: Arial, 'Helvetica Neue', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-title: Arial, 'Helvetica Neue', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, sans-serif;
+  /* Liquid glass (navbar + controls): translucent fill, no stroke borders.
+     Edge = inset specular highlight + soft underside shade + outer lift. */
+  --glass-blur: 16px;
+  --glass-saturate: 1.7;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-bg-hover: rgba(255, 255, 255, 0.14);
+  --glass-bg-accent: rgba(255, 215, 0, 0.22);
+  --glass-bg-accent-hover: rgba(255, 215, 0, 0.3);
+  /* Legacy names kept for non-glass dividers; do not use as control borders. */
+  --glass-border: transparent;
+  --glass-border-strong: transparent;
+  --glass-rim-inset: inset 0 1px 1px rgba(255, 255, 255, 0.48), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  --glass-rim-inset-hover: inset 0 1px 1px rgba(255, 255, 255, 0.55), inset 0 -1px 2px rgba(0, 0, 0, 0.22);
+  --glass-lift: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --glass-lift-hover: 0 10px 28px rgba(0, 0, 0, 0.26);
+  --glass-shadow: var(--glass-rim-inset), var(--glass-lift);
+  --glass-shadow-hover: var(--glass-rim-inset-hover), var(--glass-lift-hover);
+  --glass-shadow-accent: inset 0 1px 1px rgba(255, 255, 255, 0.42), inset 0 -1px 2px rgba(0, 0, 0, 0.18),
+    0 8px 22px rgba(0, 0, 0, 0.22);
+  --glass-shadow-accent-hover: inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -1px 2px rgba(0, 0, 0, 0.2),
+    0 10px 26px rgba(0, 0, 0, 0.26);
+  --glass-shadow-pressed: inset 0 2px 4px rgba(0, 0, 0, 0.28), inset 0 -1px 1px rgba(255, 255, 255, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.16);
+  --glass-header-rim: inset 0 1px 0 rgba(255, 255, 255, 0.32), inset 0 -1px 2px rgba(0, 0, 0, 0.18);
+  --glass-shadow-header: var(--glass-header-rim), 0 10px 28px rgba(0, 0, 0, 0.22);
+  --glass-shadow-header-hover: inset 0 1px 0 rgba(255, 255, 255, 0.38), inset 0 -1px 2px rgba(0, 0, 0, 0.22),
+    0 12px 32px rgba(0, 0, 0, 0.28);
+
+  --font-base: 'Helvetica Neue', HelveticaNeue, Arial, 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* zh body: bold Latin via unicode-range (see cra-fonts.css), then CJK system fonts — no ultra-light Helvetica for ASCII. */
+  --font-base-zh: 'DVLab Latin Mix', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-title: Coolvetica, 'Helvetica Neue', HelveticaNeue, Arial, 'Noto Sans TC', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* CJK body/headings — overridden per html[lang]. Latin scale is locale-agnostic (700). */
+  --fw-body: 300;
+  --fw-heading: 500;
+  --fw-heading-lg: 600;
+  --fw-nav: 500;
+  --fw-latin-copy: 700;
+  --fw-latin-meta: 700;
+  --fw-latin-strong: 700;
+  --fw-latin-ui: 700;
+  --fw-latin-chip: 700;
+  --fw-latin-chip-sub: 600;
+  --fw-member-name: 700;
 
   --text-xs: 12px;
   --text-sm: 14px;
@@ -69,6 +112,21 @@
   --ease-standard: cubic-bezier(0.2, 0.78, 0.22, 1);
   --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
   --stagger-step: 80ms;
+}
+
+html[lang^='zh'] {
+  --font-base: var(--font-base-zh);
+  --fw-body: 300;
+  --fw-heading: 500;
+  --fw-heading-lg: 600;
+  --fw-nav: 500;
+}
+
+html[lang^='en'] {
+  --fw-body: 700;
+  --fw-heading: 700;
+  --fw-heading-lg: 700;
+  --fw-nav: 700;
 }
 
 :root[data-theme='light'] {
@@ -98,4 +156,27 @@
   --shadow-emboss-hover: none;
   --shadow-emboss-pressed: none;
   --shadow-field: none;
+
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-bg-hover: rgba(255, 255, 255, 0.78);
+  --glass-bg-accent: rgba(201, 217, 79, 0.42);
+  --glass-bg-accent-hover: rgba(201, 217, 79, 0.52);
+  --glass-border: transparent;
+  --glass-border-strong: transparent;
+  --glass-rim-inset: inset 0 1px 1px rgba(255, 255, 255, 0.88), inset 0 -1px 2px rgba(41, 50, 30, 0.12);
+  --glass-rim-inset-hover: inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(41, 50, 30, 0.14);
+  --glass-lift: 0 8px 22px rgba(41, 50, 30, 0.1);
+  --glass-lift-hover: 0 10px 26px rgba(41, 50, 30, 0.14);
+  --glass-shadow: var(--glass-rim-inset), var(--glass-lift);
+  --glass-shadow-hover: var(--glass-rim-inset-hover), var(--glass-lift-hover);
+  --glass-shadow-accent: inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 -1px 2px rgba(74, 94, 32, 0.14),
+    0 8px 20px rgba(41, 50, 30, 0.12);
+  --glass-shadow-accent-hover: inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(74, 94, 32, 0.16),
+    0 10px 24px rgba(41, 50, 30, 0.14);
+  --glass-shadow-pressed: inset 0 2px 4px rgba(41, 50, 30, 0.14), inset 0 -1px 1px rgba(255, 255, 255, 0.7),
+    0 2px 8px rgba(41, 50, 30, 0.08);
+  --glass-header-rim: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 0 -1px 2px rgba(41, 50, 30, 0.1);
+  --glass-shadow-header: var(--glass-header-rim), 0 8px 22px rgba(41, 50, 30, 0.1);
+  --glass-shadow-header-hover: inset 0 1px 0 rgba(255, 255, 255, 0.85), inset 0 -1px 2px rgba(41, 50, 30, 0.12),
+    0 10px 26px rgba(41, 50, 30, 0.14);
 }

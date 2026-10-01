@@ -7,7 +7,7 @@ nickname: "Ric"
 role: pi
 status: active
 area: verification
-avatar: "/member/images/cyhuang.jpg"
+avatar: "/images/host/ric.jpeg"
 bio:
   zh: |
     黃鐘揚（Ric）教授於 1992 年取得國立臺灣大學電機工程學系學士學位，2000 年取得美國加州大學聖塔芭芭拉分校（UCSB）電機與電腦工程博士學位。2004 年回到臺大電機系擔任助理教授之前，曾在 Cadence Design Systems 擔任資深研發經理，負責功能驗證工具核心引擎的開發。

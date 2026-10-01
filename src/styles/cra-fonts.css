@@ -1,0 +1,66 @@
+/* CRA reference fonts (commit 6e33b72 static mirror). Licensed for site branding parity.
+   helvetica-neu.ttf is a single Ultra Light (300) face — do not alias 400–700 to it or
+   Latin stays visually thin. Heavier weights use system Helvetica/Arial bold + synthesis. */
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/cra/helvetica-neu.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src:
+    local('Helvetica Neue Medium'),
+    local('HelveticaNeue-Medium'),
+    local('Helvetica Neue Bold'),
+    local('HelveticaNeue-Bold'),
+    local('Arial Bold'),
+    local('Arial');
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Coolvetica;
+  src:
+    url('/fonts/cra/CoolveticaRg-Regular.woff2') format('woff2'),
+    url('/fonts/cra/CoolveticaRg-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Coolvetica;
+  src:
+    local('Helvetica Neue Bold'),
+    local('HelveticaNeue-Bold'),
+    local('Arial Bold'),
+    local('Arial');
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* zh-TW mixed copy: Latin digits/names must not use ultra-light Helvetica at body weight 300.
+   CJK skips this family (unicode-range); Latin in the same <p> uses bold system faces. */
+@font-face {
+  font-family: 'DVLab Latin Mix';
+  src:
+    local('Helvetica Neue Bold'),
+    local('HelveticaNeue-Bold'),
+    local('Helvetica Neue Medium'),
+    local('HelveticaNeue-Medium'),
+    local('Arial Bold'),
+    local('Arial');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2070-2074,
+    U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD, U+0100-024F, U+1E00-1EFF, U+2070-209F,
+    U+2150-218F, U+2460-24FF;
+}

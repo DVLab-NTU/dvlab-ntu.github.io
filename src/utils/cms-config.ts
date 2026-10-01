@@ -131,7 +131,7 @@ export function cmsCollections() {
       files: ['zh', 'en'].map(locale => ({
         name: `site_${locale}`, label: `Site (${locale})`, file: `src/data/site.${locale}.json`, format: 'json',
         fields: [text('brand'), text('siteName'), {
-          name: 'nav', label: 'Navigation', widget: 'object', fields: ['home', 'members', 'papers', 'courses', 'awards', 'life'].map(name => text(name)),
+          name: 'nav', label: 'Navigation', widget: 'object', fields: ['home', 'host', 'members', 'papers', 'courses', 'awards'].map(name => text(name)),
         }, {
           name: 'home', label: 'Home', widget: 'object', fields: [multiline('intro')],
         }],

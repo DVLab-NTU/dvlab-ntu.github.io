@@ -86,7 +86,7 @@ export const schemas = { members: membersSchema, papers: papersSchema, courses: 
 export const siteSchema = z.object({
   brand: z.string().trim().min(1),
   siteName: z.string().trim().min(1),
-  nav: z.object(Object.fromEntries(['home', 'members', 'papers', 'courses', 'awards', 'life'].map(key => [key, z.string().trim().min(1)]))),
+  nav: z.object(Object.fromEntries(['home', 'host', 'members', 'papers', 'courses', 'awards'].map(key => [key, z.string().trim().min(1)]))),
   home: z.object({
     intro: z.string().trim().min(1),
   }),

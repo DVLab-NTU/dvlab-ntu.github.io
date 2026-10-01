@@ -18,29 +18,30 @@ const t = pageCopy.courses[lang];
 const pathPrefix = lang === 'en' ? '/en' : '';
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
+  <div class="courses-cra">
   <section class="page-head" data-reveal>
-    <h1 class="page-title">{t.title}</h1>
+    <h1 class="page-title cra-page-title">{t.title}</h1>
   </section>
 
   <section class="detail-shell" data-reveal-group>
     {courses.map((c, i) => (
-      <article id={c.slug} class="card detail-content stack-sm course-card" data-reveal data-reveal-order={String(i)}>
+      <article id={c.slug} class="flat-entry course-card" data-reveal data-reveal-order={String(i)}>
         <div class="detail-meta">
           <h2 class="page-title">{pickI18nText(c.title, lang)}</h2>
           <span class="badge-muted">{c.semester}</span>
         </div>
         {c.intro && <p>{pickI18nText(c.intro, lang)}</p>}
-        {c.contents && (
-          <details>
-            <summary class="btn btn-ghost">{t.contents}</summary>
-            <ul class="mt-4">
-              {c.contents[lang].map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </details>
-        )}
-        <div class="detail-links">
+        <div class="course-card-actions">
+          {c.contents && (
+            <details class="course-contents-details">
+              <summary class="btn btn-ghost">{t.contents}</summary>
+              <ul class="course-contents-list">
+                {c.contents[lang].map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </details>
+          )}
           <a class="btn btn-ghost" href={c.link} target="_blank" rel="noreferrer">{t.catalogue}</a>
           {c.github && (
             <a class="btn btn-ghost" href={c.github} target="_blank" rel="noreferrer">GitHub Repo</a>
@@ -49,6 +50,7 @@ const pathPrefix = lang === 'en' ? '/en' : '';
       </article>
     ))}
   </section>
+  </div>
 </BaseLayout>
 
 <style>
