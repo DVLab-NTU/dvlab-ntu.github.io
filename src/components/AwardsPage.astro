@@ -31,7 +31,7 @@ const pathPrefix = lang === 'en' ? '/en' : '';
         data-reveal
         data-reveal-order={String(i)}
       >
-        <h3 class="glass-list-card__title">{pickI18nText(a.title, lang)}</h3>
+        <h2 class="glass-list-card__title">{pickI18nText(a.title, lang)}</h2>
         <GlassMetaRow>
           <GlassMetaChip value={formatAwardDateChip(a.month, a.year)} />
           <a

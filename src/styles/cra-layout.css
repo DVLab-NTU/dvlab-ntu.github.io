@@ -289,6 +289,21 @@
   color: var(--cra-light-blue);
 }
 
+.home-news-date-chip .glass-chip-value {
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: var(--fw-latin-chip);
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  color: var(--cra-light-gold);
+}
+
+[data-theme='light'] .home-news-date-chip .glass-chip-value {
+  color: #4a5e20;
+}
+
 .home-news-date-year,
 .home-news-date-month {
   width: 100%;
