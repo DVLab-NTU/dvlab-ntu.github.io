@@ -1,4 +1,6 @@
-/* CRA reference fonts (commit 6e33b72 static mirror). Licensed for site branding parity. */
+/* CRA reference fonts (commit 6e33b72 static mirror). Licensed for site branding parity.
+   helvetica-neu.ttf is a single Ultra Light (300) face — do not alias 400–700 to it or
+   Latin stays visually thin. Heavier weights use system Helvetica/Arial bold + synthesis. */
 @font-face {
   font-family: 'Helvetica Neue';
   src: url('/fonts/cra/helvetica-neu.ttf') format('truetype');
@@ -9,39 +11,22 @@
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/cra/helvetica-neu.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/cra/helvetica-neu.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/cra/helvetica-neu.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/cra/helvetica-neu.ttf') format('truetype');
-  font-weight: 700;
+  src:
+    local('Helvetica Neue Medium'),
+    local('HelveticaNeue-Medium'),
+    local('Helvetica Neue Bold'),
+    local('HelveticaNeue-Bold'),
+    local('Arial Bold'),
+    local('Arial');
+  font-weight: 500 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: Coolvetica;
-  src: url('/fonts/cra/CoolveticaRg-Regular.woff2') format('woff2'),
+  src:
+    url('/fonts/cra/CoolveticaRg-Regular.woff2') format('woff2'),
     url('/fonts/cra/CoolveticaRg-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
@@ -50,27 +35,12 @@
 
 @font-face {
   font-family: Coolvetica;
-  src: url('/fonts/cra/CoolveticaRg-Regular.woff2') format('woff2'),
-    url('/fonts/cra/CoolveticaRg-Regular.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: Coolvetica;
-  src: url('/fonts/cra/CoolveticaRg-Regular.woff2') format('woff2'),
-    url('/fonts/cra/CoolveticaRg-Regular.woff') format('woff');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: Coolvetica;
-  src: url('/fonts/cra/CoolveticaRg-Regular.woff2') format('woff2'),
-    url('/fonts/cra/CoolveticaRg-Regular.woff') format('woff');
-  font-weight: 700;
+  src:
+    local('Helvetica Neue Bold'),
+    local('HelveticaNeue-Bold'),
+    local('Arial Bold'),
+    local('Arial');
+  font-weight: 600 700;
   font-style: normal;
   font-display: swap;
 }

@@ -7,6 +7,26 @@ body {
   font-weight: var(--fw-body);
 }
 
+html[lang^='en'] {
+  font-synthesis: weight;
+}
+
+/* Latin strings on zh pages (authors, dates, UI labels) — heavier than CJK body. */
+.home-news-meta,
+.paper-list-item p,
+.paper-authors,
+.cra-site .meta,
+.news-contex,
+.detail-contex,
+.member-tile h3,
+.host-cra-tagline,
+.filter-tag,
+.badge,
+.badge-muted,
+.status-chip {
+  font-synthesis: weight;
+}
+
 html[lang^='zh'] :is(h1, h2, h3) {
   font-weight: var(--fw-heading);
 }
@@ -15,7 +35,8 @@ html[lang^='en'] :is(h1, h2, h3) {
   font-weight: var(--fw-heading-lg);
 }
 
-html[lang^='en'] .nav-text {
+html[lang^='en'] .nav-text,
+html[lang^='en'] .nav-link {
   font-weight: var(--fw-nav);
 }
 
@@ -124,6 +145,16 @@ html[lang^='en'] .footer .footer-copy {
 }
 
 html[lang^='en'] .flat-entry h2 {
+  font-weight: var(--fw-latin-copy);
+}
+
+html[lang^='en'] .cra-site :is(.card h2, .card h3, .flat-entry h2, .filter-wrap h2) {
+  font-weight: var(--fw-latin-strong);
+}
+
+html[lang^='en'] .cra-site .card,
+html[lang^='en'] .cra-site .card p,
+html[lang^='en'] .cra-site .card li {
   font-weight: var(--fw-latin-copy);
 }
 
