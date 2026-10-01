@@ -6,6 +6,7 @@ import { getCollection } from 'astro:content';
 import HomeLogo from './HomeLogo.astro';
 import { pageCopy } from '../data/page-copy.mjs';
 import { pickI18nText } from '../utils/i18n-text';
+import { formatAwardDateChip } from '../utils/award-date.mjs';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const labels = pageCopy.home[lang];
@@ -56,9 +57,8 @@ function awardAttendants(award: { students: string[]; advisors?: string[] }) {
           {awards.map((award) => (
             <article class="home-news-item">
               <div class="home-news-date">
-                <div class="home-news-date-chip glass-chip">
-                  <span class="home-news-date-year">{award.year}</span>
-                  <span class="home-news-date-month">{award.month}</span>
+                <div class="home-news-date-chip glass-chip glass-meta-chip">
+                  <span class="glass-chip-value">{formatAwardDateChip(award.month, award.year)}</span>
                 </div>
               </div>
               <div class="home-news-detail">

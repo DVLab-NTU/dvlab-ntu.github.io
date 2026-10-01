@@ -996,28 +996,7 @@ html[lang^='en'] .nav-text {
   align-items: center;
 }
 
-.paper-meta-chip {
-  gap: 6px;
-}
-
-.paper-chip-label {
-  font-size: 0.6875rem;
-  font-weight: var(--fw-latin-ui);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  opacity: 0.82;
-}
-
-html[lang^='zh'] .paper-chip-label {
-  text-transform: none;
-  letter-spacing: 0.04em;
-  font-size: var(--text-xs);
-}
-
-.paper-chip-value {
-  font-weight: var(--fw-latin-strong);
-  letter-spacing: 0.02em;
-}
+/* Meta chip label/value typography: src/styles/glass-ui.css */
 
 .paper-detail-actions {
   align-items: center;

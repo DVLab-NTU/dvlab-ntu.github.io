@@ -4,6 +4,7 @@ import { render } from 'astro:content';
 import { summarizeParts } from '../utils/seo';
 import { displayVenue } from '../utils/paper-meta.mjs';
 import { pageCopy } from '../data/page-copy.mjs';
+import GlassMetaChip from './glass/GlassMetaChip.astro';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const t = pageCopy.paper[lang];
@@ -23,15 +24,9 @@ const pageDesc = abstract || summarizeParts([entry.data.authors, entry.data.venu
       <h1 class="page-title">{entry.data.title}</h1>
       <div class="detail-meta paper-detail-meta">
         {venueName && (
-          <span class="badge paper-meta-chip">
-            <span class="paper-chip-label">{t.venueLabel}</span>
-            <span class="paper-chip-value">{venueName}</span>
-          </span>
+          <GlassMetaChip label={t.venueLabel} value={venueName} variant="accent" />
         )}
-        <span class="badge-muted paper-meta-chip">
-          <span class="paper-chip-label">{t.yearLabel}</span>
-          <span class="paper-chip-value">{entry.data.year}</span>
-        </span>
+        <GlassMetaChip label={t.yearLabel} value={String(entry.data.year)} />
       </div>
       {entry.data.authors && <p class="paper-authors">{t.authors}{entry.data.authors}</p>}
     </article>

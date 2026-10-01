@@ -1,0 +1,18 @@
+---
+/** One row: meta chips (start) + actions such as Source (end), shared on awards cards. */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+<div class:list={['glass-meta-row', 'detail-meta', className]}>
+  <div class="glass-meta-row__chips">
+    <slot />
+  </div>
+  {Astro.slots.has('actions') && (
+    <div class="glass-meta-row__actions">
+      <slot name="actions" />
+    </div>
+  )}
+</div>

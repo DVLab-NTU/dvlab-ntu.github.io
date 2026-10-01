@@ -65,8 +65,8 @@
   --glass-bg-chip-accent: var(--glass-bg-accent);
   --glass-bg-chip-accent-hover: var(--glass-bg-accent-hover);
   /* Denser panels (paper list cards): more opaque than chips/nav, still glass. */
-  --glass-bg-panel: rgba(255, 255, 255, 0.072);
-  --glass-bg-panel-hover: rgba(255, 255, 255, 0.1);
+  --glass-bg-panel: rgba(255, 255, 255, 0.055);
+  --glass-bg-panel-hover: rgba(255, 255, 255, 0.082);
   /* Legacy names kept for non-glass dividers; do not use as control borders. */
   --glass-border: transparent;
   --glass-border-strong: transparent;
@@ -175,8 +175,8 @@ html[lang^='en'] {
   --glass-bg-chip-hover: var(--glass-bg-hover);
   --glass-bg-chip-accent: var(--glass-bg-accent);
   --glass-bg-chip-accent-hover: var(--glass-bg-accent-hover);
-  --glass-bg-panel: rgba(255, 255, 255, 0.32);
-  --glass-bg-panel-hover: rgba(255, 255, 255, 0.42);
+  --glass-bg-panel: rgba(255, 255, 255, 0.26);
+  --glass-bg-panel-hover: rgba(255, 255, 255, 0.36);
   --glass-border: transparent;
   --glass-border-strong: transparent;
   --glass-rim-inset: inset 0 1px 1px rgba(255, 255, 255, 0.88), inset 0 -1px 2px rgba(41, 50, 30, 0.12);

@@ -195,7 +195,19 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
   paired dark/light values. Neutral fill is ~5.5% white (dark) / ~30% white
   (light); accent fills use the matching gold tint. `--glass-bg-chip*` aliases
   the same scale for meta chips. `--glass-bg-panel*` is slightly denser than
-  chips (~7% / ~32% white) for paper and award list cards.
+  chips (~5.5% / ~26% white) for paper and award list cards.
+- Shared liquid-glass UI entry points (avoid one-off list/chip CSS per page):
+  - Tokens: `src/styles/tokens.css` (`--glass-bg*`, `--glass-bg-panel*`).
+  - Surfaces + list cards + meta rows: `src/styles/glass-ui.css` (imported from
+    `BaseLayout.astro`); classes `.glass-list`, `.glass-list-card`,
+    `.glass-meta-row`, `.glass-meta-chip`. Legacy aliases `.paper-list-item`,
+    `.award-list-item`, `.badge-muted` remain for tests and gradual migration.
+  - Components: `src/components/glass/` (`GlassListCard`, `GlassMetaChip`,
+    `GlassMetaRow`). Papers, awards, and paper detail use these; home news date
+    chips share `formatAwardDateChip()` in `src/utils/award-date.mjs`.
+  - Page gutters: `.container` on `<main class="site-shell">`; sticky footer must
+    not set `width: 100%` on `.site-shell` (see `page-background.css`).
+  - Footer: single `SiteFooter.astro` from `BaseLayout.astro`.
 - Theme is applied before paint by an inline script in `BaseLayout.astro`
   (`localStorage['lab-theme']` → `prefers-color-scheme` fallback).
 - Theme crossfade: `effects.css` (~180 ms). All animation respects

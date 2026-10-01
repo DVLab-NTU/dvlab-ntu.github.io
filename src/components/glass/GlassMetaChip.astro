@@ -1,0 +1,16 @@
+---
+/** Liquid-glass meta chip (muted or accent). Optional label + value rows for paper venue/year. */
+interface Props {
+  value: string;
+  label?: string;
+  variant?: 'muted' | 'accent';
+  class?: string;
+}
+
+const { value, label, variant = 'muted', class: className } = Astro.props;
+const chipClass = variant === 'accent' ? 'badge' : 'badge-muted';
+---
+<span class:list={[chipClass, 'glass-meta-chip', 'paper-meta-chip', className]}>
+  {label && <span class="glass-chip-label paper-chip-label">{label}</span>}
+  <span class="glass-chip-value paper-chip-value">{value}</span>
+</span>
