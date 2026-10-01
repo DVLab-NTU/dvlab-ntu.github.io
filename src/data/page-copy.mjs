@@ -182,6 +182,8 @@ export const pageCopy = {
   "awards": {
     "zh": {
       "title": "獲獎紀錄",
+      "yearLabel": "年份",
+      "monthLabel": "月份",
       "students": "學生：",
       "advisors": "指導教授：",
       "source": "來源",
@@ -190,6 +192,8 @@ export const pageCopy = {
     },
     "en": {
       "title": "Awards",
+      "yearLabel": "Year",
+      "monthLabel": "Month",
       "students": "Students: ",
       "advisors": "Advisors: ",
       "source": "Source",

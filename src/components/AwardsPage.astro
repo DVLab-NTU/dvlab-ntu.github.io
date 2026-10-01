@@ -18,17 +18,30 @@ const pathPrefix = lang === 'en' ? '/en' : '';
     <h1 class="page-title cra-page-title">{t.title}</h1>
   </section>
 
-  <section class="detail-shell" data-reveal-group>
+  <section class="award-list" data-reveal-group>
     {awards.map((a, i) => (
-      <article id={a.slug} class="flat-entry" data-reveal data-reveal-order={String(i)}>
-        <h2 class="page-title">{pickI18nText(a.title, lang)}</h2>
-        <p class="badge-muted">{a.year} · {a.month}</p>
-        <p><strong>{t.students}</strong>{a.students.join(t.separator)}</p>
+      <article id={a.slug} class="award-list-item" data-reveal data-reveal-order={String(i)}>
+        <h3>{pickI18nText(a.title, lang)}</h3>
+        <div class="detail-meta award-list-meta">
+          <span class="badge-muted paper-meta-chip">
+            <span class="paper-chip-label">{t.yearLabel}</span>
+            <span class="paper-chip-value">{a.year}</span>
+          </span>
+          <span class="badge-muted paper-meta-chip">
+            <span class="paper-chip-label">{t.monthLabel}</span>
+            <span class="paper-chip-value">{a.month}</span>
+          </span>
+        </div>
+        <p class="award-list-detail">
+          <strong>{t.students}</strong>{a.students.join(t.separator)}
+        </p>
         {a.advisors && a.advisors.length > 0 && (
-          <p><strong>{t.advisors}</strong>{a.advisors.join(t.separator)}</p>
+          <p class="award-list-detail">
+            <strong>{t.advisors}</strong>{a.advisors.join(t.separator)}
+          </p>
         )}
-        <div class="detail-links">
-          <a class="btn btn-ghost" href={a.source} target="_blank" rel="noreferrer">{t.source}</a>
+        <div class="award-list-actions">
+          <a class="btn btn-ghost award-source" href={a.source} target="_blank" rel="noreferrer">{t.source}</a>
         </div>
       </article>
     ))}

@@ -127,7 +127,9 @@ body.has-unified-page-backdrop > .footer {
 
 body.has-unified-page-backdrop > .site-shell {
   flex: 1 0 auto;
-  width: 100%;
+  /* Do not set width: 100% — it overrides .container (min(1120px, 92vw)) and removes gutters. */
+  align-self: center;
+  box-sizing: border-box;
 }
 
 body.has-unified-page-backdrop > .footer {
