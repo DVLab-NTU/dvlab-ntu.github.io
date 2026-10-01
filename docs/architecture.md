@@ -116,7 +116,10 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
   system Helvetica/Arial bold faces plus `font-synthesis: weight` — the CRA
   `.ttf` must not be registered at 400–700 or Latin stays thin. `--fw-latin-*`
   tokens live on `:root` (typically 700) for both zh and en; only CJK body,
-  headings, and nav weights differ by `html[lang]`.
+  headings, and nav weights differ by `html[lang]`. On `html lang="zh-TW"`,
+  `html[lang^='zh'] :is(h1,h2,h3)` must not override Latin-heavy classes
+  (`.home-news-title`, `.group-title`, `.paper-list-item h3`, etc.) — see
+  `cra-typography.css`.
 - Display titles: **Coolvetica** via `--font-title`.
 - Chinese fallback: Noto Sans TC (system stack in `tokens.css`).
 

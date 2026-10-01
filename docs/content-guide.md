@@ -144,9 +144,10 @@ There is **no** public `/life/` page. The collection may remain for Decap CMS
 and for the home hiking hero (`group-hiking` photo path). Do not add Life to the
 site nav or sitemap.
 
-The homepage shows the team introduction, hiking photo, and the **NEWS & AWARDS**
-band (award records with external `source` links). Page UI labels live in
-`src/data/page-copy.mjs`. Visual styling (gradients, liquid-glass controls, fonts)
+The homepage shows a **mission** blurb (`home.{zh,en}.missionParagraphs` in
+`src/data/page-copy.mjs`, rendered in `HomePage.astro` as `#lab-introduction`)
+and the **NEWS & AWARDS** band (award records with external `source` links). Other
+page UI labels also live in `src/data/page-copy.mjs`. Visual styling (gradients, liquid-glass controls, fonts)
 is documented in `docs/architecture.md` under **CRA visual system**.
 
 ## CMS editing
