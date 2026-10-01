@@ -75,6 +75,9 @@ html[data-page-bg='misc'] {
    sits behind the body background painting layer and reads as a flat fill). */
 body.has-unified-page-backdrop {
   background: transparent;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 body.has-unified-page-backdrop::before,
@@ -122,7 +125,14 @@ body.has-unified-page-backdrop > .footer {
   z-index: 1;
 }
 
+body.has-unified-page-backdrop > .site-shell {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
 body.has-unified-page-backdrop > .footer {
+  flex-shrink: 0;
+  margin-top: auto;
   background: transparent;
 }
 

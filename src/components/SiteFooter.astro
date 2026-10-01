@@ -1,0 +1,17 @@
+---
+/** Shared site footer — used only via BaseLayout. */
+const { lang, siteName } = Astro.props as { lang: 'zh' | 'en'; siteName: string };
+---
+<footer class="footer">
+  <div class="container footer-inner">
+    <span class="footer-back-top">
+      <a href="#top" aria-label={lang === 'zh' ? '回到頂端' : 'Back to top'}>↑ {lang === 'zh' ? '回到頂端' : 'Back to top'}</a>
+    </span>
+    <span class="footer-copy">© 2026 {siteName}</span>
+    <span>
+      <a href="https://github.com/DVLab-NTU/dvlab-ntu.github.io" target="_blank" rel="noreferrer">
+        GitHub
+      </a>
+    </span>
+  </div>
+</footer>

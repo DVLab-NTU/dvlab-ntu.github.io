@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { render } from 'astro:content';
 import { summarizeParts } from '../utils/seo';
+import { displayVenue } from '../utils/paper-meta.mjs';
 import { pageCopy } from '../data/page-copy.mjs';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
@@ -11,6 +12,7 @@ const { entry } = Astro.props;
 const abstract = entry.data.abstract?.trim() ?? '';
 const bibtex = entry.data.bibtex?.trim() ?? '';
 const hasBody = Boolean(entry.body?.trim());
+const venueName = displayVenue(entry.data.venue, entry.data.year);
 const { Content } = await render(entry);
 const pageDesc = abstract || summarizeParts([entry.data.authors, entry.data.venue, entry.data.year], 160);
 ---
@@ -19,9 +21,17 @@ const pageDesc = abstract || summarizeParts([entry.data.authors, entry.data.venu
   <section class="detail-shell">
     <article class="card detail-hero" data-reveal>
       <h1 class="page-title">{entry.data.title}</h1>
-      <div class="detail-meta">
-        <span class="badge">{entry.data.venue}</span>
-        <span class="badge-muted">{entry.data.year}</span>
+      <div class="detail-meta paper-detail-meta">
+        {venueName && (
+          <span class="badge paper-meta-chip">
+            <span class="paper-chip-label">{t.venueLabel}</span>
+            <span class="paper-chip-value">{venueName}</span>
+          </span>
+        )}
+        <span class="badge-muted paper-meta-chip">
+          <span class="paper-chip-label">{t.yearLabel}</span>
+          <span class="paper-chip-value">{entry.data.year}</span>
+        </span>
       </div>
       {entry.data.authors && <p class="paper-authors">{t.authors}{entry.data.authors}</p>}
     </article>

@@ -17,6 +17,7 @@ import '../styles/page-background.css';
 import { resolvePageBackgroundKey } from '../utils/page-background.mjs';
 import { lucideNavIcons } from '../data/lucide-icons.mjs';
 import LucideIcon from '../components/LucideIcon.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import revealScript from '../scripts/reveal.mjs?url';
 import uiScript from '../scripts/ui.mjs?url';
 import navbarScrollScript from '../scripts/navbar-scroll.mjs?url';
@@ -246,19 +247,7 @@ const navItems = [
         <slot />
       </div>
     </main>
-    <footer class="footer">
-      <div class="container footer-inner">
-        <span class="footer-back-top">
-          <a href="#top" aria-label={lang === 'zh' ? '回到頂端' : 'Back to top'}>↑ {lang === 'zh' ? '回到頂端' : 'Back to top'}</a>
-        </span>
-        <span class="footer-copy">© 2026 {t.siteName}</span>
-        <span>
-          <a href="https://github.com/DVLab-NTU/dvlab-ntu.github.io" target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-        </span>
-      </div>
-    </footer>
+    <SiteFooter lang={lang} siteName={t.siteName} />
     <script type="module" src={revealScript}></script>
     <script type="module" src={uiScript}></script>
     <script type="module" src={navbarScrollScript}></script>

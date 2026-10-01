@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { pageCopy } from '../data/page-copy.mjs';
+import { formatPaperListMetaLine } from '../utils/paper-meta.mjs';
 
 const paperEntries = await getCollection('papers');
 const papers = paperEntries
@@ -39,7 +40,7 @@ const pathPrefix = lang === 'en' ? '/en' : '';
           data-search-text={`${p.title} ${p.authors || ''} ${p.venue} ${p.year}`}
         >
           <h3>{p.title}</h3>
-          <p>{p.year} · {p.venue}</p>
+          <p>{formatPaperListMetaLine(p.venue, p.year)}</p>
           {p.authors && <p class="paper-authors">{t.authors}{p.authors}</p>}
         </a>
       ))}
