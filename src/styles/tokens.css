@@ -54,15 +54,16 @@
      Edge = inset specular highlight + soft underside shade + outer lift. */
   --glass-blur: 16px;
   --glass-saturate: 1.7;
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-bg-hover: rgba(255, 255, 255, 0.14);
-  --glass-bg-accent: rgba(255, 215, 0, 0.22);
-  --glass-bg-accent-hover: rgba(255, 215, 0, 0.3);
-  /* Compact meta chips (news dates, semester badges): lighter fill than buttons/nav. */
-  --glass-bg-chip: rgba(255, 255, 255, 0.055);
-  --glass-bg-chip-hover: rgba(255, 255, 255, 0.09);
-  --glass-bg-chip-accent: rgba(255, 215, 0, 0.14);
-  --glass-bg-chip-accent-hover: rgba(255, 215, 0, 0.2);
+  /* Site-wide liquid-glass fill (~5.5% white neutral on dark). */
+  --glass-bg: rgba(255, 255, 255, 0.055);
+  --glass-bg-hover: rgba(255, 255, 255, 0.09);
+  --glass-bg-accent: rgba(255, 215, 0, 0.14);
+  --glass-bg-accent-hover: rgba(255, 215, 0, 0.2);
+  /* Meta chips use the same scale (news dates, semester badges). */
+  --glass-bg-chip: var(--glass-bg);
+  --glass-bg-chip-hover: var(--glass-bg-hover);
+  --glass-bg-chip-accent: var(--glass-bg-accent);
+  --glass-bg-chip-accent-hover: var(--glass-bg-accent-hover);
   /* Legacy names kept for non-glass dividers; do not use as control borders. */
   --glass-border: transparent;
   --glass-border-strong: transparent;
@@ -162,14 +163,15 @@ html[lang^='en'] {
   --shadow-emboss-pressed: none;
   --shadow-field: none;
 
-  --glass-bg: rgba(255, 255, 255, 0.62);
-  --glass-bg-hover: rgba(255, 255, 255, 0.78);
-  --glass-bg-accent: rgba(201, 217, 79, 0.42);
-  --glass-bg-accent-hover: rgba(201, 217, 79, 0.52);
-  --glass-bg-chip: rgba(255, 255, 255, 0.3);
-  --glass-bg-chip-hover: rgba(255, 255, 255, 0.42);
-  --glass-bg-chip-accent: rgba(201, 217, 79, 0.24);
-  --glass-bg-chip-accent-hover: rgba(201, 217, 79, 0.34);
+  /* Light theme glass fill (~30% white neutral) — matches approved chip ratio. */
+  --glass-bg: rgba(255, 255, 255, 0.3);
+  --glass-bg-hover: rgba(255, 255, 255, 0.42);
+  --glass-bg-accent: rgba(201, 217, 79, 0.24);
+  --glass-bg-accent-hover: rgba(201, 217, 79, 0.34);
+  --glass-bg-chip: var(--glass-bg);
+  --glass-bg-chip-hover: var(--glass-bg-hover);
+  --glass-bg-chip-accent: var(--glass-bg-accent);
+  --glass-bg-chip-accent-hover: var(--glass-bg-accent-hover);
   --glass-border: transparent;
   --glass-border-strong: transparent;
   --glass-rim-inset: inset 0 1px 1px rgba(255, 255, 255, 0.88), inset 0 -1px 2px rgba(41, 50, 30, 0.12);

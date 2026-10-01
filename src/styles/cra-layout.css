@@ -463,7 +463,7 @@ html[lang^='en'] .home-news-meta {
 
 .members-status-toggle .filter-tag:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--glass-bg-hover);
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
