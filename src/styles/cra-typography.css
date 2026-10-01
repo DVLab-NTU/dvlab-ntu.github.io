@@ -12,7 +12,17 @@ html {
 }
 
 /* —— CJK chrome (locale-specific) —— */
-html[lang^='zh'] :is(h1, h2, h3) {
+html[lang^='zh'] :is(h1, h2, h3):not(:where(
+  .home-news-heading,
+  .home-news-title,
+  .group-title,
+  .host-cra-tagline,
+  .flat-entry :is(h2, h3),
+  .paper-list-item h3,
+  .member-tile h3,
+  .cra-site .card :is(h2, h3),
+  .filter-wrap h2
+)) {
   font-weight: var(--fw-heading);
 }
 
@@ -30,10 +40,12 @@ html[lang^='en'] .nav-link {
 }
 
 html[lang^='zh'] .page-title,
-html[lang^='zh'] .section-title,
 html[lang^='zh'] .members-page-title,
-html[lang^='zh'] .host-cra-title,
-html[lang^='zh'] .home-news-heading.section-title {
+html[lang^='zh'] .host-cra-title {
+  font-weight: var(--fw-heading);
+}
+
+html[lang^='zh'] .section-title:not(.home-news-heading) {
   font-weight: var(--fw-heading);
 }
 
@@ -67,6 +79,7 @@ html[lang^='zh'] .btn:not(.lang-link):not(.theme-toggle-btn) {
 }
 
 /* —— Latin / English (zh and en share the same weights) —— */
+.home-news-heading.section-title,
 .group-title,
 .home-news-title,
 .paper-list-item h3,
@@ -74,6 +87,28 @@ html[lang^='zh'] .btn:not(.lang-link):not(.theme-toggle-btn) {
 .flat-entry h2,
 .cra-site :is(.card h2, .card h3, .flat-entry h2, .filter-wrap h2) {
   font-weight: var(--fw-latin-strong);
+}
+
+html[lang^='zh'] :is(
+  .home-news-heading.section-title,
+  .group-title,
+  .home-news-title,
+  .paper-list-item h3,
+  .host-cra-tagline,
+  .flat-entry h2,
+  .member-tile h3,
+  .cra-site .card :is(h2, h3),
+  .filter-wrap h2
+) {
+  font-weight: var(--fw-latin-strong);
+}
+
+html[lang^='zh'] .home-mission-text {
+  font-weight: var(--fw-body);
+}
+
+html[lang^='en'] .home-mission-text {
+  font-weight: var(--fw-latin-copy);
 }
 
 .home-news-meta,

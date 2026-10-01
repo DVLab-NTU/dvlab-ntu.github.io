@@ -29,7 +29,15 @@ function awardAttendants(award: { students: string[]; advisors?: string[] }) {
       <HomeLogo lang={lang} />
     </section>
 
-    <section id="lab-introduction" class="home-news" aria-labelledby="home-news-title">
+    <section id="lab-introduction" class="home-mission" aria-label={lang === 'zh' ? '實驗室簡介' : 'Lab mission'}>
+      <div class="home-mission-inner">
+        {labels.missionParagraphs.map((paragraph) => (
+          <p class="home-mission-text">{paragraph}</p>
+        ))}
+      </div>
+    </section>
+
+    <section class="home-news" aria-labelledby="home-news-title">
       <div class="home-news-inner">
         <h1 id="home-news-title" class="section-title home-news-heading">{labels.newsAwards}</h1>
         <div class="home-news-list">
