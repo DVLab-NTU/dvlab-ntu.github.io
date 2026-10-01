@@ -194,8 +194,8 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
   surfaces. Liquid-glass tokens (`--glass-bg`, `--glass-border`, …) have
   paired dark/light values. Neutral fill is ~5.5% white (dark) / ~30% white
   (light); accent fills use the matching gold tint. `--glass-bg-chip*` aliases
-  the same scale for meta chips. `--glass-bg-panel*` is denser (~14% / ~52%)
-  for paper list cards.
+  the same scale for meta chips. `--glass-bg-panel*` is slightly denser than
+  chips (~8.5% / ~36% white) for paper list cards.
 - Theme is applied before paint by an inline script in `BaseLayout.astro`
   (`localStorage['lab-theme']` → `prefers-color-scheme` fallback).
 - Theme crossfade: `effects.css` (~180 ms). All animation respects
