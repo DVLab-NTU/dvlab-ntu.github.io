@@ -82,18 +82,18 @@
   --font-title: Coolvetica, 'Helvetica Neue', HelveticaNeue, Arial, 'Noto Sans TC', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Locale weight scale — Latin uses discrete 300/500/600/700 (see cra-fonts.css). */
+  /* CJK body/headings — overridden per html[lang]. Latin scale is locale-agnostic (700). */
   --fw-body: 300;
   --fw-heading: 500;
   --fw-heading-lg: 600;
   --fw-nav: 500;
-  --fw-latin-copy: 600;
+  --fw-latin-copy: 700;
   --fw-latin-meta: 700;
   --fw-latin-strong: 700;
-  --fw-latin-ui: 600;
-  --fw-latin-chip: 600;
-  --fw-latin-chip-sub: 500;
-  --fw-member-name: 600;
+  --fw-latin-ui: 700;
+  --fw-latin-chip: 700;
+  --fw-latin-chip-sub: 600;
+  --fw-member-name: 700;
 
   --text-xs: 12px;
   --text-sm: 14px;
@@ -117,27 +117,13 @@ html[lang^='zh'] {
   --fw-heading: 500;
   --fw-heading-lg: 600;
   --fw-nav: 500;
-  --fw-latin-copy: 600;
-  --fw-latin-meta: 700;
-  --fw-latin-strong: 700;
-  --fw-latin-ui: 600;
-  --fw-latin-chip: 600;
-  --fw-latin-chip-sub: 500;
-  --fw-member-name: 600;
 }
 
 html[lang^='en'] {
-  --fw-body: 600;
+  --fw-body: 700;
   --fw-heading: 700;
   --fw-heading-lg: 700;
   --fw-nav: 700;
-  --fw-latin-copy: 700;
-  --fw-latin-meta: 700;
-  --fw-latin-strong: 700;
-  --fw-latin-ui: 700;
-  --fw-latin-chip: 700;
-  --fw-latin-chip-sub: 600;
-  --fw-member-name: 700;
 }
 
 :root[data-theme='light'] {

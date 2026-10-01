@@ -1,5 +1,5 @@
 /* Locale-aware weight tuning on top of CRA Helvetica Neue / Coolvetica stack.
-   Loaded after layout/components so these rules win on conflicts. */
+   --fw-latin-* tokens are identical on zh/en; only CJK body/headings/nav differ by locale. */
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -7,26 +7,11 @@ body {
   font-weight: var(--fw-body);
 }
 
-html[lang^='en'] {
+html {
   font-synthesis: weight;
 }
 
-/* Latin strings on zh pages (authors, dates, UI labels) — heavier than CJK body. */
-.home-news-meta,
-.paper-list-item p,
-.paper-authors,
-.cra-site .meta,
-.news-contex,
-.detail-contex,
-.member-tile h3,
-.host-cra-tagline,
-.filter-tag,
-.badge,
-.badge-muted,
-.status-chip {
-  font-synthesis: weight;
-}
-
+/* —— CJK chrome (locale-specific) —— */
 html[lang^='zh'] :is(h1, h2, h3) {
   font-weight: var(--fw-heading);
 }
@@ -35,54 +20,62 @@ html[lang^='en'] :is(h1, h2, h3) {
   font-weight: var(--fw-heading-lg);
 }
 
+html[lang^='zh'] .nav-text {
+  font-weight: var(--fw-nav);
+}
+
 html[lang^='en'] .nav-text,
 html[lang^='en'] .nav-link {
   font-weight: var(--fw-nav);
 }
 
-html[lang^='zh'] .nav-text {
-  font-weight: var(--fw-nav);
+html[lang^='zh'] .page-title,
+html[lang^='zh'] .section-title,
+html[lang^='zh'] .members-page-title,
+html[lang^='zh'] .host-cra-title,
+html[lang^='zh'] .home-news-heading.section-title {
+  font-weight: var(--fw-heading);
 }
 
 html[lang^='en'] .page-title,
 html[lang^='en'] .section-title,
 html[lang^='en'] .members-page-title,
-html[lang^='en'] .host-cra-title {
-  font-weight: var(--fw-heading-lg);
-}
-
-html[lang^='zh'] .page-title,
-html[lang^='zh'] .section-title,
-html[lang^='zh'] .members-page-title,
-html[lang^='zh'] .host-cra-title {
-  font-weight: var(--fw-heading);
-}
-
-html[lang^='en'] .group-title {
-  font-weight: var(--fw-latin-copy);
-}
-
-html[lang^='zh'] .group-title {
-  font-weight: var(--fw-heading);
-}
-
+html[lang^='en'] .host-cra-title,
 html[lang^='en'] .home-news-heading.section-title {
   font-weight: var(--fw-heading-lg);
 }
 
-html[lang^='zh'] .home-news-heading.section-title {
+html[lang^='en'] .cra-site p,
+html[lang^='en'] .cra-site li,
+html[lang^='en'] .footer {
+  font-weight: var(--fw-latin-copy);
+}
+
+html[lang^='en'] .cra-site .card,
+html[lang^='en'] .cra-site .card p,
+html[lang^='en'] .cra-site .card li {
+  font-weight: var(--fw-latin-copy);
+}
+
+html[lang^='zh'] .nav-actions .theme-toggle-btn,
+html[lang^='zh'] .nav-actions .lang-link {
+  font-weight: var(--fw-latin-ui);
+}
+
+html[lang^='zh'] .btn:not(.lang-link):not(.theme-toggle-btn) {
   font-weight: var(--fw-heading);
 }
 
-html[lang^='en'] .home-news-title {
+/* —— Latin / English (zh and en share the same weights) —— */
+.group-title,
+.home-news-title,
+.paper-list-item h3,
+.host-cra-tagline,
+.flat-entry h2,
+.cra-site :is(.card h2, .card h3, .flat-entry h2, .filter-wrap h2) {
   font-weight: var(--fw-latin-strong);
 }
 
-html[lang^='zh'] .home-news-title {
-  font-weight: var(--fw-heading-lg);
-}
-
-/* Award author lines and similar Latin meta (both locales). */
 .home-news-meta,
 .paper-list-item p,
 .paper-authors,
@@ -92,74 +85,24 @@ html[lang^='zh'] .home-news-title {
   font-weight: var(--fw-latin-meta);
 }
 
-html[lang^='en'] .btn,
-html[lang^='en'] .theme-toggle-btn,
-html[lang^='en'] .lang-link {
+.btn,
+.theme-toggle-btn,
+.lang-link,
+.badge,
+.badge-muted,
+.status-chip,
+.footer-back-top a,
+.footer .footer-copy,
+.filter-tag {
   font-weight: var(--fw-latin-ui);
 }
 
-html[lang^='zh'] .nav-actions .theme-toggle-btn,
-html[lang^='zh'] .nav-actions .lang-link {
-  font-weight: var(--fw-latin-ui);
+.btn-primary {
+  font-weight: var(--fw-latin-strong);
 }
 
-html[lang^='en'] .cra-site p,
-html[lang^='en'] .cra-site li,
-html[lang^='en'] .footer {
-  font-weight: var(--fw-latin-copy);
-}
-
-html[lang^='en'] .member-tile h3 {
+.member-tile h3 {
   font-weight: var(--fw-member-name);
-}
-
-html[lang^='zh'] .member-tile h3 {
-  font-weight: var(--fw-member-name);
-}
-
-html[lang^='en'] .paper-list-item h3 {
-  font-weight: var(--fw-latin-strong);
-}
-
-html[lang^='zh'] .paper-list-item h3 {
-  font-weight: var(--fw-heading-lg);
-}
-
-html[lang^='en'] .badge,
-html[lang^='en'] .badge-muted,
-html[lang^='en'] .status-chip {
-  font-weight: var(--fw-latin-ui);
-}
-
-html[lang^='en'] .btn {
-  font-weight: var(--fw-latin-ui);
-}
-
-html[lang^='en'] .btn-primary {
-  font-weight: var(--fw-latin-strong);
-}
-
-html[lang^='en'] .footer-back-top a,
-html[lang^='en'] .footer .footer-copy {
-  font-weight: var(--fw-latin-ui);
-}
-
-html[lang^='en'] .flat-entry h2 {
-  font-weight: var(--fw-latin-copy);
-}
-
-html[lang^='en'] .cra-site :is(.card h2, .card h3, .flat-entry h2, .filter-wrap h2) {
-  font-weight: var(--fw-latin-strong);
-}
-
-html[lang^='en'] .cra-site .card,
-html[lang^='en'] .cra-site .card p,
-html[lang^='en'] .cra-site .card li {
-  font-weight: var(--fw-latin-copy);
-}
-
-html[lang^='en'] .host-cra-tagline {
-  font-weight: var(--fw-latin-strong);
 }
 
 .home-news-date-year {
