@@ -58,6 +58,11 @@
   --glass-bg-hover: rgba(255, 255, 255, 0.14);
   --glass-bg-accent: rgba(255, 215, 0, 0.22);
   --glass-bg-accent-hover: rgba(255, 215, 0, 0.3);
+  /* Compact meta chips (news dates, semester badges): lighter fill than buttons/nav. */
+  --glass-bg-chip: rgba(255, 255, 255, 0.055);
+  --glass-bg-chip-hover: rgba(255, 255, 255, 0.09);
+  --glass-bg-chip-accent: rgba(255, 215, 0, 0.14);
+  --glass-bg-chip-accent-hover: rgba(255, 215, 0, 0.2);
   /* Legacy names kept for non-glass dividers; do not use as control borders. */
   --glass-border: transparent;
   --glass-border-strong: transparent;
@@ -161,6 +166,10 @@ html[lang^='en'] {
   --glass-bg-hover: rgba(255, 255, 255, 0.78);
   --glass-bg-accent: rgba(201, 217, 79, 0.42);
   --glass-bg-accent-hover: rgba(201, 217, 79, 0.52);
+  --glass-bg-chip: rgba(255, 255, 255, 0.3);
+  --glass-bg-chip-hover: rgba(255, 255, 255, 0.42);
+  --glass-bg-chip-accent: rgba(201, 217, 79, 0.24);
+  --glass-bg-chip-accent-hover: rgba(201, 217, 79, 0.34);
   --glass-border: transparent;
   --glass-border-strong: transparent;
   --glass-rim-inset: inset 0 1px 1px rgba(255, 255, 255, 0.88), inset 0 -1px 2px rgba(41, 50, 30, 0.12);

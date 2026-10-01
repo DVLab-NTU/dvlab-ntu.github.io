@@ -400,7 +400,7 @@ html[lang^='en'] .nav-text {
 /* Compact liquid-glass chips (home news dates, semester badges, meta labels). */
 .glass-chip {
   border: none;
-  background: var(--glass-bg);
+  background: var(--glass-bg-chip);
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
@@ -422,7 +422,7 @@ html[lang^='en'] .nav-text {
   font-weight: var(--fw-latin-ui);
   letter-spacing: 0.04em;
   border: none;
-  background: var(--glass-bg);
+  background: var(--glass-bg-chip);
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
@@ -434,7 +434,7 @@ html[lang^='en'] .nav-text {
 
 .badge {
   color: var(--primary-2);
-  background: var(--glass-bg-accent);
+  background: var(--glass-bg-chip-accent);
   box-shadow: var(--glass-shadow-accent);
 }
 
@@ -452,7 +452,7 @@ html[lang^='en'] .nav-text {
 
 .badge:hover {
   color: var(--primary-2);
-  background: var(--glass-bg-accent-hover);
+  background: var(--glass-bg-chip-accent-hover);
   box-shadow: var(--glass-shadow-accent-hover);
   transform: translateY(-1px);
 }
@@ -463,7 +463,7 @@ html[lang^='en'] .nav-text {
 
 .badge-muted:hover {
   color: var(--text);
-  background: var(--glass-bg-hover);
+  background: var(--glass-bg-chip-hover);
   box-shadow: var(--glass-shadow-hover);
   transform: translateY(-1px);
 }
