@@ -79,6 +79,8 @@
     0 12px 32px rgba(0, 0, 0, 0.28);
 
   --font-base: 'Helvetica Neue', HelveticaNeue, Arial, 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* zh body: bold Latin via unicode-range (see cra-fonts.css), then CJK system fonts — no ultra-light Helvetica for ASCII. */
+  --font-base-zh: 'DVLab Latin Mix', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-title: Coolvetica, 'Helvetica Neue', HelveticaNeue, Arial, 'Noto Sans TC', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
@@ -113,6 +115,7 @@
 }
 
 html[lang^='zh'] {
+  --font-base: var(--font-base-zh);
   --fw-body: 300;
   --fw-heading: 500;
   --fw-heading-lg: 600;
