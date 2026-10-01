@@ -530,7 +530,8 @@ html[lang^='en'] .home-news-meta {
 /* Host profile (CRA HostProfile) */
 .host-cra {
   --host-social-tile: rgba(188, 221, 223, 0.92);
-  --host-social-glyph: var(--cra-dark-blue);
+  /* Dark navy host section — glyphs must be light (CRA media-list used white, not dark blue). */
+  --host-social-glyph: var(--cra-light-blue);
   padding: clamp(28px, 4vw, 48px) 0 clamp(56px, 6vw, 80px);
 }
 
@@ -636,9 +637,10 @@ html[lang^='en'] .home-news-meta {
   height: 100%;
   display: block;
   color: var(--host-social-glyph);
-  opacity: 1;
+  opacity: 0.94;
   transition:
     color var(--motion-fast) var(--ease-standard),
+    opacity var(--motion-fast) var(--ease-standard),
     transform var(--motion-fast) var(--ease-standard),
     filter var(--motion-fast) var(--ease-standard);
 }
@@ -655,18 +657,25 @@ html[lang^='en'] .home-news-meta {
 
 .host-social-cra .host-social-link-square:hover .host-social-square-icon,
 .host-social-cra .host-social-link-square:focus-visible .host-social-square-icon {
-  color: var(--host-social-glyph);
-  filter: brightness(0.92);
+  color: #ffffff;
+  opacity: 1;
+  filter: brightness(1.04);
   transform: scale(1.05);
 }
 
 .host-social-cra .host-social-link-square:active .host-social-square-icon {
-  filter: brightness(0.88);
+  opacity: 1;
+  filter: brightness(0.96);
   transform: scale(0.98);
 }
 
+[data-theme='light'] .host-cra {
+  --host-social-glyph: var(--cra-dark-blue);
+}
+
 [data-theme='light'] .host-social-cra .host-social-square-icon {
-  color: var(--cra-dark-blue);
+  color: var(--host-social-glyph);
+  opacity: 1;
 }
 
 .host-cra-actions {
