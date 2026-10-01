@@ -145,8 +145,11 @@ and for the home hiking hero (`group-hiking` photo path). Do not add Life to the
 site nav or sitemap.
 
 The homepage shows a **mission** blurb (`home.{zh,en}.missionParagraphs` in
-`src/data/page-copy.mjs`, rendered in `HomePage.astro` as `#lab-introduction`)
-and the **NEWS & AWARDS** band (award records with external `source` links). Other
+`src/data/page-copy.mjs`, rendered in `HomePage.astro` as `#lab-introduction`),
+a **lab culture typewriter** (`home.{zh,en}.cultureMottos` — CRA English mottos on
+both locales; `src/scripts/home-culture-typewriter.mjs`, `prefers-reduced-motion`
+cycles text without typing), and the **NEWS & AWARDS** band (award records with
+external `source` links). Other
 page UI labels also live in `src/data/page-copy.mjs`. Visual styling (gradients, liquid-glass controls, fonts)
 is documented in `docs/architecture.md` under **CRA visual system**.
 

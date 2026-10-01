@@ -9,6 +9,8 @@ import { pickI18nText } from '../utils/i18n-text';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const labels = pageCopy.home[lang];
+const cultureMottosJson = JSON.stringify(labels.cultureMottos);
+const cultureMottoInitial = labels.cultureMottos[0] ?? '';
 const awardLabels = pageCopy.awards[lang];
 const pathPrefix = lang === 'en' ? '/en' : '';
 const t = lang === 'en' ? siteEn : siteZh;
@@ -34,6 +36,16 @@ function awardAttendants(award: { students: string[]; advisors?: string[] }) {
         {labels.missionParagraphs.map((paragraph) => (
           <p class="home-mission-text">{paragraph}</p>
         ))}
+        <p
+          class="home-culture-motto"
+          lang="en"
+          data-culture-typewriter
+          data-strings={cultureMottosJson}
+        >
+          <span class="home-culture-typewriter" aria-live="polite">
+            <span class="home-culture-typewriter-text" data-typewriter-display>{cultureMottoInitial}</span><span class="home-culture-cursor" aria-hidden="true">_</span>
+          </span>
+        </p>
       </div>
     </section>
 
@@ -71,4 +83,5 @@ function awardAttendants(award: { students: string[]; advisors?: string[] }) {
 
 <script>
   import '../scripts/particles.mjs';
+  import '../scripts/home-culture-typewriter.mjs';
 </script>

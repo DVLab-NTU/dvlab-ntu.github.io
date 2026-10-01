@@ -71,11 +71,11 @@ const unexpectedMissingCmsVars = ['CMS_GITHUB_REPO', 'CMS_OAUTH_BASE_URL', 'PUBL
 const checks = [
   {
     file: 'dist/index.html',
-    includes: ['DVLab', 'NEWS &amp; AWARDS', '設計驗證實驗室'],
+    includes: ['DVLab', 'NEWS &amp; AWARDS', '設計驗證實驗室', 'We research because we are curious'],
   },
   {
     file: 'dist/en/index.html',
-    includes: ['DVLab', 'NEWS &amp; AWARDS', 'Design Verification Lab'],
+    includes: ['DVLab', 'NEWS &amp; AWARDS', 'Design Verification Lab', 'We research because we are curious'],
   },
   {
     file: 'dist/host/index.html',

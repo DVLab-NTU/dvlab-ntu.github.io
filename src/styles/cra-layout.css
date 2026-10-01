@@ -210,6 +210,47 @@
   margin-bottom: 0;
 }
 
+/* CRA About lab-culture typewriter (Coolvetica + light gold, blinking _) */
+.home-culture-motto {
+  margin: clamp(28px, 4vw, 40px) 0 0;
+  text-align: center;
+}
+
+.home-culture-typewriter {
+  display: inline-block;
+  font-family: var(--font-title);
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: var(--fw-latin-strong);
+  line-height: 1.25;
+  color: var(--cra-light-gold);
+  letter-spacing: 0.02em;
+}
+
+[data-theme='light'] .home-culture-typewriter {
+  color: #4a5e20;
+}
+
+.home-culture-cursor {
+  display: inline-block;
+  margin-left: 1px;
+  animation: home-culture-cursor-blink 0.9s step-end infinite;
+}
+
+.home-culture-motto.is-reduced-motion .home-culture-cursor {
+  animation: none;
+  opacity: 0.85;
+}
+
+@keyframes home-culture-cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
 [data-theme='light'] .home-mission-text {
   color: var(--text-soft);
 }
