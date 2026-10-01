@@ -992,6 +992,18 @@ html[lang^='en'] .nav-text {
   flex-wrap: wrap;
 }
 
+.paper-detail-actions {
+  align-items: center;
+}
+
+.paper-detail-actions .bibtex-details {
+  flex: 0 1 auto;
+}
+
+.paper-detail-actions .bibtex-details pre {
+  margin-top: 12px;
+}
+
 .filter-wrap {
   margin-bottom: 16px;
   display: grid;

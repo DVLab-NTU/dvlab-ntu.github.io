@@ -122,6 +122,10 @@ body.has-unified-page-backdrop > .footer {
   z-index: 1;
 }
 
+body.has-unified-page-backdrop > .footer {
+  background: transparent;
+}
+
 .page-backdrop__noise {
   position: absolute;
   inset: -20%;

@@ -22,6 +22,25 @@
   box-shadow: var(--glass-shadow-accent-hover);
 }
 
+/* Denser glass panel (paper list cards — higher fill than --glass-bg). */
+.glass-panel {
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--glass-bg-panel);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+
+a.glass-panel:hover,
+a.glass-panel:focus-visible,
+.glass-panel-interactive:hover,
+.glass-panel-interactive:focus-visible {
+  background: var(--glass-bg-panel-hover);
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-1px);
+}
+
 /* Interactive glass panel (member tiles, detail hero, etc.) */
 .glass-card {
   border: none;
