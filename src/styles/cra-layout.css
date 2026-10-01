@@ -327,11 +327,6 @@
   padding: 14px 10px;
   text-align: center;
   border-radius: 14px;
-  background: var(--glass-bg);
-  border: none;
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   color: var(--cra-light-blue);
 }
 
