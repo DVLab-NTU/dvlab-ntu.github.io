@@ -6,6 +6,11 @@ export const pageCopy = {
         "在 DVLab，我們聚焦三大研究軸線：AI 形式方法、EDA 與 3DIC、以及量子設計自動化。面對系統層級設計的驗證瓶頸，我們以自動抽象降低問題複雜度，並以學習與引導式精化捕捉關鍵設計意圖，朝向可重現、可分享的開源驗證與設計流程努力。",
         "我們也關注量子計算如何重塑設計堆疊——從合成、映射、最佳化到在實際裝置上的驗證；同時在 3DIC 與異質整合場景延伸時序、簽核與系統級 EDA 方法。無論是哪一條路線，我們都希望在嚴謹理論、實用工具與探索未知的好奇心之間取得平衡。"
       ],
+      "cultureMottos": [
+        "We research because we are curious",
+        "We publish because we love to share",
+        "We exercise because we work too hard"
+      ],
       "newsAwards": "NEWS & AWARDS",
       "allAwards": "所有獲獎紀錄",
       "awardSeparator": "、",
@@ -18,6 +23,11 @@ export const pageCopy = {
       "missionParagraphs": [
         "At DVLab, we advance three connected directions—AI Formal Methods, EDA for 3DIC, and Quantum Design Automation. To ease system-level verification bottlenecks, we combine automatic abstraction that tames complexity with learning-guided refinement that captures essential design intent, building open, reproducible frameworks our collaborators can rely on.",
         "We are equally curious about how quantum techniques reshape the computing stack—from synthesis and optimization to verification on practical devices—and how classical EDA must evolve for heterogeneous 3DIC integration and sign-off. Across AI Formal, EDA 3DIC, and Quantum, we pursue rigorous theory, useful tools, and the curiosity that keeps hard engineering problems worth solving."
+      ],
+      "cultureMottos": [
+        "We research because we are curious",
+        "We publish because we love to share",
+        "We exercise because we work too hard"
       ],
       "newsAwards": "NEWS & AWARDS",
       "allAwards": "All awards",

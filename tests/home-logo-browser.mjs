@@ -19,6 +19,8 @@ export async function testHomeLogo(browser, base) {
         assert.equal(await logo.locator('img').count(), 6);
         assert.equal(await page.locator('a[href*="/join/"]').count(), 0);
         assert.equal(await page.locator('.home-news-item').count(), 7);
+        assert(await page.locator('[data-culture-typewriter]').isVisible());
+        assert((await page.locator('[data-culture-typewriter]').getAttribute('data-strings'))?.includes('We publish because we love to share'));
         assert((await page.locator('.home-opening').boundingBox()).height >= 844 * 0.8 - 1);
         assert(await page.locator('h1').isVisible());
         assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
