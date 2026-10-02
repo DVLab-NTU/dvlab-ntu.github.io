@@ -51,9 +51,11 @@ export async function testContrast(browser, base) {
           }
           if (path === '/awards/') {
             const badge = page.locator('.badge-muted').first();
-            assert.equal(await badge.evaluate(el => getComputedStyle(el).borderTopStyle), 'solid');
-            assert.equal(await badge.evaluate(el => getComputedStyle(el).borderTopWidth), '1px');
-            assert.equal(await badge.evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(238, 241, 226)');
+            assert.equal(await badge.evaluate(el => getComputedStyle(el).borderTopWidth), '0px');
+            assert(
+              await badge.evaluate(el => getComputedStyle(el).backdropFilter.includes('blur')),
+              'badge-muted should use liquid-glass backdrop blur',
+            );
             assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
             await page.locator('.award-source').first().focus();
             assert.equal(await page.locator('.award-source').first().evaluate(el => getComputedStyle(el).outlineStyle), 'solid');

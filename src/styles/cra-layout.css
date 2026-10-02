@@ -56,8 +56,7 @@
 
 /* Flat surfaces: strip card chrome on list/detail pages */
 .cra-site .detail-shell .card,
-.cra-site .filter-wrap .card,
-.cra-site .paper-list-item {
+.cra-site .filter-wrap .card {
   background: transparent;
   box-shadow: none;
   backdrop-filter: none;
@@ -82,47 +81,7 @@
   box-shadow: none;
 }
 
-.paper-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-top: 12px;
-}
-
-.paper-list-item {
-  display: block;
-  padding: 18px 0;
-  border-bottom: 1px solid rgba(188, 221, 223, 0.22);
-  color: inherit;
-  text-decoration: none;
-  transition: color var(--motion-fast) var(--ease-standard);
-}
-
-.paper-list-item:hover,
-.paper-list-item:focus-visible {
-  color: var(--cra-light-gold);
-}
-
-.paper-list-item h3 {
-  margin: 0 0 6px;
-  font-size: clamp(17px, 1.6vw, 20px);
-  font-weight: var(--fw-heading-lg);
-  line-height: 1.45;
-}
-
-.paper-list-item p {
-  margin: 0;
-  color: var(--cra-gray-blue);
-  font-size: var(--text-sm);
-}
-
-[data-theme='light'] .paper-list-item {
-  border-bottom-color: var(--line);
-}
-
-[data-theme='light'] .paper-list-item p {
-  color: var(--muted);
-}
+/* Paper / award list cards: src/styles/glass-ui.css (.glass-list-card). */
 
 .flat-entry {
   padding: 22px 0;
@@ -299,7 +258,7 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: clamp(18px, 2.8vw, 32px);
-  align-items: start;
+  align-items: center;
   padding: clamp(18px, 2.5vw, 26px) 0;
   border-bottom: 1px solid rgba(188, 221, 223, 0.14);
 }
@@ -327,12 +286,22 @@
   padding: 14px 10px;
   text-align: center;
   border-radius: 14px;
-  background: var(--glass-bg);
-  border: none;
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   color: var(--cra-light-blue);
+}
+
+.home-news-date-chip .glass-chip-value {
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: var(--fw-latin-chip);
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  color: var(--cra-light-gold);
+}
+
+[data-theme='light'] .home-news-date-chip .glass-chip-value {
+  color: #4a5e20;
 }
 
 .home-news-date-year,
@@ -468,7 +437,7 @@ html[lang^='en'] .home-news-meta {
 
 .members-status-toggle .filter-tag:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--glass-bg-hover);
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 

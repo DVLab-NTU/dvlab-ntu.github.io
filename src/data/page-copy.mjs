@@ -132,6 +132,8 @@ export const pageCopy = {
   "paper": {
     "zh": {
       "authors": "作者：",
+      "venueLabel": "會議",
+      "yearLabel": "年份",
       "abstract": "摘要",
       "links": "連結",
       "online": "線上閱讀",
@@ -147,6 +149,8 @@ export const pageCopy = {
     },
     "en": {
       "authors": "Authors: ",
+      "venueLabel": "Venue",
+      "yearLabel": "Year",
       "abstract": "Abstract",
       "links": "Links",
       "online": "Online",

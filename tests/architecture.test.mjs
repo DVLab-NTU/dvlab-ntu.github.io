@@ -11,6 +11,7 @@ import {
   memberEnrollmentKey,
 } from '../src/utils/member-groups.mjs';
 import { resolvePageBackgroundKey } from '../src/utils/page-background.mjs';
+import { displayVenue, formatPaperListMetaLine } from '../src/utils/paper-meta.mjs';
 import { cmsCollections, renderCmsConfigYml } from '../src/utils/cms-config.ts';
 import { readContent } from '../scripts/validate-content.mjs';
 
@@ -41,6 +42,12 @@ test('member display groups use three research pillars', () => {
   assert.equal(groups.length, 3);
   assert.deepEqual(groups.map((group) => group.key), ['ai-formal', 'eda-3dic', 'quantum']);
   assert.equal(groups[0].label.en, 'AI Formal');
+});
+
+test('paper venue display strips trailing year to avoid duplicate chips', () => {
+  assert.equal(displayVenue('DATE 2026', 2026), 'DATE');
+  assert.equal(formatPaperListMetaLine('DATE 2026', 2026), 'DATE · 2026');
+  assert.equal(displayVenue('DAC', 2024), 'DAC');
 });
 
 test('page backdrop keys follow route shape', () => {

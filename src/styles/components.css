@@ -397,6 +397,19 @@ html[lang^='en'] .nav-text {
   box-shadow: var(--shadow-md), var(--glow-soft);
 }
 
+/* Compact liquid-glass chips (home news dates, semester badges, meta labels). */
+.glass-chip {
+  border: none;
+  background: var(--glass-bg-chip);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  transition: color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
+}
+
 .badge,
 .badge-muted {
   display: inline-flex;
@@ -409,46 +422,50 @@ html[lang^='en'] .nav-text {
   font-weight: var(--fw-latin-ui);
   letter-spacing: 0.04em;
   border: none;
+  background: var(--glass-bg-chip);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  transition: color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
 }
 
 .badge {
   color: var(--primary-2);
-  background: rgba(255, 215, 0, 0.08);
+  background: var(--glass-bg-chip-accent);
+  box-shadow: var(--glass-shadow-accent);
 }
 
 [data-theme='light'] .badge {
-  color: var(--text-soft);
+  color: #29321e;
 }
 
 .badge-muted {
   color: var(--muted);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.badge,
-.badge-muted {
-  transition: border-color var(--motion-fast) var(--ease-standard),
-    background-color var(--motion-fast) var(--ease-standard),
-    color var(--motion-fast) var(--ease-standard),
-    transform var(--motion-fast) var(--ease-standard);
-}
-
-.badge:hover,
-.badge-muted:hover {
-  border-color: var(--line-strong);
-  color: var(--text);
-  transform: translateY(-1px);
 }
 
 [data-theme='light'] .badge-muted {
-  background: #eef1e2;
-  border: 1px solid var(--line-strong);
-  color: #475533;
-  border-radius: 4px;
-  font-size: 13px;
-  letter-spacing: 0.015em;
-  padding: 2px 8px;
-  transform: none;
+  color: var(--text-soft);
+}
+
+.badge:hover {
+  color: var(--primary-2);
+  background: var(--glass-bg-chip-accent-hover);
+  box-shadow: var(--glass-shadow-accent-hover);
+  transform: translateY(-1px);
+}
+
+[data-theme='light'] .badge:hover {
+  color: #29321e;
+}
+
+.badge-muted:hover {
+  color: var(--text);
+  background: var(--glass-bg-chip-hover);
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-1px);
 }
 
 .status-chip {
@@ -973,6 +990,24 @@ html[lang^='en'] .nav-text {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.paper-detail-meta {
+  align-items: center;
+}
+
+/* Meta chip label/value typography: src/styles/glass-ui.css */
+
+.paper-detail-actions {
+  align-items: center;
+}
+
+.paper-detail-actions .bibtex-details {
+  flex: 0 1 auto;
+}
+
+.paper-detail-actions .bibtex-details pre {
+  margin-top: 12px;
 }
 
 .filter-wrap {

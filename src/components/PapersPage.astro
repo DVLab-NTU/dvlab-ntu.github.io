@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { pageCopy } from '../data/page-copy.mjs';
+import { formatPaperListMetaLine } from '../utils/paper-meta.mjs';
+import GlassListCard from './glass/GlassListCard.astro';
 
 const paperEntries = await getCollection('papers');
 const papers = paperEntries
@@ -28,9 +30,9 @@ const pathPrefix = lang === 'en' ? '/en' : '';
     />
     <p class="empty-state" data-empty-state hidden>{t.empty}</p>
 
-    <div class="paper-list" data-list-intro>
+    <div class="glass-list paper-list" data-list-intro>
       {papers.map((p, i) => (
-        <a
+        <GlassListCard
           href={`${pathPrefix}/papers/${p.slug}/`}
           class="paper-list-item"
           data-list-intro-item
@@ -38,10 +40,10 @@ const pathPrefix = lang === 'en' ? '/en' : '';
           data-list-card
           data-search-text={`${p.title} ${p.authors || ''} ${p.venue} ${p.year}`}
         >
-          <h3>{p.title}</h3>
-          <p>{p.year} · {p.venue}</p>
-          {p.authors && <p class="paper-authors">{t.authors}{p.authors}</p>}
-        </a>
+          <h3 class="glass-list-card__title">{p.title}</h3>
+          <p class="glass-list-card__detail">{formatPaperListMetaLine(p.venue, p.year)}</p>
+          {p.authors && <p class="glass-list-card__detail paper-authors">{t.authors}{p.authors}</p>}
+        </GlassListCard>
       ))}
     </div>
   </section>

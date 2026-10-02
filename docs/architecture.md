@@ -87,7 +87,7 @@ scripts/              # Build/verify tooling (see verification.md)
 | `/members/` | Members | Three horizontal carousels (AI Formal / EDA 3DIC / Quantum); no PI card |
 | `/members/:id/` | Member bio | Liquid-glass link buttons; copy-email control |
 | `/papers/` | Publications | CRA subpage gradient; search + year filters |
-| `/papers/:slug/` | Paper detail | Abstract, links, bibtex disclosure + copy |
+| `/papers/:slug/` | Paper detail | Venue/year chips, abstract, BibTeX disclosure + copy |
 | `/courses/` | Courses | CRA subpage gradient; sorted by semester desc |
 | `/awards/` | Awards | CRA subpage gradient |
 | `/en/*` | English | Mirrors every route under `/en/` |
@@ -192,7 +192,23 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
 
 - Tokens live in `src/styles/tokens.css`: dark CRA navy/gold; light yellow-green
   surfaces. Liquid-glass tokens (`--glass-bg`, `--glass-border`, …) have
-  paired dark/light values.
+  paired dark/light values. Neutral fill is ~5.5% white (dark) / ~30% white
+  (light); accent fills use the matching gold tint. `--glass-bg-chip*` aliases
+  the same scale for meta chips. `--glass-bg-panel*` is the paper and award
+  list fill: dark matches chips at ~5.5% white (hover ~8.2%); light is ~26%
+  white, a bit lighter than the ~30% chip fill.
+- Shared liquid-glass UI entry points (avoid one-off list/chip CSS per page):
+  - Tokens: `src/styles/tokens.css` (`--glass-bg*`, `--glass-bg-panel*`).
+  - Surfaces + list cards + meta rows: `src/styles/glass-ui.css` (imported from
+    `BaseLayout.astro`); classes `.glass-list`, `.glass-list-card`,
+    `.glass-meta-row`, `.glass-meta-chip`. Legacy aliases `.paper-list-item`,
+    `.award-list-item`, `.badge-muted` remain for tests and gradual migration.
+  - Components: `src/components/glass/` (`GlassListCard`, `GlassMetaChip`,
+    `GlassMetaRow`). Papers, awards, and paper detail use these; home news date
+    chips share `formatAwardDateChip()` in `src/utils/award-date.mjs`.
+  - Page gutters: `.container` on `<main class="site-shell">`; sticky footer must
+    not set `width: 100%` on `.site-shell` (see `page-background.css`).
+  - Footer: single `SiteFooter.astro` from `BaseLayout.astro`.
 - Theme is applied before paint by an inline script in `BaseLayout.astro`
   (`localStorage['lab-theme']` → `prefers-color-scheme` fallback).
 - Theme crossfade: `effects.css` (~180 ms). All animation respects

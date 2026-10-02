@@ -113,8 +113,10 @@ contents: { zh: […], en: […] }   # optional
 
 - Courses are sorted by `semester` descending (newest first).
 - When a course is offered again in a new semester, update `semester` **and**
-  the `ser_no` inside the official `link` (each semester has a different
-  serial number on the NTU catalogue).
+  the `ser_no` (and `dpt_code` when needed) inside the official `link` — copy
+  the full `print_table.php?…` URL from [台大課程地圖](https://coursemap.aca.ntu.edu.tw/)
+  or NOL search. Cross-listed offerings may use a different `dpt_code` than the
+  home department (e.g. Web Programming 114-1 uses `9210`, not `9010`).
 
 ## Awards (`src/content/awards/<slug>.md`)
 

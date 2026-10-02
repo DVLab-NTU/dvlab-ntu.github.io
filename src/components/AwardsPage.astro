@@ -3,6 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { pickI18nText } from '../utils/i18n-text';
 import { pageCopy } from '../data/page-copy.mjs';
+import { formatAwardDateChip } from '../utils/award-date.mjs';
+import GlassListCard from './glass/GlassListCard.astro';
+import GlassMetaChip from './glass/GlassMetaChip.astro';
+import GlassMetaRow from './glass/GlassMetaRow.astro';
 
 const awardEntries = await getCollection('awards');
 const awards = awardEntries
@@ -18,19 +22,35 @@ const pathPrefix = lang === 'en' ? '/en' : '';
     <h1 class="page-title cra-page-title">{t.title}</h1>
   </section>
 
-  <section class="detail-shell" data-reveal-group>
+  <section class="glass-list glass-list--grid award-list" data-reveal-group>
     {awards.map((a, i) => (
-      <article id={a.slug} class="flat-entry" data-reveal data-reveal-order={String(i)}>
-        <h2 class="page-title">{pickI18nText(a.title, lang)}</h2>
-        <p class="badge-muted">{a.year} · {a.month}</p>
-        <p><strong>{t.students}</strong>{a.students.join(t.separator)}</p>
+      <GlassListCard
+        id={a.slug}
+        class="award-list-item"
+        static
+        data-reveal
+        data-reveal-order={String(i)}
+      >
+        <h2 class="glass-list-card__title">{pickI18nText(a.title, lang)}</h2>
+        <GlassMetaRow>
+          <GlassMetaChip value={formatAwardDateChip(a.month, a.year)} />
+          <a
+            slot="actions"
+            class="btn btn-ghost award-source"
+            href={a.source}
+            target="_blank"
+            rel="noreferrer"
+          >{t.source}</a>
+        </GlassMetaRow>
+        <p class="glass-list-card__detail award-list-detail">
+          <strong>{t.students}</strong>{a.students.join(t.separator)}
+        </p>
         {a.advisors && a.advisors.length > 0 && (
-          <p><strong>{t.advisors}</strong>{a.advisors.join(t.separator)}</p>
+          <p class="glass-list-card__detail award-list-detail">
+            <strong>{t.advisors}</strong>{a.advisors.join(t.separator)}
+          </p>
         )}
-        <div class="detail-links">
-          <a class="btn btn-ghost" href={a.source} target="_blank" rel="noreferrer">{t.source}</a>
-        </div>
-      </article>
+      </GlassListCard>
     ))}
   </section>
   </div>
