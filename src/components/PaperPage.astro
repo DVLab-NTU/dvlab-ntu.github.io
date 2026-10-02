@@ -15,7 +15,7 @@ const bibtex = entry.data.bibtex?.trim() ?? '';
 const hasBody = Boolean(entry.body?.trim());
 const venueName = displayVenue(entry.data.venue, entry.data.year);
 const { Content } = await render(entry);
-const pageDesc = abstract || summarizeParts([entry.data.authors, entry.data.venue, entry.data.year], 160);
+const pageDesc = abstract || summarizeParts([entry.data.authors, venueName, entry.data.year], 160);
 ---
 <BaseLayout title={entry.data.title} desc={pageDesc} lang={lang} pathPrefix={pathPrefix} ogType="article">
   <div class="papers-cra">

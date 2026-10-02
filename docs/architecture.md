@@ -87,7 +87,7 @@ scripts/              # Build/verify tooling (see verification.md)
 | `/members/` | Members | Three horizontal carousels (AI Formal / EDA 3DIC / Quantum); no PI card |
 | `/members/:id/` | Member bio | Liquid-glass link buttons; copy-email control |
 | `/papers/` | Publications | CRA subpage gradient; search + year filters |
-| `/papers/:slug/` | Paper detail | Abstract, links, bibtex disclosure + copy |
+| `/papers/:slug/` | Paper detail | Venue/year chips, abstract, BibTeX disclosure + copy |
 | `/courses/` | Courses | CRA subpage gradient; sorted by semester desc |
 | `/awards/` | Awards | CRA subpage gradient |
 | `/en/*` | English | Mirrors every route under `/en/` |
@@ -194,8 +194,9 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
   surfaces. Liquid-glass tokens (`--glass-bg`, `--glass-border`, …) have
   paired dark/light values. Neutral fill is ~5.5% white (dark) / ~30% white
   (light); accent fills use the matching gold tint. `--glass-bg-chip*` aliases
-  the same scale for meta chips. `--glass-bg-panel*` is slightly denser than
-  chips (~5.5% / ~26% white) for paper and award list cards.
+  the same scale for meta chips. `--glass-bg-panel*` is the paper and award
+  list fill: dark matches chips at ~5.5% white (hover ~8.2%); light is ~26%
+  white, a bit lighter than the ~30% chip fill.
 - Shared liquid-glass UI entry points (avoid one-off list/chip CSS per page):
   - Tokens: `src/styles/tokens.css` (`--glass-bg*`, `--glass-bg-panel*`).
   - Surfaces + list cards + meta rows: `src/styles/glass-ui.css` (imported from

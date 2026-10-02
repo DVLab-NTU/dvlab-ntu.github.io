@@ -22,7 +22,7 @@
   box-shadow: var(--glass-shadow-accent-hover);
 }
 
-/* Denser glass panel (paper list cards — higher fill than --glass-bg). */
+/* List-card glass. Dark matches --glass-bg; light is slightly lighter. */
 .glass-panel {
   border: none;
   border-radius: var(--radius-card);

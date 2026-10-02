@@ -64,7 +64,7 @@
   --glass-bg-chip-hover: var(--glass-bg-hover);
   --glass-bg-chip-accent: var(--glass-bg-accent);
   --glass-bg-chip-accent-hover: var(--glass-bg-accent-hover);
-  /* Denser panels (paper list cards): more opaque than chips/nav, still glass. */
+  /* List cards. Dark fill matches chips; hover is slightly stronger. */
   --glass-bg-panel: rgba(255, 255, 255, 0.055);
   --glass-bg-panel-hover: rgba(255, 255, 255, 0.082);
   /* Legacy names kept for non-glass dividers; do not use as control borders. */
@@ -175,6 +175,7 @@ html[lang^='en'] {
   --glass-bg-chip-hover: var(--glass-bg-hover);
   --glass-bg-chip-accent: var(--glass-bg-accent);
   --glass-bg-chip-accent-hover: var(--glass-bg-accent-hover);
+  /* Light list cards are a bit lighter than chips (26% vs 30% white). */
   --glass-bg-panel: rgba(255, 255, 255, 0.26);
   --glass-bg-panel-hover: rgba(255, 255, 255, 0.36);
   --glass-border: transparent;
