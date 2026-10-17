@@ -14,9 +14,9 @@ bio:
 
     研究興趣包括：(1) 系統晶片（SoC）設計驗證、(2) 量子電路最佳化、(3) 網路服務的自動測試與測試產生，以及 (4) 創業教育。
 
-    若您是正在尋找指導教授的研究生，或對研究專題有興趣的大學部同學，歡迎參考本網站上的資訊，也歡迎與黃教授聯繫以了解更多細節。
+    想找指導教授的研究生，或對專題研究有興趣的大學部同學，可以先看看網站上的資料，也歡迎直接找黃教授聊聊。
 
-    附註：歡迎在網路上與我連結，但請先簡短自我介紹，否則邀請可能無法獲得回覆。
+    P.S. 歡迎在網路上加我，送出邀請時請附上一兩句話說明你是誰，不然我可能不會接受。
   en: |
     Professor Chung-Yang (Ric) Huang received his B.S. degree from Department of Electrical Engineering, National Taiwan University (NTUEE), in 1992. He obtained his PhD from Department of Electrical and Computer Engineering, University of California at Santa Barbara, in 2000. Before joining NTUEE as an assistant professor in 2004, he was with Cadence Design Systems, where he served as a senior R&D manager and was in charge of the core engine development of their functional verification tools.
 
@@ -24,7 +24,7 @@ bio:
 
     For those new and prospective graduate students looking for an advisor, or undergraduate students who are interested in research projects, please refer to the information in this web site. You are also very welcome to talk to Professor Huang for more details.
 
-    ps. Welcome to connect with me on cyberspace. However, please drop me a note about who you are, or your invitation may not be acknowledged.
+    P.S. Welcome to connect with me on cyberspace. However, please drop me a note about who you are, or your invitation may not be acknowledged.
 researchInterests:
   - { zh: "SoC 設計驗證", en: "SoC design verification" }
   - { zh: "量子電路最佳化", en: "Quantum circuit optimization" }

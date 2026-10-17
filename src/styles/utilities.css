@@ -1,210 +1,41 @@
-/* Liquid-glass controls: embossed rim (inset) + lift — never a 1px stroke border. */
-.glass-surface {
-  border: none;
-  background: var(--glass-bg);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-}
-
-.glass-surface:hover {
-  background: var(--glass-bg-hover);
-  box-shadow: var(--glass-shadow-hover);
-}
-
-.glass-surface-accent {
-  background: var(--glass-bg-accent);
-  box-shadow: var(--glass-shadow-accent);
-}
-
-.glass-surface-accent:hover {
-  background: var(--glass-bg-accent-hover);
-  box-shadow: var(--glass-shadow-accent-hover);
-}
-
-/* List-card glass. Dark matches --glass-bg; light is slightly lighter. */
-.glass-panel {
-  border: none;
-  border-radius: var(--radius-card);
-  background: var(--glass-bg-panel);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-}
-
-a.glass-panel:hover,
-a.glass-panel:focus-visible,
-.glass-panel-interactive:hover,
-.glass-panel-interactive:focus-visible {
-  background: var(--glass-bg-panel-hover);
-  box-shadow: var(--glass-shadow-hover);
-  transform: translateY(-1px);
-}
-
-/* Interactive glass panel (member tiles, detail hero, etc.) */
-.glass-card {
-  border: none;
-  background: var(--glass-bg);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  transition:
-    background-color var(--motion-fast) var(--ease-standard),
-    box-shadow var(--motion-fast) var(--ease-standard),
-    color var(--motion-fast) var(--ease-standard),
-    transform var(--motion-fast) var(--ease-standard);
-}
-
-a.glass-card:hover,
-a.glass-card:focus-visible,
-.glass-card-interactive:hover,
-.glass-card-interactive:focus-visible {
-  background: var(--glass-bg-hover);
-  box-shadow: var(--glass-shadow-hover);
-  transform: translateY(-1px);
-}
-
-a.glass-card:active,
-.glass-card-interactive:active {
-  transform: translateY(0);
-  box-shadow: var(--glass-shadow-pressed);
-}
-
-.grid {
-  display: grid;
-  gap: var(--space-gap);
-}
-
-.grid-2 {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.grid-3 {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.stack-sm {
-  display: grid;
-  gap: 10px;
-}
-
-.stack-md {
-  display: grid;
-  gap: 14px;
-}
-
-.mb-4 {
-  margin-bottom: 16px;
-}
-
-.mb-5 {
-  margin-bottom: 22px;
-}
-
-.mt-4 {
-  margin-top: 16px;
-}
-
-[data-reveal] {
-  --reveal-delay: 0ms;
-  opacity: 1;
-  transform: none;
-}
-
+/* Scroll reveal (reveal.mjs) and list intro (ui.mjs). Content is visible by default;
+   scripts opt elements into the hidden start state. */
 [data-reveal].reveal-ready {
   opacity: 0;
-  transform: translateY(14px) scale(0.985);
-  transition: opacity var(--motion-slow) var(--ease-standard) var(--reveal-delay),
-    transform var(--motion-slow) var(--ease-standard) var(--reveal-delay);
+  transform: translateY(14px);
+  transition:
+    opacity var(--motion-slow) var(--ease-out) var(--reveal-delay, 0ms),
+    transform var(--motion-slow) var(--ease-out) var(--reveal-delay, 0ms);
 }
 
 [data-reveal].reveal-ready.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.project-grid {
-  contain: layout paint style;
-}
-
-@keyframes listIntroIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.992);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-[data-list-intro].list-intro-ready > [data-list-intro-item] {
-  opacity: 1;
   transform: none;
 }
 
-[data-list-intro].list-intro-ready > [data-list-intro-item][data-list-intro-active] {
-  opacity: 0;
-  transform: translateY(12px) scale(0.992);
-  animation: listIntroIn 420ms var(--ease-standard) both;
-  animation-delay: var(--list-intro-delay, 0ms);
-}
-
-@supports (content-visibility: auto) {
-  .project-grid > * {
-    content-visibility: auto;
-    contain-intrinsic-size: 280px 240px;
-  }
-}
-
-.progressive-sentinel {
-  height: 1px;
-  width: 100%;
-}
-
-.member-card {
-  transition: opacity var(--motion-mid) var(--ease-standard), transform var(--motion-mid) var(--ease-standard);
-}
-
-.member-card.is-filter-hidden,
-.member-tile.is-filter-hidden,
-[data-member-card].is-filter-hidden {
-  display: none;
-}
-
-[data-list-card].is-filter-hidden {
-  display: none;
-}
-
-.member-card.is-filter-visible {
-  animation: memberIn 360ms var(--ease-standard);
-}
-
-@keyframes memberIn {
+@keyframes listIntroIn {
   from {
     opacity: 0;
     transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
+}
+
+[data-list-intro].list-intro-ready > [data-list-intro-item][data-list-intro-active] {
+  animation: listIntroIn 420ms var(--ease-out) both;
+  animation-delay: var(--list-intro-delay, 0ms);
+}
+
+.member-tile.is-filter-visible {
+  animation: listIntroIn 360ms var(--ease-out);
 }
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal].reveal-ready {
     opacity: 1;
     transform: none;
-    transition: none;
-  }
-
-  [data-list-intro].list-intro-ready > [data-list-intro-item][data-list-intro-active] {
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-
-  .member-card.is-filter-visible {
-    animation: none;
   }
 }

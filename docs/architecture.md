@@ -38,20 +38,17 @@ src/
     404.astro         # noindex 404 with nav links
   scripts/            # Client-side interactivity (ES modules, no framework)
     reveal.mjs        # Scroll-reveal animations (IntersectionObserver)
-    particles.mjs     # Home hero particle canvas
+    particles.mjs     # Home hero constellation canvas
     ui.mjs            # Theme toggle, member filter, list search, copy-email
     navbar-scroll.mjs # Fixed header scroll state + --site-header-height sync
     members-carousel.mjs # Horizontal member tracks (wheel / drag)
     cms.mjs            # CMS member ID guard and initialization
   styles/
-    tokens.css        # Design tokens, liquid-glass (--glass-*), themes
-    base.css          # Reset, body padding-top for fixed header
-    components.css    # Header bar, nav, liquid-glass .btn, filters, host
-    page-background.css # Full-viewport gradient + noise backdrop per route
-    cra-layout.css    # CRA home/news, members tracks, host layout
-    cra-fonts.css     # Helvetica Neue + Coolvetica (@font-face)
-    effects.css       # Hero glow, view-transition, ink theme transition
-    utilities.css     # Grid, reveal states, small helpers
+    tokens.css        # Design tokens: night sky / star atlas themes, liquid glass, type, controls
+    base.css          # Jost @font-face, reset, browser surfaces, fixed sky backdrop, theme fade
+    components.css    # Header bar, nav, buttons, chips, inputs, segmented control, footer
+    pages.css         # Page layouts: home timeline, host, members, lists, details, courses
+    utilities.css     # Reveal and list-intro states
   utils/
     seo.ts            # Canonical/hreflang/OG helpers
     i18n-text.ts      # pickI18nText({zh, en})
@@ -64,10 +61,12 @@ public/
   images/lab/         # Lab group photos (home hero)
   images/             # Logo, OG cover, favicons
   member/images/      # Member photos (<id>.jpg)
-  fonts/cra/          # CRA reference webfonts (Helvetica Neue, Coolvetica)
+  images/sky/         # night.svg / chart.svg backdrops (scripts/generate-sky.mjs)
+  fonts/jost/         # Jost variable font, latin + latin-ext (SIL OFL)
   robots.txt
 scripts/              # Build/verify tooling (see verification.md)
   build-site.mjs      # Wraps astro build (clean dist, telemetry off)
+  generate-sky.mjs    # Regenerates the sky SVGs and twinkle data (run manually)
   validate-content.mjs# Content schema + bilingual checks
   smoke-build.mjs     # Key pages contain expected strings
   verify-pages.mjs    # Output-quality audit of every HTML page
@@ -105,36 +104,69 @@ scripts/              # Build/verify tooling (see verification.md)
    control grouping; labels are translated only when rendering.
 5. The build emits one static HTML per route (plus sitemap, robots, 404).
 
-## CRA visual system
+## Visual system
 
-The site follows the legacy CRA (2022 React) look while staying a static Astro build.
+One sky drawn two ways. Dark theme: a very deep midnight sky with the Milky Way
+under liquid glass. Light theme: the same stars printed as a star atlas
+(polar grid, constellation figures, ecliptic) under vellum glass. Gold is the
+starlight accent in both. Design context lives in `PRODUCT.md` and `DESIGN.md`.
+
+### Sky backdrop
+
+- `BaseLayout.astro` renders a fixed `.sky` layer: gradient + Milky Way haze,
+  `public/images/sky/night.svg` (dark) or `chart.svg` (light), and an inline SVG
+  of twinkling stars from `src/data/sky-twinkle.json` (dark only, off under
+  reduced motion). All three come from `scripts/generate-sky.mjs` (seeded, so
+  the output is stable); rerun it after changing the sky and commit the output.
+- `html[data-page-bg]` is still set per route but no longer changes the backdrop.
 
 ### Typography
 
-- Body: **Helvetica Neue** (Ultra Light, weight 300) from `public/fonts/cra/`,
-  loaded in `src/styles/cra-fonts.css`. Heavier Latin weights (500–700) use
-  system Helvetica/Arial bold faces plus `font-synthesis: weight` — the CRA
-  `.ttf` must not be registered at 400–700 or Latin stays thin. `--fw-latin-*`
-  tokens live on `:root` (typically 700) for both zh and en; only CJK body,
-  headings, and nav weights differ by `html[lang]`.   On `html lang="zh-TW"`,
-  `html[lang^='zh'] :is(h1,h2,h3)` must not override Latin-heavy classes
-  (`.home-news-title`, `.group-title`, `.paper-list-item h3`, etc.) — see
-  `cra-typography.css`. Mixed zh body copy uses `--font-base-zh`: `DVLab Latin Mix`
-  (`unicode-range` + system bold Latin) before Noto/PingFang so inline years and
-  English names are not rendered in ultra-light Helvetica at `--fw-body` 300.
-- Display titles: **Coolvetica** via `--font-title`.
-- Chinese fallback: Noto Sans TC (system stack in `tokens.css`).
+- One family: **Jost** (variable, self-hosted in `public/fonts/jost/`) for Latin,
+  falling through to the system Traditional Chinese face (PingFang TC / Noto Sans
+  TC / Microsoft JhengHei) for CJK. Sizes, weights, line heights and tracking are
+  tokens in `tokens.css`; zh gets looser line height and positive tracking.
 
-### Fixed liquid-glass header
+### Controls
 
-- `.site-header` is a full-width frosted bar (`--glass-*` in `tokens.css`):
-  translucent fill, blur/saturate, **embossed inset rim** (no 1px stroke border),
-  soft outer lift. Scrolled state deepens via `.is-scrolled` (`navbar-scroll.mjs`).
-- `body` uses `padding-top: var(--site-header-height)` (`base.css`). The
-  height is measured at runtime and written back to `--site-header-height` so
-  the bar and content never overlap when the mobile menu opens.
+- Every button uses `.btn` (default glass), `.btn-primary` (gold glass) or
+  `.btn-icon` (round): one height (`--control-h`, 40px), pill shape, the same
+  hover / pressed / focus states. External links append `ExternalLinkIcon`.
+- Chips (`.badge`, `.badge-muted`) are 28px pills and are not interactive.
+- Nav links are pills on the floating glass header; the active page uses the
+  gold fill. Below 880px the links open as a solid sheet under the bar (a
+  nested `backdrop-filter` cannot blur the page, so the sheet is opaque).
+- Host social links are `.btn-icon` circles with solid Font Awesome marks
+  (`src/data/social-icons.mjs`, `SocialIcon.astro`), all at one optical size.
 
-### Navigation vs buttons
+### Members layout
+
+- Grouping is defined in `src/data/member-labels.mjs` (`memberDisplayGroups`:
+  AI Formal, EDA 3DIC, Quantum) and rendered by `buildMemberDisplayGroups`
+  in `src/utils/member-groups.mjs`.
+- Each group is a horizontal track (`.members-track-scroll`, `members-carousel.mjs`).
+  The PI (`cyhuang`) is excluded from the list page; profile lives on `/host/`.
+- A segmented toggle (`.members-status-toggle`, `.filter-tag`) filters
+  **在學 / Current students** vs **已畢業 / Alumni** using CMS `status` (`current`/`active`
+  → enrolled; `alumni`/`former` → graduated). Client filter in `ui.mjs`.
+
+### Host page
+
+- Portrait: `public/images/host/ric.jpeg` (`HOST_PHOTO` in `src/utils/host-member.ts`).
+- Desktop: sticky portrait + contact column beside the title and bio; mobile:
+  title, portrait, contacts, bio. A bio paragraph starting with `附註` / `P.S.`
+  is set as a note.
+
+## Theming
+
+- Tokens live in `src/styles/tokens.css`, with light overrides on
+  `:root[data-theme='light']`.
+- Theme is applied before paint by an inline script in `BaseLayout.astro`
+  (`localStorage['lab-theme']` → `prefers-color-scheme` fallback).
+- Theme crossfade (~180 ms) is in `base.css`. All animation respects
+  `prefers-reduced-motion`.
+
+## Navigation vs buttons
 
 - **Nav tabs** (`.nav-link` + icons) stay text/icon links on the glass bar —
   no chip borders, blur stacks, or `.btn` shine. Nav glyphs are **Lucide**
@@ -224,9 +256,8 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
 
 Member originals remain in `public/`; `MemberAvatar.astro` imports local raster
 assets and uses Astro Image to emit small responsive WebPs. Both lists and
-profiles use this component. Typography loads the CRA reference webfonts from
-`public/fonts/cra/` (Helvetica Neue at 300 for body, Coolvetica for display
-titles) via `src/styles/cra-fonts.css`, with Noto Sans TC fallbacks for Chinese.
+profiles use this component. The only web font is Jost (two small variable
+WOFF2 subsets in `public/fonts/jost/`); Chinese uses system fonts.
 
 Content is visible without scripts. The reveal script opts observed nodes into
 animation after initialization, and caps stagger delays. Mobile navigation is

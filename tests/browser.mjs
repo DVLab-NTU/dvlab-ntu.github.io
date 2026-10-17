@@ -24,11 +24,12 @@ try {
    await page.goto(base+prefix+'/members/');
    await page.waitForTimeout(150);
    assert.equal(await page.locator('h1').innerText(),prefix?'Members':'成員列表');
-   assert.equal(await page.locator('h1').evaluate(el=>getComputedStyle(el.closest('section')).opacity),'1');
+   assert.equal(await page.locator('h1').evaluate(el=>getComputedStyle(el.closest('section')??el).opacity),'1');
    assert.equal(await page.locator('[data-member-card]').count(), membersOnListPage);
    if(failure!=='scripts'){
-    await page.locator('[data-member-search]').fill('Pin-Chun');
-    assert.equal(await page.locator('[data-member-card]:visible').count(),1);
+    await page.locator('[data-status-filter="graduated"]').click();
+    const alumni=await page.locator('[data-member-card]:visible').evaluateAll(cards=>cards.map(card=>card.dataset.memberEnrollment));
+    assert(alumni.length>0 && alumni.every(value=>value==='graduated'));
     assert.equal(await page.locator('.nav-toggle-bar').first().evaluate(el => getComputedStyle(el).backgroundColor === getComputedStyle(document.body).color), true);
     await page.locator('.nav-toggle').click();
     assert.equal(await page.locator('.nav-toggle').getAttribute('aria-expanded'),'true');
@@ -45,7 +46,7 @@ try {
  const context=await browser.newContext({viewport:{width:1280,height:900}});
  const page=await context.newPage();
  let fontRequests=0;
- page.on('request',req=>{if(req.resourceType()==='font')fontRequests++});
+ page.on('request',req=>{if(req.resourceType()==='font'&&!req.url().includes('/fonts/jost/'))fontRequests++});
  for(const path of ['/','/en/','/host/','/en/host/','/members/','/en/members/','/papers/','/en/papers/','/courses/','/en/courses/','/awards/','/en/awards/','/members/Pinchun/','/en/members/Pinchun/']){
   await page.goto(base+path);await page.waitForTimeout(650);
   assert(await page.locator('h1').isVisible());
@@ -53,7 +54,7 @@ try {
   assert.equal(await page.locator('h1').evaluate(el=>getComputedStyle(el.closest('section')??el).opacity),'1');
  }
  assert.equal(fontRequests,0);
- console.log('PASS 14 desktop routes; zero font requests');
+ console.log('PASS 14 desktop routes; only self-hosted Jost fonts');
  await context.close();
  await testResearchTags(browser, base);
  await testParticles(browser, base);

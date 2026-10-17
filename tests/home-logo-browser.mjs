@@ -82,7 +82,7 @@ export async function testHomeLogo(browser, base) {
         assert.equal((await page.locator('[data-home-logo]').innerText()).trim(), '');
         const ink = page.locator('[data-logo-part="text"]').first();
         assert.equal(await ink.evaluate(el => getComputedStyle(el).filter !== 'none'), theme === 'light');
-        assert.equal(await page.locator('.home-opening').evaluate(el => getComputedStyle(el).color), theme === 'light' ? 'rgb(41, 53, 21)' : 'rgb(244, 248, 255)');
+        assert.equal(await page.locator('.home-opening').evaluate(el => getComputedStyle(el).color), theme === 'light' ? 'rgb(19, 33, 63)' : 'rgb(244, 248, 255)');
         await page.locator('[data-theme-toggle]').click();
         await page.waitForFunction(expected => document.documentElement.dataset.theme === expected, theme === 'light' ? 'dark' : 'light');
         await page.waitForFunction(tinted => (getComputedStyle(document.querySelector('[data-logo-part="text"]')).filter !== 'none') === tinted, theme !== 'light');
@@ -98,7 +98,7 @@ export async function testHomeContent(browser, base) {
     const page = await context.newPage();
     for (const prefix of ['', '/en']) {
       await page.goto(base + prefix + '/');
-      const links = await page.locator('.home-news-item h3 a').evaluateAll(anchors => anchors.map(a => a.getAttribute('href')));
+      const links = await page.locator('.home-news-source-link').evaluateAll(anchors => anchors.map(a => a.getAttribute('href')));
       assert(links.length >= 4);
       for (const href of links.slice(0, 4)) {
         assert(href.startsWith('http'), `expected external award link, got ${href}`);

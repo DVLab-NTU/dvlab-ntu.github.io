@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { pickI18nText } from '../utils/i18n-text';
 import { pageCopy } from '../data/page-copy.mjs';
+import ExternalLinkIcon from './ExternalLinkIcon.astro';
 
 const courseEntries = await getCollection('courses');
 const courses = courseEntries
@@ -18,16 +19,15 @@ const t = pageCopy.courses[lang];
 const pathPrefix = lang === 'en' ? '/en' : '';
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
-  <div class="courses-cra">
   <section class="page-head" data-reveal>
-    <h1 class="page-title cra-page-title">{t.title}</h1>
+    <h1 class="page-title">{t.title}</h1>
   </section>
 
-  <section class="detail-shell" data-reveal-group>
+  <section class="course-list" data-reveal-group>
     {courses.map((c, i) => (
-      <article id={c.slug} class="flat-entry course-card" data-reveal data-reveal-order={String(i)}>
-        <div class="detail-meta">
-          <h2 class="page-title">{pickI18nText(c.title, lang)}</h2>
+      <article id={c.slug} class="course-card" data-reveal data-reveal-order={String(i)}>
+        <div class="course-card-head">
+          <h2>{pickI18nText(c.title, lang)}</h2>
           <span class="badge-muted">{c.semester}</span>
         </div>
         {c.intro && <p>{pickI18nText(c.intro, lang)}</p>}
@@ -42,17 +42,12 @@ const pathPrefix = lang === 'en' ? '/en' : '';
               </ul>
             </details>
           )}
-          <a class="btn btn-ghost" href={c.link} target="_blank" rel="noreferrer">{t.catalogue}</a>
+          <a class="btn btn-ghost" href={c.link} target="_blank" rel="noreferrer">{t.catalogue}<ExternalLinkIcon /></a>
           {c.github && (
-            <a class="btn btn-ghost" href={c.github} target="_blank" rel="noreferrer">GitHub Repo</a>
+            <a class="btn btn-ghost" href={c.github} target="_blank" rel="noreferrer">GitHub<ExternalLinkIcon /></a>
           )}
         </div>
       </article>
     ))}
   </section>
-  </div>
 </BaseLayout>
-
-<style>
-  .course-card { scroll-margin-top: 140px; }
-</style>

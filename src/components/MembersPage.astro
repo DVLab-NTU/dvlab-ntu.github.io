@@ -15,14 +15,16 @@ const listMembers = members.filter((member) => member.role !== 'pi');
 const displayGroups = buildMemberDisplayGroups(listMembers);
 ---
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
-  <div class="members-cra subpage-members" data-members-filter-root>
-    <h1 class="page-title cra-page-title section-title members-page-title">{t.heading}</h1>
+  <div class="members-cra" data-members-filter-root>
+    <header class="page-head">
+      <h1 class="page-title">{t.heading}</h1>
+    </header>
 
     <div class="members-toolbar">
       <div class="members-status-toggle" role="group" aria-label={t.statusFilter}>
         <button
           type="button"
-          class="filter-tag btn-shine is-selected"
+          class="filter-tag is-selected"
           data-status-filter="enrolled"
           aria-pressed="true"
         >
@@ -30,7 +32,7 @@ const displayGroups = buildMemberDisplayGroups(listMembers);
         </button>
         <button
           type="button"
-          class="filter-tag btn-shine"
+          class="filter-tag"
           data-status-filter="graduated"
           aria-pressed="false"
         >
