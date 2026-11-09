@@ -23,6 +23,7 @@ test('one schema accepts YAML serialization and rejects incomplete bilingual val
   assert.equal(membersSchema.safeParse({ ...data, name: { zh: '姓名' } }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, status: 'Alumni' }).success, false);
   assert.equal(membersSchema.parse({ ...data, area: undefined }).area, undefined);
+  assert.equal(membersSchema.parse({ ...data, area: null }).area, null);
   assert.equal(membersSchema.safeParse({ ...data, area: 'unverified' }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, name: { zh: ' ', en: 'Name' } }).success, false);
 });
