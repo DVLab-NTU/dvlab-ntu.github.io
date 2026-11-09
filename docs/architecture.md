@@ -84,7 +84,7 @@ scripts/              # Build/verify tooling (see verification.md)
 |---|---|---|
 | `/` | Home | Full-bleed particles + logo; **NEWS & AWARDS** on same backdrop (no gray band) |
 | `/host/` | Host | CRA profile: `ric.jpeg`, bio, square social tiles incl. homepage |
-| `/members/` | Members | Three horizontal carousels (AI Formal / EDA 3DIC / Quantum); no PI card |
+| `/members/` | Members | Research area, other members, and research assistant carousels; no PI card |
 | `/members/:id/` | Member bio | Liquid-glass link buttons; copy-email control |
 | `/papers/` | Publications | CRA subpage gradient; search + year filters |
 | `/papers/:slug/` | Paper detail | Venue/year chips, abstract, BibTeX disclosure + copy |
@@ -169,14 +169,15 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
 
 - Grouping is defined in `src/data/member-labels.mjs` (`memberDisplayGroups`:
   AI Formal, EDA 3DIC, Quantum) and rendered by `buildMemberDisplayGroups`
-  in `src/utils/member-groups.mjs`.
+  in `src/utils/member-groups.mjs`. Members without an area and research assistants
+  have separate tracks when present.
 - Each group is a horizontal track (`.members-track-scroll`, `members-carousel.mjs`).
   Member tiles (`.member-tile`) use shared liquid-glass tokens (translucent fill,
   embossed inset shadows, no stroke border). Member detail hero uses the same glass
   panel treatment (`.detail-hero-member`).
   The PI (`cyhuang`) is excluded from the list page; profile lives on `/host/`.
 - A liquid-glass segmented toggle (`.members-status-toggle`, `.filter-tag`) filters
-  **在學 / Current students** vs **已畢業 / Alumni** using CMS `status` (`current`/`active`
+  **現任 / Current** vs **歷屆 / Former** using CMS `status` (`current`/`active`
   → enrolled; `alumni`/`former` → graduated). Client filter in `ui.mjs`; carousels unchanged.
 
 ### Host page

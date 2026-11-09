@@ -71,9 +71,9 @@ export const pageCopy = {
       "placeholder": "搜尋 name / area / role...",
       "empty": "沒有匹配成員，請調整關鍵詞或篩選條件。",
       "all": "全部",
-      "statusFilter": "依在學狀態篩選成員",
-      "statusEnrolled": "在學",
-      "statusGraduated": "已畢業",
+      "statusFilter": "依身分狀態篩選成員",
+      "statusEnrolled": "現任",
+      "statusGraduated": "歷屆",
       "emptyStatus": "此狀態下沒有成員。",
       "description": "DVLab（台大設計驗證實驗室）成員列表：由黃鐘揚教授領導，涵蓋碩士生、博士生與專題生，研究方向包括形式化驗證、量子電路合成與電子設計自動化（EDA）。"
     },
@@ -84,9 +84,9 @@ export const pageCopy = {
       "placeholder": "Search name / area / role...",
       "empty": "No matching members. Try another keyword or filter.",
       "all": "All",
-      "statusFilter": "Filter members by enrollment status",
-      "statusEnrolled": "Current students",
-      "statusGraduated": "Alumni",
+      "statusFilter": "Filter members by status",
+      "statusEnrolled": "Current",
+      "statusGraduated": "Former",
       "emptyStatus": "No members in this category.",
       "description": "DVLab (Design Verification Lab, NTUEE) members: students and researchers led by Prof. Chung-Yang (Ric) Huang, working on formal verification, quantum circuit synthesis, and EDA."
     }

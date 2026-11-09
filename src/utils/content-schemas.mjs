@@ -35,7 +35,7 @@ export const membersSchema = z.object({
   name: i18nText,
   role: z.enum(Object.keys(roles)),
   status: z.enum(Object.keys(statuses)),
-  area: z.enum(Object.keys(areas)),
+  area: z.enum(Object.keys(areas)).nullish(),
   nickname: optionalText,
   avatar: optionalText,
   avatarPosition: z.enum(['left', 'center', 'right']).optional(),
