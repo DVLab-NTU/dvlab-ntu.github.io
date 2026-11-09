@@ -1,18 +1,19 @@
 import { roles, areas, memberDisplayGroups } from '../data/member-labels.mjs';
 
 export function buildMemberDisplayGroups(members) {
-  const blocks = [];
-  for (const group of memberDisplayGroups) {
-    const list = members
-      .filter((member) => group.areas.includes(member.area))
-      .sort((a, b) => a.id.localeCompare(b.id, 'en'));
-    if (list.length) blocks.push({ ...group, members: list });
-  }
-  return blocks;
+  const sorted = [...members].sort((a, b) => a.id.localeCompare(b.id, 'en'));
+  return [
+    ...memberDisplayGroups.map(group => ({
+      ...group,
+      members: sorted.filter(member => member.role !== 'ra' && group.areas.includes(member.area)),
+    })),
+    { key: 'other', label: { zh: '其他成員', en: 'Other members' }, members: sorted.filter(member => member.role !== 'ra' && !member.area) },
+    { key: 'ra', label: { zh: '研究助理', en: 'Research assistants' }, members: sorted.filter(member => member.role === 'ra') },
+  ].filter(group => group.members.length);
 }
 export const isFormer = member => member.status === 'alumni' || member.status === 'former';
 
-/** Members list filter: enrolled (在學) vs graduated (已畢業), from CMS `status`. */
+/** Members list filter: current vs former, from CMS `status`. */
 export function memberEnrollmentKey(member) {
   if (member.status === 'alumni' || member.status === 'former') {
     return 'graduated';

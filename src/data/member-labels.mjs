@@ -2,7 +2,7 @@ export const roles = {
   pi: { zh: '負責人 (PI)', en: 'PI' },
   phd: { zh: '博士生', en: 'PhD' },
   master: { zh: '碩士生', en: 'Master' },
-  ra: { zh: '研究助理', en: 'RA' },
+  ra: { zh: '研究助理', en: 'Research Assistant' },
   undergraduate: { zh: '專題生', en: 'Undergraduate' },
 };
 export const statuses = {

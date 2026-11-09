@@ -22,6 +22,8 @@ test('one schema accepts YAML serialization and rejects incomplete bilingual val
   assert.equal(membersSchema.safeParse({ ...data, bio: { zh: '簡介', en: '' } }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, name: { zh: '姓名' } }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, status: 'Alumni' }).success, false);
+  assert.equal(membersSchema.parse({ ...data, area: undefined }).area, undefined);
+  assert.equal(membersSchema.safeParse({ ...data, area: 'unverified' }).success, false);
   assert.equal(membersSchema.safeParse({ ...data, name: { zh: ' ', en: 'Name' } }).success, false);
 });
 
@@ -32,15 +34,19 @@ test('member enrollment filter maps CMS status metadata', () => {
   assert.equal(memberEnrollmentKey({ status: 'former' }), 'graduated');
 });
 
-test('member display groups use three research pillars', () => {
+test('member display groups keep research tracks and list missing areas and RAs once', () => {
   const members = [
     { id: 'a', role: 'master', area: 'formal', status: 'current' },
     { id: 'b', role: 'master', area: 'eda', status: 'current' },
     { id: 'c', role: 'master', area: 'quantum', status: 'current' },
+    { id: 'd', role: 'master', status: 'current' },
+    { id: 'e', role: 'ra', area: 'formal', status: 'active' },
+    { id: 'f', role: 'ra', status: 'active' },
   ];
   const groups = buildMemberDisplayGroups(members);
-  assert.equal(groups.length, 3);
-  assert.deepEqual(groups.map((group) => group.key), ['ai-formal', 'eda-3dic', 'quantum']);
+  assert.deepEqual(groups.map(group => [group.key, group.members.map(member => member.id)]), [
+    ['ai-formal', ['a']], ['eda-3dic', ['b']], ['quantum', ['c']], ['other', ['d']], ['ra', ['e', 'f']],
+  ]);
   assert.equal(groups[0].label.en, 'AI Formal');
 });
 
@@ -80,6 +86,7 @@ test('CMS supports every collection field and existing member IDs', () => {
   }
   const memberFields = collections.find(item => item.name === 'members').fields;
   const pattern = new RegExp(memberFields.find(item => item.name === 'id').pattern[0]);
+  assert.equal(memberFields.find(item => item.name === 'area').required, false);
   for (const name of fs.readdirSync('src/content/members')) assert(pattern.test(name.replace(/\.md$/, '')), name);
   const enabled = { enabled: true, repo: 'DVLab-NTU/dvlab-ntu.github.io', branch: 'main', oauthBaseUrl: 'https://example.com', siteDomain: 'dvlab-ntu.github.io', missing: [] };
   assert.equal(load(renderCmsConfigYml(enabled)).backend.repo, enabled.repo);

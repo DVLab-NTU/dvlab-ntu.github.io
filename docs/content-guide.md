@@ -24,7 +24,7 @@ id: "anitalu724"            # must match filename; part of the member URL
 name: { zh: "呂承樺", en: "Cheng-Hua Lu" }
 role: master                        # pi / phd / master / ra / undergraduate
 status: current                     # current / active / alumni / former
-area: quantum                       # quantum / formal / ai-formal / 3dic / eda / verification / architecture
+area: quantum                       # optional; quantum / formal / ai-formal / 3dic / eda / verification / architecture
 cohort: 12                          # admission year 112 (2023), optional
 avatar: "/member/images/anitalu724.jpg"
 nickname: "Anita"                     # optional
@@ -58,20 +58,20 @@ Notes:
   a profile/photo was uploaded: R13 / ROC 113 / 2024 all map to `cohort: 13`.
   Honor the member's latest form response when it differs from a legacy folder
   or student identifier. Graduation status is independent of the admission cohort.
-  Unknown cohorts are labeled explicitly, never inferred from email addresses or
-  estimated by subtracting a degree duration from a graduation year.
-  Both list group headings and member details label the admission year explicitly;
-  detail pages also display the member's current/alumni status.
+  Omit an unknown cohort; do not infer it from email addresses or graduation years.
+  Student detail pages show the admission year when provided. Research assistant
+  pages omit it. Detail pages also display each member's status.
   Detail pages show the nickname, bilingual bio, research topic tags, and links.
   Research topics are a list of short bilingual labels, shown below the profile
   metadata. Use consistent names for the same topic; do not infer missing topics.
   Keep research explanations and personal hobbies in `bio`, preserving submitted
   details. Do not split free-text submissions automatically by punctuation.
-  The broad `area` badge is shown on the detail page only when no topics are supplied.
+  The `area` badge appears only when an area is known and no topics are supplied.
   Members with `role: pi` are omitted from `/members/` (no PI chip); the host
   profile is edited via `cyhuang.md` and rendered on `/host/` with `ric.jpeg`.
-  The public list uses three horizontal carousels (AI Formal / EDA 3DIC / Quantum)
-  from `memberDisplayGroups` in `member-labels.mjs`, not a single searchable grid.
+  The public list uses research area carousels (AI Formal / EDA 3DIC / Quantum).
+  Members with no area appear under Other members. The `ra` role always appears
+  under Research assistants.
 - New members: add the Markdown file and the submitted photo with the same `id`.
   If the photo is not yet available, omit `avatar` to use the default; do not substitute another person's image.
 

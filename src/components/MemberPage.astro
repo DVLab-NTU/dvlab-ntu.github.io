@@ -12,15 +12,15 @@ const t = pageCopy.member[lang];
 const pathPrefix = lang === 'en' ? '/en' : '';
 const { member } = Astro.props;
 const nameText = member.name[lang];
-const areaText = areas[member.area][lang];
+const areaText = areas[member.area]?.[lang];
 const bio = pickI18nText(member.bio, lang);
 const researchInterests = member.researchInterests || [];
 const links = member.links;
 const hasLinks = Boolean(links?.scholar || links?.github || links?.homepage || links?.email || links?.linkedin || links?.instagram || links?.linktree || links?.strava || links?.facebook || links?.researchgate);
 const showRoleBadge = member.role !== 'pi';
-const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh'
-  ? (showRoleBadge ? `${roles[member.role][lang]}，研究方向：${areaText}。` : `研究方向：${areaText}。`)
-  : (showRoleBadge ? `${roles[member.role][lang]}. Research area: ${areaText}.` : `Research area: ${areaText}.`)));
+const pageDesc = bio
+  ? bio.slice(0, 150)
+  : [roles[member.role][lang], areaText].filter(Boolean).join(' · ');
 ---
 <BaseLayout title={nameText} desc={pageDesc} lang={lang} pathPrefix={pathPrefix}>
   <section class="detail-shell">
@@ -31,9 +31,9 @@ const pageDesc = (bio ? bio.slice(0, 150) : (lang === 'zh'
         <div class="detail-meta">
           {showRoleBadge && <span class="badge">{roles[member.role][lang]}</span>}
           {member.role !== 'pi' && <span class="badge-muted">{statuses[member.status][lang]}</span>}
-          {!researchInterests.length && <span class="badge-muted">{areaText}</span>}
+          {!researchInterests.length && areaText && <span class="badge-muted">{areaText}</span>}
         </div>
-        {member.role !== 'pi' && <p>{admissionCohortLabel(member.cohort, lang)}</p>}
+        {showRoleBadge && member.role !== 'ra' && member.cohort != null && <p>{admissionCohortLabel(member.cohort, lang)}</p>}
         {researchInterests.length > 0 && (
           <ul class="detail-meta research-tags" aria-label={lang === 'zh' ? '研究主題' : 'Research topics'}>
             {researchInterests.map(topic => <li class="badge-muted">{topic[lang]}</li>)}
