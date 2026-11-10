@@ -5,4 +5,5 @@ name:
   en: "鍾蕎安"
 role: "master"
 status: "current"
+area: "ai-formal"
 ---
