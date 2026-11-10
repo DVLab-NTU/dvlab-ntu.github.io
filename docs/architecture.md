@@ -169,8 +169,8 @@ The site follows the legacy CRA (2022 React) look while staying a static Astro b
 
 - Grouping is defined in `src/data/member-labels.mjs` (`memberDisplayGroups`:
   AI Formal, EDA 3DIC, Quantum) and rendered by `buildMemberDisplayGroups`
-  in `src/utils/member-groups.mjs`. Members without an area and research assistants
-  have separate tracks when present.
+  in `src/utils/member-groups.mjs`. Roles do not affect grouping. Members without an
+  area appear under Other members.
 - Each group is a horizontal track (`.members-track-scroll`, `members-carousel.mjs`).
   Member tiles (`.member-tile`) use shared liquid-glass tokens (translucent fill,
   embossed inset shadows, no stroke border). Member detail hero uses the same glass

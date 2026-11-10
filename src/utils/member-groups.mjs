@@ -5,10 +5,9 @@ export function buildMemberDisplayGroups(members) {
   return [
     ...memberDisplayGroups.map(group => ({
       ...group,
-      members: sorted.filter(member => member.role !== 'ra' && group.areas.includes(member.area)),
+      members: sorted.filter(member => group.areas.includes(member.area)),
     })),
-    { key: 'other', label: { zh: '其他成員', en: 'Other members' }, members: sorted.filter(member => member.role !== 'ra' && !member.area) },
-    { key: 'ra', label: { zh: '研究助理', en: 'Research assistants' }, members: sorted.filter(member => member.role === 'ra') },
+    { key: 'other', label: { zh: '其他成員', en: 'Other members' }, members: sorted.filter(member => !member.area) },
   ].filter(group => group.members.length);
 }
 export const isFormer = member => member.status === 'alumni' || member.status === 'former';
