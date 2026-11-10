@@ -5,4 +5,5 @@ name:
   en: "Tzu-Wei Tseng"
 role: "ra"
 status: "active"
+area: "ai-formal"
 ---

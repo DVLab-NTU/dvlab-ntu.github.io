@@ -6,5 +6,5 @@ name:
 role: "master"
 status: "current"
 cohort: 15
-area: "eda"
+area: "ai-formal"
 ---
