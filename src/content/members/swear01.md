@@ -26,4 +26,5 @@ links:
   github: "https://github.com/swear01"
   linkedin: "https://www.linkedin.com/in/swear01"
   linktree: "https://linktr.ee/swear01"
+avatarPosition: "top"
 ---

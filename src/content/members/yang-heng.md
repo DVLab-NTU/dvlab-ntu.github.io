@@ -26,4 +26,5 @@ researchInterests:
     en: "EDA"
   - zh: "數位 IC 設計"
     en: "Digital IC Design"
+avatarPosition: "center 25%"
 ---

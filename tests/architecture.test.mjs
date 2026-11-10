@@ -134,6 +134,10 @@ test('submitted profile fields survive parsing and CMS editing', () => {
   assert.equal(member.links.linktree, 'https://linktr.ee/swear01');
   assert.equal(membersSchema.safeParse({ ...member, researchInterests: [{ zh: '量子', en: '' }] }).success, false);
   const fields = cmsCollections().find(item => item.name === 'members').fields;
+  for (const position of ['top', 'center 15%', 'center 25%']) {
+    assert.equal(membersSchema.parse({ ...member, avatarPosition: position }).avatarPosition, position);
+    assert(fields.find(item => item.name === 'avatarPosition').options.includes(position));
+  }
   const linkFields = fields.find(item => item.name === 'links').fields;
   for (const name of ['instagram', 'linktree', 'strava', 'facebook', 'researchgate']) assert(linkFields.some(field => field.name === name));
 });
