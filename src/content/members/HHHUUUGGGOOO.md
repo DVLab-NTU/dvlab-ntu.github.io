@@ -23,4 +23,5 @@ researchInterests:
     en: "Design Verification"
   - zh: "合成與實體設計"
     en: "Synthesis & Physical Design"
+avatarPosition: "center 15%"
 ---

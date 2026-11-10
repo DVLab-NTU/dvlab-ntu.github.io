@@ -8,4 +8,5 @@ role: "master"
 status: "current"
 area: "3dic"
 avatar: "/member/images/yen-chu-lo.jpg"
+avatarPosition: "top"
 ---
