@@ -70,8 +70,8 @@ Notes:
   Members with `role: pi` are omitted from `/members/` (no PI chip); the host
   profile is edited via `cyhuang.md` and rendered on `/host/` with `ric.jpeg`.
   The public list uses research area carousels (AI Formal / EDA 3DIC / Quantum).
-  Members with no area appear under Other members. The `ra` role always appears
-  under Research assistants.
+  Members with no area appear under Other members. Research assistants are
+  listed by area, with their role shown on their profile.
 - New members: add the Markdown file and the submitted photo with the same `id`.
   If the photo is not yet available, omit `avatar` to use the default; do not substitute another person's image.
 

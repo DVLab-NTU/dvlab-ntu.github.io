@@ -35,7 +35,7 @@ test('member enrollment filter maps CMS status metadata', () => {
   assert.equal(memberEnrollmentKey({ status: 'former' }), 'graduated');
 });
 
-test('member display groups keep research tracks and list missing areas and RAs once', () => {
+test('member display groups use research areas regardless of role', () => {
   const members = [
     { id: 'a', role: 'master', area: 'formal', status: 'current' },
     { id: 'b', role: 'master', area: 'eda', status: 'current' },
@@ -46,7 +46,7 @@ test('member display groups keep research tracks and list missing areas and RAs 
   ];
   const groups = buildMemberDisplayGroups(members);
   assert.deepEqual(groups.map(group => [group.key, group.members.map(member => member.id)]), [
-    ['ai-formal', ['a']], ['eda-3dic', ['b']], ['quantum', ['c']], ['other', ['d']], ['ra', ['e', 'f']],
+    ['ai-formal', ['a', 'e']], ['eda-3dic', ['b']], ['quantum', ['c']], ['other', ['d', 'f']],
   ]);
   assert.equal(groups[0].label.en, 'AI Formal');
 });
