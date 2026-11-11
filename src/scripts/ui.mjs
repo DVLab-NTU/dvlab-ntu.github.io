@@ -17,15 +17,11 @@ function initThemeToggle() {
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
     if (toggle) {
-      const nextLabel = theme === 'dark'
-        ? (isZh ? '淺色' : 'Light')
-        : (isZh ? '深色' : 'Dark');
-      const icon = theme === 'dark' ? '☼' : '☾';
-      toggle.textContent = `${icon} ${nextLabel}`;
-      toggle.setAttribute('aria-label', theme === 'dark'
+      const label = theme === 'dark'
         ? (isZh ? '切換到淺色模式' : 'Switch to light mode')
-        : (isZh ? '切換到深色模式' : 'Switch to dark mode'));
-      toggle.setAttribute('aria-pressed', String(theme === 'dark'));
+        : (isZh ? '切換到深色模式' : 'Switch to dark mode');
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
     }
   }
 
@@ -352,12 +348,19 @@ function initNavToggle() {
   if (!nav || !toggle) {
     return;
   }
+  const isZh = document.documentElement.lang?.startsWith('zh');
   function setOpen(open) {
     nav.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? (isZh ? '關閉選單' : 'Close menu') : (isZh ? '開啟選單' : 'Open menu'));
   }
   toggle.addEventListener('click', () => {
     setOpen(!nav.classList.contains('is-open'));
+  });
+  document.addEventListener('click', (event) => {
+    if (nav.classList.contains('is-open') && !nav.contains(event.target)) {
+      setOpen(false);
+    }
   });
   links.forEach((link) => {
     link.addEventListener('click', () => setOpen(false));

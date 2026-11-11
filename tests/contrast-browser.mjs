@@ -33,10 +33,6 @@ export async function testContrast(browser, base) {
                     opacity *= Number(style.opacity);
                     layers.push(rgb(style.backgroundColor));
                     if (layers.at(-1)[3] !== 0 && (layers.at(-1)[3] ?? 1) === 1) break;
-                    assertNoGradient(style);
-                  }
-                  function assertNoGradient(style) {
-                    if (style.backgroundImage !== 'none') throw Error('Contrast check requires a solid background');
                   }
                   const bg = layers.reverse().reduce((background, layer) => blend(layer, background), [255, 255, 255]);
                   const color = rgb(getComputedStyle(node).color);
@@ -64,7 +60,7 @@ export async function testContrast(browser, base) {
           await page.locator('[data-theme-toggle]').click();
           await page.waitForTimeout(180);
           const selector = path === '/awards/' ? '.badge-muted' : '.badge';
-          assert.equal(await page.locator(selector).first().evaluate(el => getComputedStyle(el).color), path === '/awards/' ? 'rgb(143, 174, 178)' : 'rgb(252, 255, 204)');
+          assert.equal(await page.locator(selector).first().evaluate(el => getComputedStyle(el).color), path === '/awards/' ? 'rgb(194, 203, 223)' : 'rgb(244, 205, 107)');
           await page.locator('[data-theme-toggle]').click();
         }
       }

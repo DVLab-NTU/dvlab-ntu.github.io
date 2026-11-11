@@ -6,6 +6,7 @@ import { resolveMemberAvatar } from '../utils/member-avatar';
 import { pickI18nText } from '../utils/i18n-text';
 import { admissionCohortLabel } from '../utils/member-groups.mjs';
 import { pageCopy } from '../data/page-copy.mjs';
+import ExternalLinkIcon from './ExternalLinkIcon.astro';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const t = pageCopy.member[lang];
@@ -54,18 +55,18 @@ const pageDesc = bio
       <article class="card detail-section" data-reveal>
         <h2>{t.links}</h2>
         <div class="detail-links">
-          {links?.scholar && <a class="btn btn-ghost" href={links.scholar} target="_blank" rel="noreferrer">Google Scholar</a>}
-          {links?.github && <a class="btn btn-ghost" href={links.github} target="_blank" rel="noreferrer">GitHub</a>}
-          {links?.homepage && <a class="btn btn-ghost" href={links.homepage} target="_blank" rel="noreferrer">Homepage</a>}
-          {links?.linkedin && <a class="btn btn-ghost" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>}
-          {links?.instagram && <a class="btn btn-ghost" href={links.instagram} target="_blank" rel="noreferrer">Instagram</a>}
-          {links?.linktree && <a class="btn btn-ghost" href={links.linktree} target="_blank" rel="noreferrer">Linktree</a>}
-          {links?.strava && <a class="btn btn-ghost" href={links.strava} target="_blank" rel="noreferrer">Strava</a>}
-          {links?.facebook && <a class="btn btn-ghost" href={links.facebook} target="_blank" rel="noreferrer">Facebook</a>}
-          {links?.researchgate && <a class="btn btn-ghost" href={links.researchgate} target="_blank" rel="noreferrer">ResearchGate</a>}
+          {links?.scholar && <a class="btn btn-ghost" href={links.scholar} target="_blank" rel="noreferrer">Google Scholar<ExternalLinkIcon /></a>}
+          {links?.github && <a class="btn btn-ghost" href={links.github} target="_blank" rel="noreferrer">GitHub<ExternalLinkIcon /></a>}
+          {links?.homepage && <a class="btn btn-ghost" href={links.homepage} target="_blank" rel="noreferrer">Homepage<ExternalLinkIcon /></a>}
+          {links?.linkedin && <a class="btn btn-ghost" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn<ExternalLinkIcon /></a>}
+          {links?.instagram && <a class="btn btn-ghost" href={links.instagram} target="_blank" rel="noreferrer">Instagram<ExternalLinkIcon /></a>}
+          {links?.linktree && <a class="btn btn-ghost" href={links.linktree} target="_blank" rel="noreferrer">Linktree<ExternalLinkIcon /></a>}
+          {links?.strava && <a class="btn btn-ghost" href={links.strava} target="_blank" rel="noreferrer">Strava<ExternalLinkIcon /></a>}
+          {links?.facebook && <a class="btn btn-ghost" href={links.facebook} target="_blank" rel="noreferrer">Facebook<ExternalLinkIcon /></a>}
+          {links?.researchgate && <a class="btn btn-ghost" href={links.researchgate} target="_blank" rel="noreferrer">ResearchGate<ExternalLinkIcon /></a>}
           {links?.email && (
             <button
-              class="member-email"
+              class="btn member-email"
               type="button"
               data-copy-text={links.email}
               data-copy-label={links.email}

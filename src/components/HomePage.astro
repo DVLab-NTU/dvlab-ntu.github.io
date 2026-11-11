@@ -4,6 +4,7 @@ import siteEn from '../data/site.en.json';
 import siteZh from '../data/site.zh.json';
 import { getCollection } from 'astro:content';
 import HomeLogo from './HomeLogo.astro';
+import ExternalLinkIcon from './ExternalLinkIcon.astro';
 import { pageCopy } from '../data/page-copy.mjs';
 import { pickI18nText } from '../utils/i18n-text';
 import { formatAwardDateChip } from '../utils/award-date.mjs';
@@ -23,6 +24,10 @@ function awardAttendants(award: { students: string[]; advisors?: string[] }) {
   const people = [...award.students];
   if (award.advisors?.length) people.push(...award.advisors);
   return people.join(labels.awardSeparator);
+}
+
+function monthLabel(month: string, year: number) {
+  return formatAwardDateChip(month, year).replace(String(year), '').replace('.', '').trim();
 }
 ---
 <BaseLayout title="" desc={t.home.intro} lang={lang} pathPrefix={pathPrefix}>
@@ -51,31 +56,28 @@ function awardAttendants(award: { students: string[]; advisors?: string[] }) {
     </section>
 
     <section class="home-news" aria-labelledby="home-news-title">
-      <div class="home-news-inner">
-        <h1 id="home-news-title" class="section-title home-news-heading">{labels.newsAwards}</h1>
-        <div class="home-news-list">
-          {awards.map((award) => (
-            <article class="home-news-item">
-              <div class="home-news-date">
-                <div class="home-news-date-chip glass-chip glass-meta-chip">
-                  <span class="glass-chip-value">{formatAwardDateChip(award.month, award.year)}</span>
-                </div>
-              </div>
-              <div class="home-news-detail">
-                <h3 class="home-news-title">{pickI18nText(award.title, lang)}</h3>
-                <p class="home-news-meta">{awardAttendants(award)}</p>
-                <a
-                  class="btn btn-ghost home-news-source-link"
-                  href={award.source}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {awardLabels.source}
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
+      <h1 id="home-news-title" class="section-title home-news-heading">{labels.newsAwards}</h1>
+      <div class="home-news-list">
+        {awards.map((award) => (
+          <article class="home-news-item">
+            <p class="home-news-date">
+              <span class="home-news-year">{award.year}</span>
+              <span class="home-news-month">{monthLabel(award.month, award.year)}</span>
+            </p>
+            <div class="home-news-detail">
+              <h3 class="home-news-title">{pickI18nText(award.title, lang)}</h3>
+              <p class="home-news-meta">{awardAttendants(award)}</p>
+              <a
+                class="btn home-news-source-link"
+                href={award.source}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {awardLabels.source}<ExternalLinkIcon />
+              </a>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   </div>

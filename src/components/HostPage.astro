@@ -4,7 +4,7 @@ import { getEntry } from 'astro:content';
 import { pageCopy } from '../data/page-copy.mjs';
 import { pickI18nText } from '../utils/i18n-text';
 import { HOST_MEMBER_ID, HOST_PHOTO, hostLineUrl } from '../utils/host-member';
-import HostSocialSquareIcon from './HostSocialSquareIcon.astro';
+import SocialIcon from './SocialIcon.astro';
 
 const { lang } = Astro.props as { lang: 'zh' | 'en' };
 const t = pageCopy.host[lang];
@@ -15,61 +15,63 @@ if (!entry) {
 }
 const member = entry.data;
 const nameText = lang === 'zh' ? `${member.name.zh} 教授` : `Professor ${member.name.en}`;
+// Keep hyphenated given names (Chung-Yang) on one line when the title wraps.
+const nameWords = nameText.split(' ');
 const bio = pickI18nText(member.bio, lang);
 const paragraphs = bio ? bio.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean) : [];
+const isNote = (paragraph: string) => /^(附註|P\.?S\.?)/i.test(paragraph);
 const links = member.links;
 const pageDesc = paragraphs[0]?.slice(0, 160) || t.description;
 
 const socialItems = [
-  links?.email && { key: 'email', href: `mailto:${links.email}`, label: t.email, variant: 'email' as const },
-  links?.linkedin && { key: 'linkedin', href: links.linkedin, label: 'LinkedIn', variant: 'linkedin' as const },
-  links?.facebook && { key: 'facebook', href: links.facebook, label: 'Facebook', variant: 'facebook' as const },
-  { key: 'line', href: hostLineUrl, label: 'LINE', variant: 'line' as const },
-  links?.homepage && { key: 'homepage', href: links.homepage, label: t.homepage, variant: 'homepage' as const },
-].filter(Boolean);
+  links?.email && { key: 'email', href: `mailto:${links.email}`, label: t.email },
+  links?.linkedin && { key: 'linkedin', href: links.linkedin, label: 'LinkedIn' },
+  links?.facebook && { key: 'facebook', href: links.facebook, label: 'Facebook' },
+  { key: 'line', href: hostLineUrl, label: 'LINE' },
+  links?.homepage && { key: 'homepage', href: links.homepage, label: t.homepage },
+].filter(Boolean) as { key: 'email' | 'linkedin' | 'facebook' | 'line' | 'homepage'; href: string; label: string }[];
 ---
 <BaseLayout title={t.title} desc={pageDesc} lang={lang} pathPrefix={pathPrefix}>
   <div class="host-cra" data-reveal>
-    <div class="host-cra-wrapper">
-      <h1 class="host-cra-title">{nameText}</h1>
-      <p class="host-cra-tagline" lang={lang === 'zh' ? 'zh-TW' : 'en'}>&ldquo;{t.tagline}&rdquo;</p>
+    <header class="host-title-block">
+      <h1 class="host-cra-title">{nameWords.map((word, i) => (
+        <>{i > 0 && ' '}{word.includes('-') ? <span class="nowrap">{word}</span> : word}</>
+      ))}</h1>
+      <p class="host-cra-tagline" lang={lang === 'zh' ? 'zh-TW' : 'en'}>{t.tagline}</p>
+    </header>
 
-      <div class="host-content-info">
-        <div class="host-left-col">
-          {paragraphs.map((paragraph) => (
-            <p>{paragraph}</p>
-          ))}
-        </div>
+    <aside class="host-aside" aria-label={t.photoLabel}>
+      <img
+        class="host-photo"
+        src={HOST_PHOTO}
+        alt={member.name[lang]}
+        width="739"
+        height="739"
+        loading="eager"
+        decoding="async"
+      />
+      <ul class="host-social" aria-label={t.socialLabel}>
+        {socialItems.map((item) => (
+          <li>
+            <a
+              class="btn btn-icon host-social-link"
+              href={item.href}
+              target={item.key === 'email' ? undefined : '_blank'}
+              rel={item.key === 'email' ? undefined : 'noreferrer'}
+              aria-label={item.label}
+              title={item.label}
+            >
+              <SocialIcon variant={item.key} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
 
-        <aside class="host-right-col" aria-label={t.photoLabel}>
-          <div class="host-photo-wrap">
-            <img
-              class="host-photo"
-              src={HOST_PHOTO}
-              alt={member.name[lang]}
-              width="739"
-              height="739"
-              loading="eager"
-              decoding="async"
-            />
-          </div>
-          <ul class="host-social host-social-cra" aria-label={t.socialLabel}>
-            {socialItems.map((item) => (
-              <li>
-                <a
-                  class="host-social-link host-social-link-square"
-                  href={item.href}
-                  target={item.key === 'email' ? undefined : '_blank'}
-                  rel={item.key === 'email' ? undefined : 'noreferrer'}
-                  aria-label={item.label}
-                >
-                  <HostSocialSquareIcon variant={item.variant} uid={item.key} />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </aside>
-      </div>
+    <div class="host-bio">
+      {paragraphs.map((paragraph) => (
+        <p class:list={[isNote(paragraph) && 'host-note']}>{paragraph}</p>
+      ))}
     </div>
   </div>
 </BaseLayout>

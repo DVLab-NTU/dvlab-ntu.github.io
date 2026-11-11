@@ -1,0 +1,23 @@
+---
+import { socialIcons } from '../data/social-icons.mjs';
+
+type Variant = 'email' | 'linkedin' | 'facebook' | 'line' | 'homepage';
+
+const { variant } = Astro.props as { variant: Variant };
+const glyph = socialIcons[variant];
+if (!glyph) {
+  throw new Error(`Unknown social icon variant: ${variant}`);
+}
+---
+<svg
+  class="social-icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox={glyph.viewBox}
+  width="20"
+  height="20"
+  fill="currentColor"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d={glyph.d} fill-rule={glyph.evenodd ? 'evenodd' : undefined} />
+</svg>

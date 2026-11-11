@@ -7,6 +7,7 @@ import { formatAwardDateChip } from '../utils/award-date.mjs';
 import GlassListCard from './glass/GlassListCard.astro';
 import GlassMetaChip from './glass/GlassMetaChip.astro';
 import GlassMetaRow from './glass/GlassMetaRow.astro';
+import ExternalLinkIcon from './ExternalLinkIcon.astro';
 
 const awardEntries = await getCollection('awards');
 const awards = awardEntries
@@ -19,7 +20,7 @@ const pathPrefix = lang === 'en' ? '/en' : '';
 <BaseLayout title={t.title} desc={t.description} lang={lang} pathPrefix={pathPrefix}>
   <div class="awards-cra">
   <section class="page-head" data-reveal>
-    <h1 class="page-title cra-page-title">{t.title}</h1>
+    <h1 class="page-title">{t.title}</h1>
   </section>
 
   <section class="glass-list glass-list--grid award-list" data-reveal-group>
@@ -36,11 +37,11 @@ const pathPrefix = lang === 'en' ? '/en' : '';
           <GlassMetaChip value={formatAwardDateChip(a.month, a.year)} />
           <a
             slot="actions"
-            class="btn btn-ghost award-source"
+            class="btn award-source"
             href={a.source}
             target="_blank"
             rel="noreferrer"
-          >{t.source}</a>
+          >{t.source}<ExternalLinkIcon /></a>
         </GlassMetaRow>
         <p class="glass-list-card__detail award-list-detail">
           <strong>{t.students}</strong>{a.students.join(t.separator)}

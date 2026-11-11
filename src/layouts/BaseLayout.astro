@@ -5,18 +5,14 @@ import { buildDefaultLocaleAlternates, normalizeSitePath, toAbsoluteUrl } from '
 import type { LocaleAlternates } from '../utils/seo';
 
 import '../styles/tokens.css';
-import '../styles/cra-fonts.css';
 import '../styles/base.css';
 import '../styles/components.css';
-import '../styles/effects.css';
+import '../styles/pages.css';
 import '../styles/utilities.css';
-import '../styles/cra-layout.css';
-import '../styles/glass-ui.css';
-import '../styles/cra-typography.css';
-import '../styles/page-background.css';
 
 import { resolvePageBackgroundKey } from '../utils/page-background.mjs';
-import { lucideNavIcons } from '../data/lucide-icons.mjs';
+import { lucideNavIcons, lucideThemeIcons } from '../data/lucide-icons.mjs';
+import sky from '../data/sky-twinkle.json';
 import LucideIcon from '../components/LucideIcon.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import revealScript from '../scripts/reveal.mjs?url';
@@ -101,7 +97,7 @@ const navItems = [
 }));
 ---
 <!doctype html>
-<html lang={lang === 'zh' ? 'zh-TW' : 'en'} class="has-unified-page-backdrop" data-page-bg={pageBgKey}>
+<html lang={lang === 'zh' ? 'zh-TW' : 'en'} data-page-bg={pageBgKey}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -171,34 +167,24 @@ const navItems = [
       </style>
     </noscript>
     <style is:inline>
-      /* Critical inline styles: applied before the stylesheet loads so full
-         page navigations never flash a white background or oversized images.
-         Unified-backdrop routes use gradient stops; legacy flat fill is fallback only. */
-      html.has-unified-page-backdrop {
-        background: #0f1c2b;
-      }
-      html.has-unified-page-backdrop[data-theme='light'] {
-        background: #e0e6d6;
-      }
-      html:not(.has-unified-page-backdrop) {
-        background: #14263a;
-      }
-      html:not(.has-unified-page-backdrop)[data-theme='light'] {
-        background: #f5f8e4;
-      }
-      img {
-        max-width: 100%;
-        height: auto;
-      }
+      /* Paint the theme ground before the stylesheet loads so navigations never flash. */
+      html { background: #040915; }
+      html[data-theme='light'] { background: #f2eee3; }
+      img { max-width: 100%; height: auto; }
     </style>
   </head>
-  <body id="top" class:list={['has-unified-page-backdrop', pageBgKey === 'home' && 'is-home-route']}>
-    <div class="page-backdrop" aria-hidden="true">
-      <div class="page-backdrop__noise"></div>
-      <div class="page-backdrop__vignette"></div>
+  <body id="top" class:list={[pageBgKey === 'home' && 'is-home-route']}>
+    <div class="sky" aria-hidden="true">
+      <div class="sky__haze"></div>
+      <div class="sky__stars"></div>
+      <svg class="sky__twinkle" viewBox={`0 0 ${sky.width} ${sky.height}`} preserveAspectRatio="xMidYMid slice">
+        {sky.stars.map((star) => (
+          <circle cx={star.x} cy={star.y} r={star.r} style={`--delay:${star.delay}s;--dur:${star.dur}s`} />
+        ))}
+      </svg>
     </div>
     <header class="site-header">
-      <div class="container nav">
+      <div class="nav">
         <a class="brand" href={navPathResolved.home} aria-label={t.siteName}>
           <img class="brand-logo brand-logo-dark" src="/images/dvlab-logo.png" alt="DVLab" width="120" height="84" />
           <img class="brand-logo brand-logo-light" src="/images/dvlab-logo-light.png" alt="" aria-hidden="true" width="120" height="84" loading="eager" />
@@ -218,9 +204,18 @@ const navItems = [
           ))}
         </nav>
         <div class="nav-actions">
-          <button class="theme-toggle-btn btn-shine" data-theme-toggle type="button" aria-label="Switch theme">Dark</button>
           <button
-            class="nav-toggle"
+            class="btn btn-icon theme-toggle-btn"
+            data-theme-toggle
+            type="button"
+            aria-label={lang === 'zh' ? '切換深淺色' : 'Switch theme'}
+          >
+            <LucideIcon class="theme-icon-sun" nodes={lucideThemeIcons.sun} />
+            <LucideIcon class="theme-icon-moon" nodes={lucideThemeIcons.moon} />
+          </button>
+          <a class="btn lang-link" href={localeSwitchHref} lang={lang === 'zh' ? 'en' : 'zh-TW'}>{alternateLocaleLabel}</a>
+          <button
+            class="btn btn-icon nav-toggle"
             type="button"
             aria-expanded="false"
             aria-controls="site-nav"
@@ -230,7 +225,6 @@ const navItems = [
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
           </button>
-          <a class="lang-link btn-shine" href={localeSwitchHref} aria-label={alternateLocaleLabel}>{alternateLocaleLabel}</a>
         </div>
       </div>
     </header>
@@ -243,7 +237,7 @@ const navItems = [
       })();
     </script>
 
-    <main class="container site-shell cra-site page-shell" data-page-bg={pageBgKey}>
+    <main class="site-shell" data-page-bg={pageBgKey}>
       <div class="page-content">
         <slot />
       </div>

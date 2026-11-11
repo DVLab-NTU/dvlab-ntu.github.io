@@ -1,199 +1,131 @@
+/* Design tokens. Dark = midnight sky under liquid glass; light = printed star atlas
+   under vellum glass. Gold is the starlight accent in both. */
 :root {
-  /* Old-site palette (2022 React site): navy + yellow on dark */
-  --bg: #1f3751;
-  --bg-elevated: #14263a;
-  --line: rgba(188, 221, 223, 0.24);
-  --line-strong: rgba(252, 255, 204, 0.5);
-  --text: #bcdddf;
-  --text-soft: #d4e8ea;
-  --muted: #8faeb2;
-  --primary: #ffd700;
-  --primary-2: #fcffcc;
-  --surface-1: rgba(20, 38, 58, 0.55);
+  /* Sky (dark) */
+  --sky-top: #010309;
+  --sky-mid: #040915;
+  --sky-low: #0a1531;
+  --haze-a: rgba(112, 136, 230, 0.13);
+  --haze-b: rgba(150, 110, 210, 0.07);
+  --horizon: rgba(40, 70, 160, 0.28);
 
-  --particle-color: #fcffcc;
-  --particle-link-opacity: 0.1;
+  --text: #e9eef8;
+  --text-soft: #c2cbdf;
+  --muted: #8e9ab7;
+  --line: rgba(196, 212, 255, 0.12);
+  --line-strong: rgba(196, 212, 255, 0.22);
 
-  --gradient-bg: radial-gradient(1200px 800px at 15% -10%, rgba(177, 208, 210, 0.22), transparent 55%),
-    radial-gradient(900px 600px at 100% 0%, rgba(109, 170, 175, 0.16), transparent 50%),
-    linear-gradient(180deg, #1f3751 0%, #14263a 100%);
-  --gradient-accent: linear-gradient(180deg, #ffe14d 0%, #ffd700 100%);
+  --accent: #f2c75c;
+  --accent-strong: #ffdb80;
+  --accent-text: #f4cd6b;
+  --accent-ink: #fbe3a6;
+  --focus: #f2c75c;
 
-  --radius-card: 12px;
-  --radius-md: 8px;
-  --radius-pill: 999px;
+  /* Liquid glass */
+  --glass-blur: 18px;
+  --glass-sat: 160%;
+  --glass-fill: rgba(150, 172, 240, 0.075);
+  --glass-fill-hover: rgba(170, 192, 255, 0.13);
+  --glass-fill-panel: rgba(130, 152, 222, 0.06);
+  --glass-fill-panel-hover: rgba(150, 172, 240, 0.09);
+  --glass-fill-strong: rgba(14, 22, 46, 0.72);
+  /* Menu sheet sits inside the blurred header, so it cannot blur the page itself. */
+  --menu-sheet: #0a1022;
+  --glass-fill-accent: rgba(242, 199, 92, 0.16);
+  --glass-fill-accent-hover: rgba(242, 199, 92, 0.24);
+  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0) 58%);
+  --glass-rim: inset 0 1px 0 rgba(255, 255, 255, 0.17), inset 0 0 0 1px rgba(190, 210, 255, 0.075),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.32);
+  --glass-rim-hover: inset 0 1px 0 rgba(255, 255, 255, 0.26), inset 0 0 0 1px rgba(200, 220, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.32);
+  --glass-rim-accent: inset 0 1px 0 rgba(255, 238, 190, 0.32), inset 0 0 0 1px rgba(242, 199, 92, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  --glass-drop: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+  --glass-drop-hover: 0 14px 36px -10px rgba(0, 0, 0, 0.8);
+  --glass-shadow: var(--glass-rim), var(--glass-drop);
+  --glass-shadow-hover: var(--glass-rim-hover), var(--glass-drop-hover);
+  --glass-shadow-accent: var(--glass-rim-accent), var(--glass-drop);
+  --glass-shadow-pressed: inset 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(190, 210, 255, 0.08);
 
-  --space-page-y: 42px;
-  --space-gap: 18px;
+  --particle-color: #f4f7ff;
+  --particle-link-color: #a9c1ff;
+  --particle-link-opacity: 0.22;
 
-  --shadow-sm: 0 8px 24px rgba(5, 12, 22, 0.35);
-  --shadow-md: 0 16px 40px rgba(5, 12, 22, 0.45);
-  --shadow-focus: 0 0 0 3px rgba(255, 215, 0, 0.28);
-  --glow-soft: 0 0 44px rgba(255, 215, 0, 0.1);
-
-  /* Shared embossed-button shading: light top edge, dark inset bottom,
-     soft drop shadow. Overridden for the light theme below. */
-  --shadow-emboss:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-    inset 0 2px 3px rgba(0, 0, 0, 0.12),
-    0 3px 6px rgba(0, 0, 0, 0.2);
-  --shadow-emboss-hover:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 2px 3px rgba(0, 0, 0, 0.16),
-    0 4px 10px rgba(0, 0, 0, 0.28);
-  --shadow-emboss-pressed:
-    inset 0 2px 4px rgba(0, 0, 0, 0.2),
-    0 1px 1px rgba(0, 0, 0, 0.1);
-  --shadow-field:
-    inset 0 2px 4px rgba(0, 0, 0, 0.14),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
-
-  --blur-card: 12px;
-
-  /* Liquid glass (navbar + controls): translucent fill, no stroke borders.
-     Edge = inset specular highlight + soft underside shade + outer lift. */
-  --glass-blur: 16px;
-  --glass-saturate: 1.7;
-  /* Site-wide liquid-glass fill (~5.5% white neutral on dark). */
-  --glass-bg: rgba(255, 255, 255, 0.055);
-  --glass-bg-hover: rgba(255, 255, 255, 0.09);
-  --glass-bg-accent: rgba(255, 215, 0, 0.14);
-  --glass-bg-accent-hover: rgba(255, 215, 0, 0.2);
-  /* Meta chips use the same scale (news dates, semester badges). */
-  --glass-bg-chip: var(--glass-bg);
-  --glass-bg-chip-hover: var(--glass-bg-hover);
-  --glass-bg-chip-accent: var(--glass-bg-accent);
-  --glass-bg-chip-accent-hover: var(--glass-bg-accent-hover);
-  /* List cards. Dark fill matches chips; hover is slightly stronger. */
-  --glass-bg-panel: rgba(255, 255, 255, 0.055);
-  --glass-bg-panel-hover: rgba(255, 255, 255, 0.082);
-  /* Legacy names kept for non-glass dividers; do not use as control borders. */
-  --glass-border: transparent;
-  --glass-border-strong: transparent;
-  --glass-rim-inset: inset 0 1px 1px rgba(255, 255, 255, 0.48), inset 0 -1px 2px rgba(0, 0, 0, 0.2);
-  --glass-rim-inset-hover: inset 0 1px 1px rgba(255, 255, 255, 0.55), inset 0 -1px 2px rgba(0, 0, 0, 0.22);
-  --glass-lift: 0 8px 24px rgba(0, 0, 0, 0.2);
-  --glass-lift-hover: 0 10px 28px rgba(0, 0, 0, 0.26);
-  --glass-shadow: var(--glass-rim-inset), var(--glass-lift);
-  --glass-shadow-hover: var(--glass-rim-inset-hover), var(--glass-lift-hover);
-  --glass-shadow-accent: inset 0 1px 1px rgba(255, 255, 255, 0.42), inset 0 -1px 2px rgba(0, 0, 0, 0.18),
-    0 8px 22px rgba(0, 0, 0, 0.22);
-  --glass-shadow-accent-hover: inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -1px 2px rgba(0, 0, 0, 0.2),
-    0 10px 26px rgba(0, 0, 0, 0.26);
-  --glass-shadow-pressed: inset 0 2px 4px rgba(0, 0, 0, 0.28), inset 0 -1px 1px rgba(255, 255, 255, 0.12),
-    0 2px 8px rgba(0, 0, 0, 0.16);
-  --glass-header-rim: inset 0 1px 0 rgba(255, 255, 255, 0.32), inset 0 -1px 2px rgba(0, 0, 0, 0.18);
-  --glass-shadow-header: var(--glass-header-rim), 0 10px 28px rgba(0, 0, 0, 0.22);
-  --glass-shadow-header-hover: inset 0 1px 0 rgba(255, 255, 255, 0.38), inset 0 -1px 2px rgba(0, 0, 0, 0.22),
-    0 12px 32px rgba(0, 0, 0, 0.28);
-
-  --font-base: 'Helvetica Neue', HelveticaNeue, Arial, 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  /* zh body: bold Latin via unicode-range (see cra-fonts.css), then CJK system fonts — no ultra-light Helvetica for ASCII. */
-  --font-base-zh: 'DVLab Latin Mix', 'Noto Sans TC', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-title: Coolvetica, 'Helvetica Neue', HelveticaNeue, Arial, 'Noto Sans TC', sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-
-  /* CJK body/headings — overridden per html[lang]. Latin scale is locale-agnostic (700). */
-  --fw-body: 300;
+  /* Type */
+  --font-sans: 'Jost', 'PingFang TC', 'Noto Sans TC', 'Noto Sans CJK TC', 'Source Han Sans TC', 'Microsoft JhengHei',
+    system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.875rem;
+  --fs-control: 0.9375rem;
+  --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --fs-lead: clamp(1.0625rem, 0.98rem + 0.45vw, 1.25rem);
+  --fs-h3: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --fs-h2: clamp(1.375rem, 1.15rem + 1vw, 1.875rem);
+  --fs-h1: clamp(2.25rem, 1.55rem + 3vw, 3.75rem);
+  --fw-body: 400;
+  --fw-medium: 500;
   --fw-heading: 500;
-  --fw-heading-lg: 600;
-  --fw-nav: 500;
-  --fw-latin-copy: 700;
-  --fw-latin-meta: 700;
-  --fw-latin-strong: 700;
-  --fw-latin-ui: 700;
-  --fw-latin-chip: 700;
-  --fw-latin-chip-sub: 600;
-  --fw-member-name: 700;
+  --lh-body: 1.7;
+  --lh-tight: 1.15;
+  --tracking-body: 0.005em;
+  --tracking-heading: -0.015em;
 
-  --text-xs: 12px;
-  --text-sm: 14px;
-  --text-md: 16px;
-  --text-lg: 20px;
-  --text-xl: clamp(28px, 4vw, 44px);
+  /* Shape and rhythm */
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --control-h: 40px;
+  --chip-h: 28px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --page-max: 1120px;
 
-  --lh-tight: 1.22;
-  --lh-copy: 1.72;
-
-  --motion-fast: 150ms;
-  --motion-mid: 240ms;
-  --motion-slow: 460ms;
-  --ease-standard: cubic-bezier(0.2, 0.78, 0.22, 1);
-  --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
-  --stagger-step: 80ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-fast: 160ms;
+  --motion-mid: 260ms;
+  --motion-slow: 520ms;
 }
 
 html[lang^='zh'] {
-  --font-base: var(--font-base-zh);
-  --fw-body: 300;
-  --fw-heading: 500;
-  --fw-heading-lg: 600;
-  --fw-nav: 500;
-}
-
-html[lang^='en'] {
-  --fw-body: 700;
-  --fw-heading: 700;
-  --fw-heading-lg: 700;
-  --fw-nav: 700;
+  --lh-body: 1.85;
+  --tracking-body: 0.03em;
+  --tracking-heading: 0.04em;
 }
 
 :root[data-theme='light'] {
-  /* Warm off-white surfaces retain the old site's yellow-green accents. */
-  --bg: #f7f8f2;
-  --bg-elevated: #fdfef9;
-  --line: #d7dccb;
-  --line-strong: #a8b38b;
-  --text: #29321e;
-  --text-soft: #46503b;
-  --muted: #657046;
-  --primary: #9db41f;
-  --primary-2: #f7fad8;
-  --surface-1: #fdfef9;
+  /* Star atlas */
+  --paper: #f2eee3;
+  --paper-edge: rgba(110, 90, 50, 0.12);
 
-  --particle-color: #526326;
-  --particle-link-opacity: 0.22;
+  --text: #13213f;
+  --text-soft: #33405f;
+  --muted: #59637d;
+  --line: rgba(19, 33, 63, 0.13);
+  --line-strong: rgba(19, 33, 63, 0.24);
 
-  --gradient-bg: var(--bg);
-  --gradient-accent: linear-gradient(180deg, #c9d94f 0%, #9db41f 100%);
-  --radius-card: 8px;
-  --shadow-sm: none;
-  --shadow-md: 0 2px 6px rgba(74, 94, 32, 0.08);
-  --glow-soft: 0 0 0 transparent;
-  --shadow-focus: 0 0 0 3px rgba(157, 180, 31, 0.35);
-  --shadow-emboss: none;
-  --shadow-emboss-hover: none;
-  --shadow-emboss-pressed: none;
-  --shadow-field: none;
+  --accent: #b8891b;
+  --accent-strong: #d4a43a;
+  --accent-text: #7a5706;
+  --accent-ink: #13213f;
+  --focus: #13213f;
 
-  /* Light theme glass fill (~30% white neutral) — matches approved chip ratio. */
-  --glass-bg: rgba(255, 255, 255, 0.3);
-  --glass-bg-hover: rgba(255, 255, 255, 0.42);
-  --glass-bg-accent: rgba(201, 217, 79, 0.24);
-  --glass-bg-accent-hover: rgba(201, 217, 79, 0.34);
-  --glass-bg-chip: var(--glass-bg);
-  --glass-bg-chip-hover: var(--glass-bg-hover);
-  --glass-bg-chip-accent: var(--glass-bg-accent);
-  --glass-bg-chip-accent-hover: var(--glass-bg-accent-hover);
-  /* Light list cards are a bit lighter than chips (26% vs 30% white). */
-  --glass-bg-panel: rgba(255, 255, 255, 0.26);
-  --glass-bg-panel-hover: rgba(255, 255, 255, 0.36);
-  --glass-border: transparent;
-  --glass-border-strong: transparent;
-  --glass-rim-inset: inset 0 1px 1px rgba(255, 255, 255, 0.88), inset 0 -1px 2px rgba(41, 50, 30, 0.12);
-  --glass-rim-inset-hover: inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(41, 50, 30, 0.14);
-  --glass-lift: 0 8px 22px rgba(41, 50, 30, 0.1);
-  --glass-lift-hover: 0 10px 26px rgba(41, 50, 30, 0.14);
-  --glass-shadow: var(--glass-rim-inset), var(--glass-lift);
-  --glass-shadow-hover: var(--glass-rim-inset-hover), var(--glass-lift-hover);
-  --glass-shadow-accent: inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 -1px 2px rgba(74, 94, 32, 0.14),
-    0 8px 20px rgba(41, 50, 30, 0.12);
-  --glass-shadow-accent-hover: inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(74, 94, 32, 0.16),
-    0 10px 24px rgba(41, 50, 30, 0.14);
-  --glass-shadow-pressed: inset 0 2px 4px rgba(41, 50, 30, 0.14), inset 0 -1px 1px rgba(255, 255, 255, 0.7),
-    0 2px 8px rgba(41, 50, 30, 0.08);
-  --glass-header-rim: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 0 -1px 2px rgba(41, 50, 30, 0.1);
-  --glass-shadow-header: var(--glass-header-rim), 0 8px 22px rgba(41, 50, 30, 0.1);
-  --glass-shadow-header-hover: inset 0 1px 0 rgba(255, 255, 255, 0.85), inset 0 -1px 2px rgba(41, 50, 30, 0.12),
-    0 10px 26px rgba(41, 50, 30, 0.14);
+  /* Vellum glass over the chart */
+  --glass-fill: rgba(255, 253, 247, 0.58);
+  --glass-fill-hover: rgba(255, 254, 250, 0.82);
+  --glass-fill-panel: rgba(255, 253, 247, 0.55);
+  --glass-fill-panel-hover: rgba(255, 254, 250, 0.74);
+  --glass-fill-strong: rgba(250, 247, 239, 0.9);
+  --menu-sheet: #f8f5ed;
+  --glass-fill-accent: rgba(212, 164, 58, 0.24);
+  --glass-fill-accent-hover: rgba(212, 164, 58, 0.34);
+  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 60%);
+  --glass-rim: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 0 0 1px rgba(19, 33, 63, 0.1);
+  --glass-rim-hover: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(19, 33, 63, 0.16);
+  --glass-rim-accent: inset 0 1px 0 rgba(255, 250, 230, 0.9), inset 0 0 0 1px rgba(150, 110, 20, 0.28);
+  --glass-drop: 0 8px 22px -10px rgba(19, 33, 63, 0.28);
+  --glass-drop-hover: 0 12px 28px -10px rgba(19, 33, 63, 0.34);
+  --glass-shadow-pressed: inset 0 2px 5px rgba(19, 33, 63, 0.16), inset 0 0 0 1px rgba(19, 33, 63, 0.12);
+
+  --particle-color: #13213f;
+  --particle-link-color: #13213f;
+  --particle-link-opacity: 0.3;
 }

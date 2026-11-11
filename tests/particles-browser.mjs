@@ -6,7 +6,7 @@ export async function testParticles(browser, base) {
   await context.addInitScript(() => {
     sessionStorage.setItem('dvlab-home-logo-seen', '1');
     window.draws = { frames: 0, points: [] };
-    for (const method of ['clearRect', 'fillRect']) {
+    for (const method of ['clearRect', 'arc']) {
       const original = CanvasRenderingContext2D.prototype[method];
       CanvasRenderingContext2D.prototype[method] = function (...args) {
         if (this.canvas.matches('[data-particles]')) {
@@ -44,15 +44,13 @@ export async function testParticles(browser, base) {
     await page.evaluate(() => document.documentElement.dataset.theme = 'dark');
     await page.waitForTimeout(80);
     const darkColor = await page.evaluate(() => window.draws.color);
-    assert.equal(darkColor, '#fcffcc');
-    assert.equal(await page.evaluate(() => window.draws.alpha), 0.5);
+    assert.equal(darkColor, '#f4f7ff');
     await page.evaluate(() => document.documentElement.dataset.theme = 'light');
     await page.waitForFunction(color => window.draws.color !== color, darkColor);
-    assert.equal(await page.evaluate(() => window.draws.color), '#526326');
-    assert.equal(await page.evaluate(() => window.draws.alpha), 0.5);
+    assert.equal(await page.evaluate(() => window.draws.color), '#13213f');
     for (let i = 0; i < 30; i++) await page.mouse.click(opening.x + 10, opening.y + 10);
     await page.waitForTimeout(80);
-    assert.equal(await count(), 100);
+    assert.equal(await count(), 110);
     await page.locator('footer').scrollIntoViewIfNeeded();
     await page.waitForTimeout(150);
     const paused = await frames();

@@ -1,7 +1,11 @@
-// Old-site style particle background (lightweight vanilla canvas port of the
-// 2022 react-tsparticles setup: square particles, link lines, hover repulse,
-// click push). Decorative only — content never depends on it.
+// Home hero constellations: slow-drifting stars that link into constellation lines
+// when they pass close to each other. The pointer acts as one more star, so moving
+// across the sky draws lines to nearby stars; a click adds a small cluster.
+// Decorative only — content never depends on it.
 let cleanup = null;
+
+const LINK_DISTANCE = 140;
+const POINTER_DISTANCE = 190;
 
 function initParticles() {
   cleanup?.();
@@ -18,29 +22,34 @@ function initParticles() {
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
   const reduceFactor = window.innerWidth < 760 ? 0.5 : 1;
-  const density = 10000;
-  const count = Math.max(12, Math.min(80, Math.floor((canvas.clientWidth * canvas.clientHeight) / density * reduceFactor)));
+  const density = 11000;
+  const count = Math.max(14, Math.min(84, Math.floor((canvas.clientWidth * canvas.clientHeight) / density * reduceFactor)));
   let color;
+  let linkColor;
   let linkOpacity;
   function updateColor() {
     const style = getComputedStyle(document.documentElement);
-    color = style.getPropertyValue('--particle-color').trim() || '#fcffcc';
-    linkOpacity = Number.parseFloat(style.getPropertyValue('--particle-link-opacity')) || 0.1;
+    color = style.getPropertyValue('--particle-color').trim() || '#f4f7ff';
+    linkColor = style.getPropertyValue('--particle-link-color').trim() || color;
+    linkOpacity = Number.parseFloat(style.getPropertyValue('--particle-link-opacity')) || 0.2;
   }
   updateColor();
 
-  const particles = Array.from({ length: count }, () => ({
-    x: Math.random() * canvas.clientWidth,
-    y: Math.random() * canvas.clientHeight,
-    vx: (Math.random() - 0.5),
-    vy: (Math.random() - 0.5),
-    size: 2 + Math.random() * 4,
-    opacity: 0.5,
-  }));
+  const makeStar = (x, y, speed = 0.18) => ({
+    x,
+    y,
+    vx: (Math.random() - 0.5) * speed,
+    vy: (Math.random() - 0.5) * speed,
+    size: 0.6 + Math.random() ** 2 * 1.6,
+    phase: Math.random() * Math.PI * 2,
+    rate: 0.6 + Math.random() * 1.4,
+  });
+
+  const particles = Array.from({ length: count }, () => makeStar(Math.random() * canvas.clientWidth, Math.random() * canvas.clientHeight));
 
   let width = canvas.clientWidth;
   let height = canvas.clientHeight;
-  let mouse = { x: -9999, y: -9999 };
+  const mouse = { x: -9999, y: -9999 };
   let raf = 0;
   let visible = false;
   let lastTime = 0;
@@ -55,59 +64,58 @@ function initParticles() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
+  function line(ax, ay, bx, by, alpha) {
+    ctx.globalAlpha = alpha;
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(bx, by);
+    ctx.stroke();
+  }
+
   function step(time) {
     const elapsed = lastTime ? Math.min((time - lastTime) / (1000 / 60), 2) : 1;
     lastTime = time;
+    const seconds = time / 1000;
     ctx.clearRect(0, 0, width, height);
 
     for (const p of particles) {
       p.x += p.vx * elapsed;
       p.y += p.vy * elapsed;
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
 
-      if (p.x < 0 || p.x > width) {
-        p.vx *= -1;
-      }
-      if (p.y < 0 || p.y > height) {
-        p.vy *= -1;
-      }
-
+      // Stars ease away from the pointer just enough to keep lines readable.
       const dx = p.x - mouse.x;
       const dy = p.y - mouse.y;
       const dist = Math.hypot(dx, dy);
-      if (dist < 200 && dist > 0) {
-        const force = (200 - dist) / 200;
-        p.x += (dx / dist) * force * 2 * elapsed;
-        p.y += (dy / dist) * force * 2 * elapsed;
+      if (dist < 70 && dist > 0) {
+        const force = (70 - dist) / 70;
+        p.x += (dx / dist) * force * 1.2 * elapsed;
+        p.y += (dy / dist) * force * 1.2 * elapsed;
       }
-    }
-
-    for (const p of particles) {
       p.x = Math.max(0, Math.min(width, p.x));
       p.y = Math.max(0, Math.min(height, p.y));
     }
-    ctx.fillStyle = color;
-    for (const p of particles) {
-      ctx.globalAlpha = p.opacity;
-      ctx.fillRect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size);
-    }
 
-    ctx.globalAlpha = 1;
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 0.5;
-    // ponytail: pairwise links capped at 100 particles; use a spatial grid if this cap grows.
+    ctx.strokeStyle = linkColor;
+    ctx.lineWidth = 0.6;
     for (let i = 0; i < particles.length; i += 1) {
+      const a = particles[i];
       for (let j = i + 1; j < particles.length; j += 1) {
-        const a = particles[i];
         const b = particles[j];
         const d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < 150) {
-          ctx.globalAlpha = linkOpacity * (1 - d / 150);
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
+        if (d < LINK_DISTANCE) line(a.x, a.y, b.x, b.y, linkOpacity * (1 - d / LINK_DISTANCE));
       }
+      const pd = Math.hypot(a.x - mouse.x, a.y - mouse.y);
+      if (pd < POINTER_DISTANCE) line(a.x, a.y, mouse.x, mouse.y, Math.min(1, linkOpacity * 2.2) * (1 - pd / POINTER_DISTANCE));
+    }
+
+    ctx.fillStyle = color;
+    for (const p of particles) {
+      ctx.globalAlpha = 0.45 + 0.45 * (0.5 + 0.5 * Math.sin(seconds * p.rate + p.phase));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
     }
     ctx.globalAlpha = 1;
 
@@ -129,15 +137,8 @@ function initParticles() {
   function onClick(event) {
     if (motion.matches || event.pointerType !== 'mouse' || event.target.closest('a, button, input, select, textarea, [role=button]')) return;
     const rect = canvas.getBoundingClientRect();
-    for (let i = 0; i < 4 && particles.length < 100; i += 1) {
-      particles.push({
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top,
-        vx: (Math.random() - 0.5) * 1.2,
-        vy: (Math.random() - 0.5) * 1.2,
-        size: 2 + Math.random() * 4,
-        opacity: 0.5,
-      });
+    for (let i = 0; i < 4 && particles.length < 110; i += 1) {
+      particles.push(makeStar(event.clientX - rect.left, event.clientY - rect.top, 0.9));
     }
   }
 

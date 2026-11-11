@@ -3,8 +3,8 @@ export const pageCopy = {
     "zh": {
       "heading": "DVLab 設計驗證實驗室",
       "missionParagraphs": [
-        "在 DVLab，我們聚焦三大研究軸線：AI 形式方法、EDA 與 3DIC、以及量子設計自動化。面對系統層級設計的驗證瓶頸，我們以自動抽象降低問題複雜度，並以學習與引導式精化捕捉關鍵設計意圖，朝向可重現、可分享的開源驗證與設計流程努力。",
-        "我們也關注量子計算如何重塑設計堆疊——從合成、映射、最佳化到在實際裝置上的驗證；同時在 3DIC 與異質整合場景延伸時序、簽核與系統級 EDA 方法。無論是哪一條路線，我們都希望在嚴謹理論、實用工具與探索未知的好奇心之間取得平衡。"
+        "DVLab 的研究分成三個方向：AI 形式方法、3DIC 的電子設計自動化（EDA），以及量子設計自動化。系統層級的設計越來越大，驗證常常卡在問題規模上。我們用自動抽象把問題縮小，再用學習導引的精化找回真正重要的設計意圖，並朝可重現、開源的驗證與設計流程努力。",
+        "我們也研究量子計算會如何改變設計流程，範圍涵蓋合成、映射、最佳化，以及在實際量子裝置上的驗證。另一方面，3DIC 與異質整合讓時序分析、簽核與系統級 EDA 都需要新的方法。不管做哪個題目，我們都希望理論站得住，工具也真的有人用。"
       ],
       "cultureMottos": [
         "We research because we are curious",
@@ -21,8 +21,8 @@ export const pageCopy = {
     "en": {
       "heading": "Design Verification Lab",
       "missionParagraphs": [
-        "At DVLab, we advance three connected directions—AI Formal Methods, EDA for 3DIC, and Quantum Design Automation. To ease system-level verification bottlenecks, we combine automatic abstraction that tames complexity with learning-guided refinement that captures essential design intent, building open, reproducible frameworks our collaborators can rely on.",
-        "We are equally curious about how quantum techniques reshape the computing stack—from synthesis and optimization to verification on practical devices—and how classical EDA must evolve for heterogeneous 3DIC integration and sign-off. Across AI Formal, EDA 3DIC, and Quantum, we pursue rigorous theory, useful tools, and the curiosity that keeps hard engineering problems worth solving."
+        "DVLab works in three areas: AI formal methods, EDA for 3DIC, and quantum design automation. System-level designs keep growing, and verification often stalls on problem size. We use automatic abstraction to shrink the problem and learning-guided refinement to recover the design intent that matters, working toward open, reproducible verification and design flows.",
+        "We also study how quantum computing changes the design flow, from synthesis, mapping, and optimization to verification on real quantum devices. On the classical side, 3DIC and heterogeneous integration need new approaches to timing, sign-off, and system-level EDA. Whatever the topic, we want theory that holds up and tools that people actually use."
       ],
       "cultureMottos": [
         "We research because we are curious",
@@ -69,7 +69,7 @@ export const pageCopy = {
       "heading": "成員列表",
       "search": "搜尋成員",
       "placeholder": "搜尋 name / area / role...",
-      "empty": "沒有匹配成員，請調整關鍵詞或篩選條件。",
+      "empty": "找不到符合的成員。",
       "all": "全部",
       "statusFilter": "依身分狀態篩選成員",
       "statusEnrolled": "現任",
@@ -82,7 +82,7 @@ export const pageCopy = {
       "heading": "Members",
       "search": "Search members",
       "placeholder": "Search name / area / role...",
-      "empty": "No matching members. Try another keyword or filter.",
+      "empty": "No members match.",
       "all": "All",
       "statusFilter": "Filter members by status",
       "statusEnrolled": "Current",
@@ -96,7 +96,7 @@ export const pageCopy = {
       "about": "簡介",
       "links": "連結",
       "copied": "已複製",
-      "copyEmail": "點選複製郵箱",
+      "copyEmail": "點一下複製電子郵件",
       "back": "返回成員列表",
       "home": "回到首頁"
     },
@@ -112,19 +112,19 @@ export const pageCopy = {
   "papers": {
     "zh": {
       "title": "論文",
-      "intro": "本頁收錄黃鐘揚教授任職臺大期間的論文，包含跨實驗室合作成果。",
+      "intro": "黃鐘揚教授在臺大任教期間發表的論文，包含與其他實驗室合作的成果。",
       "placeholder": "搜尋標題 / 作者 / 會議 / 年份...",
       "search": "搜尋論文",
-      "empty": "沒有匹配論文，請調整關鍵詞。",
+      "empty": "找不到符合的論文。",
       "authors": "作者：",
       "description": "DVLab（台大設計驗證實驗室）研究成果：形式化驗證、量子電路合成與最佳化、EDA 相關論文，發表於 DAC、DATE、ICCAD、QCE 等頂尖會議與期刊。"
     },
     "en": {
       "title": "Papers",
-      "intro": "This page lists Professor Chung-Yang Huang's publications during his tenure at NTU, including cross-lab collaborations.",
+      "intro": "Publications by Professor Chung-Yang Huang during his time at NTU, including work with other labs.",
       "placeholder": "Search title / author / venue / year...",
       "search": "Search papers",
-      "empty": "No matching papers. Try another keyword.",
+      "empty": "No papers match.",
       "authors": "Authors: ",
       "description": "DVLab (Design Verification Lab, NTUEE) publications: formal verification, quantum circuit synthesis and optimization, and EDA research published at DAC, DATE, ICCAD, QCE, and more."
     }
